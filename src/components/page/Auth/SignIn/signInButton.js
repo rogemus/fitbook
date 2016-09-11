@@ -15,6 +15,7 @@ class SignInButton extends React.Component {
     }
 
     onStatusChange(response) {
+        console.log(response);
         this.props.signInUser(response);
     }
 

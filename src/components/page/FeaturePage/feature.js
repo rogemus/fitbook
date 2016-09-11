@@ -3,11 +3,18 @@ import {connect} from 'react-redux';
 import * as actions from '../../../actions';
 
 class Feature extends Component {
-    render() {
+    componentWillMount() {
+        this.props.fetchMessage();
+    }
+    render(){
         return (
-            <div>super text, który widać tylko jeśli jesteś zalogowany</div>
+            <div>{this.props.message}</div>
         )
     }
 }
 
-export default connect(null, actions)(Feature);
+function mapStateToProps(state) {
+    return {message: state.auth.message}
+}
+
+export default connect(mapStateToProps,actions)(Feature);
