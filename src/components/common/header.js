@@ -13,7 +13,11 @@ class Header extends React.Component {
                 </li>,
                 <li className="nav-item" key={2}>
                     <Link className="nav-link" to="/gyms">Gyms</Link>
-                </li>]
+                </li>,
+                <li className="nav-item" key={3}>
+                    <Link className="nav-link" to="/me">Me</Link>
+                </li>
+            ]
         } else {
             return [
                 <li className="nav-item" key={1}>

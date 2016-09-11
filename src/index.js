@@ -13,6 +13,7 @@ import Feature from './components/page/FeaturePage/feature';
 import Home from './components/page/HomePage/home';
 import RequireAuth from './components/page/Auth/require_auth';
 import GymsPage from './components/page/GymsPage/gymsPage';
+import UserPage from './components/page/UserPage/userPage';
 import reducers from './reducers';
 
 const createStoreWithMiddleware = applyMiddleware(reduxThunk)(createStore);
@@ -33,6 +34,7 @@ ReactDOM.render(
                 <Route path="signin" component={SignIn}/>
                 <Route path="signout" component={SignOut}/>
                 <Route path="gyms" component={GymsPage} />
+                <Route path="me" component={RequireAuth(UserPage)} />
                 <Route path="feature" component={RequireAuth(Feature)}/>
             </Route>
         </Router>
