@@ -1,8 +1,8 @@
-import React, {Component} from 'react';
+import React from 'react';
 import {connect} from 'react-redux';
-import * as actions from '../../../actions';
+import * as actions from '../../../actions/auth_actions';
 
-class Feature extends Component {
+class Feature extends React.Component {
     componentWillMount() {
         this.props.fetchMessage();
     }

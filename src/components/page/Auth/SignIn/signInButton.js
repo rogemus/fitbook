@@ -1,11 +1,10 @@
 import React from 'react';
 import {connect} from 'react-redux';
-import * as actions from '../../../../actions';
+import * as actions from '../../../../actions/auth_actions';
 class SignInButton extends React.Component {
 
     constructor(props) {
         super(props);
-
         this.FB = props.fb;
     }
 

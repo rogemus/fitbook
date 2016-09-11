@@ -1,8 +1,8 @@
-import React, {Component} from 'react';
+import React from 'react';
 import {connect} from 'react-redux';
-import * as actions from '../../../../actions';
+import * as actions from '../../../../actions/auth_actions';
 
-class Signout extends Component {
+class Signout extends React.Component {
     componentWillMount() {
         this.props.signOutUser();
     }
