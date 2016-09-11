@@ -12,7 +12,7 @@ class Header extends Component {
         } else {
             return [
                 <li className="nav-item" key={1}>
-                    <Link className="nav-link" to="/signin">Sign In</Link>
+                    <Link className="nav-link" to="/signin" refresh="true">Sign In</Link>
                 </li>
             ];
         }
