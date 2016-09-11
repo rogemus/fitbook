@@ -5,31 +5,31 @@ import {
     FETCH_GYMS
 } from './types';
 
-const ROOT_URL = 'http://localhost:3030';
+const ROOT_URL = 'http://localhost:3030/api/v1';
 
 export function fetchGyms() {
     return function (dispatch) {
-        axios.get(ROOT_URL + '/api/v1/gyms', {
-            headers: {'Authorization': 'Bearer ' + localStorage.getItem('token')}
-        }).then(response => {
-            dispatch({
-                type: FETCH_GYMS,
-                payload: response.data.message
+        axios.get(ROOT_URL + '/gyms')
+            .then(response => {
+                console.log(response.data);
+                dispatch({
+                    type: FETCH_GYMS,
+                    payload: response.data
+                });
             });
-        });
     }
 }
 
 export function fetchGym() {
     return function (dispatch) {
-        axios.get(ROOT_URL + '/api/v1/gym', {
-            headers: {'Authorization': 'Bearer ' + localStorage.getItem('token')}
-        }).then(response => {
-            dispatch({
-                type: FETCH_GYM,
-                payload: response.data.message
+        axios.get(ROOT_URL + '/gym')
+            .then(response => {
+                console.log(response.data);
+                dispatch({
+                    type: FETCH_GYM,
+                    payload: response.data
+                });
             });
-        });
     }
 }
 
