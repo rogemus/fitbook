@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160830214705) do
+ActiveRecord::Schema.define(version: 20161005125012) do
 
   create_table "gyms", force: :cascade do |t|
     t.string   "name"
@@ -22,11 +22,23 @@ ActiveRecord::Schema.define(version: 20160830214705) do
     t.index ["user_id"], name: "index_gyms_on_user_id"
   end
 
+  create_table "members", force: :cascade do |t|
+    t.integer  "user_id"
+    t.integer  "gym_id"
+    t.integer  "status",     default: 0
+    t.datetime "created_at",             null: false
+    t.datetime "updated_at",             null: false
+    t.index ["gym_id"], name: "index_members_on_gym_id"
+    t.index ["user_id"], name: "index_members_on_user_id"
+  end
+
   create_table "users", force: :cascade do |t|
     t.bigint   "facebook_id"
+    t.string   "phone"
     t.string   "name"
     t.string   "facebook_token"
     t.string   "email"
+    t.string   "image"
     t.datetime "created_at",     null: false
     t.datetime "updated_at",     null: false
   end

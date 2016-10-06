@@ -1,14 +1,23 @@
 class User < ApplicationRecord
+
   has_many :gyms, dependent: :destroy
 
+  has_many :in_gym, through: :members
+
   class << self
-    def from_omniauth(auth_hash)
-      user = find_or_create_by(facebook_id: auth_hash[:uid],
-                               email: auth_hash[:info][:email])
-      user.facebook_token = auth_hash[:credentials][:token]
-      user.name = auth_hash[:info][:name]
-      user.save!
-      user
+    def from_fb_token(fb_token)
+      fb = Koala::Facebook::API.new(fb_token)
+      fb_user = fb.get_object(:me, {fields: %w{name email}} )
+      if fb_user
+        user = find_or_create_by(facebook_id: fb_user['id'])
+        user.facebook_token = fb_token
+        user.email = fb_user['email'] || nil
+        user.name = fb_user['name']
+        user.save!
+        user
+      else
+        nil
+      end
     end
   end
 

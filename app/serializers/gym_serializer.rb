@@ -1,3 +1,3 @@
 class GymSerializer < ActiveModel::Serializer
-  attributes :id, :name
+  attributes :id, :name, :facebook_id
 end
