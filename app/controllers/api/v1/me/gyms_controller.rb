@@ -6,8 +6,13 @@ module Api::V1::Me
     end
 
     def update
-      gym = Gym.user_fb_gym(@current_user, params[:facebook_id])
+      gym = @current_user.gyms.find(params[:id])
+      if gym
+        gym = Gym.user_fb_gym(@current_user, gym[:facebook_id])
+      end
       render json: gym
+    rescue
+      render json: nil
     end
 
     def create
@@ -18,6 +23,7 @@ module Api::V1::Me
             {:name => gym_hash['name'],
              :facebook_id => gym_hash['id'],
              :facebook_token => gym_hash['access_token']})
+        gym.members << Member.new({user: @current_user, status: :owner})
         @current_user.gyms << gym
         gym.save!
       end

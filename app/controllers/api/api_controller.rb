@@ -1,12 +1,32 @@
 module Api
   class ApiController < ApplicationController
-    before_action :authenticate_request!, :merge_facebook_into_models
+
+    attr_accessor :current_user
+    before_action :authenticate_request!, :merge_facebook_into_models,
+                  except: :user_from_facebook_token
 
     def merge_facebook_into_models
       ApplicationRecord.setup_facebook!(@current_user) if @current_user.facebook_token
     end
 
-    protected
+    def user_from_facebook_token
+      user = User.from_fb_token(params[:facebook_token])
+      if user
+        render json: payload(user)
+      else
+        render json: {errors: ['Invalid credentials'] }, status: :unauthorized
+      end
+    end
+
+    private
+
+    def payload(user)
+      return nil unless user&.id
+      {
+          auth_token: JsonWebToken.encode( {user_id: user.id} ),
+          user: {id: user.id}
+      }
+    end
 
     def authenticate_request!
       unless user_id_in_token?
@@ -17,8 +37,6 @@ module Api
     rescue JWT::VerificationError, JWT::DecodeError
       render json: { errors: ['Non authenticated'] }, status: :unauthorized
     end
-
-    private
 
     def http_token
       @http_token ||= if request.headers['Authorization'].present?
@@ -31,7 +49,8 @@ module Api
     end
 
     def user_id_in_token?
-      http_token && auth_token && auth_token[:user_id].to_i
+      http_token &&
+          auth_token && auth_token[:user_id].to_i
     end
 
   end

@@ -1,6 +1,7 @@
 class Gym < ApplicationRecord
 
   belongs_to :user
+  has_many :members
 
   ALLOWED_CATEGORIES = %w{Gym}
   ALLOWED_PERMS = %w{ADMINISTER}

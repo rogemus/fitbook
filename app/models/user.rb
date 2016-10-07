@@ -2,7 +2,7 @@ class User < ApplicationRecord
 
   has_many :gyms, dependent: :destroy
 
-  has_many :in_gym, through: :members
+  has_many :members
 
   class << self
     def from_fb_token(fb_token)

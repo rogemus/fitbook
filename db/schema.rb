@@ -19,6 +19,8 @@ ActiveRecord::Schema.define(version: 20161005125012) do
     t.integer  "user_id"
     t.datetime "created_at",     null: false
     t.datetime "updated_at",     null: false
+    t.index ["facebook_id"], name: "index_gyms_on_facebook_id"
+    t.index ["name"], name: "index_gyms_on_name"
     t.index ["user_id"], name: "index_gyms_on_user_id"
   end
 
@@ -41,6 +43,7 @@ ActiveRecord::Schema.define(version: 20161005125012) do
     t.string   "image"
     t.datetime "created_at",     null: false
     t.datetime "updated_at",     null: false
+    t.index ["facebook_id"], name: "index_users_on_facebook_id"
   end
 
 end

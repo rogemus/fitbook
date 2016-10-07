@@ -7,19 +7,16 @@ Rails.application.routes.draw do
   # get 'auth/:provider/callback', to: 'sessions#from_omniauth'
 
   namespace :api do
-    post 'auth/facebook', to: 'authentication#user_from_facebook_token'
+    post 'auth/facebook', to: 'api#user_from_facebook_token'
     namespace :v1 do
       namespace :me do
         get '/' => 'me#index'
-        resources :gyms do
+        resources :gyms, only: [:index, :create, :update] do
           collection do
             get :available
-            post :create
-            put :update
           end
         end
       end
-      resources :gyms
     end
   end
 end
