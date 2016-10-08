@@ -12,7 +12,7 @@ class Signin extends React.Component {
 
     responseFacebook = (response) => {
         console.log(response);
-        this.props.signInUser(response);
+        this.props.signInUserv2(response);
     };
 
     render() {

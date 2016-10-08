@@ -16,14 +16,17 @@ export function signOutUser() {
 }
 
 export function signInUser(data) {
+    var facebookToken = data.accessToken;
     return function (dispatch) {
-        dispatch({
-            type: AUTH_USER,
-            payload: data.userID
+        axios.post(ROOT_URL + '/api/auth/facebook', {
+            facebook_token: facebookToken
+        }).then(response => {
+            dispatch({
+                type: AUTH_USER
+            });
+            localStorage.setItem('token', response.data.auth_token);
         });
-        localStorage.setItem('token', data.accessToken);
-        browserHistory.push('/gyms');
-    };
+    }
 }
 
 export function fetchGyms() {
