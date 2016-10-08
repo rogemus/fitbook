@@ -8,7 +8,7 @@ const ROOT_URL = 'http://localhost:3030/api/v1';
 
 export function fetchCurrentUser() {
     return function (dispatch) {
-        axios.get(ROOT_URL + '/me', {
+        axios.get(ROOT_URL + '/me/gyms', {
             headers: {'Authorization': 'Bearer ' + localStorage.getItem('token')}
         }).then(response => {
             dispatch({

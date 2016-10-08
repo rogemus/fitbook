@@ -17,9 +17,11 @@ export function signOutUser() {
 
 export function signInUser(data) {
     return function (dispatch) {
-        dispatch({type: AUTH_USER});
-        console.log('token', data.authResponse.accessToken);
-        localStorage.setItem('token', data.authResponse.accessToken);
+        dispatch({
+            type: AUTH_USER,
+            payload: data.userID
+        });
+        localStorage.setItem('token', data.accessToken);
         browserHistory.push('/gyms');
     };
 }
@@ -27,7 +29,7 @@ export function signInUser(data) {
 export function fetchGyms() {
     return function (dispatch) {
         axios.get(ROOT_URL + '/api/v1/gyms', {
-            headers: {'Authorization': 'Bearer ' + localStorage.getItem('token')}
+            headers: {Authorization: 'Bearer ' + localStorage.getItem('token')}
         }).then(response => {
             dispatch({
                 type: FETCH_GYMS,
@@ -40,11 +42,11 @@ export function fetchGyms() {
 export function fetchGym() {
     return function (dispatch) {
         axios.get(ROOT_URL + '/api/v1/gym', {
-            headers: {'Authorization': 'Bearer ' + localStorage.getItem('token')}
+            headers: {Authorization: 'Bearer ' + localStorage.getItem('token')}
         }).then(response => {
             dispatch({
                 type: FETCH_GYM,
-                payload: response.data.message
+                payload: response.data
             });
         });
     }
