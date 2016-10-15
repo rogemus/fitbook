@@ -1,4 +1,4 @@
-#Konto testowe:
+#Konto
 
 nr telefonu: 669446713
 

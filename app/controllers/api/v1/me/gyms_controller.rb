@@ -1,47 +1,58 @@
 module Api::V1::Me
   class GymsController < BaseController
 
-    def index
+    include GymsDoc
+
+    ALLOWED_CATEGORIES = %w{Gym}
+    REQUIRED_PERMISSIONS = %w{ADMINISTER}
+
+    def show
       render json: @current_user.gyms
     end
 
-    def update
-      gym = @current_user.gyms.find(params[:id])
-      if gym
-        gym = Gym.user_fb_gym(@current_user, gym[:facebook_id])
-      end
+    def create
+      id = params.require(:id)
+      fb_result = facebook_gym(id)
+      gym = Gym.create!({:name => fb_result['name'],
+                     :facebook_id => id,
+                     :graph_token => fb_result['access_token'],
+                     :user => @current_user})
       render json: gym
-    rescue
-      render json: nil
+    rescue => error
+      render json: {:error => error}, status: :bad_request
     end
 
-    def create
-      gym_hash = gym_hash_correct(params[:facebook_id])
-      gym = nil
-      if gym_hash
-        gym = Gym.new(
-            {:name => gym_hash['name'],
-             :facebook_id => gym_hash['id'],
-             :facebook_token => gym_hash['access_token']})
-        gym.members << Member.new({user: @current_user, status: :owner})
-        @current_user.gyms << gym
-        gym.save!
-      end
-      render json: gym
+    def update
+      id = params.require(:id)
+    end
+
+    def destroy
+      # TODO
+      id = params.require(:id)
     end
 
     def available
-      gyms = @current_user.available_gyms.map do |gym|
-        { facebook_id: gym['id'], name: gym['name'] }
-      end
-      render json: gyms
+      render json: facebook_gyms.map {|gym| {:id => gym['name'],
+                                             :name => gym['id']}}
     end
 
     private
 
-    def gym_hash_correct(hash)
-      (@current_user.available_gyms.select{|gym| gym['id'] == hash}).first
+    def facebook_gym(id)
+      facebook_gyms.find {|gym| gym['id'] == id} or
+          raise 'Gym has invalid category, permissions or already exists'
     end
 
+    def facebook_gyms
+      @koala.get_connections(:me, :accounts).select do |gym|
+        validate_gym_fields(gym)
+      end
+    end
+
+    def validate_gym_fields(gym)
+      !@current_user.gyms.find_by(gym['id']) &&
+          gym['category_list'].map {|category| category['name']} & ALLOWED_CATEGORIES &&
+          gym['perms'] & REQUIRED_PERMISSIONS
+    end
   end
 end

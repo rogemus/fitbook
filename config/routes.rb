@@ -1,22 +1,21 @@
 Rails.application.routes.draw do
-
   apipie
-  devise_for :user
-
-  root to: 'index#index'
-  # get 'auth/:provider/callback', to: 'sessions#from_omniauth'
+  # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 
   namespace :api do
-    post 'auth/facebook', to: 'api#user_from_facebook_token'
+
+    namespace :auth do
+      post :facebook, to: :facebook
+    end
+
     namespace :v1 do
       namespace :me do
-        get '/' => 'me#index'
-        resources :gyms, only: [:index, :create, :update] do
-          collection do
-            get :available
-          end
+        root to: 'me#index'
+        resource :gyms do
+          get :available
         end
       end
     end
   end
+
 end

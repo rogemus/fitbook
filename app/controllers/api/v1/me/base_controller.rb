@@ -1,4 +1,5 @@
-module Api::V1::Me
-  class BaseController < Api::V1::BaseController
+module Api::V1
+  class Me::BaseController < BaseController
+
   end
 end
