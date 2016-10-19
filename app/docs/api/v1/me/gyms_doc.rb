@@ -17,7 +17,7 @@ module Api::V1::Me::GymsDoc
 
   doc_for :create do
     api :POST, '/v1/me/gyms', 'Create gym from valid facebook id'
-    param :id, Integer, :required => true
+    param :facebook_id, Integer, :required => true
   end
 
   doc_for :update do
@@ -25,6 +25,13 @@ module Api::V1::Me::GymsDoc
     api :PUT, '/v1/me/gyms', desc
     api :PATCH, '/v1/me/gyms', desc
     param :id, Integer, :required => true
+  end
+
+  doc_for :join do
+    api :POST, '/v1/me/gyms/join', 'Join gym with given level'
+    param :id, Integer, :required => true
+    param :level, [:regular, :special, :trainer],
+           :desc => 'Default is regular, special and trainer requires owner approval'
   end
 
   doc_for :destroy do

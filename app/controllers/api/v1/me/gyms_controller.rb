@@ -11,20 +11,22 @@ module Api::V1::Me
     end
 
     def create
-      id = params.require(:id)
-      fb_result = facebook_gym(id)
+      facebook_id = params.require(:facebook_id)
+      fb_result = facebook_gym(facebook_id)
       gym = Gym.create!({:name => fb_result['name'],
-                     :facebook_id => id,
+                     :facebook_id => facebook_id,
                      :graph_token => fb_result['access_token'],
                      :owner => @current_user})
+      @current_user.members << join_gym_as_owner(gym)
       render json: gym
     rescue => error
       render json: {:error => error}, status: :bad_request
     end
 
     def update
-      id = params.require(:id)
-      # TODO
+      gym = Gym.find_by!({:id => params.require(:id),
+                         :owner => @current_user})
+      render json: gym
     end
 
     def destroy
@@ -37,7 +39,27 @@ module Api::V1::Me
                                              :name => gym['id']}}
     end
 
+    def join
+      level = params[:level] || :regular
+      gym = Gym.find(params.require(:id))
+
+      @current_user.members << join_gym(gym, level)
+
+      render json: @current_user.gyms_attending.last
+    end
+
     private
+
+    def join_gym_as_owner(gym)
+      join_gym(gym, :owner, true)
+    end
+
+    def join_gym(gym, level, as_owner = false)
+      membership = Member.new({:gym => gym,
+                               :membership_level => level})
+      membership.join_as_owner if as_owner
+      membership
+    end
 
     def facebook_gym(id)
       facebook_gyms.find {|gym| gym['id'] == id} or

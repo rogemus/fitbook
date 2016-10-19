@@ -1,5 +1,8 @@
 class User < ApplicationRecord
 
+  has_many :members
+  has_many :gyms_attending, :through => :members, :source => :gym
+
   has_many :owned_gyms, :class_name => 'Gym', :foreign_key => 'owner_id'
 
   class << self

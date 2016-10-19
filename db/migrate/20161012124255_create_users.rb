@@ -4,10 +4,10 @@ class CreateUsers < ActiveRecord::Migration[5.0]
 
       t.string :name
       t.string :phone
-      t.string :email
+      t.string :email, unique: true
       t.string :fb_image
 
-      t.bigint :facebook_id, index: true
+      t.bigint :facebook_id, index: true, unique: true
 
       t.string :graph_token
 

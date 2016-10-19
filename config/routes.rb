@@ -13,6 +13,7 @@ Rails.application.routes.draw do
         root to: 'me#index'
         resource :gyms do
           get :available
+          post :join
         end
       end
     end
