@@ -17,11 +17,11 @@ ActiveRecord::Schema.define(version: 20161015134449) do
     t.string   "fb_image"
     t.bigint   "facebook_id"
     t.string   "graph_token"
-    t.integer  "user_id"
+    t.integer  "owner_id"
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
     t.index ["facebook_id"], name: "index_gyms_on_facebook_id"
-    t.index ["user_id"], name: "index_gyms_on_user_id"
+    t.index ["owner_id"], name: "index_gyms_on_owner_id"
   end
 
   create_table "users", force: :cascade do |t|

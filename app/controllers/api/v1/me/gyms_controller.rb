@@ -7,7 +7,7 @@ module Api::V1::Me
     REQUIRED_PERMISSIONS = %w{ADMINISTER}
 
     def show
-      render json: @current_user.gyms
+      render json: @current_user.owned_gyms
     end
 
     def create
@@ -16,7 +16,7 @@ module Api::V1::Me
       gym = Gym.create!({:name => fb_result['name'],
                      :facebook_id => id,
                      :graph_token => fb_result['access_token'],
-                     :user => @current_user})
+                     :owner => @current_user})
       render json: gym
     rescue => error
       render json: {:error => error}, status: :bad_request
@@ -24,6 +24,7 @@ module Api::V1::Me
 
     def update
       id = params.require(:id)
+      # TODO
     end
 
     def destroy
@@ -50,7 +51,7 @@ module Api::V1::Me
     end
 
     def validate_gym_fields(gym)
-      !@current_user.gyms.find_by(gym['id']) &&
+      !@current_user.owned_gyms.find_by(gym['id']) &&
           gym['category_list'].map {|category| category['name']} & ALLOWED_CATEGORIES &&
           gym['perms'] & REQUIRED_PERMISSIONS
     end

@@ -1,6 +1,6 @@
 class User < ApplicationRecord
 
-  has_many :gyms
+  has_many :owned_gyms, :class_name => 'Gym', :foreign_key => 'owner_id'
 
   class << self
     def find_in_facebook(token, with = {fields: %w{id name email}})

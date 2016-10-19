@@ -9,7 +9,7 @@ class CreateGyms < ActiveRecord::Migration[5.0]
 
       t.string :graph_token
 
-      t.belongs_to :user, index: true
+      t.references :owner, references: :user
 
       t.timestamps
     end

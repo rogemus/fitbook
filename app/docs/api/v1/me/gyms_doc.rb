@@ -21,8 +21,9 @@ module Api::V1::Me::GymsDoc
   end
 
   doc_for :update do
-    api :PUT, '/v1/me/gyms', 'Update gym from valid facebook id'
-    api :PATCH, '/v1/me/gyms', 'Update gym from valid facebook id'
+    desc = 'Pull newest data from facebook'
+    api :PUT, '/v1/me/gyms', desc
+    api :PATCH, '/v1/me/gyms', desc
     param :id, Integer, :required => true
   end
 
