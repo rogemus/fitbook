@@ -4,3 +4,6 @@ development:
 test:
   app_id: '986848648068958'
   secret_key: 'bb170e0a654a9bef5bb65e7507fd4f40'
+production:
+  app_id: '986848648068958'
+  secret_key: 'bb170e0a654a9bef5bb65e7507fd4f40'
