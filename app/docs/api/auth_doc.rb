@@ -12,7 +12,11 @@ module Api::AuthDoc
   end
 
   doc_for :facebook do
-    api :POST, '/auth/facebook', 'Auth using facebook token'
+    description <<-eos
+    Returns token for use in API as:
+    Header -> Authorization: Bearer <token>
+    eos
+    api :POST, '/auth/facebook', 'Auth using facebook token, returns token and User'
     param :token, String, :required => true
   end
 

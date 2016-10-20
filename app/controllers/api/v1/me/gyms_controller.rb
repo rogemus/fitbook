@@ -1,7 +1,7 @@
 module Api::V1::Me
   class GymsController < BaseController
 
-    include GymsDoc
+    include ::Api::V1::Me::GymsDoc
 
     ALLOWED_CATEGORIES = %w{Gym}
     REQUIRED_PERMISSIONS = %w{ADMINISTER}
@@ -17,7 +17,7 @@ module Api::V1::Me
                      :facebook_id => facebook_id,
                      :graph_token => fb_result['access_token'],
                      :owner => @current_user})
-      @current_user.members << join_gym_as_owner(gym)
+      join_gym(gym)
       render json: gym
     rescue => error
       render json: {:error => error}, status: :bad_request
@@ -39,26 +39,10 @@ module Api::V1::Me
                                              :name => gym['id']}}
     end
 
-    def join
-      level = params[:level] || :regular
-      gym = Gym.find(params.require(:id))
-
-      @current_user.members << join_gym(gym, level)
-
-      render json: @current_user.gyms_attending.last
-    end
-
     private
 
-    def join_gym_as_owner(gym)
-      join_gym(gym, :owner, true)
-    end
-
-    def join_gym(gym, level, as_owner = false)
-      membership = Member.new({:gym => gym,
-                               :membership_level => level})
-      membership.join_as_owner if as_owner
-      membership
+    def join_gym(gym)
+      @current_user.join_gym_as_owner(gym)
     end
 
     def facebook_gym(id)
@@ -73,8 +57,11 @@ module Api::V1::Me
     end
 
     def validate_gym_fields(gym)
-      !@current_user.owned_gyms.find_by(gym['id']) &&
-          gym['category_list'].map {|category| category['name']} & ALLOWED_CATEGORIES &&
+      owned_gyms = @current_user.owned_gyms.map {|gym| gym[:facebook_id]} || []
+      categories = gym['category_list'].map {|category| category['name']}
+
+      !owned_gyms.include?(gym['id'].to_i) &&
+          categories & ALLOWED_CATEGORIES &&
           gym['perms'] & REQUIRED_PERMISSIONS
     end
   end

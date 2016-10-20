@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
+
   apipie
-  # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 
   namespace :api do
 
@@ -9,6 +9,13 @@ Rails.application.routes.draw do
     end
 
     namespace :v1 do
+
+      resources :gyms, only: [:index, :show] do
+        member do
+          post :join
+        end
+      end
+
       namespace :me do
         root to: 'me#index'
         resource :gyms do

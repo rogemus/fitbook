@@ -11,4 +11,16 @@ class User < ApplicationRecord
     end
   end
 
+  def join_gym_as_owner(gym)
+    join_gym(gym, :owner, true)
+  end
+
+  def join_gym(gym, level, as_owner = false)
+    membership = Member.new({:gym => gym,
+                             :membership_level => level})
+    membership.join_as_owner if as_owner
+    self.members << membership
+    membership
+  end
+
 end

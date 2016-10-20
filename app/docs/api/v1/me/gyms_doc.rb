@@ -12,7 +12,11 @@ module Api::V1::Me::GymsDoc
   end
 
   doc_for :show do
-    api :GET, '/v1/me/gyms', 'Get current user gyms'
+    api :GET, '/v1/me/gyms', 'Get gyms owned by current user'
+  end
+
+  doc_for :available do
+    api :GET, '/v1/me/gyms/available', 'Get list of available gyms from facebook'
   end
 
   doc_for :create do
@@ -36,10 +40,6 @@ module Api::V1::Me::GymsDoc
 
   doc_for :destroy do
     param :id, Integer, :required => true
-  end
-
-  doc_for :available do
-    api :GET, '/v1/me/gyms/available', 'Get list of available gyms from facebook'
   end
 
 end

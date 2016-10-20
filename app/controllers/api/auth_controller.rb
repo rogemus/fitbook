@@ -18,8 +18,6 @@ module Api
              :graph_token => token})
       end
       render json: token_payload(user)
-    rescue => error
-      render json: {:errors => error}, status: :unauthorized
     end
 
     private
@@ -32,6 +30,7 @@ module Api
           user: payload
       }
     end
+
   end
 
 end
