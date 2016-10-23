@@ -40,5 +40,4 @@ Rails.application.configure do
   # Raises error for missing translations
   # config.action_view.raise_on_missing_translations = true
 
-  ENV['USER_FB_TOKEN'] = 'EAACEdEose0cBABHnysexpbIcoxN1rikSqwt09d1iRn13kFnrEOxWUU5gTssdzgTscJykDOuE5qc17cfKLSpYcRYs66HSmY9pVklOqxGZAPfsTHX9EbP10EIxrNG8JiNBsrQ9SZBOaCyqx9Id5PunlVzYB0TRnLzZAFF9JsxFgZDZD'
 end

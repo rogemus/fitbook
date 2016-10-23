@@ -12,6 +12,9 @@ gem 'koala', '~> 2.2'
 
 group :development, :test do
   gem 'byebug', platform: :mri
+  gem 'rspec'
+  gem 'rspec-rails'
+  gem 'autotest-standalone'
 end
 
 group :development do

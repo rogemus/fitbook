@@ -58,7 +58,7 @@ module Api::V1::Me
 
     def validate_gym_fields(gym)
       owned_gyms = @current_user.owned_gyms.map {|gym| gym[:facebook_id]} || []
-      categories = gym['category_list'].map {|category| category['name']}
+      categories = gym['category_list'].map {|category| category['name']} || []
 
       !owned_gyms.include?(gym['id'].to_i) &&
           categories & ALLOWED_CATEGORIES &&

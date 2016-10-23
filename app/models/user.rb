@@ -1,5 +1,7 @@
 class User < ApplicationRecord
 
+  validates :name, presence: true
+
   has_many :members
   has_many :gyms_attending, :through => :members, :source => :gym
 
