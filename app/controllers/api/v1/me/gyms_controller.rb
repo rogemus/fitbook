@@ -57,12 +57,18 @@ module Api::V1::Me
     end
 
     def validate_gym_fields(gym)
-      owned_gyms = @current_user.owned_gyms.map {|gym| gym[:facebook_id]} || []
-      categories = gym['category_list'].map {|category| category['name']} || []
+      owned_gyms = @current_user.owned_gyms.map {|owned| owned[:facebook_id]} || []
 
-      !owned_gyms.include?(gym['id'].to_i) &&
-          categories & ALLOWED_CATEGORIES &&
-          gym['perms'] & REQUIRED_PERMISSIONS
+      main_category = gym['category']
+
+      categories_list = []
+      categories_list = gym['category_list'].map {|category| category['name']} if gym.key?('category_list')
+
+      concated_categories = [main_category].concat(categories_list)
+
+      !owned_gyms.include?(gym['id'].to_i) &
+          ((concated_categories & ALLOWED_CATEGORIES).count > 0) &
+          ((gym['perms'] & REQUIRED_PERMISSIONS).count > 0)
     end
   end
 end

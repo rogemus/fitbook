@@ -14,6 +14,7 @@ group :development, :test do
   gem 'byebug', platform: :mri
   gem 'rspec'
   gem 'rspec-rails'
+  gem 'database_cleaner'
   gem 'autotest-standalone'
 end
 
