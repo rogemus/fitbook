@@ -38,8 +38,4 @@ module Api::V1::Me::GymsDoc
            :desc => 'Default is regular, special and trainer requires owner approval'
   end
 
-  doc_for :destroy do
-    param :id, Integer, :required => true
-  end
-
 end

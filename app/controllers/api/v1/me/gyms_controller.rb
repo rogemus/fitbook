@@ -17,7 +17,7 @@ module Api::V1::Me
                      :facebook_id => facebook_id,
                      :graph_token => fb_result['access_token'],
                      :owner => @current_user})
-      join_gym(gym)
+      join_gym_as_owner(gym)
       render json: gym
     rescue => error
       render json: {:error => error}, status: :bad_request
@@ -29,19 +29,19 @@ module Api::V1::Me
       render json: gym
     end
 
-    def destroy
-      # TODO
-      id = params.require(:id)
-    end
-
     def available
       render json: facebook_gyms.map {|gym| {:id => gym['name'],
                                              :name => gym['id']}}
     end
 
+    def join
+      gym = Gym.find(params.require(:id))
+      @current_user.join_gym(gym, params[:level] || :regular)
+    end
+
     private
 
-    def join_gym(gym)
+    def join_gym_as_owner(gym)
       @current_user.join_gym_as_owner(gym)
     end
 

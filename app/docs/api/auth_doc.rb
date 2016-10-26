@@ -18,6 +18,10 @@ module Api::AuthDoc
     eos
     api :POST, '/auth/facebook', 'Auth using facebook token, returns token and User'
     param :token, String, :required => true
+    param :long_term, [true, false], :desc => <<-eos
+    Generate long term token from given short term,
+    only for short living token (web)
+    eos
   end
 
 end

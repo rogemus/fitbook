@@ -11,8 +11,5 @@ module Api::V1
       render json: Gym.find(params[:id])
     end
 
-    def join
-    end
-
   end
 end

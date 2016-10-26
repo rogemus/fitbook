@@ -1,3 +1,5 @@
+require 'net/http'
+
 module Api
 
   class AuthController < ::ApplicationController
@@ -8,6 +10,7 @@ module Api
       token = params.require(:token)
       auth_hash = User::find_in_facebook(token)
       user = User.find_by({:facebook_id => auth_hash['id']})
+      token = generate_long_term(token) if params[:long_term] == 'true'
       if user
         user.update_attribute(:graph_token, token)
       else
@@ -21,6 +24,17 @@ module Api
     end
 
     private
+
+    def generate_long_term(token)
+      params = {
+          :grant_type => :fb_exchange_token,
+          :client_id => ::Facebook::APP_ID,
+          :client_secret => ::Facebook::SECRET,
+          :fb_exchange_token => token
+      }.map { |k, v| "#{k}=#{v}"}.join('&')
+      url = URI('https://graph.facebook.com/oauth/access_token?' + params)
+      ::Net::HTTP::get(url).tr('access_token=', '')
+    end
 
     def token_payload(user)
       return nil unless user&.id
