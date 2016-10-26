@@ -33,7 +33,7 @@ module Api
           :fb_exchange_token => token
       }.map { |k, v| "#{k}=#{v}"}.join('&')
       url = URI('https://graph.facebook.com/oauth/access_token?' + params)
-      ::Net::HTTP::get(url).tr('access_token=', '')
+      ::Net::HTTP::get(url).sub('access_token=', '')
     end
 
     def token_payload(user)
