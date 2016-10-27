@@ -10,21 +10,48 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161026143629) do
+ActiveRecord::Schema.define(version: 20161027200436) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
+  create_table "cities", force: :cascade do |t|
+    t.string  "name"
+    t.integer "country_id"
+    t.index ["country_id"], name: "index_cities_on_country_id", using: :btree
+    t.index ["name", "country_id"], name: "index_cities_on_name_and_country_id", unique: true, using: :btree
+  end
+
+  create_table "countries", force: :cascade do |t|
+    t.string "name"
+  end
+
   create_table "gyms", force: :cascade do |t|
     t.string   "name",        null: false
-    t.string   "fb_image"
     t.bigint   "facebook_id"
     t.string   "graph_token"
     t.integer  "owner_id"
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
+    t.string   "about"
+    t.string   "description"
+    t.string   "website"
+    t.string   "picture"
+    t.integer  "location_id"
+    t.string   "cover"
     t.index ["facebook_id"], name: "index_gyms_on_facebook_id", using: :btree
+    t.index ["location_id"], name: "index_gyms_on_location_id", using: :btree
     t.index ["owner_id"], name: "index_gyms_on_owner_id", using: :btree
+  end
+
+  create_table "locations", force: :cascade do |t|
+    t.string  "street"
+    t.float   "latitude"
+    t.float   "longitude"
+    t.integer "city_id"
+    t.integer "gym_id"
+    t.index ["city_id"], name: "index_locations_on_city_id", using: :btree
+    t.index ["gym_id"], name: "index_locations_on_gym_id", using: :btree
   end
 
   create_table "members", force: :cascade do |t|
@@ -50,4 +77,5 @@ ActiveRecord::Schema.define(version: 20161026143629) do
     t.index ["facebook_id"], name: "index_users_on_facebook_id", using: :btree
   end
 
+  add_foreign_key "gyms", "locations"
 end

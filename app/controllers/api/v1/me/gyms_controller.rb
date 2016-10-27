@@ -3,13 +3,14 @@ module Api::V1::Me
 
     include ::Api::V1::Me::GymsDoc
 
-    ALLOWED_CATEGORIES = %w{Gym}
+    ALLOWED_CATEGORIES = ['Gym/Physical Fitness Center']
     REQUIRED_PERMISSIONS = %w{ADMINISTER}
 
     def show
       render json: @current_user.owned_gyms
     end
 
+    # todo: zacaiganie z fb
     def create
       facebook_id = params.require(:facebook_id)
       fb_result = facebook_gym(facebook_id)
@@ -18,6 +19,8 @@ module Api::V1::Me
                      :graph_token => fb_result['access_token'],
                      :owner => @current_user})
       join_gym_as_owner(gym)
+      # todo: merge
+      merge_facebook_data(gym)
 
       render json: gym
     rescue => error
@@ -27,8 +30,7 @@ module Api::V1::Me
     def update
       gym = Gym.find_by!({:id => params.require(:id),
                          :owner => @current_user})
-      gym.include_facebook_data!
-      gym.save!
+      merge_facebook_data(gym)
 
       render json: gym
     end
@@ -41,9 +43,16 @@ module Api::V1::Me
     def join
       gym = Gym.find(params.require(:id))
       @current_user.join_gym(gym, params[:level] || :regular)
+
+      render json: @current_user.gyms_attending.last
     end
 
     private
+
+    def merge_facebook_data(gym)
+      gym.include_facebook_data!
+      gym.save!
+    end
 
     def join_gym_as_owner(gym)
       @current_user.join_gym_as_owner(gym)

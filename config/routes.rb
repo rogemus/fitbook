@@ -11,16 +11,17 @@ Rails.application.routes.draw do
     namespace :v1 do
 
       resources :gyms, only: [:index, :show] do
-        member do
-          post :join
-        end
       end
 
       namespace :me do
         root to: 'me#index'
-        resource :gyms do
+        resource :gyms, only: [:create, :show]  do
           get :available
-          post :join
+        end
+        resources :gyms, only: [:update] do
+          member do
+            post :join
+          end
         end
       end
     end

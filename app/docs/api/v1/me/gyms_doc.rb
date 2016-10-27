@@ -26,9 +26,8 @@ module Api::V1::Me::GymsDoc
 
   doc_for :update do
     desc = 'Pull newest data from facebook'
-    api :PUT, '/v1/me/gyms', desc
-    api :PATCH, '/v1/me/gyms', desc
-    param :id, Integer, :required => true
+    api :PUT, '/v1/me/:id/gyms', desc
+    api :PATCH, '/v1/me/:id/gyms', desc
   end
 
   doc_for :join do

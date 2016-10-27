@@ -6,6 +6,7 @@ module Api
 
     include Api::AuthDoc
 
+    # todo: rescue po invalid fb tokenie
     def facebook
       token = params.require(:token)
       auth_hash = User::find_in_facebook(token)
