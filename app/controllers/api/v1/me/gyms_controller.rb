@@ -18,6 +18,7 @@ module Api::V1::Me
                      :graph_token => fb_result['access_token'],
                      :owner => @current_user})
       join_gym_as_owner(gym)
+
       render json: gym
     rescue => error
       render json: {:error => error}, status: :bad_request
@@ -26,6 +27,9 @@ module Api::V1::Me
     def update
       gym = Gym.find_by!({:id => params.require(:id),
                          :owner => @current_user})
+      gym.include_facebook_data!
+      gym.save!
+
       render json: gym
     end
 
@@ -64,10 +68,10 @@ module Api::V1::Me
       categories_list = []
       categories_list = gym['category_list'].map {|category| category['name']} if gym.key?('category_list')
 
-      concated_categories = [main_category].concat(categories_list)
+      all_categories = [main_category].concat(categories_list)
 
       !owned_gyms.include?(gym['id'].to_i) &
-          ((concated_categories & ALLOWED_CATEGORIES).count > 0) &
+          ((all_categories & ALLOWED_CATEGORIES).count > 0) &
           ((gym['perms'] & REQUIRED_PERMISSIONS).count > 0)
     end
   end

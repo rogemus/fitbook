@@ -32,8 +32,7 @@ module Api::V1::Me::GymsDoc
   end
 
   doc_for :join do
-    api :POST, '/v1/me/gyms/join', 'Join gym with given level'
-    param :id, Integer, :required => true
+    api :POST, '/v1/me/gyms/:id/join', 'Join gym with given level'
     param :level, [:regular, :special, :trainer],
            :desc => 'Default is regular, special and trainer requires owner approval'
   end
