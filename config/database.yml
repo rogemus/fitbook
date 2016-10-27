@@ -6,14 +6,15 @@
 #
 default: &default
   host: localhost
-  username: fitbook-user
-  password: password
   adapter: postgresql
   encoding: unicode
 
 development:
   <<: *default
   database: development
+  username: fitbook-user
+  password: password
+
 
 # Warning: The database defined as "test" will be erased and
 # re-generated from your development database when you run "rake".
@@ -21,7 +22,14 @@ development:
 test:
   <<: *default
   database: test
+  username: fitbook-user
+  password: password
+
 
 production:
   <<: *default
-  database: production
+  pool: 5
+  database: nomxdzpa
+  username: nomxdzpa
+  password: 1mbRnefdAg2cBrW5LuzXHt0evT8unfWb
+  host: qdjjtnkv.db.elephantsql.com
