@@ -17,7 +17,8 @@ export function signInUser(data) {
     var facebookToken = data.accessToken;
     return function (dispatch) {
         axios.post(ROOT_URL + '/api/auth/facebook', {
-            token: facebookToken
+            token: facebookToken,
+            long_term: true
         }).then(response => {
             dispatch({
                 type: AUTH_USER

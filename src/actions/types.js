@@ -10,3 +10,4 @@ export const FETCH_MESSAGE = 'fetch_message';
 /* Current User Types */
 export const FETCH_CURRENT_USER = 'fetch_current_user';
 export const FETCH_CURRENT_USER_GYMS = 'fetch_current_user_gyms';
+export const FETCH_CURRENT_USER_AVAILABLE_GYMS = 'fetch_current_user_available_gyms';
