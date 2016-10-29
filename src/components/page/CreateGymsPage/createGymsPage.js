@@ -1,11 +1,10 @@
 import React from 'react';
 import {connect} from 'react-redux';
-import {fetchCurrentUserAvailableGyms} from '../../../actions/current_user_actions'
+import {fetchCurrentUserAvailableGyms, createGym} from '../../../actions/current_user_actions'
 class CreateGymsPage extends React.Component {
 
     constructor(props) {
         super(props);
-
 
         this.onFormSubmit = this.onFormSubmit.bind(this);
     }
@@ -17,8 +16,7 @@ class CreateGymsPage extends React.Component {
 
     onFormSubmit(event) {
         event.preventDefault();
-        console.log(this.refs.form.gymSelect.value);
-
+        this.props.createGym(parseInt(this.refs.form.gymSelect.value));
     }
 
     renderSelectGym() {
@@ -53,4 +51,4 @@ function mapStateToProps(state) {
     }
 }
 
-export default connect(mapStateToProps, {fetchCurrentUserAvailableGyms})(CreateGymsPage);
+export default connect(mapStateToProps, {fetchCurrentUserAvailableGyms, createGym})(CreateGymsPage);
