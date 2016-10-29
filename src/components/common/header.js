@@ -11,7 +11,7 @@ class Header extends React.Component {
         }
     }
 
-    renderCurrentUser() {
+    renderCurrentUserName() {
         if(this.props.current_user) {
             return this.props.current_user.name;
         }
@@ -19,7 +19,6 @@ class Header extends React.Component {
 
     renderLinks() {
         if (this.props.authenticated) {
-            this.renderCurrentUser();
             return [
                 <li className="nav-item" key={1}>
                     <Link className="nav-link" to="/signout">Sign Out</Link>
@@ -28,10 +27,7 @@ class Header extends React.Component {
                     <Link className="nav-link" to="/gyms">Gyms</Link>
                 </li>,
                 <li className="nav-item" key={3}>
-                    <Link className="nav-link" to="/me">Me</Link>
-                </li>,
-                <li className="nav-item" key={4}>
-                    {this.renderCurrentUser()}
+                    <Link className="nav-link" to="/me">{this.renderCurrentUserName()}</Link>
                 </li>
 
             ]

@@ -7,5 +7,6 @@ export const FETCH_GYM = 'fetch_gym';
 export const FETCH_GYMS = 'fetch_gyms';
 export const FETCH_MESSAGE = 'fetch_message';
 
-/* USER_CURRENT Types */
+/* Current User Types */
 export const FETCH_CURRENT_USER = 'fetch_current_user';
+export const FETCH_CURRENT_USER_GYMS = 'fetch_current_user_gyms';
