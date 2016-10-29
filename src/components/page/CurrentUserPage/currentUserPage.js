@@ -20,15 +20,24 @@ class CurrentUserPage extends React.Component {
 
     renderCurrentUserGyms() {
         if (this.props.current_user_gyms) {
-            console.log(this.props.current_user_gyms);
+            return this.props.current_user_gyms.map(gym => {
+                return (
+                    <span key={gym.id}>{gym.name}</span>
+                );
+            });
         }
     }
 
     render() {
         return (
             <div>
-                {this.renderCurrentUserCard()}
-                {this.renderCurrentUserGyms()}
+                <div><h1>User info</h1>
+                    {this.renderCurrentUserCard()}
+                </div>
+                <div>
+                    <h2>User Gyms</h2>
+                    {this.renderCurrentUserGyms()}
+                </div>
             </div>
         )
     }
