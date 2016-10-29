@@ -4,11 +4,10 @@ import * as actions from '../../../actions/auth_actions';
 
 class Feature extends React.Component {
     componentWillMount() {
-        this.props.fetchMessage();
     }
     render(){
         return (
-            <div>{this.props.message}</div>
+            <div></div>
         )
     }
 }
