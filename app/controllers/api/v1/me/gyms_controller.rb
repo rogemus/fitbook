@@ -10,7 +10,6 @@ module Api::V1::Me
       render json: @current_user.owned_gyms
     end
 
-    # todo: zacaiganie z fb
     def create
       facebook_id = params.require(:facebook_id)
       fb_result = facebook_gym(facebook_id)
@@ -19,7 +18,6 @@ module Api::V1::Me
                      :graph_token => fb_result['access_token'],
                      :owner => @current_user})
       join_gym_as_owner(gym)
-      # todo: merge
       merge_facebook_data(gym)
 
       render json: gym
@@ -36,8 +34,8 @@ module Api::V1::Me
     end
 
     def available
-      render json: facebook_gyms.map {|gym| {:id => gym['name'],
-                                             :name => gym['id']}}
+      render json: facebook_gyms.map {|gym| {:id => gym['id'],
+                                             :name => gym['name']}}
     end
 
     def join
