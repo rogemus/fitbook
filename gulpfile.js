@@ -8,30 +8,29 @@ var open = require('gulp-open');
 //Concatenates files
 var concat = require('gulp-concat');
 //Transform SASS
-var sass = require('gulp-ruby-sass');
+var sass = require('gulp-sass');
 var sourcemaps = require('gulp-sourcemaps');
 var prefix = require('gulp-autoprefixer');
-//Transform JADE
-var jade = require('gulp-jade');
 
 
 var config = {
     port: 3001,
     devBaseUrl: 'http:localhost',
     paths: {
-        html: './src/*.html',
-        js: './src/scripts/**/*.js',
+        html: './src/**/*.html',
+        img: './src/img/**/*',
+        fonts: './src/fonts/**/*',
+        js: './src/js/**/*.js',
         css: [
             './src/css/**/*.css'
         ],
-        buildCss: './build/css',
-        mainSass: './src/main.sass',
         sass: [
-            './src/**/*.sass'
+            './src/sass/**/*.sass'
         ],
-        jade: [
-            './src/jade/2-pages/**/*.jade'
-        ],
+        buildCss: './build/css',
+        buildImgs: './build/img',
+        buildHtml: './build/html',
+        buildFont: './build/fonts',
         build: './build'
     }
 };
@@ -47,7 +46,7 @@ gulp.task('connect', function () {
 
 
 gulp.task('open', ['connect'], function () {
-    gulp.src('build/index.html')
+    gulp.src('build/html/')
         .pipe(open({
             uri: config.devBaseUrl + ':' + config.port + '/'
         }));
@@ -59,29 +58,33 @@ gulp.task('html', function () {
         .pipe(connect.reload());
 });
 
-gulp.task('sass', function () {
-    sass('src/sass/main.sass', {sourcemap: true, style: 'compact'})
-        .pipe(prefix("last 5 version", "> 1%", "ie 8", "ie 7"))
-        .pipe(sourcemaps.write('.'))
-        .pipe(gulp.dest(config.paths.buildCss));
+gulp.task('img', function () {
+    gulp.src(config.paths.img)
+        .pipe(gulp.dest(config.paths.buildImgs));
 });
 
-gulp.task('jade', function () {
-    var YOUR_LOCALS = {};
+gulp.task('fonts', function () {
+    gulp.src(config.paths.fonts)
+        .pipe(gulp.dest(config.paths.buildFont));
+});
 
-    gulp.src(config.paths.jade)
-        .pipe(jade({
-            locals: YOUR_LOCALS,
-            pretty: true
-        }))
-        .pipe(gulp.dest(config.paths.build));
+gulp.task('css', function () {
+    gulp.src(config.paths.css)
+        .pipe(gulp.dest(config.paths.buildCss))
+        .pipe(connect.reload());
+});
+
+gulp.task('sass', function () {
+    gulp.src(config.paths.sass)
+        .pipe(sass().on('error', sass.logError))
+        .pipe(gulp.dest(config.paths.buildCss))
+        .pipe(connect.reload());
 });
 
 
 gulp.task('watch', function () {
     gulp.watch(config.paths.html, ['html']);
     gulp.watch(config.paths.sass, ['sass']);
-    gulp.watch(config.paths.jade, ['jade']);
 });
 
-gulp.task('default', ['html', 'sass', 'jade', 'open', 'watch']);
+gulp.task('default', ['html', 'fonts', 'img', 'sass', 'open', 'watch']);
