@@ -23,6 +23,8 @@ export function signInUser(data) {
             dispatch({
                 type: AUTH_USER
             });
+
+            console.log(response.data.token);
             localStorage.setItem('token', response.data.token);
             browserHistory.push('/feature');
         });

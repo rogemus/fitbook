@@ -24,7 +24,7 @@ class CreateGymsPage extends React.Component {
 
             return (
                 this.props.current_user_available_gyms.map(gym => {
-                    return (<option key={gym.id} value={gym.name}>{gym.id}</option>)
+                    return (<option key={gym.id} value={gym.id}>{gym.name}</option>)
                 })
             )
         }
