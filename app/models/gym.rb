@@ -8,6 +8,18 @@ class Gym < ApplicationRecord
 
   validates :name, presence: true
 
+  class << self
+    def find_by_city(city, country)
+      city = City.find_by({:name => city,
+                           :country => Country.find_by({:name => country})})
+      joins(:location).where(locations: {:city_id => city.id})
+    end
+
+    def find_by_coordinates(top_left, bottom_right)
+      joins(:location).where(locations: Location.fits_in_view(top_left, bottom_right))
+    end
+  end
+
   def include_facebook_data!
     koala = Koala::Facebook::API.new(self.graph_token)
     fields = [:about, 'cover.fields(source)', :description,
