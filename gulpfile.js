@@ -21,16 +21,15 @@ var config = {
         img: './src/img/**/*',
         fonts: './src/fonts/**/*',
         js: './src/js/**/*.js',
-        css: [
-            './src/css/**/*.css'
-        ],
+        css: './src/css/**/*.css',
         sass: [
-            './src/sass/**/*.sass'
+            './src/sass/**/*.scss'
         ],
         buildCss: './build/css',
         buildImgs: './build/img',
         buildHtml: './build/html',
         buildFont: './build/fonts',
+        buildJS: './build/js',
         build: './build'
     }
 };
@@ -74,6 +73,13 @@ gulp.task('css', function () {
         .pipe(connect.reload());
 });
 
+gulp.task('js', function () {
+    gulp.src(config.paths.js)
+        .pipe(gulp.dest(config.paths.buildJS))
+        .pipe(connect.reload());
+});
+
+
 gulp.task('sass', function () {
     gulp.src(config.paths.sass)
         .pipe(sass().on('error', sass.logError))
@@ -87,4 +93,4 @@ gulp.task('watch', function () {
     gulp.watch(config.paths.sass, ['sass']);
 });
 
-gulp.task('default', ['html', 'fonts', 'img', 'sass', 'open', 'watch']);
+gulp.task('default', ['open', 'html', 'fonts', 'img', 'css', 'js', 'sass', 'watch']);
