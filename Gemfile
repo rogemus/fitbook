@@ -10,6 +10,8 @@ gem 'apipie-rails'
 gem 'jwt'
 gem 'koala', '~> 2.2'
 
+gem 'active_model_serializers'
+
 group :development, :test do
   gem 'byebug', platform: :mri
   gem 'rspec'
