@@ -13,6 +13,9 @@ Rails.application.routes.draw do
       resources :gyms, only: [:index, :show] do
       end
 
+      resources :users, only: [:show] do
+      end
+
       namespace :me do
         root to: 'me#index'
         resource :gyms, only: [:create, :show]  do
