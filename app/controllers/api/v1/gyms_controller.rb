@@ -10,7 +10,7 @@ module Api::V1
       elsif test_lat_long_params
         render json: Gym.find_by_coordinates(loc[:top_left], loc[:bottom_right])
       else
-        render json: params
+        render json: Gym.all
       end
     end
 
