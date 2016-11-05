@@ -16,14 +16,23 @@ class SignIn extends React.Component {
 
     render() {
         return (
-            <div>
-                <FacebookLogin
-                    appId="986848648068958"
-                    autoLoad={true}
-                    fields="name,email,picture"
-                    callback={this.responseFacebook}
-                />
+            <div className="full-page">
+                <div className="container">
+                    <div className="row">
+                        <div className="center">
+                            <div className="card">
+                                <FacebookLogin
+                                    appId="986848648068958"
+                                    autoLoad={true}
+                                    fields="name,email,picture"
+                                    callback={this.responseFacebook}
+                                />
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
+
         )
     }
 }

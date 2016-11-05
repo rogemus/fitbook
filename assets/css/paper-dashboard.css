@@ -1873,3 +1873,28 @@ star {
 
 .label-danger {
   background-color: #EB5E28; }
+
+.full-page {
+  background: url("/assets/img/background/background-5.png") no-repeat center center/cover;
+  overflow: hidden;
+  position: relative;
+  height: 93vh;
+  border-radius: 50px; }
+.full-page .center {
+  display: block;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%); }
+.full-page .card {
+  box-shadow: 0 25px 30px -13px rgba(40, 40, 40, 0.4);
+  border-radius: 6px;
+  padding: 25px; }
+.full-page .card-header {
+  text-align: center;
+  margin-bottom: 20px;
+  display: block;
+  font-family: Muli, Helvetica, Arial, sans-serif;
+  font-size: 25.55px;
+  font-weight: 300;
+  line-height: 35.77px; }

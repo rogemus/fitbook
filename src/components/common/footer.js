@@ -2,7 +2,7 @@ import React from 'react';
 
 export default() => {
     return (
-        <footer class="footer">
+        <footer className="footer">
             <div className="container-fluid">
                 <nav className="pull-left">
                     <ul>

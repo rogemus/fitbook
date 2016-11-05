@@ -1,6 +1,15 @@
 import React from 'react';
 import {connect} from 'react-redux';
+import {Link} from 'react-router';
 import {fetchCurrentUserGyms} from '../../../actions/current_user_actions'
+import GymCard from '../../common/gymCard';
+import UserCard from '../../common/userCard';
+
+const marginTop = {
+    margin: "50px 0"
+};
+
+
 class CurrentUserPage extends React.Component {
 
     componentWillMount() {
@@ -10,36 +19,43 @@ class CurrentUserPage extends React.Component {
     renderCurrentUserCard() {
         if (this.props.current_user) {
             return (
-                <div>
-                    <div>{this.props.current_user.name}</div>
-                    <div>{this.props.current_user.email}</div>
-                </div>
+                <UserCard user={this.props.current_user}/>
             )
         }
     }
 
     renderCurrentUserGyms() {
         if (this.props.current_user_gyms) {
-            return this.props.current_user_gyms.map(gym => {
-                return (
-                    <span key={gym.id}>{gym.name}</span>
-                );
-            });
+            return (
+                <div>
+                    <h4 className="title">My gyms</h4>
+                    {this.props.current_user_gyms.map(gym => {
+                        return (
+                            <GymCard key={gym.id} gym={gym}/>
+                        );
+                    })}
+                </div>
+            )
         }
     }
 
     render() {
         return (
-            <div>
-                <div><h1>User info</h1>
-                    {this.renderCurrentUserCard()}
-                </div>
-                <div>
-                    <h2>User Gyms</h2>
-                    {this.renderCurrentUserGyms()}
+            <div style={marginTop}>
+                <div className="content">
+                    <div className="container-fluid">
+                        <div className="row">
+                            <div className="col-lg-4 col-md-5">
+                                {this.renderCurrentUserCard()}
+                            </div>
+                            <div className="col-lg-8 col-md-7">
+                                {this.renderCurrentUserGyms()}
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
-        )
+        );
     }
 }
 
