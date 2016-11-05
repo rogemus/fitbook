@@ -12,42 +12,94 @@ class Sidebar extends React.Component {
     }
 
     renderCurrentUserName() {
-        if(this.props.current_user) {
+        if (this.props.current_user) {
             return this.props.current_user.name;
+        }
+    }
+
+    renderUser() {
+        if (this.props.current_user && this.props.authenticated) {
+            return (
+                <div className="user">
+                    <div className="photo">
+                        <Link to="/me">
+                            <img src="assets/img/faces/face-2.jpg"/>
+                        </Link>
+                    </div>
+                    <div className="info" key={1}>
+                        <Link to="/me">{this.renderCurrentUserName()}</Link>
+                    </div>
+                </div>
+            )
         }
     }
 
     renderLinks() {
         if (this.props.authenticated) {
             return [
-                <li className="nav-item" key={1}>
-                    <Link className="nav-link" to="/signout">Sign Out</Link>
+                <li key={1}>
+                    <Link to="/">
+                        <i className="fa fa-home"></i>
+                        <p>Home</p>
+                    </Link>
                 </li>,
-                <li className="nav-item" key={2}>
-                    <Link className="nav-link" to="/creategym">Create Gym</Link>
+                <li key={2}>
+                    <Link to="/creategym">
+                        <i className="fa fa-plus"></i>
+                        <p>Create Gym</p>
+                    </Link>
                 </li>,
-                <li className="nav-item" key={3}>
-                    <Link className="nav-link" to="/me">{this.renderCurrentUserName()}</Link>
+                <li key={3}>
+                    <Link to="/signout">
+                        <i className="fa fa-sign-out"></i>
+                        <p>Sign Out</p>
+                    </Link>
                 </li>
-
             ]
         } else {
             return [
-                <li className="nav-item" key={1}>
-                    <Link className="nav-link" to="/signin">Sign In</Link>
+                <li key={1}>
+                    <Link to="/">
+                        <i className="fa fa-home"></i>
+                        <p>Home</p>
+                    </Link>
+                </li>,
+                <li key={2}>
+                    <Link to="/signin">
+                        <i className="fa fa-sign-in"></i>
+                        <p>Sign In</p>
+                    </Link>
                 </li>
-            ];
+
+            ]
         }
     }
 
     render() {
         return (
-            <nav className="navbar navbar-light">
-                <Link to="/" className="navbar-brand">Home</Link>
-                <ul className="nav navbar-nav">
-                    {this.renderLinks()}
-                </ul>
-            </nav>
+            <div className="sidebar">
+                <div className="logo">
+                    <a href="http://www.creative-tim.com">
+                        Fitbook
+                    </a>
+                </div>
+                <div className="logo logo-mini">
+                    <a href="http://www.creative-tim.com">
+                        FitB
+                    </a>
+                </div>
+                <div className="sidebar-wrapper">
+                    {this.renderUser()}
+                    <ul className="nav">
+                        {this.renderLinks()}
+                    </ul>
+                    <div className="navbar-minimize">
+                        <button id="minimizeSidebar" className="btn btn-fill btn-icon">
+                            <i className="fa fa-ellipsis-h"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
         )
     }
 }
