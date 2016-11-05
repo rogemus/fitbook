@@ -27,7 +27,7 @@ body {
   }
 
   .user {
-    border-bottom: 1px solid rgba($white-color, .3);
+    border-right: 1px solid $light-gray;
     padding-bottom: 20px;
 
     .photo {
@@ -78,6 +78,7 @@ body {
     height: 75px;
     position: relative;
     z-index: 4;
+    border-bottom: 1px solid $light-gray;
 
     a {
       padding: $padding-small-vertical $padding-zero;
@@ -202,7 +203,7 @@ body {
     width: 80px;
     display: block;
     z-index: 3;
-    border-right: 1px solid $medium-gray;
+    border-right: 1px solid $light-gray;
 
     .sidebar-wrapper {
       overflow: inherit;
