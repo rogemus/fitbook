@@ -25,11 +25,11 @@ var config = {
         sass: [
             './src/sass/**/*.scss'
         ],
-        buildCss: './build/css',
-        buildImgs: './build/img',
-        buildHtml: './build/html',
-        buildFont: './build/fonts',
-        buildJS: './build/js',
+        buildCss: './build/assets/css',
+        buildImgs: './build/assets/img',
+        buildHtml: './build',
+        buildFont: './build/assets/fonts',
+        buildJS: './build/assets/js',
         build: './build'
     }
 };
@@ -45,9 +45,9 @@ gulp.task('connect', function () {
 
 
 gulp.task('open', ['connect'], function () {
-    gulp.src('build/html/')
+    gulp.src('build/html')
         .pipe(open({
-            uri: config.devBaseUrl + ':' + config.port + '/'
+            uri: config.devBaseUrl + ':' + config.port + '/html'
         }));
 });
 
