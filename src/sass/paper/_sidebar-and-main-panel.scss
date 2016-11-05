@@ -1,30 +1,29 @@
+body {
+  background-color: $bg-nude;
+  &.sidebar-mini {
+    .sidebar {
+      .sidebar-wrapper {
+        height: calc(100vh - 95px);
+      }
+    }
+  }
+}
+
 .sidebar {
   position: fixed;
+  background: #fff;
+  border-right: 1px solid $medium-gray;
 
   .sidebar-wrapper {
-    position: relative;
     height: calc(100vh - 75px);
-    overflow: auto;
+    position: relative;
+    overflow: hidden;
     z-index: 4;
-    box-shadow: inset -1px 0px 0px 0px $medium-gray;
     width: 260px;
-
   }
 
   .logo-mini {
     display: none;
-  }
-
-  .sidebar-background {
-    position: absolute;
-    z-index: 1;
-    height: 100%;
-    width: 100%;
-    display: block;
-    top: 0;
-    left: 0;
-    background-size: cover;
-    background-position: center center;
   }
 
   .user {
@@ -37,10 +36,17 @@
       overflow: hidden;
       border-radius: 50%;
       margin: 0 auto;
+
       @extend .general-animation;
 
-      img {
-        width: 100%;
+      a {
+        padding: 0;
+        overflow: hidden;
+        border-radius: 50%;
+        opacity: 1;
+        img {
+          width: 100%;
+        }
       }
     }
 
@@ -62,21 +68,18 @@
   }
 }
 
-.sidebar,
-.off-canvas-sidebar {
+.sidebar {
   width: 260px;
   display: block;
 
   .logo {
     padding: 18px 0px;
     margin: 0;
-    box-shadow: inset -1px 0px 0px 0px #cfcfca;
     height: 75px;
     position: relative;
     z-index: 4;
 
-    .simple-text {
-      text-transform: uppercase;
+    a {
       padding: $padding-small-vertical $padding-zero;
       display: block;
       font-size: $font-size-large;
@@ -91,15 +94,6 @@
       font-size: 20px;
       margin: 10px 10px;
       line-height: 20px;
-    }
-
-    &:before {
-      content: "";
-      position: absolute;
-      bottom: 0px;
-      right: 10%;
-      width: 80%;
-      height: 1px;
     }
   }
 
@@ -137,17 +131,6 @@
 
       @extend .general-animation;
     }
-
-    .caret {
-      margin-top: 12px;
-      position: absolute;
-      right: 0;
-    }
-
-    [data-toggle="collapse"] ~ div > ul > li > a {
-      padding-left: 70px;
-      margin: 0;
-    }
   }
 
   .nav {
@@ -161,23 +144,9 @@
     }
   }
 
-  &:after,
-  &:before {
-    display: block;
-    content: "";
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    top: 0;
-    left: 0;
-    z-index: 2;
-    background: $white-background-color;
-  }
-
-  &,
-  &[data-background-color="white"] {
+  & {
     @include sidebar-background-color($white-background-color, $default-color);
-
+    @include sidebar-active-color($warning-color);
     .user {
       margin-top: 20px;
 
@@ -186,14 +155,9 @@
       }
     }
   }
-
-  &[data-active-color="warning"] {
-    @include sidebar-active-color($warning-color);
-  }
 }
 
 .main-panel {
-  background-color: $bg-nude;
   overflow: auto;
   position: relative;
   z-index: 2;
@@ -233,223 +197,99 @@
   height: 100%;
 }
 
-// windows os settings for perfect scrollbar off
-.sidebar .sidebar-wrapper,
-.main-panel {
-  .perfect-scrollbar-on &,
-  & {
-    overflow: hidden;
-  }
-}
-
-// regular settings for perfect scrollbar off
-.perfect-scrollbar-off {
-  .sidebar .sidebar-wrapper,
-  .main-panel {
-    overflow: auto;
-  }
-}
-
-@media (min-width: $screen-md) {
-  .hover-collapse {
+.sidebar-mini {
+  .sidebar {
+    width: 80px;
     display: block;
-    position: absolute;
-    top: 0;
-    left: 81px;
-    background-color: $pale-bg;
-    border: 0 none;
-    border-radius: $border-radius-extreme;
-    padding: 0px;
-    @include box-shadow($dropdown-shadow);
-  }
+    z-index: 3;
+    border-right: 1px solid $medium-gray;
 
-  .sidebar-mini {
-    .sidebar {
+    .sidebar-wrapper {
+      overflow: inherit;
       width: 80px;
+    }
+
+    .logo {
+      display: none;
+    }
+
+    .logo-mini {
       display: block;
-      z-index: 3;
+    }
 
-      .sidebar-wrapper {
-        overflow: inherit;
-        width: 80px;
-        box-shadow: none;
+    .sidebar-wrapper > .nav {
 
-        .collapse.in {
-          display: none;
+      a {
+        transition: none;
+      }
+
+      li {
+        > a {
+          margin: 10px 0px;
+          padding-left: 25px;
+          padding-right: 25px;
         }
+      }
 
-        .collapse .nav {
-          width: 160px;
-          height: auto;
-          position: relative;
-
-          li.active {
-            a {
-              &:before,
-              &:after {
-                display: none
-              }
-            }
-          }
-
-          li {
-            & > a:hover,
-            & > a:focus {
-              background-color: $default-color;
-              color: $fill-font-color;
-              opacity: 1;
-              text-decoration: none;
-            }
-
-            &:first-child > a {
-              border-top-left-radius: 6px;
-              border-top-right-radius: 6px;
-            }
-
-            &:last-child > a {
-              border-bottom-left-radius: 6px;
-              border-bottom-right-radius: 6px;
-            }
-          }
-
-          &:before {
-            border-right: 11px solid $medium-pale-bg;
-            border-top: 11px solid transparent;
-            border-bottom: 11px solid transparent;
-            position: absolute;
-            content: "";
-            display: inline-block;
-            left: -12px;
-            top: 14px;
-          }
-
+      li.active {
+        > a {
+          &:before,
           &:after {
-            border-right: 11px solid $pale-bg;
-            border-top: 11px solid transparent;
-            border-bottom: 11px solid transparent;
-            position: absolute;
-            content: "";
-            display: inline-block;
-            left: -11px;
-            top: 14px;
+            display: none;
           }
         }
       }
 
-      .logo {
+      p {
         display: none;
-        box-shadow: none;
+        left: -20px;
+        opacity: 0;
       }
 
-      .logo-mini {
-        display: block;
+      i {
+        float: none;
       }
+    }
 
-      .sidebar-wrapper > .nav {
+    .user {
+      position: relative;
+      margin-top: 20px;
 
+      .nav {
         a {
           transition: none;
         }
+      }
 
-        li {
-          &:hover,
-          &:focus {
-            .collapse {
-              @extend .hover-collapse;
-            }
-          }
-
-          > a {
-            margin: 10px 0px;
-            padding-left: 25px;
-            padding-right: 25px;
-          }
-        }
-
-        li.active {
-          > a {
-            &:before,
-            &:after {
-              display: none;
-            }
-          }
-        }
-
-        p {
-          display: none;
-          left: -20px;
+      .info {
+        > a {
+          height: 0;
           opacity: 0;
-        }
-
-        i {
-          float: none;
-        }
-
-        [data-toggle="collapse"] ~ div > ul > li > a {
-          padding-left: 25px;
+          padding: 0;
         }
       }
 
-      .user {
-        position: relative;
-        margin-top: 20px;
-
-        .nav {
-          a {
-            transition: none;
-          }
-        }
-
-        .info {
-          > a {
-            height: 0;
-            opacity: 0;
-            padding: 0;
-          }
-        }
-
-        .photo {
-          width: 50px;
-          height: 50px;
-          border-width: 2px;
-        }
-
-        &:hover {
-
-          .collapse {
-            @extend .hover-collapse;
-          }
-        }
+      .photo {
+        width: 50px;
+        height: 50px;
+        border-width: 2px;
       }
-    }
-
-    .main-panel {
-      width: calc(100% - 80px);
-      margin-left: 80px;
-
-      &:before {
-        position: absolute;
-        content: "";
-        display: block;
-        z-index: 5;
-        left: 0;
-        top: 0;
-        height: 100%;
-        width: 1px;
-        background-color: $medium-gray;
-      }
-    }
-
-    .wrapper {
-      height: auto;
-    }
-
-    .sidebar,
-    .main-panel {
-      overflow: visible;
-      max-height: none;
-      height: auto;
     }
   }
 
+  .main-panel {
+    width: calc(100% - 80px);
+    margin-left: 80px;
+  }
+
+  .wrapper {
+    height: auto;
+  }
+
+  .sidebar,
+  .main-panel {
+    overflow: visible;
+    max-height: none;
+    height: auto;
+  }
 }
