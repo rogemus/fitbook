@@ -45,7 +45,7 @@ gulp.task('connect', function () {
 
 
 gulp.task('open', ['connect'], function () {
-    gulp.src('build/html')
+    gulp.src('build/')
         .pipe(open({
             uri: config.devBaseUrl + ':' + config.port + '/html'
         }));
