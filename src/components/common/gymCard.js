@@ -1,8 +1,8 @@
 import React from 'react';
 import {Link} from 'react-router';
 
-export default(gym) => (
-    <div className="card col-lg-3 col-sm-6">
+export default({gym}) => (
+    <div className="card col-md-6">
         <div className="content">
             <div className="row">
                 <div className="col-xs-5">
@@ -12,7 +12,7 @@ export default(gym) => (
                     </div>
                 </div>
                 <div className="col-xs-7">
-                    <Link to={'/gyms' + gym.id}>
+                    <Link to={'/gyms/' + gym.id}>
                         <h2>{gym.name}</h2>
                     </Link>
                     <hr/>

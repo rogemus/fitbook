@@ -5,7 +5,7 @@ import {
     FETCH_GYMS
 } from './types';
 
-const ROOT_URL = 'http://localhost:3030/api/v1';
+const ROOT_URL = 'http://fitbook-api.herokuapp.com/api/v1';
 
 export function fetchGyms() {
     return function (dispatch) {
@@ -20,11 +20,10 @@ export function fetchGyms() {
     }
 }
 
-export function fetchGym() {
+export function fetchGym(id) {
     return function (dispatch) {
-        axios.get(ROOT_URL + '/gym')
+        axios.get(`${ROOT_URL}/gyms/${id}`)
             .then(response => {
-                console.log(response.data);
                 dispatch({
                     type: FETCH_GYM,
                     payload: response.data

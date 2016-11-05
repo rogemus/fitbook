@@ -23,7 +23,7 @@ class SignIn extends React.Component {
                             <div className="card">
                                 <FacebookLogin
                                     appId="986848648068958"
-                                    autoLoad={true}
+                                    autoLoad={false}
                                     fields="name,email,picture"
                                     callback={this.responseFacebook}
                                 />

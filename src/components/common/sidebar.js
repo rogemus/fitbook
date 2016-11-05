@@ -23,7 +23,7 @@ class Sidebar extends React.Component {
                 <div className="user">
                     <div className="photo">
                         <Link to="/me">
-                            <img src="assets/img/faces/face-2.jpg"/>
+                            <img src="/assets/img/faces/face-2.jpg"/>
                         </Link>
                     </div>
                     <div className="info" key={1}>

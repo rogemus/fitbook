@@ -14,6 +14,9 @@ import Home from './components/page/HomePage/home';
 import RequireAuth from './components/page/Auth/require_auth';
 import CurrentUserPage from './components/page/CurrentUserPage/currentUserPage';
 import CreateGymsPage from './components/page/CreateGymsPage/createGymsPage'
+import GymPage from './components/page/GymPage/gymPage';
+import GymsPage from './components/page/GymsPage/gymsPage';
+
 import reducers from './reducers';
 
 
@@ -34,9 +37,11 @@ ReactDOM.render(
                 <IndexRoute component={Home}/>
                 <Route path="signin" component={SignIn}/>
                 <Route path="signout" component={SignOut}/>
-                <Route path="creategym" component={CreateGymsPage} />
-                <Route path="me" component={RequireAuth(CurrentUserPage)} />
+                <Route path="gyms/:id" component={GymPage}/>
+                <Route path="creategym" component={RequireAuth(CreateGymsPage)}/>
+                <Route path="me" component={RequireAuth(CurrentUserPage)}/>
                 <Route path="feature" component={RequireAuth(Feature)}/>
+                <Route path="*" component={Home}/>
             </Route>
         </Router>
     </Provider>
