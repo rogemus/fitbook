@@ -12,7 +12,7 @@ const marginTop = {
 
 class CurrentUserPage extends React.Component {
 
-    componentWillMount() {
+    componentDidMount() {
         this.props.fetchCurrentUserGyms();
     }
 

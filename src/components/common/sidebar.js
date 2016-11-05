@@ -5,7 +5,7 @@ import {fetchCurrentUser} from '../../actions/current_user_actions';
 
 class Sidebar extends React.Component {
 
-    componentWillMount() {
+    componentDidMount() {
         if (this.props.authenticated) {
             this.props.fetchCurrentUser();
         }

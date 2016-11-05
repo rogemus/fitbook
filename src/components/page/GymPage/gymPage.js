@@ -5,7 +5,7 @@ import GymCard from '../../common/gymCard';
 
 class GymPage extends React.Component {
 
-    componentWillMount() {
+    componentDidMount() {
         this.props.fetchGym(this.props.params.id);
     }
 

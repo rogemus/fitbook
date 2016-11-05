@@ -10,7 +10,7 @@ class CreateGymsPage extends React.Component {
     }
 
 
-    componentWillMount() {
+    componentDidMount() {
         this.props.fetchCurrentUserAvailableGyms();
     }
 
