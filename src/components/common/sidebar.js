@@ -79,14 +79,14 @@ class Sidebar extends React.Component {
         return (
             <div className="sidebar">
                 <div className="logo">
-                    <a href="http://www.creative-tim.com">
+                    <Link to="/">
                         Fitbook
-                    </a>
+                    </Link>
                 </div>
                 <div className="logo logo-mini">
-                    <a href="http://www.creative-tim.com">
+                    <Link to="/">
                         FitB
-                    </a>
+                    </Link>
                 </div>
                 <div className="sidebar-wrapper">
                     {this.renderUser()}
