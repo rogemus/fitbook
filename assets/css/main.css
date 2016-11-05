@@ -1478,7 +1478,7 @@ body {
 .sidebar {
   position: fixed;
   background: #fff;
-  border-right: 1px solid #cfcfca; }
+  border-right: 1px solid #E3E3E3; }
   .sidebar .sidebar-wrapper {
     height: calc(100vh - 75px);
     position: relative;
@@ -1488,7 +1488,6 @@ body {
   .sidebar .logo-mini {
     display: none; }
   .sidebar .user {
-    border-bottom: 1px solid rgba(255, 255, 255, 0.3);
     padding-bottom: 20px; }
     .sidebar .user .photo {
       width: 80px;
@@ -1521,7 +1520,8 @@ body {
     margin: 0;
     height: 75px;
     position: relative;
-    z-index: 4; }
+    z-index: 4;
+    border-bottom: 1px solid #E3E3E3; }
     .sidebar .logo a {
       padding: 4px 0px;
       display: block;
@@ -1568,7 +1568,7 @@ body {
     background-color: #FFFFFF; }
   .sidebar .user,
   .sidebar .mini-logo {
-    border-bottom: 1px solid rgba(102, 97, 91, 0.3);
+    border-bottom: 1px solid #E3E3E3;
     position: relative;
     z-index: 4; }
   .sidebar .logo:before {
@@ -1626,7 +1626,7 @@ body {
   width: 80px;
   display: block;
   z-index: 3;
-  border-right: 1px solid #cfcfca; }
+  border-right: 1px solid #E3E3E3; }
   .sidebar-mini .sidebar .sidebar-wrapper {
     overflow: inherit;
     width: 80px; }
@@ -1684,7 +1684,8 @@ body {
     position: absolute;
     left: 50%;
     transform: translateX(-50%);
-    bottom: 15px; }
+    bottom: 15px;
+    padding: 5px 10px !important; }
   .navbar-minimize .ti-more-alt {
     display: inline-block;
     min-width: 14px; }
