@@ -10,14 +10,16 @@ class HomePage extends React.Component {
 
     render() {
         return (
-            <div>
-                <Geosuggest
-                    placeholder="Start typing!"
-                    country="pl"
-                    types={["geocode"]}
-                    onSuggestSelect={this.onSuggestSelect}
-                    location={new google.maps.LatLng(53.558572, 9.9278215)}
-                    radius="20"/>
+            <div className="find-gym">
+                <div className="find-gym__background">
+                    <Geosuggest
+                        placeholder="Start typing!"
+                        country="pl"
+                        types={["geocode"]}
+                        onSuggestSelect={this.onSuggestSelect}
+                        location={new google.maps.LatLng()}
+                        radius="20"/>
+                </div>
             </div>
         )
     }

@@ -25,7 +25,7 @@ export function signInUser(data) {
             });
 
             localStorage.setItem('token', response.data.token);
-            browserHistory.push('/feature');
+            browserHistory.push('/');
         });
     }
 }

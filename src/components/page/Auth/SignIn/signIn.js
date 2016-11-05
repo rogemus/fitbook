@@ -16,7 +16,7 @@ class SignIn extends React.Component {
 
     render() {
         return (
-            <div className="full-page">
+            <div className="full-page login-page">
                 <div className="container">
                     <div className="row">
                         <div className="center">

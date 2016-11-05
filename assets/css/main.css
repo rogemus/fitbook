@@ -1875,11 +1875,12 @@ star {
   background-color: #EB5E28; }
 
 .full-page {
-  background: url("/assets/img/background/background-5.png") no-repeat center center/cover;
   overflow: hidden;
   position: relative;
   height: 93vh;
   border-radius: 50px; }
+.full-page.login-page {
+  background: url("/assets/img/background/background-5.png") no-repeat center center/cover; }
 .full-page .center {
   display: block;
   position: absolute;
@@ -1891,36 +1892,41 @@ star {
   border-radius: 6px;
   padding: 25px; }
 
+.find-gym__background {
+  background: url("/assets/img/background/background-4.jpg") no-repeat center center/cover;
+  padding: 250px 0;
+  border-radius: 50px; }
+
 .geosuggest {
-  font-size: 18px;
-  font-size: 1rem;
+  font-size: 24px;
   position: relative;
   width: 50%;
   margin: 1em auto;
-  text-align: left; }
-
+  text-align: left;
+  /**
+ * A geosuggest item
+ */ }
 .geosuggest__input {
   width: 100%;
-  border: 2px solid transparent;
+  font-size: 24px;
+  border: 1px solid transparent;
   box-shadow: 0 0 1px #3d464d;
   padding: .5em 1em;
   -webkit-transition: border 0.2s, box-shadow 0.2s;
   transition: border 0.2s, box-shadow 0.2s; }
-
 .geosuggest__input:focus {
   border-color: #267dc0;
   box-shadow: 0 0 0 transparent; }
-
 .geosuggest__suggests {
   position: absolute;
   top: 100%;
   left: 0;
   right: 0;
-  max-height: 25em;
+  max-height: 50em;
   padding: 0;
   margin-top: -1px;
   background: #fff;
-  border: 2px solid #267dc0;
+  border: 1px solid #267dc0;
   border-top-width: 0;
   overflow-x: hidden;
   overflow-y: auto;
@@ -1928,29 +1934,18 @@ star {
   z-index: 5;
   -webkit-transition: max-height 0.2s, border 0.2s;
   transition: max-height 0.2s, border 0.2s; }
-
 .geosuggest__suggests--hidden {
   max-height: 0;
   overflow: hidden;
   border-width: 0; }
-
-/**
- * A geosuggest item
- */
 .geosuggest__item {
-  font-size: 18px;
-  font-size: 1rem;
+  font-size: 24px;
   padding: .5em .65em;
   cursor: pointer; }
-
-.geosuggest__item:hover,
-.geosuggest__item:focus {
+.geosuggest__item:hover, .geosuggest__item:focus {
   background: #f5f5f5; }
-
 .geosuggest__item--active {
   background: #267dc0;
   color: #fff; }
-
-.geosuggest__item--active:hover,
-.geosuggest__item--active:focus {
+.geosuggest__item--active:hover, .geosuggest__item--active:focus {
   background: #ccc; }

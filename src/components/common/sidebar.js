@@ -18,7 +18,7 @@ class Sidebar extends React.Component {
     }
 
     renderUser() {
-        if (this.props.current_user && this.props.authenticated) {
+        if (this.props.authenticated) {
             return (
                 <div className="user">
                     <div className="photo">
