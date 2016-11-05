@@ -16,7 +16,7 @@
     <link href="/assets/css/bootstrap.min.css" rel="stylesheet"/>
 
     <!--  Paper Dashboard core CSS    -->
-    <link href="/assets/css/paper-dashboard.css" rel="stylesheet"/>
+    <link href="/assets/css/main.css" rel="stylesheet"/>
 
     <!--  Fonts and icons     -->
     <link href="http://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css" rel="stylesheet">
@@ -89,45 +89,25 @@
     </div>
 
     <div class="main-panel">
-
         <div class="content">
-            <div class="container-fluid">
-                <div class="row">
-                    <div class="col-lg-3 col-sm-6">
-                        <div class="card">
-                            <div class="content">
-                                <div class="row">
-                                    <div class="col-xs-5">
-                                        <div class="icon-big icon-warning text-center">
-                                            <i class="ti-server"></i>
-                                        </div>
-                                    </div>
-                                    <div class="col-xs-7">
-                                        <div class="numbers">
-                                            <p>Capacity</p>
-                                            105GB
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="card-footer">
-                                <hr/>
-                                <div class="stats">
-                                    <i class="ti-reload"></i> Updated now
-                                </div>
-                            </div>
+            <div class="find-gym">
+                <div class="find-gym__background">
+                    <div class="geosuggest">
+                        <div class="geosuggest__input-wrapper"><input type="text" class="geosuggest__input"
+                                                                      autocomplete="off" placeholder="Start typing!"
+                                                                      value=""></div>
+                        <div class="geosuggest__suggests-wrapper">
+                            <ul class="geosuggest__suggests geosuggest__suggests--hidden"></ul>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
-        <footer class="footer">
-            <div class="container-fluid">
-                <div class="copyright pull-right">
-                    &copy; Fitbook
+            <footer class="footer">
+                <div class="container-fluid">
+                    <div class="copyright pull-right">© Fitbook</div>
                 </div>
-            </div>
-        </footer>
+            </footer>
+        </div>
     </div>
 </div>
 </body>
