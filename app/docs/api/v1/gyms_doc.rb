@@ -11,11 +11,17 @@ module Api::V1::GymsDoc
   defaults do
   end
 
-  doc_for :index do
-    api :GET, '/v1/gyms', 'All gyms, can be filtered by hash, city/country prior'
-    param :location, Hash, :desc => 'Hash with two options by city & country, or by location' do
+  doc_for :show do
+    api :GET, '/v1/gyms/:id', 'Find gym where :id'
+  end
+
+  doc_for :find do
+    api :POST, '/v1/gyms/find', 'Find gym by city/country or viewport'
+    param :location, Hash, :desc => 'City and country' do
       param :city, String
       param :country, String
+    end
+    param :location, Hash, :desc => 'Current viewport' do
       param :top_left, Hash, :desc => 'Top left viewport' do
         param :latitude, Float
         param :longitude, Float
@@ -25,10 +31,6 @@ module Api::V1::GymsDoc
         param :longitude, Float
       end
     end
-  end
-
-  doc_for :show do
-    api :GET, '/v1/gyms/:id', 'Find gym where :id'
   end
 
 end

@@ -10,6 +10,9 @@ Rails.application.routes.draw do
 
     namespace :v1 do
 
+      resource :gyms, only: [] do
+        post :find
+      end
       resources :gyms, only: [:index, :show] do
       end
 

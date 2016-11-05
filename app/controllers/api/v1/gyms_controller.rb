@@ -3,19 +3,19 @@ module Api::V1
 
     include GymsDoc
 
-    def index
+    def show
+      render json: Gym.find(params[:id])
+    end
+
+    def find
       loc = params[:location]
       if test_city_params
         render json: Gym.find_by_city(loc[:city], loc[:country])
       elsif test_lat_long_params
         render json: Gym.find_by_coordinates(loc[:top_left], loc[:bottom_right])
       else
-        render json: Gym.all
+        render json: {:errors => 'Missing params'}, :status => :bad_request
       end
-    end
-
-    def show
-      render json: Gym.find(params[:id])
     end
 
     private
