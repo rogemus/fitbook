@@ -1478,7 +1478,7 @@ body {
 .sidebar {
   position: fixed;
   background: #fff;
-  border-right: 1px solid #cfcfca; }
+  border-right: 1px solid #E3E3E3; }
   .sidebar .sidebar-wrapper {
     height: calc(100vh - 75px);
     position: relative;
@@ -1488,7 +1488,6 @@ body {
   .sidebar .logo-mini {
     display: none; }
   .sidebar .user {
-    border-right: 1px solid #E3E3E3;
     padding-bottom: 20px; }
     .sidebar .user .photo {
       width: 80px;
@@ -1569,7 +1568,7 @@ body {
     background-color: #FFFFFF; }
   .sidebar .user,
   .sidebar .mini-logo {
-    border-bottom: 1px solid rgba(102, 97, 91, 0.3);
+    border-bottom: 1px solid #E3E3E3;
     position: relative;
     z-index: 4; }
   .sidebar .logo:before {
