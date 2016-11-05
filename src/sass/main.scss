@@ -1,17 +1,18 @@
-@import "paper/variables";
-@import "paper/mixins";
+@import "utils/variables";
+@import "utils/mixins";
 
-@import "paper/typography";
-@import "paper/sidebar-and-main-panel";
-@import "paper/buttons";
-@import "paper/misc";
-@import "paper/inputs";
-@import "paper/forms";
-@import "paper/navbars";
-@import "paper/footers";
-@import "paper/cards";
-@import "paper/timeline";
-@import "paper/labels";
+@import "core/typography";
+@import "core/labels";
+@import "core/buttons";
+@import "core/misc";
+@import "core/inputs";
+@import "core/forms";
+@import "core/cards";
 
-@import "paper/pages";
-@import "paper/_geosuggest";
+@import "component/sidebar-and-main-panel";
+@import "component/navbars";
+@import "component/footers";
+@import "component/timeline";
+@import "component/pages";
+@import "component/geosuggest";
+@import "component/find-gym";
