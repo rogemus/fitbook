@@ -12,30 +12,59 @@ class HomePage extends React.Component {
             search_result: [],
             location: null
         };
+
         this.onSuggestSelect = this.onSuggestSelect.bind(this);
         this.renderGymSearchResult2 = this.renderGymSearchResult2.bind(this);
     }
 
 
     onSuggestSelect(suggest) {
-        const viewport = suggest.gmaps.geometry.viewport;
-
+        const distanceInMeters = 5000;
         const location = {
-            top_left: {
-                latitude: viewport.b.b,
-                longitude: viewport.b.f
-            },
-            bottom_right: {
-                latitude: viewport.f.b,
-                longitude: viewport.f.f
-            }, center_of_search: {
-                latitude: suggest.location.lat,
-                longitude: suggest.location.lng,
-                placeId: suggest.placeId
-            }
+            latitude: suggest.location.lat,
+            longitude: suggest.location.lng
         };
 
-        return this.props.findGyms(location);
+        // const location = {
+        //     top_left: {
+        //         latitude: viewport.f.b,
+        //         longitude: viewport.b.b
+        //     },
+        //     bottom_right: {
+        //         latitude: viewport.f.f,
+        //         longitude: viewport.b.f
+        //     }
+        // };
+
+        // const location = {
+        //     top_left: {
+        //         latitude: 32.2322332,
+        //         longitude: 1.213123312
+        //     },
+        //     bottom_right: {
+        //         latitude: 89.21212,
+        //         longitude: 100.1111
+        //     }
+        // };
+
+        const latRadian = location.latitude * Math.PI / 180;
+        const degLatKm = 110.574235;
+        const degLongKm = 110.572833 * Math.cos(latRadian);
+        const deltaLat = distanceInMeters / 1000 / degLatKm;
+        const deltaLong = distanceInMeters / 1000 / degLongKm;
+
+        const viewBox = {
+                top_left: {
+                    latitude: location.latitude - deltaLat,
+                    longitude: location.longitude - deltaLong
+                },
+                bottom_right: {
+                    latitude: location.latitude + deltaLat,
+                    longitude: location.longitude + deltaLong
+                }
+        };
+
+        return this.props.findGyms(viewBox);
     }
 
     renderGymSearchResult2() {
@@ -178,7 +207,7 @@ class HomePage extends React.Component {
                         types={["geocode"]}
                         onSuggestSelect={this.onSuggestSelect}
                         location={new google.maps.LatLng()}
-                        radius="50"/>
+                        radius="20"/>
                 </div>
 
                 {this.renderGymSearchResult2()}

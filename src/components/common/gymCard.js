@@ -12,7 +12,7 @@ export default({gym}) => (
                     </div>
                 </div>
                 <div className="col-xs-7">
-                    <Link to={'/gyms/' + gym.id}>
+                    <Link to={`/gyms/${gym.id}`}>
                         <h2>{gym.name}</h2>
                     </Link>
                     <hr/>

@@ -8,10 +8,8 @@ import {
 const ROOT_URL = 'http://fitbook-api.herokuapp.com/api/v1';
 
 export function findGyms(data) {
-    console.log(data);
-
     return function (dispatch) {
-        axios.post(ROOT_URL + '/gyms/find', {
+        axios.post(`${ROOT_URL}/gyms/find`, {
                 location: {
                     top_left: data.top_left,
                     bottom_right: data.bottom_right
