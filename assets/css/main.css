@@ -1543,8 +1543,9 @@ body {
       padding-right: 25px;
       opacity: .7; }
     .sidebar .sidebar-wrapper > .nav li:hover > a {
+      color: #F3BB45;
       opacity: 1; }
-    .sidebar .sidebar-wrapper > .nav li.active > a {
+    .sidebar .sidebar-wrapper > .nav li.active a {
       color: #7A9E9F;
       opacity: 1; }
     .sidebar .sidebar-wrapper > .nav p {
@@ -1583,9 +1584,6 @@ body {
     color: #66615B; }
   .sidebar .nav .divider {
     background-color: rgba(102, 97, 91, 0.2); }
-  .sidebar .nav li.active > a {
-    color: #F3BB45;
-    opacity: 1; }
   .sidebar .user {
     margin-top: 20px; }
     .sidebar .user .photo {

@@ -5,7 +5,7 @@ import {fetchCurrentUser} from '../../actions/current_user_actions';
 
 class Sidebar extends React.Component {
 
-    componentDidMount() {
+    componentWillMount() {
         if (this.props.authenticated) {
             this.props.fetchCurrentUser();
         }
@@ -18,7 +18,7 @@ class Sidebar extends React.Component {
     }
 
     renderUser() {
-        if (this.props.authenticated) {
+        if (this.props.current_user && this.props.authenticated) {
             return (
                 <div className="user">
                     <div className="photo">
@@ -38,7 +38,7 @@ class Sidebar extends React.Component {
         if (this.props.authenticated) {
             return [
                 <li key={1}>
-                    <Link to="/">
+                    <Link to="/" activeClassName="active">
                         <i className="fa fa-home"></i>
                         <p>Home</p>
                     </Link>
@@ -70,7 +70,6 @@ class Sidebar extends React.Component {
                         <p>Sign In</p>
                     </Link>
                 </li>
-
             ]
         }
     }
@@ -79,7 +78,7 @@ class Sidebar extends React.Component {
         return (
             <div className="sidebar">
                 <div className="logo">
-                    <Link to="/">
+                    <Link to="/" className="simple-text">
                         Fitbook
                     </Link>
                 </div>

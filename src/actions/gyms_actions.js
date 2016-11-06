@@ -2,18 +2,24 @@ import axios from 'axios';
 
 import {
     FETCH_GYM,
-    FETCH_GYMS
+    FIND_GYMS
 } from './types';
 
 const ROOT_URL = 'http://fitbook-api.herokuapp.com/api/v1';
 
-export function fetchGyms() {
+export function findGyms(data) {
+    console.log(data);
+
     return function (dispatch) {
-        axios.get(ROOT_URL + '/gyms')
-            .then(response => {
-                console.log(response.data);
+        axios.post(ROOT_URL + '/gyms/find', {
+                location: {
+                    top_left: data.top_left,
+                    bottom_right: data.bottom_right
+                }
+            }
+        ).then(response => {
                 dispatch({
-                    type: FETCH_GYMS,
+                    type: FIND_GYMS,
                     payload: response.data
                 });
             });
