@@ -39,10 +39,15 @@ module Api
 
     def token_payload(user)
       return nil unless user&.id
+      iss = Time.now.to_i
+      exp = iss + 12 * 3600
+
       payload = {user_id: user.id, name: user.name}
       {
-          token: JSONWebToken.encode(payload),
-          user: payload
+          token: JSONWebToken.encode({user: payload, exp: exp, iss: iss}),
+          user: payload,
+          iss: iss,
+          exp: exp
       }
     end
 
