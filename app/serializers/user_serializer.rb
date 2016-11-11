@@ -3,7 +3,8 @@ class UserSerializer < ActiveModel::Serializer
 
   def images
     {
-        :picture => object.fb_image
+        :cover => object.cover,
+        :picture => object.picture
     }
   end
 

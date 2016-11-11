@@ -12,14 +12,20 @@ module Api
       auth_hash = User::find_in_facebook(token)
       user = User.find_by({:facebook_id => auth_hash['id']})
       token = generate_long_term(token) if params[:long_term] == 'true'
+
+      picture = auth_hash['picture']&.[]('data')&.[]('url')
+      cover = auth_hash['cover']&.[]('source')
+
       if user
-        user.update_attribute(:graph_token, token)
+        user.update!({:graph_token => token,
+                      :picture => picture, :cover => cover})
       else
-        user = User.create!(
-            {:name => auth_hash['name'],
-             :facebook_id => auth_hash['id'],
-             :email => auth_hash['email'],
-             :graph_token => token})
+        data = {:name => auth_hash['name'],
+                :facebook_id => auth_hash['id'],
+                :email => auth_hash['email'],
+                :graph_token => token,
+                :picture => picture, :cover => cover}
+        user = User.create!(data)
       end
       render json: token_payload(user)
     end
@@ -45,7 +51,7 @@ module Api
       payload = {user_id: user.id, name: user.name}
       {
           token: JSONWebToken.encode({user: payload, exp: exp, iss: iss}),
-          user: payload,
+          user: UserSerializer.new(user),
           iss: iss,
           exp: exp
       }
