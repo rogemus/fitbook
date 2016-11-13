@@ -7,7 +7,7 @@ module Api::V1::Me
     REQUIRED_PERMISSIONS = %w{ADMINISTER}
 
     def show
-      render json: @current_user.owned_gyms
+      render json: current_user.owned_gyms
     end
 
     def create
@@ -16,7 +16,7 @@ module Api::V1::Me
       gym = Gym.create!({:name => fb_result['name'],
                      :facebook_id => facebook_id,
                      :graph_token => fb_result['access_token'],
-                     :owner => @current_user})
+                     :owner => current_user})
       join_gym_as_owner(gym)
       merge_facebook_data(gym)
 
@@ -27,7 +27,7 @@ module Api::V1::Me
 
     def update
       gym = Gym.find_by!({:id => params.require(:id),
-                         :owner => @current_user})
+                         :owner => current_user})
       merge_facebook_data(gym)
 
       render json: gym
@@ -40,9 +40,13 @@ module Api::V1::Me
 
     def join
       gym = Gym.find(params.require(:id))
-      @current_user.join_gym(gym, params[:level] || :regular)
+      member = current_user.join_gym(gym, params[:level] || :regular)
 
-      render json: @current_user.gyms_attending.last
+      if member.valid?
+        render json: member, status: :created
+      else
+        render json: member.errors.messages, status: :bad_request
+      end
     end
 
     private
@@ -53,7 +57,7 @@ module Api::V1::Me
     end
 
     def join_gym_as_owner(gym)
-      @current_user.join_gym_as_owner(gym)
+      current_user.join_gym_as_owner(gym)
     end
 
     def facebook_gym(id)
@@ -68,7 +72,7 @@ module Api::V1::Me
     end
 
     def validate_gym_fields(gym)
-      owned_gyms = @current_user.owned_gyms.map {|owned| owned[:facebook_id]} || []
+      owned_gyms = current_user.owned_gyms.map {|owned| owned[:facebook_id]} || []
 
       main_category = gym['category']
 

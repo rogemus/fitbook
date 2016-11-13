@@ -18,10 +18,24 @@ class User < ApplicationRecord
   end
 
   def join_gym(gym, level, as_owner = false)
+    level = level.parameterize.to_sym unless level.is_a?(Symbol)
+
     membership = Member.new({:gym => gym,
-                             :membership_level => level})
-    membership.join_as_owner if as_owner
-    self.members << membership
+                             :membership_level => level,
+                             :user => self})
+
+    if level === :owner && as_owner
+      membership.check_for_valid_level = false
+      membership.join_as_owner
+    else
+      membership.need_to_approve
+    end
+
+    if level === :trainer
+      membership.check_for_trainer = true
+    end
+
+    membership.save
     membership
   end
 

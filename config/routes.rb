@@ -2,10 +2,12 @@ Rails.application.routes.draw do
 
   apipie
 
-  namespace :api do
+  namespace :api, constraints: {id: /\d+/} do
 
     namespace :auth do
-      post :facebook, to: :facebook
+      post :facebook
+      put :refresh
+      patch :refresh
     end
 
     namespace :v1 do
@@ -13,14 +15,18 @@ Rails.application.routes.draw do
       resource :gyms, only: [] do
         post :find
       end
-      resources :gyms, only: [:index, :show] do
+
+      resources :gyms, only: [:index, :show]
+
+      resources :users, only: [:show]
+      resource :users, only: [] do
+        get :trainers
       end
 
-      resources :users, only: [:show] do
-      end
+      resource :me, :controller => 'me/me', only: [:show, :update]
 
       namespace :me do
-        root to: 'me#index'
+
         resource :gyms, only: [:create, :show]  do
           get :available
         end
@@ -29,6 +35,9 @@ Rails.application.routes.draw do
             post :join
           end
         end
+
+        resources :posts
+
       end
     end
   end

@@ -24,4 +24,13 @@ module Api::AuthDoc
     eos
   end
 
+  doc_for :refresh_token do
+    desc =  'Refresh valid token before exp'
+
+    description desc
+    path = '/auth/refresh'
+    api :PUT, path, desc
+    api :PATCH, path, desc
+  end
+
 end

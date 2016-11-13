@@ -6,7 +6,6 @@ module Api
 
     include Api::AuthDoc
 
-    # todo: rescue po invalid fb tokenie
     def facebook
       token = params.require(:token)
       auth_hash = User::find_in_facebook(token)
@@ -28,6 +27,16 @@ module Api
         user = User.create!(data)
       end
       render json: token_payload(user)
+    end
+
+    def refresh
+      unless user_id_in_token?
+        render json: { errors: ['Not Authorized'] }, status: :unauthorized
+        return
+      end
+      render json: token_payload(User.find(auth_token[:user][:user_id]))
+    rescue JWT::VerificationError, JWT::DecodeError => e
+      render json: { errors: e.message }, status: :unauthorized
     end
 
     private
