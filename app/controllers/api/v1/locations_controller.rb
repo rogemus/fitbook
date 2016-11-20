@@ -7,9 +7,9 @@ module Api::V1
       type = params.require(:type)
       case type
         when 'countries'
-          render json: City.uniq.pluck(:name)
+          render json: Country.uniq
         when 'cities'
-          render json: Country.uniq.pluck(:name)
+          render json: City.group([:id, :country_id])
         else
           render json: {errors: "Unknown type #{type}, countries and cities allowed"},
                  status: :unprocessable_entity
