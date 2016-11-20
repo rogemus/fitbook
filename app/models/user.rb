@@ -1,6 +1,9 @@
 class User < ApplicationRecord
 
   validates :name, presence: true
+  validates :facebook_id, uniqueness: true
+
+  has_many :posts, :foreign_key => 'author_id'
 
   has_many :members
   has_many :gyms_attending, :through => :members, :source => :gym
