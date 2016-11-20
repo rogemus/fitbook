@@ -23,6 +23,8 @@ Rails.application.routes.draw do
         get :trainers
       end
 
+      get :locations, to: 'locations#index'
+
       resource :me, :controller => 'me/me', only: [:show, :update]
 
       namespace :me do
