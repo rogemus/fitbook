@@ -1,9 +1,7 @@
 import React from 'react';
 import {connect} from 'react-redux';
-import {Link} from 'react-router';
 import {fetchCurrentUserPosts} from '../../../actions/current_user_actions'
 
-import GymCard from '../../common/gymCard';
 import UserCard from '../../common/userCard';
 import UserMenu from '../../common/userMenu';
 import TrainerGyms from '../../common/trainerGyms';
@@ -26,17 +24,17 @@ class CurrentUserPage extends React.Component {
 
     renderCurrentUserPosts() {
         //if (this.props.current_user.posts) {
-            return (
-                <div className="content">
-                    <div className="container-fluid">
-                        <h4 className="title">My posts</h4>
-                        <div className="row">
-                            <PostCard />
-                        </div>
+        return (
+            <div className="content">
+                <div className="container-fluid">
+                    <h4 className="title">My posts</h4>
+                    <div className="row">
+                        <PostCard />
                     </div>
                 </div>
-            );
-       // }
+            </div>
+        );
+        // }
     }
 
     renderCurrentUserTrainerGyms() {

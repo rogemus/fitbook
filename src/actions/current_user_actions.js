@@ -1,4 +1,5 @@
 import axios from 'axios';
+import {browserHistory} from 'react-router';
 
 import {
     FETCH_CURRENT_USER,
@@ -6,7 +7,8 @@ import {
     FETCH_CURRENT_USER_AVAILABLE_GYMS,
     FETCH_CURRENT_USER_POSTS,
     CREATE_GYM,
-    CREATE_POST
+    CREATE_POST,
+    BECOME_TRAINER
 } from './types';
 
 const ROOT_URL = 'http://fitbook-api.herokuapp.com/api/v1';
@@ -74,6 +76,45 @@ export function fetchCurrentUserPosts() {
                 type: FETCH_CURRENT_USER_POSTS,
                 payload: response.data
             });
+        });
+    }
+}
+
+export function createPost(data) {
+    return function (dispatch) {
+        axios.post(`${ROOT_URL}/me/posts`, {
+            post: {
+                title: data.title,
+                heading: data.heading,
+                body: data.body,
+                tags: data.tags
+            }
+        }, {
+            headers: {'Authorization': 'Bearer ' + localStorage.getItem('token')}
+        }).then(response => {
+            dispatch({
+                type: CREATE_POST
+            });
+
+            browserHistory.push('/me');
+        });
+    }
+}
+
+export function becomeTrainer() {
+    return function (dispatch) {
+        axios.put(`${ROOT_URL}/me/posts`, {
+            options: {
+                is_trainer: true
+            }
+        }, {
+            headers: {'Authorization': 'Bearer ' + localStorage.getItem('token')}
+        }).then(response => {
+            dispatch({
+                type: BECOME_TRAINER
+            });
+
+            browserHistory.push('/me');
         });
     }
 }

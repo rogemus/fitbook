@@ -22,7 +22,7 @@ export default() => (
                     </Link>
                 </li>
                 <li key={4}>
-                    <Link to="/me/createpost">
+                    <Link to="/createpost">
                         <p>Create Post</p>
                     </Link>
                 </li>

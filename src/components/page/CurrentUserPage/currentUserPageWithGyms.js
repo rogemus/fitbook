@@ -1,7 +1,7 @@
 import React from 'react';
 import {connect} from 'react-redux';
 import {Link} from 'react-router';
-import {fetchCurrentUserGyms} from '../../../actions/current_user_actions'
+import {fetchCurrentUserGyms, becomeTrainer} from '../../../actions/current_user_actions'
 
 import GymCard from '../../common/gymCard';
 import UserCard from '../../common/userCard';
@@ -15,6 +15,12 @@ const marginTop = {
 
 class CurrentUserPage extends React.Component {
 
+    constructor(props) {
+        super(props);
+
+        this.onFormSubmit = this.onFormSubmit.bind(this);
+    }
+
     componentDidMount() {
         this.props.fetchCurrentUserGyms();
     }
@@ -25,6 +31,20 @@ class CurrentUserPage extends React.Component {
                 <UserCard user={this.props.current_user}/>
             )
         }
+    }
+
+    renderBecomeTrainerButton() {
+        return (
+            <div className="card card-become-trainer">
+                <div className="content">
+                    <h2>Become Trainer :D</h2>
+
+                    <form ref="form" onSubmit={this.onFormSubmit}>
+                        <button type="submit" className="btn btn-primary">Become Trainer</button>
+                    </form>
+                </div>
+            </div>
+        )
     }
 
     renderCurrentUserGyms() {
@@ -59,6 +79,13 @@ class CurrentUserPage extends React.Component {
         return <UserMenu />
     }
 
+
+    onFormSubmit(e) {
+        e.preventDefault();
+        this.props.becomeTrainer();
+    }
+
+
     render() {
         return (
             <div className="">
@@ -69,6 +96,9 @@ class CurrentUserPage extends React.Component {
                         <div className="row">
                             <div className="col-lg-4 col-md-5">
                                 {this.renderCurrentUserCard()}
+
+                                {this.renderBecomeTrainerButton()}
+
 
                                 {this.renderCurrentUserTrainerGyms()}
                             </div>
@@ -91,4 +121,4 @@ function mapStateToProps(state) {
     }
 }
 
-export default connect(mapStateToProps, {fetchCurrentUserGyms})(CurrentUserPage);
+export default connect(mapStateToProps, {fetchCurrentUserGyms, becomeTrainer})(CurrentUserPage);

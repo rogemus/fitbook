@@ -29,10 +29,6 @@ class Sidebar extends React.Component {
                     </div>
                 </div>
             )
-        } else {
-            return (
-                <div>loading</div>
-            )
         }
     }
 
