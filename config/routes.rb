@@ -2,6 +2,8 @@ Rails.application.routes.draw do
 
   apipie
 
+  match '*nil', to: 'application#options', via: :options
+  
   namespace :api, constraints: {id: /\d+/} do
 
     namespace :auth do

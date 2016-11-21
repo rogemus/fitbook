@@ -2,6 +2,10 @@ class ApplicationController < ActionController::API
 
   attr_reader :current_user, :koala
 
+  def options
+    render json: {}
+  end
+
   protected
 
   def authenticate_request!
