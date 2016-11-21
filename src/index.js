@@ -12,7 +12,8 @@ import SignOut from './components/page/Auth/SignOut/signOut';
 import Feature from './components/page/FeaturePage/feature';
 import Home from './components/page/HomePage/home';
 import RequireAuth from './components/page/Auth/require_auth';
-import CurrentUserPage from './components/page/CurrentUserPage/currentUserPage';
+import CurrentUserPageWithPost from './components/page/CurrentUserPage/currentUserPageWithPost';
+import CurrentUserPageWithGyms from './components/page/CurrentUserPage/currentUserPageWithGyms';
 import CreateGymsPage from './components/page/CreateGymsPage/createGymsPage'
 import GymPage from './components/page/GymPage/gymPage';
 import GymsPage from './components/page/GymsPage/gymsPage';
@@ -39,7 +40,9 @@ ReactDOM.render(
                 <Route path="signout" component={SignOut}/>
                 <Route path="gyms/:id" component={GymPage}/>
                 <Route path="creategym" component={RequireAuth(CreateGymsPage)}/>
-                <Route path="me" component={RequireAuth(CurrentUserPage)}/>
+                <Route path="me" component={RequireAuth(CurrentUserPageWithPost)}/>
+                <Route path="me/posts" component={RequireAuth(CurrentUserPageWithPost)}/>
+                <Route path="me/gyms" component={RequireAuth(CurrentUserPageWithGyms)}/>
                 <Route path="feature" component={RequireAuth(Feature)}/>
                 <Route path="*" component={Home}/>
             </Route>

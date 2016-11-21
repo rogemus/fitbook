@@ -4,7 +4,9 @@ import {
     FETCH_CURRENT_USER,
     FETCH_CURRENT_USER_GYMS,
     FETCH_CURRENT_USER_AVAILABLE_GYMS,
-    CREATE_GYM
+    FETCH_CURRENT_USER_POSTS,
+    CREATE_GYM,
+    CREATE_POST
 } from './types';
 
 const ROOT_URL = 'http://fitbook-api.herokuapp.com/api/v1';
@@ -57,6 +59,20 @@ export function createGym(gymId) {
         }).then(response => {
             dispatch({
                 type: CREATE_GYM
+            });
+        });
+    }
+}
+
+
+export function fetchCurrentUserPosts() {
+    return function (dispatch) {
+        axios.get(`${ROOT_URL}/me/posts`, {
+            headers: {'Authorization': 'Bearer ' + localStorage.getItem('token')}
+        }).then(response => {
+            dispatch({
+                type: FETCH_CURRENT_USER_POSTS,
+                payload: response.data
             });
         });
     }

@@ -4,7 +4,7 @@ export default({user}) => (
     <div className="card card-user">
         <div className="content">
             <div className="author">
-                <img className="avatar border-white" src="../../assets/img/faces/face-2.jpg" alt={user.name}/>
+                <img className="avatar border-white" src={user.images.picture} alt={user.name}/>
                 <h4 className="title">{user.name}</h4>
             </div>
             <p className="description text-center">

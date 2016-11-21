@@ -12,9 +12,7 @@ class Sidebar extends React.Component {
     }
 
     renderCurrentUserName() {
-        if (this.props.current_user) {
-            return this.props.current_user.name;
-        }
+        return this.props.current_user.name;
     }
 
     renderUser() {
@@ -23,13 +21,17 @@ class Sidebar extends React.Component {
                 <div className="user">
                     <div className="photo">
                         <Link to="/me">
-                            <img src="/assets/img/faces/face-2.jpg"/>
+                            <img src={this.props.current_user.images.picture}/>
                         </Link>
                     </div>
                     <div className="info" key={1}>
                         <Link to="/me">{this.renderCurrentUserName()}</Link>
                     </div>
                 </div>
+            )
+        } else {
+            return (
+                <div>loading</div>
             )
         }
     }
@@ -44,12 +46,6 @@ class Sidebar extends React.Component {
                     </Link>
                 </li>,
                 <li key={2}>
-                    <Link to="/creategym">
-                        <i className="fa fa-plus"></i>
-                        <p>Create Gym</p>
-                    </Link>
-                </li>,
-                <li key={3}>
                     <Link to="/signout">
                         <i className="fa fa-sign-out"></i>
                         <p>Sign Out</p>
