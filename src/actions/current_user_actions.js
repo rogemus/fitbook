@@ -103,7 +103,7 @@ export function createPost(data) {
 
 export function becomeTrainer() {
     return function (dispatch) {
-        axios.put(`${ROOT_URL}/me/posts`, {
+        axios.put(`${ROOT_URL}/me`, {
             options: {
                 is_trainer: true
             }
@@ -114,7 +114,7 @@ export function becomeTrainer() {
                 type: BECOME_TRAINER
             });
 
-            browserHistory.push('/me');
+            //browserHistory.push('/me');
         });
     }
 }
