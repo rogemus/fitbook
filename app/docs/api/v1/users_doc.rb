@@ -12,8 +12,4 @@ module Api::V1::UsersDoc
     api :GET, '/v1/users/:id', 'Find user where :id'
   end
 
-  doc_for :trainers do
-    api :GET, '/v1/users/trainers', 'Get trainers'
-  end
-
 end

@@ -49,6 +49,28 @@ module Api::V1::Me
       end
     end
 
+    def change_membership
+      level = params.require(:level).to_sym
+      membership = Member.find_by({gym: params[:id], user: current_user})
+
+      errors = nil
+
+      if membership && membership != :owner
+        membership.approved = Member::APPROVED_MEMBERSHIP_LEVELS.include? level
+        membership.membership_level = level
+
+        if membership.save
+          render json: membership
+        else
+          errors << membership.errors
+        end
+      else
+        errors << 'Can\'t find membership or invalid membership level'
+      end
+
+      render json: {errors: errors}, status: :unprocessable_entity unless errors.empty?
+    end
+
     private
 
     def merge_facebook_data(gym)

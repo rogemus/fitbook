@@ -20,9 +20,10 @@ Rails.application.routes.draw do
 
       resources :gyms, only: [:index, :show]
 
-      resources :users, only: [:show]
-      resource :users, only: [] do
-        get :trainers
+      resource :users, only: [:show] do
+        resources :trainers, only: [:index, :show] do
+          get :posts
+        end
       end
 
       get :locations, to: 'locations#index'
@@ -37,6 +38,8 @@ Rails.application.routes.draw do
         resources :gyms, only: [:update] do
           member do
             post :join
+            put :join, action: :change_membership
+            patch :join, action: :change_membership
           end
         end
 

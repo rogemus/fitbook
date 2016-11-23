@@ -36,4 +36,12 @@ module Api::V1::Me::GymsDoc
            :desc => 'Default is regular, special and trainer requires owner approval'
   end
 
+  doc_for :join do
+    api :PUT, '/v1/me/gyms/:id/join', 'Change gym joined level'
+    api :PATCH, '/v1/me/gyms/:id/join', 'Change gym joined level'
+    param :level, [:regular, :special, :trainer],
+          :desc => 'Default is regular, special and trainer requires owner approval',
+          required: true
+  end
+
 end
