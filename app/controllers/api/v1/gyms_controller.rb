@@ -7,6 +7,10 @@ module Api::V1
       render json: Gym.find(params[:id])
     end
 
+    def trainers
+      render json: gym_trainers(params[:gym_id])
+    end
+
     def find
       loc = params[:location]
       if test_city_params
@@ -19,6 +23,10 @@ module Api::V1
     end
 
     private
+
+    def gym_trainers(id)
+      Member.where({gym: id, membership_level: :trainer}).order(approved: :desc)
+    end
 
     def test_city_params
       loc = params[:location]

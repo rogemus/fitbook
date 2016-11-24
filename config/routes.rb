@@ -14,16 +14,13 @@ Rails.application.routes.draw do
 
     namespace :v1 do
 
-      resource :gyms, only: [] do
-        post :find
-      end
+      resources :posts, only: [:index, :show]
 
-      resources :gyms, only: [:index, :show]
+      resource :gyms, only: [] { post :find }
+      resources :gyms, only: [:index, :show]  { get :trainers }
 
       resource :users, only: [:show] do
-        resources :trainers, only: [:index, :show] do
-          get :posts
-        end
+        resources :trainers, only: [:index, :show] { get :posts }
       end
 
       get :locations, to: 'locations#index'
@@ -32,9 +29,7 @@ Rails.application.routes.draw do
 
       namespace :me do
 
-        resource :gyms, only: [:create, :show]  do
-          get :available
-        end
+        resource :gyms, only: [:create, :show]  { get :available }
         resources :gyms, only: [:update] do
           member do
             post :join

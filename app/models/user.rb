@@ -11,7 +11,7 @@ class User < ApplicationRecord
   has_many :owned_gyms, :class_name => 'Gym', :foreign_key => 'owner_id'
 
   class << self
-    def find_in_facebook(token, with = {fields: %w{id name email cover.fields(source) picture.type(large)}})
+    def find_in_facebook(token, with = {fields: %w{id name email cover.type(large).fields(source) picture.type(large).fields(url)}})
       Koala::Facebook::API.new(token).get_object(:me, with)
     end
   end
