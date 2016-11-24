@@ -5,29 +5,21 @@ export default({post}) => (
     <div className="col-md-12">
         <div className="card">
             <div className="content">
-                <Link to={'/'}>
-                    <h2>Title </h2>
+                <Link to={`/posts/${post.id}`}>
+                    <h2>{post.content.title}</h2>
+                </Link>
+                <Link to={`/users/${post.author.id}`}>
+                    <span>{post.author.name}</span>
                 </Link>
                 <hr/>
                 <p className="description">
-                    Desc
+                    {post.content.heading}
+                </p>
+                <hr/>
+                <p className="description">
+                    {post.content.body}
                 </p>
             </div>
         </div>
     </div>
 )
-
-/*
-*     <div className="col-md-12">
- <div className="card">
- <div className="content">
- <Link to={`/post/${post.id}`}>
- <h2>{post.title}</h2>
- </Link>
- <hr/>
- <p className="description">
- {post.about}
- </p>
- </div>
- </div>
- </div>*/

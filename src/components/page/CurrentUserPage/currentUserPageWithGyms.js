@@ -1,24 +1,15 @@
 import React from 'react';
 import {connect} from 'react-redux';
-import {Link} from 'react-router';
 import {fetchCurrentUserGyms, becomeTrainer} from '../../../actions/current_user_actions'
 
 import GymCard from '../../common/gymCard';
 import UserCard from '../../common/userCard';
-import UserMenu from '../../common/userMenu';
-import TrainerGyms from '../../common/trainerGyms';
-
-const marginTop = {
-    margin: "50px 0"
-};
 
 
 class CurrentUserPage extends React.Component {
 
     constructor(props) {
         super(props);
-
-        this.onFormSubmit = this.onFormSubmit.bind(this);
     }
 
     componentDidMount() {
@@ -31,20 +22,6 @@ class CurrentUserPage extends React.Component {
                 <UserCard user={this.props.current_user}/>
             )
         }
-    }
-
-    renderBecomeTrainerButton() {
-        return (
-            <div className="card card-become-trainer">
-                <div className="content">
-                    <h2>Become Trainer :D</h2>
-
-                    <form ref="form" onSubmit={this.onFormSubmit}>
-                        <button type="submit" className="btn btn-primary">Become Trainer</button>
-                    </form>
-                </div>
-            </div>
-        )
     }
 
     renderCurrentUserGyms() {
@@ -67,47 +44,10 @@ class CurrentUserPage extends React.Component {
         }
     }
 
-    renderCurrentUserTrainerGyms() {
-        if (this.props.current_user) {
-            return (
-                <TrainerGyms user={this.props.current_user}/>
-            )
-        }
-    }
-
-    renderCurrentUserMenu() {
-        return <UserMenu />
-    }
-
-
-    onFormSubmit(e) {
-        e.preventDefault();
-        this.props.becomeTrainer();
-    }
-
-
     render() {
         return (
-            <div className="">
-                {this.renderCurrentUserMenu()}
-
-                <div className="content">
-                    <div className="container-fluid">
-                        <div className="row">
-                            <div className="col-lg-4 col-md-5">
-                                {this.renderCurrentUserCard()}
-
-                                {this.renderBecomeTrainerButton()}
-
-
-                                {this.renderCurrentUserTrainerGyms()}
-                            </div>
-                            <div className="col-lg-8 col-md-7">
-                                {this.renderCurrentUserGyms()}
-                            </div>
-                        </div>
-                    </div>
-                </div>
+            <div>
+                {this.renderCurrentUserGyms()}
             </div>
 
         );

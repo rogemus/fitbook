@@ -12,6 +12,7 @@ import SignOut from './components/page/Auth/SignOut/signOut';
 import Feature from './components/page/FeaturePage/feature';
 import Home from './components/page/HomePage/home';
 import RequireAuth from './components/page/Auth/require_auth';
+import CurrentUserPage from './components/page/CurrentUserPage/currentUserPage';
 import CurrentUserPageWithPost from './components/page/CurrentUserPage/currentUserPageWithPost';
 import CurrentUserPageWithGyms from './components/page/CurrentUserPage/currentUserPageWithGyms';
 import CreateGymsPage from './components/page/CreateGymsPage/createGymsPage';
@@ -39,11 +40,12 @@ ReactDOM.render(
                 <Route path="signin" component={SignIn}/>
                 <Route path="signout" component={SignOut}/>
                 <Route path="gyms/:id" component={GymPage}/>
-                <Route path="creategym" component={RequireAuth(CreateGymsPage)}/>
                 <Route path="createpost" component={RequireAuth(CreatePostPage)}/>
-                <Route path="me" component={RequireAuth(CurrentUserPageWithGyms)}/>
-                <Route path="me/posts" component={RequireAuth(CurrentUserPageWithPost)}/>
-                <Route path="me/gyms" component={RequireAuth(CurrentUserPageWithGyms)}/>
+                <Route path="me" component={RequireAuth(CurrentUserPage)}>
+                    <Route path="posts" component={RequireAuth(CurrentUserPageWithPost)}/>
+                    <Route path="gyms" component={RequireAuth(CurrentUserPageWithGyms)}/>
+                    <Route path="creategym" component={RequireAuth(CreateGymsPage)}/>
+                </Route>
                 <Route path="feature" component={RequireAuth(Feature)}/>
                 <Route path="*" component={Home}/>
             </Route>

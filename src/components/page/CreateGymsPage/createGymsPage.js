@@ -1,8 +1,6 @@
 import React from 'react';
 import {connect} from 'react-redux';
 import {fetchCurrentUserAvailableGyms, createGym} from '../../../actions/current_user_actions'
-import UserMenu from '../../common/userMenu';
-
 
 class CreateGymsPage extends React.Component {
 
@@ -35,8 +33,7 @@ class CreateGymsPage extends React.Component {
 
     render() {
         return (
-            <div className="">
-                <UserMenu />
+            <div>
                 <form ref="form" onSubmit={this.onFormSubmit} className="input-group">
                     <select name="gymSelect" className="form-control">
                         {this.renderSelectGym()}

@@ -3,10 +3,7 @@ import {connect} from 'react-redux';
 import {fetchCurrentUserPosts} from '../../../actions/current_user_actions'
 
 import UserCard from '../../common/userCard';
-import UserMenu from '../../common/userMenu';
-import TrainerGyms from '../../common/trainerGyms';
 import PostCard from '../../common/postCard';
-
 
 class CurrentUserPage extends React.Component {
 
@@ -23,51 +20,26 @@ class CurrentUserPage extends React.Component {
     }
 
     renderCurrentUserPosts() {
-        //if (this.props.current_user.posts) {
-        return (
-            <div className="content">
-                <div className="container-fluid">
-                    <h4 className="title">My posts</h4>
-                    <div className="row">
-                        <PostCard />
+        if (this.props.current_user_posts) {
+            return (
+                <div className="content">
+                    <div className="container-fluid">
+                        <h4 className="title">My posts</h4>
+                        <div className="row">
+                            {this.props.current_user_posts.map(post => {
+                                return <PostCard key={post.id} post={post}/>;
+                            })}
+                        </div>
                     </div>
                 </div>
-            </div>
-        );
-        // }
-    }
-
-    renderCurrentUserTrainerGyms() {
-        if (this.props.current_user) {
-            return (
-                <TrainerGyms user={this.props.current_user}/>
-            )
+            );
         }
-    }
-
-    renderCurrentUserMenu() {
-        return <UserMenu />
     }
 
     render() {
         return (
-            <div className="">
-                {this.renderCurrentUserMenu()}
-
-                <div className="content">
-                    <div className="container-fluid">
-                        <div className="row">
-                            <div className="col-lg-4 col-md-5">
-                                {this.renderCurrentUserCard()}
-
-                                {this.renderCurrentUserTrainerGyms()}
-                            </div>
-                            <div className="col-lg-8 col-md-7">
-                                {this.renderCurrentUserPosts()}
-                            </div>
-                        </div>
-                    </div>
-                </div>
+            <div>
+                {this.renderCurrentUserPosts()}
             </div>
         );
     }
