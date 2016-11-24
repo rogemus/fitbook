@@ -34,8 +34,13 @@ module Api::V1::Me
     end
 
     def available
-      render json: facebook_gyms.map {|gym| {:id => gym['id'],
-                                             :name => gym['name']}}
+      gyms = facebook_gyms
+      if gyms.empty?
+        render json: {}, status: :no_content
+      else
+        render json: gyms.map {|gym| {:id => gym['id'],
+                                               :name => gym['name']}}
+      end
     end
 
     def join
