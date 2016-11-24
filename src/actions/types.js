@@ -21,5 +21,6 @@ export const FETCH_CURRENT_USER_POSTS = 'fetch_current_user_posts';
 export const CREATE_GYM = 'create_gym';
 export const CREATE_POST = 'create_post';
 
+export const JOIN_GYM = 'join_gym';
 /* PUT */
 export const BECOME_TRAINER = 'become_trainer';

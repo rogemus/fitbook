@@ -31,13 +31,11 @@ class CreateGymsPage extends React.Component {
         this.onFormSubmit = this.onFormSubmit.bind(this);
     }
 
-
     handleBodyChange(e) {
         this.setState({
             postBody: e.target.getContent()
         });
     }
-
 
     handleTitleChange(e) {
         this.setState({
@@ -107,7 +105,6 @@ class CreateGymsPage extends React.Component {
                             }}
                             onChange={this.handleBodyChange}
                         />
-
                     </div>
 
                     <div className="form-group">

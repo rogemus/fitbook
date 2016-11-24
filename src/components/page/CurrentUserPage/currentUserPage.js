@@ -29,9 +29,7 @@ class CurrentUserPage extends React.Component {
     }
 
     renderBecomeTrainerButton() {
-
         if (this.props.current_user) {
-
             if (!this.props.current_user.is_trainer) {
                 return (
                     <div className="card card-become-trainer">
@@ -44,7 +42,6 @@ class CurrentUserPage extends React.Component {
                         </div>
                     </div>
                 )
-
             }
         }
     }
@@ -56,7 +53,6 @@ class CurrentUserPage extends React.Component {
                     <div className="container-fluid">
                         <h4 className="title">My gyms</h4>
                         <div className="row">
-
                             {this.props.current_user_gyms.map(gym => {
                                 return (
                                     <GymCard key={gym.id} gym={gym}/>
@@ -83,18 +79,15 @@ class CurrentUserPage extends React.Component {
         }
     }
 
-
     onFormSubmit(e) {
         e.preventDefault();
         this.props.becomeTrainer();
     }
 
-
     render() {
         return (
             <div className="">
                 {this.renderCurrentUserMenu()}
-
                 <div className="content">
                     <div className="container-fluid">
                         <div className="row">
@@ -112,7 +105,6 @@ class CurrentUserPage extends React.Component {
                     </div>
                 </div>
             </div>
-
         );
     }
 }

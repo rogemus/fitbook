@@ -8,7 +8,8 @@ import {
     FETCH_CURRENT_USER_POSTS,
     CREATE_GYM,
     CREATE_POST,
-    BECOME_TRAINER
+    BECOME_TRAINER,
+    JOIN_GYM
 } from './types';
 
 const ROOT_URL = 'http://fitbook-api.herokuapp.com/api/v1';
@@ -114,7 +115,23 @@ export function becomeTrainer() {
                 type: BECOME_TRAINER
             });
 
-            //browserHistory.push('/me');
+            browserHistory.push('/me');
+        });
+    }
+}
+
+export function joinGym(gymId) {
+    return function (dispatch) {
+        axios.post(`${ROOT_URL}/me/gyms/${gymId}/join`, {
+            level: 'trainer'
+        }, {
+            headers: {'Authorization': 'Bearer ' + localStorage.getItem('token')}
+        }).then(response => {
+            dispatch({
+                type: JOIN_GYM
+            });
+
+            browserHistory.push('/me');
         });
     }
 }

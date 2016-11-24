@@ -10,7 +10,6 @@ class CreateGymsPage extends React.Component {
         this.onFormSubmit = this.onFormSubmit.bind(this);
     }
 
-
     componentDidMount() {
         this.props.fetchCurrentUserAvailableGyms();
     }

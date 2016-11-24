@@ -18,9 +18,7 @@ class CurrentUserPage extends React.Component {
 
     renderCurrentUserCard() {
         if (this.props.current_user) {
-            return (
-                <UserCard user={this.props.current_user}/>
-            )
+            return <UserCard user={this.props.current_user}/>
         }
     }
 
@@ -31,7 +29,6 @@ class CurrentUserPage extends React.Component {
                     <div className="container-fluid">
                         <h4 className="title">My gyms</h4>
                         <div className="row">
-
                             {this.props.current_user_gyms.map(gym => {
                                 return (
                                     <GymCard key={gym.id} gym={gym}/>
@@ -49,7 +46,6 @@ class CurrentUserPage extends React.Component {
             <div>
                 {this.renderCurrentUserGyms()}
             </div>
-
         );
     }
 }
