@@ -6,7 +6,7 @@ export default({post}) => (
         <div className="card">
             <div className="content">
                 <Link to={`/posts/${post.id}`}>
-                    <h2>{post.content.title}</h2>
+                    <h3>{post.content.title}</h3>
                 </Link>
                 <Link to={`/users/${post.author.id}`}>
                     <span>{post.author.name}</span>
@@ -16,9 +16,12 @@ export default({post}) => (
                     {post.content.heading}
                 </p>
                 <hr/>
-                <p className="description">
-                    {post.content.body}
-                </p>
+                <p className="description" dangerouslySetInnerHTML={{__html: post.content.body}}></p>
+                <div className="card-footer date">
+                    <div className="stats text-right">
+                        {post.created_at}
+                    </div>
+                </div>
             </div>
         </div>
     </div>

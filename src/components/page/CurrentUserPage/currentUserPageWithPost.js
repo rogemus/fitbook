@@ -26,7 +26,7 @@ class CurrentUserPage extends React.Component {
                     <div className="container-fluid">
                         <h4 className="title">My posts</h4>
                         <div className="row">
-                            {this.props.current_user_posts.map(post => {
+                            {this.props.current_user_posts.reverse().map(post => {
                                 return <PostCard key={post.id} post={post}/>;
                             })}
                         </div>
