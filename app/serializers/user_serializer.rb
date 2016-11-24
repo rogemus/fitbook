@@ -1,8 +1,14 @@
 class UserSerializer < ActiveModel::Serializer
-  attributes :id, :name, :images, :is_trainer, :trained_gyms, :posts
+  attributes :id, :name, :images, :is_trainer, :trained_gyms, :posts, :gyms_attending
 
   def images
     { :cover => object.cover, :picture => object.picture }
+  end
+
+  def gyms_attending
+    unless instance_options[:include_gyms]
+      object.members.map {|member| MemberSerializer.new(member)}
+    end
   end
 
   def trained_gyms
