@@ -2,33 +2,44 @@ Rails.application.routes.draw do
 
   apipie
 
-  namespace :api do
+  match '*nil', to: 'application#options', via: :options
+
+  namespace :api, constraints: {id: /\d+/} do
 
     namespace :auth do
-      post :facebook, to: :facebook
+      post :facebook
+      put :refresh
+      patch :refresh
     end
 
     namespace :v1 do
 
-      resource :gyms, only: [] do
-        post :find
-      end
-      resources :gyms, only: [:index, :show] do
+      resources :posts, only: [:index, :show]
+
+      resource :gyms, only: [] { post :find }
+      resources :gyms, only: [:index, :show]  { get :trainers }
+
+      resource :users, only: [:show] do
+        resources :trainers, only: [:index, :show] { get :posts }
       end
 
-      resources :users, only: [:show] do
-      end
+      get :locations, to: 'locations#index'
+
+      resource :me, :controller => 'me/me', only: [:show, :update]
 
       namespace :me do
-        root to: 'me#index'
-        resource :gyms, only: [:create, :show]  do
-          get :available
-        end
+
+        resource :gyms, only: [:create, :show]  { get :available }
         resources :gyms, only: [:update] do
           member do
             post :join
+            put :join, action: :change_membership
+            patch :join, action: :change_membership
           end
         end
+
+        resources :posts, only: [:index, :create, :update, :destroy]
+
       end
     end
   end

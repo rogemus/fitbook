@@ -15,6 +15,10 @@ module Api::V1::GymsDoc
     api :GET, '/v1/gyms/:id', 'Find gym where :id'
   end
 
+  doc_for :trainers do
+    api :GET, '/v1/gyms/:id/trainers', 'Get trainers from gym :id, fields are sorted by approval'
+  end
+
   doc_for :find do
     api :POST, '/v1/gyms/find', 'Find gym by city/country or viewport'
     param :location, Hash, :desc => 'City and country' do

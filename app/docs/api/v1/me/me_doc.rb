@@ -11,8 +11,18 @@ module Api::V1::Me::MeDoc
   defaults do
   end
 
-  doc_for :index do
+  doc_for :show do
     api :GET, '/v1/me', 'Show profile'
+  end
+
+  doc_for :update do
+    desc = 'Update current user options'
+    api :PUT, '/v1/me/', desc
+    api :PATCH, '/v1/me/', desc
+
+    param :options, Hash, :required => true, :desc => 'Options' do
+      param :is_trainer, [true, false], :desc => 'Being trainer flag'
+    end
   end
 
 end

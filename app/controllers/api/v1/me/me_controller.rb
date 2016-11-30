@@ -3,8 +3,15 @@ module Api::V1::Me
 
     include Api::V1::Me::MeDoc
 
-    def index
-      render json: @current_user
+    def show
+      render json: current_user
+    end
+
+    def update
+      options = params.require(:options).permit(:is_trainer)
+      current_user.update!(options)
+
+      render json: current_user
     end
 
   end
