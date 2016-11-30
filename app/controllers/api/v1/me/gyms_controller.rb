@@ -3,7 +3,7 @@ module Api::V1::Me
 
     include ::Api::V1::Me::GymsDoc
 
-    ALLOWED_CATEGORIES = ['Gym/Physical Fitness Center']
+    ALLOWED_CATEGORIES = ['Physical Fitness Center']
     REQUIRED_PERMISSIONS = %w{ADMINISTER}
 
     def show
@@ -88,7 +88,7 @@ module Api::V1::Me
     end
 
     def facebook_gym(id)
-      facebook_gyms.find {|gym| gym['facebook_id'] == id} or
+      facebook_gyms.find {|gym| gym['id'] == id} or
           raise 'Gym has invalid category, permissions or already exists'
     end
 
