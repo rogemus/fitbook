@@ -57,7 +57,7 @@ module Api::V1::Me
     end
 
     def facebook_gym(id)
-      facebook_gyms.find {|gym| gym['id'] == id} or
+      facebook_gyms.find {|gym| gym['facebook_id'] == id} or
           raise 'Gym has invalid category, permissions or already exists'
     end
 
