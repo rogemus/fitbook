@@ -39,7 +39,7 @@ class ApplicationController < ActionController::API
   end
 
   def koala
-    @koala = Koala::Facebook::API.new(@current_user.graph_token)
+    @koala ||= Koala::Facebook::API.new(@current_user.graph_token)
   end
 
 end

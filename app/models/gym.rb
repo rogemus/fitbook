@@ -8,6 +8,8 @@ class Gym < ApplicationRecord
 
   validates :name, presence: true
 
+  FB_FIELDS = %w{access_token category category_list name id perms}
+
   class << self
     def find_by_city(city, country)
       city = City.find_by({:name => city,
@@ -18,11 +20,15 @@ class Gym < ApplicationRecord
     def find_by_coordinates(top_left, bottom_right)
       joins(:location).where(locations: Location.fits_in_view(top_left, bottom_right))
     end
+
+    def facebook_gyms(koala)
+      koala.get_connections(:me, :accounts, {fields: FB_FIELDS})
+    end
   end
 
   def include_facebook_data!
     koala = Koala::Facebook::API.new(self.graph_token)
-    fields = [:about, 'cover.fields(source)', :description,
+    fields = [:about, 'cover.fields(source)', :description, :hours,
               :name, :location, :parking, :website, 'picture.fields(url)']
     hash = koala.get_object(self.facebook_id, {:fields => fields})
 

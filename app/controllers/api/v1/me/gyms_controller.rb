@@ -93,7 +93,7 @@ module Api::V1::Me
     end
 
     def facebook_gyms
-      @koala.get_connections(:me, :accounts).select do |gym|
+      Gym.facebook_gyms(koala).select do |gym|
         validate_gym_fields(gym)
       end
     end

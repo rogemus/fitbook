@@ -4,7 +4,7 @@ module Api::V1::Me
     include Api::V1::Me::MeDoc
 
     def show
-      render json: current_user
+      render json: current_user, gyms_attending: true, gyms_owned: true
     end
 
     def update
@@ -12,7 +12,7 @@ module Api::V1::Me
       current_user.update!(options)
 
       render json: current_user,
-             gyms_attending: true
+             include_gyms: true
     end
 
   end

@@ -1,22 +1,39 @@
 class UserSerializer < ActiveModel::Serializer
-  attributes :id, :name, :images, :is_trainer, :trained_gyms, :posts, :gyms_attending
+  attributes :id, :name, :images, :is_trainer, :trained_gyms, :posts, :gyms_attending, :gyms_owned
 
   def images
     { :cover => object.cover, :picture => object.picture }
   end
 
+  def gyms_owned
+    if instance_options[:gyms_owned]
+      Member.
+          where(user: object.id).
+          where(membership_level: :owner).map do |m|
+        MemberSerializer.new(m)
+      end
+    end
+  end
+
   def gyms_attending
-    unless instance_options[:include_gyms]
-      object.members.map do |member|
-        MemberSerializer.new(member) if member&.membership_level&.to_sym != :owner
-      end.compact
+    if instance_options[:gyms_attending]
+      Member.
+          where(user: object.id).
+          where.not(membership_level: :owner).
+          order(:membership_level) do |m|
+        MemberSerializer.new(m)
+      end
     end
   end
 
   def trained_gyms
     if instance_options[:include_gyms] && object.is_trainer
-      gyms_attending = object.members.select {|m| m.membership_level.to_sym == :trainer}
-      gyms_attending.map {|member| GymSerializer.new(member.gym)}
+      Member.
+          where(user: object.id).
+          where(membership_level: :trainer).
+          order(:membership_level) do |m|
+        MemberSerializer.new(m)
+      end
     end
   end
 
