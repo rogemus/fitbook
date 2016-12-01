@@ -42,6 +42,11 @@ Rails.application.routes.draw do
 
         resources :posts, only: [:index, :create, :update, :destroy]
 
+        resources :trainers, only: [:index, :create] do
+          put :vote
+          patch :vote
+        end
+
       end
     end
   end

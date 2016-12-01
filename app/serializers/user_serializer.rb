@@ -1,5 +1,7 @@
 class UserSerializer < ActiveModel::Serializer
-  attributes :id, :name, :images, :is_trainer, :trained_gyms, :posts, :gyms_attending, :gyms_owned
+  attributes :id, :name, :images, :posts,
+             :gyms_attending, :gyms_owned,
+             :is_trainer, :trained_gyms, :rating
 
   def images
     { :cover => object.cover, :picture => object.picture }
@@ -40,6 +42,12 @@ class UserSerializer < ActiveModel::Serializer
   def posts
     if object.is_trainer && instance_options[:include_posts] == true
       object.posts.map {|post| PostSerializer.new(post)}
+    end
+  end
+
+  def rating
+    if object.is_trainer
+      {count: object.votes_count, rating: object.rating}
     end
   end
 

@@ -57,7 +57,7 @@ module Api::V1::Me
     def vote
       vote = current_user.vote_on(Gym.find(params[:id]), params.require(:rating))
 
-      if vote
+      if vote.valid?
         render json: vote.voteable
       else
         render json: vote.errors, status: :bad_request
