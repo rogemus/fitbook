@@ -8,7 +8,7 @@ class UserSerializer < ActiveModel::Serializer
   def gyms_attending
     unless instance_options[:include_gyms]
       object.members.map do |member|
-        MemberSerializer.new(member) if member.membership_level.to_sym != :owner
+        MemberSerializer.new(member) if member&.membership_level&.to_sym != :owner
       end.compact
     end
   end

@@ -9,9 +9,30 @@ module Api
     def facebook
       token = params.require(:token)
       auth_hash = User::find_in_facebook(token)
-      user = User.find_by({:facebook_id => auth_hash['id']})
-      token = generate_long_term(token) if params[:long_term] == 'true'
 
+      token = generate_long_term(token) if params[:long_term] == 'true'
+      user = user_from_token(auth_hash, token)
+
+      render json: token_payload(user)
+
+    rescue Koala::Facebook::AuthenticationError => e
+      render json: {errors: e}, status: :bad_request
+    end
+
+    def refresh
+      unless user_id_in_token?
+        render json: { errors: ['Not Authorized'] }, status: :unauthorized
+        return
+      end
+      render json: token_payload(User.find(auth_token[:user][:user_id]))
+    rescue JWT::VerificationError, JWT::DecodeError => e
+      render json: { errors: e.message }, status: :unauthorized
+    end
+
+    private
+
+    def user_from_token(auth_hash, token)
+      user = User.find_by({:facebook_id => auth_hash['id']})
       picture = auth_hash['picture']&.[]('data')&.[]('url')
       cover = auth_hash['cover']&.[]('source')
 
@@ -26,20 +47,8 @@ module Api
                 :picture => picture, :cover => cover}
         user = User.create!(data)
       end
-      render json: token_payload(user)
+      user
     end
-
-    def refresh
-      unless user_id_in_token?
-        render json: { errors: ['Not Authorized'] }, status: :unauthorized
-        return
-      end
-      render json: token_payload(User.find(auth_token[:user][:user_id]))
-    rescue JWT::VerificationError, JWT::DecodeError => e
-      render json: { errors: e.message }, status: :unauthorized
-    end
-
-    private
 
     def generate_long_term(token)
       params = {

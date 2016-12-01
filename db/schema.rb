@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161120123510) do
+ActiveRecord::Schema.define(version: 20161130115232) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -102,7 +102,18 @@ ActiveRecord::Schema.define(version: 20161120123510) do
     t.index ["facebook_id"], name: "index_users_on_facebook_id", using: :btree
   end
 
+  create_table "votes", force: :cascade do |t|
+    t.integer "user_id",       null: false
+    t.string  "voteable_type", null: false
+    t.integer "voteable_id",   null: false
+    t.integer "rating",        null: false
+    t.index ["user_id", "voteable_type", "voteable_id"], name: "index_votes_on_user_id_and_voteable_type_and_voteable_id", unique: true, using: :btree
+    t.index ["user_id"], name: "index_votes_on_user_id", using: :btree
+    t.index ["voteable_type", "voteable_id"], name: "index_votes_on_voteable_type_and_voteable_id", using: :btree
+  end
+
   add_foreign_key "gyms", "locations"
   add_foreign_key "posts_tags", "posts"
   add_foreign_key "posts_tags", "tags"
+  add_foreign_key "votes", "users"
 end

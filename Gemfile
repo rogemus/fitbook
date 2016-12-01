@@ -11,6 +11,7 @@ gem 'jwt'
 gem 'koala', '~> 2.2'
 
 gem 'active_model_serializers'
+gem 'will_paginate', '~> 3.1.0'
 
 group :development, :test do
   gem 'byebug', platform: :mri

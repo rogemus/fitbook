@@ -11,7 +11,8 @@ module Api::V1::Me
       options = params.require(:options).permit(:is_trainer)
       current_user.update!(options)
 
-      render json: current_user
+      render json: current_user,
+             gyms_attending: true
     end
 
   end

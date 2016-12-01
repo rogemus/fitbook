@@ -4,6 +4,8 @@ class Post < ApplicationRecord
 
   has_and_belongs_to_many :tags
 
+  has_many :votes, as: :voteable, dependent: :destroy
+
   validates_presence_of :title, :heading, :body
 
   validates :title, length: { in: 1..55 }
