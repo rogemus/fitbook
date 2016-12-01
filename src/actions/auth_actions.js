@@ -3,8 +3,13 @@ import axios from 'axios';
 
 import {
     AUTH_USER,
-    UNAUTH_USER
+    UNAUTH_USER,
+    FETCH_CURRENT_USER
 } from './types';
+
+import {
+    fetchCurrentUser
+} from './current_user_actions'
 
 const ROOT_URL = 'http://fitbook-api.herokuapp.com';
 
@@ -15,17 +20,30 @@ export function signOutUser() {
 
 export function signInUser(data) {
     var facebookToken = data.accessToken;
+    console.log(facebookToken);
+
     return function (dispatch) {
         axios.post(`${ROOT_URL}/api/auth/facebook`, {
             token: facebookToken,
             long_term: true
         }).then(response => {
-            dispatch({
-                type: AUTH_USER
-            });
 
             localStorage.setItem('token', response.data.token);
-            browserHistory.push('/');
+
+            axios.get(`${ROOT_URL}/api/v1/me`, {
+                headers: {'Authorization': 'Bearer ' + response.data.token}
+            }).then(response => {
+                dispatch({
+                    type: AUTH_USER
+                });
+
+                dispatch({
+                    type: FETCH_CURRENT_USER,
+                    payload: response.data
+                });
+
+                browserHistory.push('/');
+            });
         });
     }
 }

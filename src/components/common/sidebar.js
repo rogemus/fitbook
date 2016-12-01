@@ -7,7 +7,7 @@ class Sidebar extends React.Component {
 
     componentWillMount() {
         if (this.props.authenticated) {
-            this.props.fetchCurrentUser();
+            //this.props.fetchCurrentUser();
         }
     }
 
@@ -101,4 +101,4 @@ function mapStateToProps(state) {
     }
 }
 
-export default connect(mapStateToProps, {fetchCurrentUser})(Sidebar);
+export default connect(mapStateToProps)(Sidebar);

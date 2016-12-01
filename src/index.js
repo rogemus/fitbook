@@ -9,7 +9,6 @@ import {AUTH_USER} from './actions/types';
 import App from './components/app';
 import SignIn from './components/page/Auth/SignIn/signIn';
 import SignOut from './components/page/Auth/SignOut/signOut';
-import Feature from './components/page/FeaturePage/feature';
 import Home from './components/page/HomePage/home';
 import RequireAuth from './components/page/Auth/require_auth';
 import CurrentUserPage from './components/page/CurrentUserPage/currentUserPage';
@@ -46,7 +45,6 @@ ReactDOM.render(
                     <Route path="gyms" component={RequireAuth(CurrentUserPageWithGyms)}/>
                     <Route path="creategym" component={RequireAuth(CreateGymsPage)}/>
                 </Route>
-                <Route path="feature" component={RequireAuth(Feature)}/>
                 <Route path="*" component={Home}/>
             </Route>
         </Router>

@@ -13,7 +13,7 @@ class CreateGymsPage extends React.Component {
                 initText: 'Put your post here :)',
                 titleInit: 'Put title here',
                 headingInit: 'Put heading here',
-                tagsInit: 'Put tags here ex. "sport, gym, fat',
+                tagsInit: 'Put tags here ex. "sport, gym, fat"',
                 plugins: 'link image code',
                 toolbar: 'undo redo | bold italic | alignleft aligncenter alignright | code'
             },
