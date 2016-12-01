@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161130115232) do
+ActiveRecord::Schema.define(version: 20161201110531) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -28,18 +28,20 @@ ActiveRecord::Schema.define(version: 20161130115232) do
   end
 
   create_table "gyms", force: :cascade do |t|
-    t.string   "name",        null: false
+    t.string   "name",                      null: false
     t.bigint   "facebook_id"
     t.string   "graph_token"
     t.integer  "owner_id"
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
+    t.datetime "created_at",                null: false
+    t.datetime "updated_at",                null: false
     t.string   "about"
     t.string   "description"
     t.string   "website"
     t.string   "picture"
     t.integer  "location_id"
     t.string   "cover"
+    t.integer  "votes_count", default: 0
+    t.float    "rating",      default: 0.0
     t.index ["facebook_id"], name: "index_gyms_on_facebook_id", using: :btree
     t.index ["location_id"], name: "index_gyms_on_location_id", using: :btree
     t.index ["owner_id"], name: "index_gyms_on_owner_id", using: :btree
@@ -99,14 +101,16 @@ ActiveRecord::Schema.define(version: 20161130115232) do
     t.string   "cover"
     t.string   "picture"
     t.boolean  "is_trainer",  default: false
+    t.integer  "votes_count", default: 0
+    t.float    "rating",      default: 0.0
     t.index ["facebook_id"], name: "index_users_on_facebook_id", using: :btree
   end
 
   create_table "votes", force: :cascade do |t|
-    t.integer "user_id",       null: false
-    t.string  "voteable_type", null: false
-    t.integer "voteable_id",   null: false
-    t.integer "rating",        null: false
+    t.integer "user_id",                     null: false
+    t.string  "voteable_type",               null: false
+    t.integer "voteable_id",                 null: false
+    t.float   "rating",        default: 0.0, null: false
     t.index ["user_id", "voteable_type", "voteable_id"], name: "index_votes_on_user_id_and_voteable_type_and_voteable_id", unique: true, using: :btree
     t.index ["user_id"], name: "index_votes_on_user_id", using: :btree
     t.index ["voteable_type", "voteable_id"], name: "index_votes_on_voteable_type_and_voteable_id", using: :btree

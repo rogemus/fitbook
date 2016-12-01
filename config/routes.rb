@@ -35,6 +35,8 @@ Rails.application.routes.draw do
             post :join
             put :join, action: :change_membership
             patch :join, action: :change_membership
+            put :vote
+            patch :vote
           end
         end
 

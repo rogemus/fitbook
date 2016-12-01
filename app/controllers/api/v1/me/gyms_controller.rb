@@ -54,6 +54,16 @@ module Api::V1::Me
       end
     end
 
+    def vote
+      vote = current_user.vote_on(Gym.find(params[:id]), params.require(:rating))
+
+      if vote
+        render json: vote.voteable
+      else
+        render json: vote.errors, status: :bad_request
+      end
+    end
+
     def change_membership
       level = params.require(:level).to_sym
       membership = Member.find_by({gym: params[:id], user: current_user})

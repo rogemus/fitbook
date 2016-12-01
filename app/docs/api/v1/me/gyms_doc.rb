@@ -44,4 +44,11 @@ module Api::V1::Me::GymsDoc
           required: true
   end
 
+  doc_for :vote do
+    desc = 'Vote on gym :id'
+    url = '/v1/me/gyms/:id/vote'
+    api :PUT, url, desc
+    api :PATCH, url, desc
+  end
+
 end

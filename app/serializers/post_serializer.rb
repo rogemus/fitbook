@@ -1,5 +1,5 @@
 class PostSerializer < ActiveModel::Serializer
-  attributes :id, :content, :created_at, :updated_at
+  attributes :id, :content, :rating, :created_at, :updated_at
 
   belongs_to :author
   has_many :tags
@@ -11,4 +11,9 @@ class PostSerializer < ActiveModel::Serializer
         body: object.body
     }
   end
+
+  def rating
+    {count: object.votes_count, rating: object.rating}
+  end
+
 end

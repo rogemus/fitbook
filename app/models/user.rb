@@ -16,6 +16,18 @@ class User < ApplicationRecord
     end
   end
 
+  def vote_on(object, rating)
+    by = {user: self, voteable: object}
+    vote = Vote.find_by(by)
+    vote = Vote.create(by.merge(rating: rating)) unless vote
+
+    if vote.rating != rating
+      vote.rating = rating
+      vote.save
+    end
+    vote
+  end
+
   def join_gym_as_owner(gym)
     join_gym(gym, :owner, true)
   end

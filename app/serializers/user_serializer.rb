@@ -20,7 +20,7 @@ class UserSerializer < ActiveModel::Serializer
       Member.
           where(user: object.id).
           where.not(membership_level: :owner).
-          order(:membership_level) do |m|
+          order(:membership_level).map do |m|
         MemberSerializer.new(m)
       end
     end
@@ -31,7 +31,7 @@ class UserSerializer < ActiveModel::Serializer
       Member.
           where(user: object.id).
           where(membership_level: :trainer).
-          order(:membership_level) do |m|
+          order(:membership_level).map do |m|
         MemberSerializer.new(m)
       end
     end
