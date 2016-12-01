@@ -7,10 +7,6 @@ import {
     FETCH_CURRENT_USER
 } from './types';
 
-import {
-    fetchCurrentUser
-} from './current_user_actions'
-
 const ROOT_URL = 'http://fitbook-api.herokuapp.com';
 
 export function signOutUser() {

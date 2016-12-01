@@ -2,7 +2,6 @@ import axios from 'axios';
 import {browserHistory} from 'react-router';
 
 import {
-    FETCH_CURRENT_USER,
     FETCH_CURRENT_USER_GYMS,
     FETCH_CURRENT_USER_AVAILABLE_GYMS,
     FETCH_CURRENT_USER_POSTS,
