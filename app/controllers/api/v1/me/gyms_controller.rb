@@ -6,18 +6,21 @@ module Api::V1::Me
     ALLOWED_CATEGORIES = ['Gym/Physical Fitness Center']
     REQUIRED_PERMISSIONS = %w{ADMINISTER}
 
+    def index
+      render json: current_user.members
+    end
+
     def show
-      render json: current_user.owned_gyms
+      render json: Gym.where({id: params.require(:id), owner: current_user})
     end
 
     def create
       facebook_id = params.require(:facebook_id)
-      gyms = facebook_gyms
-      fb_result = gyms.find { |s| s['id'] == facebook_id}
+      fb_result = facebook_gym(facebook_id)
       gym = Gym.create!({:name => fb_result['name'],
-                     :facebook_id => facebook_id,
-                     :graph_token => fb_result['access_token'],
-                     :owner => current_user})
+                         :facebook_id => facebook_id,
+                         :graph_token => fb_result['access_token'],
+                         :owner => current_user})
       join_gym_as_owner(gym)
       merge_facebook_data(gym)
 
@@ -28,7 +31,7 @@ module Api::V1::Me
 
     def update
       gym = Gym.find_by!({:id => params.require(:id),
-                         :owner => current_user})
+                          :owner => current_user})
       merge_facebook_data(gym)
 
       render json: gym
@@ -40,18 +43,7 @@ module Api::V1::Me
         render json: {}, status: :no_content
       else
         render json: gyms.map {|gym| {:id => gym['id'],
-                                               :name => gym['name']}}
-      end
-    end
-
-    def join
-      gym = Gym.find(params.require(:id))
-      member = current_user.join_gym(gym, params[:level] || :regular)
-
-      if member.valid?
-        render json: member, status: :created
-      else
-        render json: member.errors.messages, status: :bad_request
+                                      :name => gym['name']}}
       end
     end
 
@@ -65,8 +57,22 @@ module Api::V1::Me
       end
     end
 
+    def join
+      gym = Gym.find(params.require(:id))
+      mailing = params[:mailing] || false
+
+      member = current_user.join_gym(gym, params[:level] || :regular, false, mailing: mailing)
+
+      if member.valid?
+        render json: member, status: :created
+      else
+        render json: member.errors.messages, status: :bad_request
+      end
+    end
+
     def change_membership
       level = params.require(:level).to_sym
+      mailing = params[:mailing]
       membership = Member.find_by({gym: params[:id], user: current_user})
 
       errors = nil
@@ -74,6 +80,8 @@ module Api::V1::Me
       if membership && membership != :owner
         membership.approved = Member::APPROVED_MEMBERSHIP_LEVELS.include? level
         membership.membership_level = level
+
+        membership.mailing = mailing unless mailing.nil?
 
         if membership.save
           render json: membership
@@ -99,8 +107,10 @@ module Api::V1::Me
     end
 
     def facebook_gym(id)
-      facebook_gyms.find {|gym| gym['facebook_id'] == id} or
-          raise 'Gym has invalid category, permissions or already exists'
+      facebook_gyms.each do |gym|
+        return gym if gym['id'].to_i == id.to_i
+      end
+      raise 'Gym has invalid category, permissions or already exists'
     end
 
     def facebook_gyms

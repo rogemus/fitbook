@@ -6,7 +6,7 @@ class MemberSerializer < ActiveModel::Serializer
   end
 
   def gym
-    GymSerializer.new(Gym.find(object.gym.id))
+    GymSerializer.new(Gym.find(object.gym.id)) if object&.gym&.id
   end
 
 end
