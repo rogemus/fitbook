@@ -1,5 +1,5 @@
 class LocationSerializer < ActiveModel::Serializer
-  attributes :latitude, :longitude, :street, :city, :country
+  attributes :id, :latitude, :longitude, :street, :city, :country
 
   def city
     object.city.name

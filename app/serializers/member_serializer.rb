@@ -1,5 +1,5 @@
 class MemberSerializer < ActiveModel::Serializer
-  attributes :membership_level, :approved, :gym, :since
+  attributes :id, :membership_level, :approved, :mailing, :gym, :since
 
   def since
     object.created_at
