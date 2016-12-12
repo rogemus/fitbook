@@ -7,16 +7,16 @@ import {Router, Route, IndexRoute, browserHistory} from 'react-router';
 import {AUTH_USER} from './actions/types';
 
 import App from './components/app';
-import SignIn from './components/page/Auth/SignIn/signIn';
-import SignOut from './components/page/Auth/SignOut/signOut';
-import Home from './components/page/HomePage/home';
-import RequireAuth from './components/page/Auth/require_auth';
-import CurrentUserPage from './components/page/CurrentUserPage/currentUserPage';
-import CurrentUserPageWithPost from './components/page/CurrentUserPage/currentUserPageWithPost';
-import CurrentUserPageWithGyms from './components/page/CurrentUserPage/currentUserPageWithGyms';
-import CreateGymsPage from './components/page/CreateGymsPage/createGymsPage';
-import CreatePostPage from './components/page/CreatePostPage/createPostPage';
-import GymPage from './components/page/GymPage/gymPage';
+import SignIn from './components/pages/auth/signIn/signIn';
+import SignOut from './components/pages/auth/signOut/signOut';
+import Home from './components/pages/homePage/home';
+import RequireAuth from './components/pages/auth/require_auth';
+import CurrentUserPage from './components/pages/currentUserPage/currentUserPage';
+import CurrentUserPageWithPost from './components/pages/currentUserPage/currentUserPageWithPost';
+import CurrentUserPageWithGyms from './components/pages/currentUserPage/currentUserPageWithGyms';
+import CreateGymsPage from './components/pages/createGymsPage/createGymsPage';
+import CreatePostPage from './components/pages/createPostPage/createPostPage';
+import GymPage from './components/pages/gymPage/gymPage';
 
 import reducers from './reducers';
 

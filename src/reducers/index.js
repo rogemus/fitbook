@@ -1,7 +1,7 @@
 import {combineReducers} from 'redux';
-import authReducer from './auth_reducer';
-import userReducer from './current_user_reducer';
-import gymReducer from './gym_reducer';
+import authReducer from './authReducer';
+import userReducer from './currentUserReducer';
+import gymReducer from './gymReducer';
 
 const rootReducer = combineReducers({
     auth: authReducer,

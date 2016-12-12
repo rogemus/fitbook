@@ -18,7 +18,6 @@ class HomePage extends React.Component {
         this.renderGymSearchResult = this.renderGymSearchResult.bind(this);
     }
 
-
     onSuggestSelect(suggest) {
         const distanceInMeters = 2000;
 
@@ -49,22 +48,31 @@ class HomePage extends React.Component {
 
     renderGymSearchResult() {
         if (this.props.search_result) {
-           return (
 
-               <div className="find-gym__result">
-                   <div className="find-gym__result__title">
-                       <h1 className="title text-center">Gyms in your area</h1>
-                   </div>
-                   <div className="content">
-                       {this.props.search_result.map(gym => {
-                           console.log(gym);
-                           return (
-                               <SearchResultsCard key={gym.id} gym={gym}/>
-                           );
-                       })}
-                   </div>
-               </div>
-           )
+            if (this.props.search_result.length > 0) {
+                return (
+                    <div className="find-gym__result">
+                        <div className="find-gym__result__title">
+                            <h1 className="title text-center">Gyms in your area</h1>
+                        </div>
+                        <div className="content">
+                            {this.props.search_result.map(gym => {
+                                return (
+                                    <SearchResultsCard key={gym.id} gym={gym}/>
+                                );
+                            })}
+                        </div>
+                    </div>
+                )
+            } else {
+                return (
+                    <div className="find-gym__result">
+                        <div className="find-gym__result__title">
+                            <h1 className="title text-center">Sorry! :(<br/> There are not gyms in this area</h1>
+                        </div>
+                    </div>
+                )
+            }
         }
     }
 
@@ -72,6 +80,10 @@ class HomePage extends React.Component {
         return (
             <div className="find-gym">
                 <div className="find-gym__background">
+                    <div className="find-gym__title">
+                        <h1 className="title text-center">Find gyms in your area !</h1>
+                    </div>
+
                     <Geosuggest
                         placeholder="Start typing!"
                         country="pl"

@@ -2,7 +2,6 @@ import React from 'react';
 import {Link} from 'react-router';
 import GoogleMap from './googleMap';
 
-
 export default({gym}) => (
     <div className="col-md-3">
         <div className="card find-gym__result__gym">
