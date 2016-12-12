@@ -27,27 +27,27 @@ const store = createStoreWithMiddleware(reducers);
 const token = localStorage.getItem('token');
 
 if (token) {
-    store.dispatch({type: AUTH_USER});
+	store.dispatch({type: AUTH_USER});
 }
 
 
 ReactDOM.render(
-    <Provider store={store}>
-        <Router history={browserHistory}>
-            <Route path="/" component={App}>
-                <IndexRoute component={Home}/>
-                <Route path="signin" component={SignIn}/>
-                <Route path="signout" component={SignOut}/>
-                <Route path="gyms/:id" component={GymPage}/>
-                <Route path="createpost" component={RequireAuth(CreatePostPage)}/>
-                <Route path="me" component={RequireAuth(CurrentUserPage)}>
-                    <Route path="posts" component={RequireAuth(CurrentUserPageWithPost)}/>
-                    <Route path="gyms" component={RequireAuth(CurrentUserPageWithGyms)}/>
-                    <Route path="creategym" component={RequireAuth(CreateGymsPage)}/>
-                </Route>
-                <Route path="*" component={Home}/>
-            </Route>
-        </Router>
-    </Provider>
-    , document.querySelector('.app')
+	<Provider store={store}>
+		<Router history={browserHistory}>
+			<Route path="/" component={App}>
+				<IndexRoute component={Home}/>
+				<Route path="signin" component={SignIn}/>
+				<Route path="signout" component={SignOut}/>
+				<Route path="gyms/:id" component={GymPage}/>
+				<Route path="createpost" component={RequireAuth(CreatePostPage)}/>
+				<Route path="me" component={RequireAuth(CurrentUserPage)}>
+					<Route path="posts" component={RequireAuth(CurrentUserPageWithPost)}/>
+					<Route path="gyms" component={RequireAuth(CurrentUserPageWithGyms)}/>
+					<Route path="creategym" component={RequireAuth(CreateGymsPage)}/>
+				</Route>
+				<Route path="*" component={Home}/>
+			</Route>
+		</Router>
+	</Provider>
+	, document.querySelector('.app')
 );

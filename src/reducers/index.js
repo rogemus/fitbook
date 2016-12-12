@@ -4,9 +4,9 @@ import userReducer from './currentUserReducer';
 import gymReducer from './gymReducer';
 
 const rootReducer = combineReducers({
-    auth: authReducer,
-    current_user: userReducer,
-    gym: gymReducer
+	auth: authReducer,
+	current_user: userReducer,
+	gym: gymReducer
 });
 
 export default rootReducer;

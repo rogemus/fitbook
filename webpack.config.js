@@ -10,13 +10,23 @@ module.exports = {
         filename: 'bundle.js'
     },
     module: {
-        loaders: [{
-            exclude: /node_modules/,
-            loader: 'babel'
-        }]
+        loaders: [
+            {
+                exclude: /node_modules/,
+                loader: 'babel'
+            },
+            {
+                test: /\.js$/,
+                exclude: /node_modules/,
+                loader: 'eslint-loader'
+            }
+        ]
     },
     resolve: {
         extensions: ['', '.js', '.jsx']
+    },
+    eslint: {
+        configFile: './.eslintrc'
     },
     devServer: {
         port: 3000,

@@ -1,0 +1,16 @@
+{
+  parser: "babel-eslint",
+  "plugins": [
+    "react"
+  ],
+  "rules": {
+    "max-len": [1, 120, 2, {ignoreComments: true}],
+    "indent": [ 2, "tab", {"SwitchCase": 1}],
+    "quotes": [ 2, "single" ],
+    "semi": [ 2, "always" ]
+  },
+  "env": {
+    "es6": true,
+    "browser": true
+  }
+}

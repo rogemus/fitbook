@@ -4,51 +4,51 @@ import {fetchCurrentUserAvailableGyms, createGym} from '../../../actions/current
 
 class CreateGymsPage extends React.Component {
 
-    constructor(props) {
-        super(props);
+	constructor(props) {
+		super(props);
 
-        this.onFormSubmit = this.onFormSubmit.bind(this);
-    }
+		this.onFormSubmit = this.onFormSubmit.bind(this);
+	}
 
-    componentDidMount() {
-        this.props.fetchCurrentUserAvailableGyms();
-    }
+	componentDidMount() {
+		this.props.fetchCurrentUserAvailableGyms();
+	}
 
-    onFormSubmit(event) {
-        event.preventDefault();
-        this.props.createGym(parseInt(this.refs.form.gymSelect.value));
-    }
+	onFormSubmit(event) {
+		event.preventDefault();
+		this.props.createGym(parseInt(this.refs.form.gymSelect.value));
+	}
 
-    renderSelectGym() {
-        if (this.props.current_user_available_gyms) {
+	renderSelectGym() {
+		if (this.props.current_user_available_gyms) {
 
-            return (
-                this.props.current_user_available_gyms.map(gym => {
-                    return (<option key={gym.id} value={gym.id}>{gym.name}</option>)
-                })
-            )
-        }
-    }
+			return (
+				this.props.current_user_available_gyms.map(gym => {
+					return (<option key={gym.id} value={gym.id}>{gym.name}</option>)
+				})
+			)
+		}
+	}
 
-    render() {
-        return (
-            <div>
-                <form ref="form" onSubmit={this.onFormSubmit} className="input-group">
-                    <select name="gymSelect" className="form-control">
-                        {this.renderSelectGym()}
-                    </select>
-                    <button type="submit" className="btn btn-primary">Create</button>
-                </form>
-            </div>
-        )
-    }
+	render() {
+		return (
+			<div>
+				<form ref="form" onSubmit={this.onFormSubmit} className="input-group">
+					<select name="gymSelect" className="form-control">
+						{this.renderSelectGym()}
+					</select>
+					<button type="submit" className="btn btn-primary">Create</button>
+				</form>
+			</div>
+		)
+	}
 }
 
 function mapStateToProps(state) {
-    return {
-        current_user: state.current_user.user,
-        current_user_available_gyms: state.current_user.available_gyms
-    }
+	return {
+		current_user: state.current_user.user,
+		current_user_available_gyms: state.current_user.available_gyms
+	}
 }
 
 export default connect(mapStateToProps, {fetchCurrentUserAvailableGyms, createGym})(CreateGymsPage);
