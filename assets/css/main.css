@@ -1881,7 +1881,7 @@ body {
   height: 93vh;
   border-radius: 25px; }
   .full-page.login-page {
-    background: url("/assets/img/background/background-10.jpg") no-repeat center center/cover; }
+    background: url("../img/background/background-10.jpg") no-repeat center center/cover; }
   .full-page .center {
     display: block;
     position: absolute;
@@ -1947,7 +1947,7 @@ body {
         background: #ccc; }
 
 .find-gym__background {
-  background: url("/assets/img/background/background-6.jpg") no-repeat center center/cover;
+  background: url("../img/background/background-6.jpg") no-repeat center center/cover;
   padding: 250px 0;
   border-radius: 25px; }
 
