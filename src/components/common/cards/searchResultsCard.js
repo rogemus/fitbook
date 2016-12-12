@@ -26,5 +26,4 @@ export default({gym}) => (
 			</div>
 		</div>
 	</div>
-)
-
+);

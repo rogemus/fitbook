@@ -1,12 +1,10 @@
 import React from 'react';
 import {connect} from 'react-redux';
-import {Link} from 'react-router';
-import {fetchCurrentUserGyms, becomeTrainer} from '../../../actions/current_user_actions'
-
 import GymCard from '../../common/cards/gymCard';
 import UserCard from '../../common/cards/userCard';
 import UserMenu from '../../common/userMenu';
 import TrainerGyms from '../../common/trainerGyms';
+import {fetchCurrentUserGyms, becomeTrainer} from '../../../actions/currentUserActions';
 
 class CurrentUserPage extends React.Component {
 
@@ -17,14 +15,16 @@ class CurrentUserPage extends React.Component {
 	}
 
 	componentDidMount() {
-		this.props.fetchCurrentUserGyms();
+		if (this.props.current_user) {
+			if (this.props.current_user.is_trainer) {
+				this.props.fetchCurrentUserGyms();
+			}
+		}
 	}
 
 	renderCurrentUserCard() {
 		if (this.props.current_user) {
-			return (
-				<UserCard user={this.props.current_user}/>
-			)
+			return <UserCard user={this.props.current_user}/>;
 		}
 	}
 
@@ -41,7 +41,7 @@ class CurrentUserPage extends React.Component {
 							</form>
 						</div>
 					</div>
-				)
+				);
 			}
 		}
 	}
@@ -61,21 +61,19 @@ class CurrentUserPage extends React.Component {
 						</div>
 					</div>
 				</div>
-			)
+			);
 		}
 	}
 
 	renderCurrentUserTrainerGyms() {
 		if (this.props.current_user) {
-			return (
-				<TrainerGyms user={this.props.current_user}/>
-			)
+			return <TrainerGyms user={this.props.current_user}/>;
 		}
 	}
 
 	renderCurrentUserMenu() {
 		if (this.props.current_user) {
-			return <UserMenu user={this.props.current_user}/>
+			return <UserMenu user={this.props.current_user}/>;
 		}
 	}
 
@@ -113,7 +111,7 @@ function mapStateToProps(state) {
 	return {
 		current_user: state.current_user.user,
 		current_user_gyms: state.current_user.gyms
-	}
+	};
 }
 
 export default connect(mapStateToProps, {fetchCurrentUserGyms, becomeTrainer})(CurrentUserPage);

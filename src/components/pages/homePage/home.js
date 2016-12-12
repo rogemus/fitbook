@@ -1,8 +1,8 @@
 import React from 'react';
-import Geosuggest from 'react-geosuggest';
-import {findGyms} from '../../../actions/gyms_actions';
-import SearchResultsCard from '../../common/cards/searchResultsCard'
 import {connect} from 'react-redux';
+import Geosuggest from 'react-geosuggest';
+import {findGyms} from '../../../actions/gymsActions';
+import SearchResultsCard from '../../common/cards/searchResultsCard';
 
 class HomePage extends React.Component {
 
@@ -63,7 +63,7 @@ class HomePage extends React.Component {
 							})}
 						</div>
 					</div>
-				)
+				);
 			} else {
 				return (
 					<div className="find-gym__result">
@@ -71,7 +71,7 @@ class HomePage extends React.Component {
 							<h1 className="title text-center">Sorry! :(<br/> There are not gyms in this area</h1>
 						</div>
 					</div>
-				)
+				);
 			}
 		}
 	}
@@ -87,7 +87,7 @@ class HomePage extends React.Component {
 					<Geosuggest
 						placeholder="Start typing!"
 						country="pl"
-						types={["geocode"]}
+						types={['geocode']}
 						onSuggestSelect={this.onSuggestSelect}
 						location={new google.maps.LatLng()}
 						radius="20"/>
@@ -95,14 +95,14 @@ class HomePage extends React.Component {
 
 				{this.renderGymSearchResult()}
 			</div>
-		)
+		);
 	}
 }
 
 function mapStateToProps(state) {
 	return {
-		search_result: state.gym.search_gyms,
-	}
+		search_result: state.gym.search_gyms
+	};
 }
 
 export default connect(mapStateToProps, {findGyms})(HomePage);

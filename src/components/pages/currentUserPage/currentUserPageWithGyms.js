@@ -1,16 +1,10 @@
 import React from 'react';
 import {connect} from 'react-redux';
-import {fetchCurrentUserGyms, becomeTrainer} from '../../../actions/current_user_actions'
-
 import GymCard from '../../common/cards/gymCard';
 import UserCard from '../../common/cards/userCard';
-
+import {fetchCurrentUserGyms, becomeTrainer} from '../../../actions/currentUserActions';
 
 class CurrentUserPage extends React.Component {
-
-	constructor(props) {
-		super(props);
-	}
 
 	componentDidMount() {
 		this.props.fetchCurrentUserGyms();
@@ -18,7 +12,7 @@ class CurrentUserPage extends React.Component {
 
 	renderCurrentUserCard() {
 		if (this.props.current_user) {
-			return <UserCard user={this.props.current_user}/>
+			return <UserCard user={this.props.current_user}/>;
 		}
 	}
 
@@ -37,7 +31,7 @@ class CurrentUserPage extends React.Component {
 						</div>
 					</div>
 				</div>
-			)
+			);
 		}
 	}
 
@@ -54,7 +48,7 @@ function mapStateToProps(state) {
 	return {
 		current_user: state.current_user.user,
 		current_user_gyms: state.current_user.gyms
-	}
+	};
 }
 
 export default connect(mapStateToProps, {fetchCurrentUserGyms, becomeTrainer})(CurrentUserPage);

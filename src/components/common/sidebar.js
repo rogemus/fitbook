@@ -1,15 +1,8 @@
 import React from 'react';
 import {connect} from 'react-redux';
 import {Link} from 'react-router';
-import {fetchCurrentUser} from '../../actions/current_user_actions';
 
 class Sidebar extends React.Component {
-
-	componentWillMount() {
-		if (this.props.authenticated) {
-			//this.props.fetchCurrentUser();
-		}
-	}
 
 	renderCurrentUserName() {
 		return this.props.current_user.name;
@@ -28,7 +21,7 @@ class Sidebar extends React.Component {
 						<Link to="/me">{this.renderCurrentUserName()}</Link>
 					</div>
 				</div>
-			)
+			);
 		}
 	}
 
@@ -47,7 +40,7 @@ class Sidebar extends React.Component {
 						<p>Sign Out</p>
 					</Link>
 				</li>
-			]
+			];
 		} else {
 			return [
 				<li key={1}>
@@ -62,7 +55,7 @@ class Sidebar extends React.Component {
 						<p>Sign In</p>
 					</Link>
 				</li>
-			]
+			];
 		}
 	}
 
@@ -91,14 +84,14 @@ class Sidebar extends React.Component {
 					</div>
 				</div>
 			</div>
-		)
+		);
 	}
 }
 function mapStateToProps(state) {
 	return {
 		current_user: state.current_user.user,
 		authenticated: state.auth.authenticated
-	}
+	};
 }
 
 export default connect(mapStateToProps)(Sidebar);

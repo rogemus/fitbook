@@ -9,5 +9,5 @@ export default() => {
 				</div>
 			</div>
 		</footer>
-	)
-}
+	);
+};

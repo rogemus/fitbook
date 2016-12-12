@@ -25,4 +25,4 @@ export default({post}) => (
 			</div>
 		</div>
 	</div>
-)
+);

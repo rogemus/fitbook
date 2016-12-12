@@ -1,8 +1,8 @@
 import React from 'react';
 import {connect} from 'react-redux';
 import TinyMCE from 'react-tinymce';
+import {createPost} from '../../../actions/currentUserActions';
 
-import {createPost} from '../../../actions/current_user_actions'
 class CreateGymsPage extends React.Component {
 
 	constructor(props) {
@@ -50,7 +50,7 @@ class CreateGymsPage extends React.Component {
 	}
 
 	handleTagsChange(e) {
-		let tagsArr = e.target.value.split(',');
+		const tagsArr = e.target.value.split(',');
 
 		this.setState({
 			postTags: tagsArr
@@ -121,14 +121,14 @@ class CreateGymsPage extends React.Component {
 					<button type="submit" className="btn btn-primary">Create Post</button>
 				</form>
 			</div>
-		)
+		);
 	}
 }
 
 function mapStateToProps(state) {
 	return {
 		current_user: state.current_user.user
-	}
+	};
 }
 
 export default connect(mapStateToProps, {createPost})(CreateGymsPage);

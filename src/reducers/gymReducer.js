@@ -1,7 +1,7 @@
 import {
 	FETCH_GYM,
 	FIND_GYMS
-} from '../actions/types'
+} from '../actions/types';
 
 const INITIAL_STATE = {
 	gym: null,

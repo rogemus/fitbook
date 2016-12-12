@@ -1,6 +1,6 @@
 import React from 'react';
 import {connect} from 'react-redux';
-import {fetchCurrentUserAvailableGyms, createGym} from '../../../actions/current_user_actions'
+import {fetchCurrentUserAvailableGyms, createGym} from '../../../actions/currentUserActions';
 
 class CreateGymsPage extends React.Component {
 
@@ -24,9 +24,9 @@ class CreateGymsPage extends React.Component {
 
 			return (
 				this.props.current_user_available_gyms.map(gym => {
-					return (<option key={gym.id} value={gym.id}>{gym.name}</option>)
+					return (<option key={gym.id} value={gym.id}>{gym.name}</option>);
 				})
-			)
+			);
 		}
 	}
 
@@ -40,7 +40,7 @@ class CreateGymsPage extends React.Component {
 					<button type="submit" className="btn btn-primary">Create</button>
 				</form>
 			</div>
-		)
+		);
 	}
 }
 
@@ -48,7 +48,7 @@ function mapStateToProps(state) {
 	return {
 		current_user: state.current_user.user,
 		current_user_available_gyms: state.current_user.available_gyms
-	}
+	};
 }
 
 export default connect(mapStateToProps, {fetchCurrentUserAvailableGyms, createGym})(CreateGymsPage);

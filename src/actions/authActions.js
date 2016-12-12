@@ -15,14 +15,15 @@ export function signOutUser() {
 }
 
 export function signInUser(data) {
-	var facebookToken = data.accessToken;
-	console.log(facebookToken);
+	const facebookToken = data.accessToken;
 
 	return function (dispatch) {
-		axios.post(`${ROOT_URL}/api/auth/facebook`, {
-			token: facebookToken,
-			long_term: true
-		}).then(response => {
+		axios.post(`${ROOT_URL}/api/auth/facebook`,
+			{
+				token: facebookToken,
+				long_term: true
+			}
+		).then(response => {
 
 			localStorage.setItem('token', response.data.token);
 
@@ -41,5 +42,5 @@ export function signInUser(data) {
 				browserHistory.push('/');
 			});
 		});
-	}
+	};
 }

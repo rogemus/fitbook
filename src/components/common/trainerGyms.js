@@ -40,4 +40,4 @@ export default ({user}) => (
 			</ul>
 		</div>
 	</div>
-)
+);

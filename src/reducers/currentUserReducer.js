@@ -3,7 +3,7 @@ import {
 	FETCH_CURRENT_USER_GYMS,
 	FETCH_CURRENT_USER_AVAILABLE_GYMS,
 	FETCH_CURRENT_USER_POSTS
-} from '../actions/types'
+} from '../actions/types';
 
 export default function (state = {}, action) {
 	switch (action.type) {

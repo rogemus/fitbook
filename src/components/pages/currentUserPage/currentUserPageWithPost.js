@@ -1,9 +1,8 @@
 import React from 'react';
 import {connect} from 'react-redux';
-import {fetchCurrentUserPosts} from '../../../actions/current_user_actions'
-
 import UserCard from '../../common/cards/userCard';
 import PostCard from '../../common/cards/postCard';
+import {fetchCurrentUserPosts} from '../../../actions/currentUserActions';
 
 class CurrentUserPage extends React.Component {
 
@@ -13,9 +12,7 @@ class CurrentUserPage extends React.Component {
 
 	renderCurrentUserCard() {
 		if (this.props.current_user) {
-			return (
-				<UserCard user={this.props.current_user}/>
-			)
+			return <UserCard user={this.props.current_user}/>;
 		}
 	}
 
@@ -49,7 +46,7 @@ function mapStateToProps(state) {
 	return {
 		current_user: state.current_user.user,
 		current_user_posts: state.current_user.posts
-	}
+	};
 }
 
 export default connect(mapStateToProps, {fetchCurrentUserPosts})(CurrentUserPage);

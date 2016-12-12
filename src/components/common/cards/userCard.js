@@ -18,4 +18,4 @@ export default({user}) => (
 			</p>
 		</div>
 	</div>
-)
+);

@@ -1,7 +1,7 @@
 import React from 'react';
 import {connect} from 'react-redux';
-import {fetchGym} from '../../../actions/gyms_actions';
-import {joinGym} from '../../../actions/current_user_actions';
+import {fetchGym} from '../../../actions/gymsActions';
+import {joinGym} from '../../../actions/currentUserActions';
 import GymCard from '../../common/cards/gymCard';
 
 class GymPage extends React.Component {
@@ -19,7 +19,7 @@ class GymPage extends React.Component {
 
 	renderGym() {
 		if (this.props.gym) {
-			return <GymCard gym={this.props.gym}/>
+			return <GymCard gym={this.props.gym}/>;
 		}
 	}
 
@@ -36,7 +36,7 @@ class GymPage extends React.Component {
 							</form>
 						</div>
 					</div>
-				)
+				);
 			}
 		}
 	}
@@ -55,7 +55,7 @@ class GymPage extends React.Component {
 					{this.renderGym()}
 				</div>
 			</div>
-		)
+		);
 	}
 }
 
@@ -63,8 +63,7 @@ function mapStateToProps(state) {
 	return {
 		gym: state.gym.gym,
 		current_user: state.current_user.user
-	}
+	};
 }
-
 
 export default connect(mapStateToProps, {fetchGym, joinGym})(GymPage);

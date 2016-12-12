@@ -1,7 +1,6 @@
 import React from 'react';
 import {Link} from 'react-router';
 
-
 function renderLink(user) {
 	if (user.is_trainer) {
 		return [
@@ -25,7 +24,7 @@ function renderLink(user) {
 					<p>Create Post</p>
 				</Link>
 			</li>
-		]
+		];
 	} else {
 		return [
 			<li key={1}>
@@ -37,11 +36,10 @@ function renderLink(user) {
 				<Link to="/me/creategym">
 					<p>Import Gym</p>
 				</Link>
-			</li>,
-		]
+			</li>
+		];
 	}
 }
-
 
 export default({user}) => (
 	<nav className="navbar">
@@ -51,4 +49,4 @@ export default({user}) => (
 			</ul>
 		</div>
 	</nav>
-)
+);

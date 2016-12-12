@@ -1,14 +1,9 @@
 import React from 'react';
-import {signInUser} from '../../../../actions/auth_actions';
-import FacebookLogin from 'react-facebook-login';
-
 import {connect} from 'react-redux';
+import FacebookLogin from 'react-facebook-login';
+import {signInUser} from '../../../../actions/authActions';
 
 class SignIn extends React.Component {
-
-	constructor(props) {
-		super(props);
-	};
 
 	responseFacebook = (response) => {
 		this.props.signInUser(response);
@@ -32,7 +27,7 @@ class SignIn extends React.Component {
 					</div>
 				</div>
 			</div>
-		)
+		);
 	}
 }
 export default connect(null, {signInUser})(SignIn);

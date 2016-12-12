@@ -9,16 +9,16 @@ const ROOT_URL = 'http://fitbook-api.herokuapp.com/api/v1';
 
 export function findGyms(data) {
 	return function (dispatch) {
-		axios.post(`${ROOT_URL}/gyms/find`, {
-
-				"location": {
-					"top_left": {
-						"latitude": data.top_left.latitude,
-						"longitude": data.top_left.longitude
+		axios.post(`${ROOT_URL}/gyms/find`,
+			{
+				'location': {
+					'top_left': {
+						'latitude': data.top_left.latitude,
+						'longitude': data.top_left.longitude
 					},
-					"bottom_right": {
-						"latitude": data.bottom_right.latitude,
-						"longitude": data.bottom_right.longitude
+					'bottom_right': {
+						'latitude': data.bottom_right.latitude,
+						'longitude': data.bottom_right.longitude
 					}
 				}
 			}
@@ -31,7 +31,7 @@ export function findGyms(data) {
 				payload: response.data
 			});
 		});
-	}
+	};
 }
 
 export function fetchGym(id) {
@@ -43,7 +43,5 @@ export function fetchGym(id) {
 					payload: response.data
 				});
 			});
-	}
+	};
 }
-
-
