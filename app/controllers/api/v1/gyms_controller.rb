@@ -11,6 +11,15 @@ module Api::V1
       render json: gym_trainers(params[:gym_id])
     end
 
+    def comments
+      gym = Gym.find(params[:gym_id])
+      if gym
+        render json: gym.comments
+      else
+        render status: :no_content
+      end
+    end
+
     def find
       loc = params[:location]
       if test_city_params

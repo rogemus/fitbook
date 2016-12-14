@@ -3,8 +3,17 @@ module Api::V1::Me
 
     include ::Api::V1::Me::TrainersDoc
 
-    def index
+    def comment
+      body = params.require(:body)
+      trainer = User.find(params[:trainer_id])
 
+      comment = Comment.new(user: current_user, body: body, commentable: trainer)
+
+      if comment.save
+        render json: comment, status: :created
+      else
+        render json: comment.errors, status: :unprocessable_entity
+      end
     end
 
     def vote

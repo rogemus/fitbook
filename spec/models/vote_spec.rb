@@ -7,7 +7,7 @@ RSpec.describe Vote, type: :model do
   let (:gym) { build :gym}
   let (:trainer) { build :user, :is_trainer }
 
-  subject { described_class.new(user: user, voteable: gym, rating: 5) }
+  subject { described_class.new(user: user, voteable: gym, rating: 5.0) }
 
   it 'is valid with valid params' do
     expect(subject).to be_valid
@@ -25,12 +25,12 @@ RSpec.describe Vote, type: :model do
   context 'rating' do
 
     it 'is not valid when too low' do
-      subject.rating = 0
+      subject.rating = 0.99
       expect(subject).to_not be_valid
     end
 
     it 'is not valid when too high' do
-      subject.rating = 6
+      subject.rating = 5.01
       expect(subject).to_not be_valid
     end
 

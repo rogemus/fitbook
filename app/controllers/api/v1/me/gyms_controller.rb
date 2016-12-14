@@ -14,6 +14,19 @@ module Api::V1::Me
       render json: Gym.where({id: params.require(:id), owner: current_user})
     end
 
+    def comment
+      body = params.require(:body)
+      gym = Gym.find(params[:id])
+
+      comment = Comment.new(user: current_user, body: body, commentable: gym)
+
+      if comment.save
+        render json: comment, status: :created
+      else
+        render json: comment.errors, status: :unprocessable_entity
+      end
+    end
+
     def create
       facebook_id = params.require(:facebook_id)
       fb_result = facebook_gym(facebook_id)

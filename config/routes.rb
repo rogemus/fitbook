@@ -17,7 +17,10 @@ Rails.application.routes.draw do
       resources :posts, only: [:index, :show]
 
       resource :gyms, only: [] { post :find }
-      resources :gyms, only: [:index, :show]  { get :trainers }
+      resources :gyms, only: [:index, :show]  do
+        get :trainers
+        get :comments
+      end
 
       resource :users, only: [:show] do
         resources :trainers, only: [:index, :show] { get :posts }
@@ -29,20 +32,28 @@ Rails.application.routes.draw do
 
       namespace :me do
 
-        resource :gyms, only: [:create, :show]  { get :available }
-        resources :gyms, only: [:update] do
+        resource :gyms, only: [:create]  { get :available }
+        resources :gyms, only: [:index, :update] do
           member do
+            post :comment
             post :join
             put :join, action: :change_membership
             patch :join, action: :change_membership
             put :vote
             patch :vote
+
+            resources :mailings, only: [:index, :create] do
+              get :show
+              get :receivers
+              post :send, action: :commit
+            end
           end
         end
 
         resources :posts, only: [:index, :create, :update, :destroy]
 
-        resources :trainers, only: [:index, :create] do
+        resources :trainers, only: [] do
+          post :comment
           put :vote
           patch :vote
         end

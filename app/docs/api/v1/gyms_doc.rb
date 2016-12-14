@@ -15,6 +15,10 @@ module Api::V1::GymsDoc
     api :GET, '/v1/gyms/:id', 'Find gym where :id'
   end
 
+  doc_for :comments do
+    api :GET, '/v1/gyms/:id/comments', 'Get comments for gym :id'
+  end
+
   doc_for :trainers do
     api :GET, '/v1/gyms/:id/trainers', 'Get trainers from gym :id, fields are sorted by approval'
   end

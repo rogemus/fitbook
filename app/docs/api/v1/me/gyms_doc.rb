@@ -30,6 +30,11 @@ module Api::V1::Me::GymsDoc
     api :PATCH, '/v1/me/:id/gyms', desc
   end
 
+  doc_for :comment do
+    api :POST, '/v1/me/gyms/:id/comment', 'Comment gym with :id'
+    param :body, String, desc: 'Comment body', required: true
+  end
+
   doc_for :join do
     api :POST, '/v1/me/gyms/:id/join', 'Join gym with given level'
     param :level, [:regular, :special, :trainer],
@@ -47,6 +52,7 @@ module Api::V1::Me::GymsDoc
   doc_for :vote do
     desc = 'Vote on gym :id'
     url = '/v1/me/gyms/:id/vote'
+    param :rating, Float, desc: 'Rating', required: true
     api :PUT, url, desc
     api :PATCH, url, desc
   end

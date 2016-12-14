@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161201110531) do
+ActiveRecord::Schema.define(version: 20161214120927) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -20,6 +20,19 @@ ActiveRecord::Schema.define(version: 20161201110531) do
     t.integer "country_id"
     t.index ["country_id"], name: "index_cities_on_country_id", using: :btree
     t.index ["name", "country_id"], name: "index_cities_on_name_and_country_id", unique: true, using: :btree
+  end
+
+  create_table "comments", force: :cascade do |t|
+    t.integer  "user_id",          null: false
+    t.string   "commentable_type", null: false
+    t.integer  "commentable_id",   null: false
+    t.string   "body",             null: false
+    t.datetime "created_at",       null: false
+    t.datetime "updated_at",       null: false
+    t.index ["commentable_type", "commentable_id"], name: "index_comments_on_commentable_type_and_commentable_id", using: :btree
+    t.index ["created_at"], name: "index_comments_on_created_at", using: :btree
+    t.index ["user_id", "commentable_id"], name: "index_comments_on_user_id_and_commentable_id", unique: true, using: :btree
+    t.index ["user_id"], name: "index_comments_on_user_id", using: :btree
   end
 
   create_table "countries", force: :cascade do |t|
@@ -57,12 +70,30 @@ ActiveRecord::Schema.define(version: 20161201110531) do
     t.index ["gym_id"], name: "index_locations_on_gym_id", using: :btree
   end
 
+  create_table "mails", force: :cascade do |t|
+    t.integer  "gym_id"
+    t.text     "body"
+    t.datetime "created_at"
+    t.string   "header"
+    t.integer  "receivers_count", default: 0, null: false
+    t.datetime "sent"
+    t.index ["created_at"], name: "index_mails_on_created_at", using: :btree
+    t.index ["gym_id"], name: "index_mails_on_gym_id", using: :btree
+  end
+
+  create_table "mails_users", id: false, force: :cascade do |t|
+    t.integer "mail_id", null: false
+    t.integer "user_id", null: false
+    t.index ["mail_id", "user_id"], name: "index_mails_users_on_mail_id_and_user_id", unique: true, using: :btree
+  end
+
   create_table "members", force: :cascade do |t|
     t.integer  "membership_level"
     t.boolean  "approved",         default: false
     t.integer  "user_id"
     t.integer  "gym_id"
     t.datetime "created_at"
+    t.boolean  "mailing",          default: false, null: false
     t.index ["gym_id"], name: "index_members_on_gym_id", using: :btree
     t.index ["user_id", "gym_id"], name: "index_members_on_user_id_and_gym_id", unique: true, using: :btree
     t.index ["user_id"], name: "index_members_on_user_id", using: :btree
@@ -116,7 +147,10 @@ ActiveRecord::Schema.define(version: 20161201110531) do
     t.index ["voteable_type", "voteable_id"], name: "index_votes_on_voteable_type_and_voteable_id", using: :btree
   end
 
+  add_foreign_key "comments", "users"
   add_foreign_key "gyms", "locations"
+  add_foreign_key "mails_users", "mails"
+  add_foreign_key "mails_users", "users"
   add_foreign_key "posts_tags", "posts"
   add_foreign_key "posts_tags", "tags"
   add_foreign_key "votes", "users"
