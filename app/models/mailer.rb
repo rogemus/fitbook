@@ -1,4 +1,6 @@
-class Mail < ApplicationRecord
+class Mailer < ApplicationRecord
+
+  self.table_name = :mail
 
   belongs_to :gym
 

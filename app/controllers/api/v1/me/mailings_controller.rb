@@ -18,7 +18,7 @@ module Api::V1::Me
     end
 
     def create
-      mail = Mail.new({gym: gym, body: params.require(:body), header: params.require(:header)})
+      mail = Mailer.new({gym: gym, body: params.require(:body), header: params.require(:header)})
       mail.recount_receivers
 
       if mail.save

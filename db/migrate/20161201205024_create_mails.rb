@@ -11,6 +11,6 @@ class CreateMails < ActiveRecord::Migration[5.0]
       t.datetime :created_at, index: true
     end
 
-    add_foreign_key :mails, :gym
+    add_foreign_key :mails, :gyms
   end
 end
