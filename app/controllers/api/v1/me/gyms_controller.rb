@@ -74,7 +74,7 @@ module Api::V1::Me
       gym = Gym.find(params.require(:id))
       mailing = params[:mailing] || false
 
-      member = current_user.join_gym(gym, params[:level] || :regular, false, mailing: mailing)
+      member = current_user.join_gym(gym, params[:level] || :regular, false, mailing)
 
       if member.valid?
         render json: member, status: :created
