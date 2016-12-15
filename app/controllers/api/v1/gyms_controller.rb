@@ -3,6 +3,12 @@ module Api::V1
 
     include GymsDoc
 
+    NEW_GYMS_COUNT = 10
+
+    def index
+      render json: Gym.order(created_at: :desc).limit(NEW_GYMS_COUNT)
+    end
+
     def show
       render json: Gym.find(params[:id])
     end

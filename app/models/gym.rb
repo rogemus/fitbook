@@ -2,7 +2,7 @@ class Gym < ApplicationRecord
 
   has_many :comments, as: :commentable
 
-  has_many :mails
+  has_many :mailers
 
   has_many :members
   has_many :attenders, :through => :members, :source => :user

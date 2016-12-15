@@ -3,8 +3,10 @@ module Api::V1
 
     include PostsDoc
 
+    NEW_POSTS_COUNT = 10
+
     def index
-      render json: Post.order(created_at: :desc)
+      render json: Post.order(created_at: :desc).limit(NEW_POSTS_COUNT)
     end
 
     def show

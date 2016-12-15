@@ -11,6 +11,10 @@ module Api::V1::GymsDoc
   defaults do
   end
 
+  doc_for :index do
+    api :GET, '/v1/gyms/', 'Get 10 newest gyms'
+  end
+
   doc_for :show do
     api :GET, '/v1/gyms/:id', 'Find gym where :id'
   end

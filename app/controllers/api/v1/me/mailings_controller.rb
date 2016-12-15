@@ -35,7 +35,7 @@ module Api::V1::Me
     private
 
     def gym_mail
-      gym.mails.find(params[:mailing_id])
+      gym.mailers.find(params[:mailing_id])
     end
 
     def gym
