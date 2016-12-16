@@ -3,6 +3,7 @@ import axios from 'axios';
 import {
 	FETCH_GYM,
 	FETCH_NEWEST_GYMS,
+	FETCH_GYM_COMMENTS,
 	FIND_GYMS
 } from './types';
 
@@ -41,6 +42,17 @@ export function fetchGym(id) {
 			.then(response => {
 				dispatch({
 					type: FETCH_GYM,
+					payload: response.data
+				});
+			});
+	};
+}
+export function fetchGymComments(id) {
+	return function (dispatch) {
+		axios.get(`${ROOT_URL}/gyms/${id}/comments`)
+			.then(response => {
+				dispatch({
+					type: FETCH_GYM_COMMENTS,
 					payload: response.data
 				});
 			});

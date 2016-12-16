@@ -4,6 +4,7 @@ export const UNAUTH_USER = 'unauth_user';
 
 /* GYMS Types */
 /* GET */
+export const FETCH_GYM_COMMENTS = 'fetch_gym_comments';
 export const FETCH_GYM = 'fetch_gym';
 export const FETCH_NEWEST_GYMS = 'fetch_newest_gyms';
 /* POST */

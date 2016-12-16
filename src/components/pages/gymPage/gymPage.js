@@ -1,6 +1,6 @@
 import React from 'react';
 import {connect} from 'react-redux';
-import {fetchGym} from '../../../actions/gymsActions';
+import {fetchGym, fetchGymComments} from '../../../actions/gymsActions';
 import {joinGym} from '../../../actions/currentUserActions';
 import GymCard from '../../common/cards/gymCard';
 
@@ -15,11 +15,18 @@ class GymPage extends React.Component {
 
 	componentDidMount() {
 		this.props.fetchGym(this.props.params.id);
+		this.props.fetchGymComments(this.props.params.id);
 	}
 
 	renderGym() {
 		if (this.props.gym) {
 			return <GymCard gym={this.props.gym}/>;
+		}
+	}
+
+	renderGymComments() {
+		if (this.props.gym_comments) {
+			console.log(this.props.gym_comments);
 		}
 	}
 
@@ -53,6 +60,8 @@ class GymPage extends React.Component {
 					{this.renderJoinGymButton()}
 
 					{this.renderGym()}
+
+					{this.renderGymComments()}
 				</div>
 			</div>
 		);
@@ -62,8 +71,9 @@ class GymPage extends React.Component {
 function mapStateToProps(state) {
 	return {
 		gym: state.gym.gym,
+		gym_comments: state.gym.gym_comments,
 		current_user: state.current_user.user
 	};
 }
 
-export default connect(mapStateToProps, {fetchGym, joinGym})(GymPage);
+export default connect(mapStateToProps, {fetchGym, joinGym, fetchGymComments})(GymPage);
