@@ -15,11 +15,7 @@ class CurrentUserPage extends React.Component {
 	}
 
 	componentDidMount() {
-		if (this.props.current_user) {
-			if (this.props.current_user.is_trainer) {
-				this.props.fetchCurrentUserGyms();
-			}
-		}
+		this.props.fetchCurrentUserGyms();
 	}
 
 	renderCurrentUserCard() {

@@ -4,7 +4,8 @@ import axios from 'axios';
 import {
 	AUTH_USER,
 	UNAUTH_USER,
-	FETCH_CURRENT_USER
+	FETCH_CURRENT_USER,
+	LOADING
 } from './types';
 
 const ROOT_URL = 'http://fitbook-api.herokuapp.com';
@@ -30,6 +31,9 @@ export function signInUser(data) {
 			axios.get(`${ROOT_URL}/api/v1/me`, {
 				headers: {'Authorization': 'Bearer ' + response.data.token}
 			}).then(response => {
+				const user = JSON.stringify(response.data);
+				localStorage.setItem('current_user', user);
+
 				dispatch({
 					type: AUTH_USER
 				});
@@ -37,6 +41,10 @@ export function signInUser(data) {
 				dispatch({
 					type: FETCH_CURRENT_USER,
 					payload: response.data
+				});
+
+				dispatch({
+					type: LOADING
 				});
 
 				browserHistory.push('/');

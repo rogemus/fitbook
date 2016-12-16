@@ -4,7 +4,7 @@ import reduxThunk from 'redux-thunk';
 import {Provider} from 'react-redux';
 import {createStore, applyMiddleware} from 'redux';
 import {Router, Route, IndexRoute, browserHistory} from 'react-router';
-import {AUTH_USER} from './actions/types';
+import {AUTH_USER, FETCH_CURRENT_USER} from './actions/types';
 
 import App from './components/app';
 import SignIn from './components/pages/auth/signIn/signIn';
@@ -24,9 +24,14 @@ const createStoreWithMiddleware = applyMiddleware(reduxThunk)(createStore);
 const store = createStoreWithMiddleware(reducers);
 
 const token = localStorage.getItem('token');
+const current_user = localStorage.getItem('current_user');
 
 if (token) {
 	store.dispatch({type: AUTH_USER});
+	store.dispatch({
+		type: FETCH_CURRENT_USER,
+		payload: JSON.parse(current_user)
+	});
 }
 
 ReactDOM.render(

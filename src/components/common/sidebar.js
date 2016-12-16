@@ -90,7 +90,8 @@ class Sidebar extends React.Component {
 function mapStateToProps(state) {
 	return {
 		current_user: state.current_user.user,
-		authenticated: state.auth.authenticated
+		authenticated: state.auth.authenticated,
+		loading: state.processing.loading
 	};
 }
 

@@ -24,3 +24,6 @@ export const CREATE_POST = 'create_post';
 export const JOIN_GYM = 'join_gym';
 /* PUT */
 export const BECOME_TRAINER = 'become_trainer';
+
+export const LOADING = 'loading';
+export const NOLOADING = 'noloading';
