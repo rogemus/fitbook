@@ -2,6 +2,7 @@ import axios from 'axios';
 
 import {
 	FETCH_GYM,
+	FETCH_NEWEST_GYMS,
 	FIND_GYMS
 } from './types';
 
@@ -40,6 +41,18 @@ export function fetchGym(id) {
 			.then(response => {
 				dispatch({
 					type: FETCH_GYM,
+					payload: response.data
+				});
+			});
+	};
+}
+
+export function fetchNewestGyms() {
+	return function (dispatch) {
+		axios.get(`${ROOT_URL}/gyms`)
+			.then(response => {
+				dispatch({
+					type: FETCH_NEWEST_GYMS,
 					payload: response.data
 				});
 			});

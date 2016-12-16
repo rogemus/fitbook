@@ -1,7 +1,8 @@
 import React from 'react';
 import {connect} from 'react-redux';
 import Geosuggest from 'react-geosuggest';
-import {findGyms} from '../../../actions/gymsActions';
+import {findGyms, fetchNewestGyms} from '../../../actions/gymsActions';
+import {fetchNewestPosts} from '../../../actions/postActions';
 import SearchResultsCard from '../../common/cards/searchResultsCard';
 
 class HomePage extends React.Component {
@@ -16,6 +17,11 @@ class HomePage extends React.Component {
 
 		this.onSuggestSelect = this.onSuggestSelect.bind(this);
 		this.renderGymSearchResult = this.renderGymSearchResult.bind(this);
+	}
+
+	componentDidMount() {
+		this.props.fetchNewestGyms();
+		this.props.fetchNewestPosts();
 	}
 
 	onSuggestSelect(suggest) {
@@ -76,6 +82,18 @@ class HomePage extends React.Component {
 		}
 	}
 
+	renderNewestGyms() {
+		if (this.props.newest_gyms) {
+			console.log(this.props.newest_gyms);
+		}
+	}
+
+	renderNewestPosts() {
+		if (this.props.newest_posts) {
+			console.log(this.props.newest_posts);
+		}
+	}
+
 	render() {
 		return (
 			<div className="find-gym">
@@ -94,6 +112,10 @@ class HomePage extends React.Component {
 				</div>
 
 				{this.renderGymSearchResult()}
+
+				{this.renderNewestGyms()}
+
+				{this.renderNewestPosts()}
 			</div>
 		);
 	}
@@ -101,8 +123,10 @@ class HomePage extends React.Component {
 
 function mapStateToProps(state) {
 	return {
-		search_result: state.gym.search_gyms
+		search_result: state.gym.search_gyms,
+		newest_gyms: state.gym.newest_gyms,
+		newest_posts: state.posts.newest_posts
 	};
 }
 
-export default connect(mapStateToProps, {findGyms})(HomePage);
+export default connect(mapStateToProps, {findGyms, fetchNewestGyms, fetchNewestPosts})(HomePage);

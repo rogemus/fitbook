@@ -5,6 +5,7 @@ export const UNAUTH_USER = 'unauth_user';
 /* GYMS Types */
 /* GET */
 export const FETCH_GYM = 'fetch_gym';
+export const FETCH_NEWEST_GYMS = 'fetch_newest_gyms';
 /* POST */
 export const FIND_GYMS = 'find_gyms';
 
@@ -25,5 +26,10 @@ export const JOIN_GYM = 'join_gym';
 /* PUT */
 export const BECOME_TRAINER = 'become_trainer';
 
+/* POSTS */
+/* GET */
+export const FETCH_NEWEST_POST = 'fetch_newest_post';
 export const LOADING = 'loading';
 export const NOLOADING = 'noloading';
+
+
