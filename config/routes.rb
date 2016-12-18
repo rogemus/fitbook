@@ -22,7 +22,8 @@ Rails.application.routes.draw do
         get :comments
       end
 
-      resource :users, only: [:show] do
+      resources :users, only: [:show]
+      resource :users, only: [] do
         resources :trainers, only: [:index, :show] { get :posts }
       end
 
