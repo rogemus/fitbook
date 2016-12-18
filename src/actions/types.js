@@ -36,4 +36,8 @@ export const NOLOADING = 'noloading';
 /* USERS Types */
 /* GET */
 export const FETCH_USER = 'fetch_user';
-
+export const FETCH_USER_COMMENTS = 'fetch_user_comments';
+export const FETCH_USER_POSTS = 'fetch_user_posts';
+/* POSTS */
+export const CREATE_USER_COMMENTS = 'create_user_comments';
+export const CREATE_USER_RATING = 'create_user_rating';
