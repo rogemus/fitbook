@@ -1,6 +1,9 @@
 ```
 npm install
 ```
+```
+npm install -g gulp webpack webpack-dev-server mocha
+```
 
 ### Start
 ```
