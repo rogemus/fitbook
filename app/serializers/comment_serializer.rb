@@ -6,7 +6,7 @@ class CommentSerializer < ActiveModel::Serializer
         id: object.user.id,
         images: {
             cover: object.user.cover,
-            picuter: object.user.picture
+            picture: object.user.picture
         }
     }
   end
