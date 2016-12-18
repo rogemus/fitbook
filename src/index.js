@@ -17,6 +17,7 @@ import CurrentUserPageWithGyms from './components/pages/currentUserPage/currentU
 import CreateGymsPage from './components/pages/createGymsPage/createGymsPage';
 import CreatePostPage from './components/pages/createPostPage/createPostPage';
 import GymPage from './components/pages/gymPage/gymPage';
+import UserPage from './components/pages/userPage/userPage';
 
 import reducers from './reducers';
 
@@ -42,6 +43,7 @@ ReactDOM.render(
 				<Route path="signin" component={SignIn}/>
 				<Route path="signout" component={SignOut}/>
 				<Route path="gyms/:id" component={GymPage}/>
+				<Route path="users/:id" component={UserPage}/>
 				<Route path="createpost" component={requireAuth(CreatePostPage)}/>
 				<Route path="me" component={requireAuth(CurrentUserPage)}>
 					<Route path="posts" component={requireAuth(CurrentUserPageWithPost)}/>

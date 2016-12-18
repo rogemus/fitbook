@@ -33,4 +33,7 @@ export const FETCH_NEWEST_POST = 'fetch_newest_post';
 export const LOADING = 'loading';
 export const NOLOADING = 'noloading';
 
+/* USERS Types */
+/* GET */
+export const FETCH_USER = 'fetch_user';
 

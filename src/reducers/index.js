@@ -1,14 +1,16 @@
 import {combineReducers} from 'redux';
 import authReducer from './authReducer';
-import userReducer from './currentUserReducer';
+import currentUserReducer from './currentUserReducer';
+import publicUserReducer from './userReducers';
 import gymReducer from './gymReducer';
 import postReducer from './postReducer';
 
 const rootReducer = combineReducers({
 	auth: authReducer,
-	current_user: userReducer,
+	current_user: currentUserReducer,
 	gym: gymReducer,
-	posts: postReducer
+	posts: postReducer,
+	public_user: publicUserReducer
 });
 
 export default rootReducer;
