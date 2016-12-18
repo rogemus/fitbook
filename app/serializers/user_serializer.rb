@@ -30,9 +30,7 @@ class UserSerializer < ActiveModel::Serializer
 
   def comments
     if object.is_trainer
-      object.comments = Comment.where({commentable_type: 'User', commentable_id: object.id}).map do |comment|
-        CommentSerializer.new(comment)
-      end
+      object.comments = Comment.where({commentable_type: 'User', commentable_id: object.id})
     end
   end
 
