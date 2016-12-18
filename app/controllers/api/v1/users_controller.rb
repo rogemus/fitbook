@@ -4,7 +4,8 @@ module Api::V1
     include UsersDoc
 
     def show
-      render json: User.find(params[:id])
+      render json: User.find(params[:id]),
+             include_gyms: true
     end
 
   end

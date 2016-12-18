@@ -10,6 +10,8 @@ class User < ApplicationRecord
 
   has_many :owned_gyms, :class_name => 'Gym', :foreign_key => 'owner_id'
 
+  has_many :comments, as: :commentable
+
   class << self
     def find_in_facebook(token, with = {fields: %w{id name email cover.type(large).fields(source) picture.type(large).fields(url)}})
       Koala::Facebook::API.new(token).get_object(:me, with)

@@ -1,7 +1,7 @@
 class UserSerializer < ActiveModel::Serializer
   attributes :id, :name, :images, :posts,
              :gyms_attending, :gyms_owned,
-             :is_trainer, :trained_gyms, :rating
+             :is_trainer, :trained_gyms, :rating, :comments
 
   def images
     { :cover => object.cover, :picture => object.picture }
@@ -24,6 +24,14 @@ class UserSerializer < ActiveModel::Serializer
           where.not(membership_level: :owner).
           order(:membership_level).map do |m|
         MemberSerializer.new(m)
+      end
+    end
+  end
+
+  def comments
+    if object.is_trainer
+      object.comments = Comment.where({commentable_type: 'User', commentable_id: object.id}).map do |comment|
+        CommentSerializer.new(comment)
       end
     end
   end

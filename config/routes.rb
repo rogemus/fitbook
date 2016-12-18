@@ -24,7 +24,10 @@ Rails.application.routes.draw do
 
       resources :users, only: [:show]
       resource :users, only: [] do
-        resources :trainers, only: [:index, :show] { get :posts }
+        resources :trainers, only: [:index, :show] do
+          get :posts
+          get :comments
+        end
       end
 
       get :locations, to: 'locations#index'

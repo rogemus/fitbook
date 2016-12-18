@@ -27,6 +27,15 @@ module Api::V1
       end
     end
 
+    def comments
+      user = detailed_trainer(params.require(:trainer_id))
+      if user
+        render json: user.comments
+      else
+        render json: not_trainer, status: :unprocessable_entity
+      end
+    end
+
     private
 
     def detailed_trainer(id)
