@@ -1,6 +1,10 @@
 import React from 'react';
 import {Link} from 'react-router';
 
+const HEIGHT = {
+	'height' : '400px'
+};
+
 function renderCover(cover) {
 	if (cover !== null) {
 		return (<img src={cover} alt="..."/>);
@@ -11,7 +15,7 @@ function renderCover(cover) {
 
 export default({gym}) => (
 	<div className="card card-user">
-		<div className="image">
+		<div className="image" style={HEIGHT}>
 			{renderCover(gym.images.cover)}
 		</div>
 		<div className="content">

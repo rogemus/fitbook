@@ -191,6 +191,14 @@ class GymPage extends React.Component {
 		);
 	}
 
+	renderNumber(number) {
+		if (isNaN(number)) {
+			return 0;
+		} else {
+			return number;
+		}
+	}
+
 	renderGymRating() {
 		if (this.props.gym) {
 			return (
@@ -206,7 +214,7 @@ class GymPage extends React.Component {
 							<div className="col-xs-7">
 								<div className="numbers">
 									<p>People voted: {this.props.gym.rating.count}</p>
-									<h5>{Number((this.props.gym.rating.rating / this.props.gym.rating.count).toFixed(1))}</h5>
+									<h5>{this.renderNumber(Number((this.props.gym.rating.rating / this.props.gym.rating.count).toFixed(1)))}</h5>
 								</div>
 							</div>
 						</div>

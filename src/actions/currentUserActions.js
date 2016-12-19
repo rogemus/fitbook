@@ -127,7 +127,7 @@ export function joinGym(gymId) {
 				headers: {'Authorization': 'Bearer ' + localStorage.getItem('token')}
 			}
 		).then(() => {
-			axios.get(`${ROOT_URL}/gyms/${id}/trainers`)
+			axios.get(`${ROOT_URL}/gyms/${gymId}/trainers`)
 				.then(response => {
 					dispatch({
 						type: FETCH_GYM_TRAINERS,

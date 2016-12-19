@@ -14,6 +14,7 @@ import requireAuth from './components/pages/auth/requireAuth';
 import CurrentUserPage from './components/pages/currentUserPage/currentUserPage';
 import CreateGymsPage from './components/pages/createGymsPage/createGymsPage';
 import CreatePostPage from './components/pages/createPostPage/createPostPage';
+import PostPage from './components/pages/postPage/postPage';
 import GymPage from './components/pages/gymPage/gymPage';
 import UserPage from './components/pages/userPage/userPage';
 
@@ -41,6 +42,7 @@ ReactDOM.render(
 				<Route path="signin" component={SignIn}/>
 				<Route path="signout" component={SignOut}/>
 				<Route path="gyms/:id" component={GymPage}/>
+				<Route path="posts/:id" component={PostPage}/>
 				<Route path="users/:id" component={UserPage}/>
 				<Route path="createpost" component={requireAuth(CreatePostPage)}/>
 				<Route path="me" component={requireAuth(CurrentUserPage)}>

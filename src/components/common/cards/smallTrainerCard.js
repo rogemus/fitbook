@@ -9,6 +9,14 @@ function renderCover(cover) {
 	}
 }
 
+function renderNumber(number) {
+	if (isNaN(number)) {
+		return 0;
+	} else {
+		return number;
+	}
+}
+
 export default({user}) => (
 	<div className="col-lg-6">
 		<div className="card card-user">
@@ -31,7 +39,7 @@ export default({user}) => (
 						<h6>People voted: {user.rating.count}</h6>
 					</div>
 					<div className="col-lg-6 text-right">
-						<h3>{Number((user.rating.rating / user.rating.count).toFixed(1))}</h3>
+						<h3>{renderNumber(Number((user.rating.rating / user.rating.count).toFixed(1)))}</h3>
 					</div>
 				</div>
 			</div>

@@ -90,6 +90,14 @@ class UserPage extends React.Component {
 		);
 	}
 
+	renderNumber(number) {
+		if (isNaN(number)) {
+			return 0;
+		} else {
+			return number;
+		}
+	}
+
 	renderRating() {
 		if (this.props.public_user) {
 			if (this.props.public_user.is_trainer === true) {
@@ -106,7 +114,11 @@ class UserPage extends React.Component {
 								<div className="col-xs-7">
 									<div className="numbers">
 										<p>People voted: {this.props.public_user.rating.count}</p>
-										<h5>{Number((this.props.public_user.rating.rating / this.props.public_user.rating.count).toFixed(1))}</h5>
+										<h5>
+											{this.renderNumber(
+												Number((this.props.public_user.rating.rating / this.props.public_user.rating.count).toFixed(1))
+											)}
+										</h5>
 									</div>
 								</div>
 							</div>
