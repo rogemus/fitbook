@@ -1,9 +1,10 @@
 import React from 'react';
 import {connect} from 'react-redux';
 import UserCard from '../../common/cards/userCard';
-import PostCard from '../../common/cards/postCard';
+import PostCard from '../../common/cards/widePostCard';
 import TrainerGyms from '../../common/trainerGyms';
 import {Link} from 'react-router';
+
 import {
 	fetchUser,
 	fetchUserComments,
