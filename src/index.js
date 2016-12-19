@@ -46,8 +46,8 @@ ReactDOM.render(
 				<Route path="posts/:id" component={PostPage}/>
 				<Route path="users/:id" component={UserPage}/>
 				<Route path="createpost" component={requireAuth(CreatePostPage)}/>
+				<Route path="creategym" component={requireAuth(CreateGymsPage)}/>
 				<Route path="me" component={requireAuth(CurrentUserPage)}>
-					<Route path="creategym" component={requireAuth(CreateGymsPage)}/>
 				</Route>
 				<Route path="*" component={E404}/>
 			</Route>

@@ -5,7 +5,7 @@ function renderLink(user) {
 	if (user.is_trainer) {
 		return [
 			<li key={1}>
-				<Link to="/me/creategym">
+				<Link to="/creategym">
 					<p>Import Gym</p>
 				</Link>
 			</li>,
@@ -18,7 +18,7 @@ function renderLink(user) {
 	} else {
 		return [
 			<li key={1}>
-				<Link to="/me/creategym">
+				<Link to="/creategym">
 					<p>Import Gym</p>
 				</Link>
 			</li>

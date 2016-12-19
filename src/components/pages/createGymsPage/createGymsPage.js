@@ -19,13 +19,27 @@ class CreateGymsPage extends React.Component {
 		this.props.createGym(parseInt(this.refs.form.gymSelect.value));
 	}
 
+	renderOptionGym() {
+		return (this.props.current_user_available_gyms.map(gym => {
+			return (<option key={gym.id} value={gym.id}>{gym.name}</option>);
+		}));
+	}
+
 	renderSelectGym() {
 		if (this.props.current_user_available_gyms) {
-
 			return (
-				this.props.current_user_available_gyms.map(gym => {
-					return (<option key={gym.id} value={gym.id}>{gym.name}</option>);
-				})
+				<form ref="form" onSubmit={this.onFormSubmit} className="input-group">
+					<select name="gymSelect" className="form-control">
+						{this.renderOptionGym()}
+					</select>
+					<button type="submit" className="btn btn-primary">Create</button>
+				</form>
+			);
+		} else {
+			return (
+				<div className="text-center">
+					<h2>You need to have gym page on your Facebook account to import it :)</h2>
+				</div>
 			);
 		}
 	}
@@ -33,12 +47,7 @@ class CreateGymsPage extends React.Component {
 	render() {
 		return (
 			<div>
-				<form ref="form" onSubmit={this.onFormSubmit} className="input-group">
-					<select name="gymSelect" className="form-control">
-						{this.renderSelectGym()}
-					</select>
-					<button type="submit" className="btn btn-primary">Create</button>
-				</form>
+				{this.renderSelectGym()}
 			</div>
 		);
 	}
