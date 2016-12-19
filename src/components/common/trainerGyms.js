@@ -1,6 +1,12 @@
 import React from 'react';
 import {Link} from 'react-router';
 
+function renderLocation(gym) {
+	if (gym.location !== null && gym.location !== undefined) {
+		return <span className="text-muted"><small>{gym.gym.location.street}, {gym.gym.location.city} {gym.gym.location.country}</small></span>;
+	}
+}
+
 export default ({gym}) => (
 	<li key={gym.id}>
 		<div className="row">
@@ -17,7 +23,7 @@ export default ({gym}) => (
 					{gym.gym.name}
 				</Link>
 				<br />
-				<span className="text-muted"><small>{gym.gym.location.street}, {gym.gym.location.city} {gym.gym.location.country}</small></span>
+				{renderLocation(gym)}
 			</div>
 		</div>
 	</li>

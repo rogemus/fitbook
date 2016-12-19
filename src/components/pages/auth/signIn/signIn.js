@@ -16,12 +16,17 @@ class SignIn extends React.Component {
 					<div className="row">
 						<div className="center">
 							<div className="card">
-								<FacebookLogin
-									appId="986848648068958"
-									autoLoad={false}
-									fields="name,email,picture"
-									callback={this.responseFacebook}
-								/>
+								<div className="header text-center">
+									<h3 className="title">Login</h3>
+								</div>
+								<div className="content">
+									<FacebookLogin
+										appId="986848648068958"
+										autoLoad={false}
+										fields="name,email,picture"
+										callback={this.responseFacebook}
+									/>
+								</div>
 							</div>
 						</div>
 					</div>

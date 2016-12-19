@@ -17,6 +17,7 @@ import CreatePostPage from './components/pages/createPostPage/createPostPage';
 import PostPage from './components/pages/postPage/postPage';
 import GymPage from './components/pages/gymPage/gymPage';
 import UserPage from './components/pages/userPage/userPage';
+import E404 from './components/pages/errros/e404';
 
 import reducers from './reducers';
 
@@ -48,7 +49,7 @@ ReactDOM.render(
 				<Route path="me" component={requireAuth(CurrentUserPage)}>
 					<Route path="creategym" component={requireAuth(CreateGymsPage)}/>
 				</Route>
-				<Route path="*" component={Home}/>
+				<Route path="*" component={E404}/>
 			</Route>
 		</Router>
 	</Provider>
