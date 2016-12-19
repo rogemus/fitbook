@@ -4,7 +4,10 @@ import {
 	FETCH_GYM,
 	FETCH_NEWEST_GYMS,
 	FETCH_GYM_COMMENTS,
-	FIND_GYMS
+	FETCH_GYM_TRAINERS,
+	FIND_GYMS,
+	CREATE_GYM_COMMENTS,
+	CREATE_GYM_RATING
 } from './types';
 
 const ROOT_URL = 'http://fitbook-api.herokuapp.com/api/v1';
@@ -59,6 +62,18 @@ export function fetchGymComments(id) {
 	};
 }
 
+export function fetchGymTrainers(id) {
+	return function (dispatch) {
+		axios.get(`${ROOT_URL}/gyms/${id}/trainers`)
+			.then(response => {
+				dispatch({
+					type: FETCH_GYM_TRAINERS,
+					payload: response.data
+				});
+			});
+	};
+}
+
 export function fetchNewestGyms() {
 	return function (dispatch) {
 		axios.get(`${ROOT_URL}/gyms`)
@@ -68,5 +83,53 @@ export function fetchNewestGyms() {
 					payload: response.data
 				});
 			});
+	};
+}
+
+export function createGymComment(id, commentBody) {
+	return function (dispatch) {
+		axios.post(`${ROOT_URL}/me/gyms/${id}/comment`,
+			{
+				body: commentBody
+			}, {
+				headers: {'Authorization': 'Bearer ' + localStorage.getItem('token')}
+			}
+		).then(() => {
+			axios.get(`${ROOT_URL}/gyms/${id}/comments`)
+				.then(response => {
+					dispatch({
+						type: FETCH_GYM_COMMENTS,
+						payload: response.data
+					});
+
+					dispatch({
+						type: CREATE_GYM_COMMENTS
+					});
+				});
+		});
+	};
+}
+
+export function createGymRating(id, ratingBody) {
+	return function (dispatch) {
+		axios.put(`${ROOT_URL}/me/gyms/${id}/vote`,
+			{
+				rating: ratingBody
+			}, {
+				headers: {'Authorization': 'Bearer ' + localStorage.getItem('token')}
+			}
+		).then(() => {
+			axios.get(`${ROOT_URL}/gyms/${id}`)
+				.then(response => {
+					dispatch({
+						type: CREATE_GYM_RATING
+					});
+
+					dispatch({
+						type: FETCH_GYM,
+						payload: response.data
+					});
+				});
+		});
 	};
 }

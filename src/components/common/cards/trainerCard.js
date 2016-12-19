@@ -1,4 +1,5 @@
 import React from 'react';
+import {Link} from 'react-router';
 
 function renderCover(cover) {
 	if (cover !== null) {
@@ -15,8 +16,12 @@ export default({user}) => (
 		</div>
 		<div className="content">
 			<div className="author">
-				<img className="avatar border-white" src={user.images.picture} alt={user.name}/>
-				<h4 className="title">{user.name}</h4>
+				<Link to={`/users/${user.id}`}>
+					<img className="avatar border-white" src={user.images.picture} alt={user.name}/>
+				</Link>
+				<Link to={`/users/${user.id}`}>
+					<h4 className="title">{user.name}</h4>
+				</Link>
 			</div>
 			<p className="description text-center">
 				{user.email}

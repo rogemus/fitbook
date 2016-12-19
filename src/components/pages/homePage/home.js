@@ -1,9 +1,15 @@
 import React from 'react';
+import _ from 'lodash';
 import {connect} from 'react-redux';
 import Geosuggest from 'react-geosuggest';
 import {findGyms, fetchNewestGyms} from '../../../actions/gymsActions';
 import {fetchNewestPosts} from '../../../actions/postActions';
 import SearchResultsCard from '../../common/cards/searchResultsCard';
+import PostCard from '../../common/cards/postCard';
+
+const MARGIN = {
+	'margin': '35px 0'
+};
 
 class HomePage extends React.Component {
 
@@ -54,7 +60,6 @@ class HomePage extends React.Component {
 
 	renderGymSearchResult() {
 		if (this.props.search_result) {
-
 			if (this.props.search_result.length > 0) {
 				return (
 					<div className="find-gym__result">
@@ -90,7 +95,20 @@ class HomePage extends React.Component {
 
 	renderNewestPosts() {
 		if (this.props.newest_posts) {
-			console.log(this.props.newest_posts);
+			return (
+				<div style={MARGIN}>
+					<div className="content">
+						<h1 className="title text-center">Newest posts</h1>
+						{_.shuffle(this.props.newest_posts).slice(0, 4).map((post) => {
+							return (
+								<div className="col-lg-3">
+									<PostCard post={post}/>
+								</div>
+							);
+						})}
+					</div>
+				</div>
+			);
 		}
 	}
 

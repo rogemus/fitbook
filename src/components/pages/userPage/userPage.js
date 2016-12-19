@@ -73,7 +73,6 @@ class UserPage extends React.Component {
 		);
 	}
 
-
 	renderRatingForm() {
 		return (
 			<form ref="formRating" onSubmit={this.onRatingSelectFormSubmit} className="comment">
@@ -99,7 +98,7 @@ class UserPage extends React.Component {
 						<div className="content">
 							<div className="row">
 								<div className="col-xs-5">
-									<div className="icon-big icon-danger text-center">
+									<div className="icon-big icon-danger">
 										<p>Rating</p>
 										<i className="fa fa-star"></i>
 									</div>
@@ -107,7 +106,7 @@ class UserPage extends React.Component {
 								<div className="col-xs-7">
 									<div className="numbers">
 										<p>People voted: {this.props.public_user.rating.count}</p>
-										{this.props.public_user.rating.rating / this.props.public_user.rating.count}
+										<h5>{this.props.public_user.rating.rating / this.props.public_user.rating.count}</h5>
 									</div>
 								</div>
 							</div>

@@ -69,6 +69,7 @@ export function createUserComment(id, commentBody) {
 		});
 	};
 }
+
 export function createRating(id, ratingBody) {
 	return function (dispatch) {
 		axios.put(`${ROOT_URL}/me/trainers/${id}/vote`,
