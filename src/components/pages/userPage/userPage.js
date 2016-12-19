@@ -2,6 +2,7 @@ import React from 'react';
 import {connect} from 'react-redux';
 import UserCard from '../../common/cards/userCard';
 import PostCard from '../../common/cards/postCard';
+import TrainerGyms from '../../common/trainerGyms';
 import {Link} from 'react-router';
 import {
 	fetchUser,
@@ -190,6 +191,46 @@ class UserPage extends React.Component {
 		}
 	}
 
+	renderUserGyms() {
+		if (this.props.public_user) {
+			if (this.props.public_user.trained_gyms > 0) {
+				return (
+					<div className="card">
+						<div className="header">
+							<h4 className="title">Whare you can find me: </h4>
+							<div className="content">
+								<ul className="list-unstyled team-members">
+									{this.props.public_user.trained_gyms.map((gym) => {
+										return <TrainerGyms key={gym.id} gym={gym}/>;
+									})}
+								</ul>
+							</div>
+						</div>
+					</div>
+				);
+			} else {
+				return (
+					<div className="card">
+						<div className="header">
+							<h4 className="title">Whare you can find me: </h4>
+							<div className="content">
+								<ul className="list-unstyled team-members">
+									<li>
+										<div className="row">
+											<span className="text-muted">
+												I don't have job :)
+											</span>
+										</div>
+									</li>
+								</ul>
+							</div>
+						</div>
+					</div>
+				);
+			}
+		}
+	}
+
 	render() {
 		return (
 			<div className="">
@@ -198,6 +239,7 @@ class UserPage extends React.Component {
 						<div className="row">
 							<div className="col-lg-4 col-md-5">
 								{this.renderUserCard()}
+								{this.renderUserGyms()}
 								{this.renderRating()}
 								{this.renderUserComments()}
 							</div>

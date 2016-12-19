@@ -63,7 +63,41 @@ class CurrentUserPage extends React.Component {
 
 	renderCurrentUserTrainerGyms() {
 		if (this.props.current_user) {
-			return <TrainerGyms user={this.props.current_user}/>;
+			if (this.props.current_user.trained_gyms > 0) {
+				return (
+					<div className="card">
+						<div className="header">
+							<h4 className="title">Whare you can find me: </h4>
+							<div className="content">
+								<ul className="list-unstyled team-members">
+									{this.props.current_user.trained_gyms.map((gym) => {
+										return <TrainerGyms key={gym.id} gym={gym}/>;
+									})}
+								</ul>
+							</div>
+						</div>
+					</div>
+				);
+			} else {
+				return (
+					<div className="card">
+						<div className="header">
+							<h4 className="title">Whare you can find me: </h4>
+							<div className="content">
+								<ul className="list-unstyled team-members">
+									<li>
+										<div className="row">
+										<span className="text-muted">
+											I don't have job :)
+										</span>
+										</div>
+									</li>
+								</ul>
+							</div>
+						</div>
+					</div>
+				);
+			}
 		}
 	}
 
