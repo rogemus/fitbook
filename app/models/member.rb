@@ -9,6 +9,8 @@ class Member < ApplicationRecord
 
   validate :basic_membership, :require_being_a_trainer
 
+  validates :user, uniqueness: { scope: :gym, message: 'User exists in gym'}
+
   enum membership_level: BASIC_MEMBERSHIP_LEVELS + [:owner]
 
   belongs_to :user

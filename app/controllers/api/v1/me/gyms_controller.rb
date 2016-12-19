@@ -79,7 +79,7 @@ module Api::V1::Me
       if member.valid?
         render json: member, status: :created
       else
-        render json: member.errors.messages, status: :bad_request
+        render json: member.errors, status: :bad_request
       end
     end
 
