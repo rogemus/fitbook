@@ -1,9 +1,10 @@
 import React from 'react';
 import {connect} from 'react-redux';
-import GymCard from '../../common/cards/gymCard';
 import UserCard from '../../common/cards/userCard';
 import UserMenu from '../../common/userMenu';
 import TrainerGyms from '../../common/trainerGyms';
+import PostCard from '../../common/cards/widePostCard';
+import {fetchCurrentUserPosts} from '../../../actions/currentUserActions';
 import {fetchCurrentUserGyms, becomeTrainer} from '../../../actions/currentUserActions';
 
 class CurrentUserPage extends React.Component {
@@ -16,6 +17,7 @@ class CurrentUserPage extends React.Component {
 
 	componentDidMount() {
 		this.props.fetchCurrentUserGyms();
+		this.props.fetchCurrentUserPosts();
 	}
 
 	renderCurrentUserCard() {
@@ -42,22 +44,33 @@ class CurrentUserPage extends React.Component {
 		}
 	}
 
-	renderCurrentUserGyms() {
-		if (this.props.current_user_gyms) {
-			return (
-				<div className="content">
-					<div className="container-fluid">
-						<h4 className="title">My gyms</h4>
-						<div className="row">
-							{this.props.current_user_gyms.map(gym => {
-								return (
-									<GymCard key={gym.id} gym={gym}/>
-								);
-							})}
+	renderCurrentUserPosts() {
+		if (this.props.current_user_posts) {
+			if (this.props.current_user_posts.length > 0) {
+				return (
+					<div className="content">
+						<div className="container-fluid">
+							<h4 className="title">My posts</h4>
+							<div className="row">
+								{this.props.current_user_posts.reverse().map(post => {
+									return <PostCard key={post.id} post={post} colSpan={6}/>;
+								})}
+							</div>
 						</div>
 					</div>
-				</div>
-			);
+				);
+			} else {
+				return (
+					<div className="content">
+						<div className="container-fluid">
+							<h4 className="title">My posts</h4>
+							<div className="row">
+								<h4 className="title">You don't have post, please add one.</h4>
+							</div>
+						</div>
+					</div>
+				);
+			}
 		}
 	}
 
@@ -121,13 +134,11 @@ class CurrentUserPage extends React.Component {
 						<div className="row">
 							<div className="col-lg-4 col-md-5">
 								{this.renderCurrentUserCard()}
-
 								{this.renderBecomeTrainerButton()}
-
 								{this.renderCurrentUserTrainerGyms()}
 							</div>
 							<div className="col-lg-8 col-md-7">
-								{this.props.children}
+								{this.renderCurrentUserPosts()}
 							</div>
 						</div>
 					</div>
@@ -140,8 +151,9 @@ class CurrentUserPage extends React.Component {
 function mapStateToProps(state) {
 	return {
 		current_user: state.current_user.user,
-		current_user_gyms: state.current_user.gyms
+		current_user_gyms: state.current_user.gyms,
+		current_user_posts: state.current_user.posts
 	};
 }
 
-export default connect(mapStateToProps, {fetchCurrentUserGyms, becomeTrainer})(CurrentUserPage);
+export default connect(mapStateToProps, {fetchCurrentUserGyms, fetchCurrentUserPosts, becomeTrainer})(CurrentUserPage);

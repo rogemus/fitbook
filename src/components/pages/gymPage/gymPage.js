@@ -7,13 +7,15 @@ import {
 	createGymComment,
 	createGymRating
 } from '../../../actions/gymsActions';
+
+import _ from 'lodash';
 import {joinGym} from '../../../actions/currentUserActions';
 import GymCard from '../../common/cards/gymCard';
 import SmallTrainerCard from '../../common/cards/smallTrainerCard';
 import GoogleMap from '../../common/googleMap';
 import {Link} from 'react-router';
 
-const margin = {
+const MARGIN = {
 	'margin': '35px 0 15px'
 };
 
@@ -37,6 +39,14 @@ class GymPage extends React.Component {
 		this.props.fetchGym(this.props.params.id);
 		this.props.fetchGymComments(this.props.params.id);
 		this.props.fetchGymTrainers(this.props.params.id);
+	}
+
+	findIfUserJoined(user, trainers) {
+		return (
+			_.findIndex(trainers, (u) => {
+				return u.id === user.id;
+			}) < 0
+		);
 	}
 
 	handleCommentBodyChange(e) {
@@ -69,18 +79,43 @@ class GymPage extends React.Component {
 
 	renderJoinGymButton() {
 		if (this.props.current_user) {
-			if (this.props.current_user.is_trainer) {
-				return (
-					<div className="card card-join-gym">
-						<div className="content">
-							<h3>Join gym</h3>
-							<form ref="form" onSubmit={this.onJoinGymFormSubmit}>
-								<button type="submit" className="btn btn-primary">Become Trainer</button>
-							</form>
+			if (this.props.gym_trainers) {
+				if (this.findIfUserJoined(this.props.current_user, this.props.gym_trainers)) {
+					return (
+						<div className="card card-join-gym">
+							<div className="content">
+								<h3>Join gym</h3>
+								<form ref="form" onSubmit={this.onJoinGymFormSubmit}>
+									<button type="submit" className="btn btn-primary">Become Trainer</button>
+								</form>
+							</div>
 						</div>
-					</div>
-				);
+					);
+				}
 			}
+		}
+	}
+
+	renderGoogleMap(gym) {
+		if (gym.location !== null && gym.location !== undefined) {
+			return <GoogleMap lat={gym.location.latitude} lon={gym.location.longitude}/>;
+		}
+	}
+
+	renderLocation(gym) {
+		if (gym.location !== null && gym.location !== undefined) {
+			return (
+				<h6 style={MARGIN}>
+					{gym.location.street},&nbsp;
+					{gym.location.city}
+				</h6>
+			);
+		} else {
+			return (
+				<p style={MARGIN} className="text-muted">
+					<small>Siłownia nie ma przypisanego adresu.</small>
+				</p>
+			);
 		}
 	}
 
@@ -88,17 +123,14 @@ class GymPage extends React.Component {
 		if (this.props.gym) {
 			return (
 				<div className="card">
-					<GoogleMap lat={this.props.gym.location.latitude} lon={this.props.gym.location.longitude}/>
+					{this.renderGoogleMap(this.props.gym)}
 					<div className="content">
 						<div className="row">
 							<div className="col-lg-6">
 								<h4>Our address:</h4>
 							</div>
 							<div className="col-lg-6 text-right">
-								<h6 style={margin}>
-									{this.props.gym.location.street},&nbsp;
-									{this.props.gym.location.city}
-								</h6>
+								{this.renderLocation(this.props.gym)}
 							</div>
 						</div>
 					</div>
@@ -116,9 +148,7 @@ class GymPage extends React.Component {
 					</div>
 					{this.props.gym_trainers.map((user) => {
 						return (
-							<div className="col-lg-6">
-								<SmallTrainerCard key={user.id} user={user}/>
-							</div>
+							<SmallTrainerCard key={user.id} user={user}/>
 						);
 					})}
 				</div>
@@ -176,7 +206,7 @@ class GymPage extends React.Component {
 							<div className="col-xs-7">
 								<div className="numbers">
 									<p>People voted: {this.props.gym.rating.count}</p>
-									<h5>{this.props.gym.rating.rating / this.props.gym.rating.count}</h5>
+									<h5>{Number((this.props.gym.rating.rating / this.props.gym.rating.count).toFixed(1))}</h5>
 								</div>
 							</div>
 						</div>

@@ -5,10 +5,11 @@ import Geosuggest from 'react-geosuggest';
 import {findGyms, fetchNewestGyms} from '../../../actions/gymsActions';
 import {fetchNewestPosts} from '../../../actions/postActions';
 import SearchResultsCard from '../../common/cards/searchResultsCard';
+import SmallGymCard from '../../common/cards/smallGymCard';
 import PostCard from '../../common/cards/postCard';
 
 const MARGIN = {
-	'margin': '35px 0'
+	'margin': '35px 0px'
 };
 
 class HomePage extends React.Component {
@@ -89,23 +90,36 @@ class HomePage extends React.Component {
 
 	renderNewestGyms() {
 		if (this.props.newest_gyms) {
-			console.log(this.props.newest_gyms);
+			return (
+				<div className="row">
+					<div style={MARGIN}>
+						<div className="content">
+							<h1 className="title text-center">Newest gyms</h1>
+							{_.shuffle(this.props.newest_gyms).slice(0, 4).map((gym) => {
+								return (
+									<SmallGymCard key={gym.id} gym={gym}/>
+								);
+							})}
+						</div>
+					</div>
+				</div>
+			);
 		}
 	}
 
 	renderNewestPosts() {
 		if (this.props.newest_posts) {
 			return (
-				<div style={MARGIN}>
-					<div className="content">
-						<h1 className="title text-center">Newest posts</h1>
-						{_.shuffle(this.props.newest_posts).slice(0, 4).map((post) => {
-							return (
-								<div className="col-lg-3">
-									<PostCard post={post}/>
-								</div>
-							);
-						})}
+				<div className="row">
+					<div style={MARGIN}>
+						<div className="content">
+							<h1 className="title text-center">Newest posts</h1>
+							{_.shuffle(this.props.newest_posts).slice(0, 4).map((post) => {
+								return (
+									<PostCard key={post.id} post={post} colSpan={3}/>
+								);
+							})}
+						</div>
 					</div>
 				</div>
 			);
@@ -131,9 +145,9 @@ class HomePage extends React.Component {
 
 				{this.renderGymSearchResult()}
 
-				{this.renderNewestGyms()}
-
 				{this.renderNewestPosts()}
+
+				{this.renderNewestGyms()}
 			</div>
 		);
 	}

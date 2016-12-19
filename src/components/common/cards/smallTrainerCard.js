@@ -10,27 +10,29 @@ function renderCover(cover) {
 }
 
 export default({user}) => (
-	<div className="card card-user">
-		<div className="image">
-			{renderCover(user.images.cover)}
-		</div>
-		<div className="content">
-			<div className="author">
-				<Link to={`/users/${user.id}`}>
-					<img className="avatar border-white" src={user.images.picture} alt={user.name}/>
-				</Link>
-				<Link to={`/users/${user.id}`}>
-					<h4 className="title">{user.name}</h4>
-				</Link>
+	<div className="col-lg-6">
+		<div className="card card-user">
+			<div className="image">
+				{renderCover(user.images.cover)}
 			</div>
-			<hr/>
-			<div className="row">
-				<div className="col-lg-6">
-					<h4>Rating</h4>
-					<h6>People voted: {user.rating.count}</h6>
+			<div className="content">
+				<div className="author">
+					<Link to={`/users/${user.id}`}>
+						<img className="avatar border-white" src={user.images.picture} alt={user.name}/>
+					</Link>
+					<Link to={`/users/${user.id}`}>
+						<h4 className="title">{user.name}</h4>
+					</Link>
 				</div>
-				<div className="col-lg-6 text-right">
-					<h3>{user.rating.rating}</h3>
+				<hr/>
+				<div className="row">
+					<div className="col-lg-6">
+						<h4>Rating</h4>
+						<h6>People voted: {user.rating.count}</h6>
+					</div>
+					<div className="col-lg-6 text-right">
+						<h3>{Number((user.rating.rating / user.rating.count).toFixed(1))}</h3>
+					</div>
 				</div>
 			</div>
 		</div>

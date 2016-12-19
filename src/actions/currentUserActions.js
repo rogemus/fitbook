@@ -2,7 +2,7 @@ import axios from 'axios';
 import {browserHistory} from 'react-router';
 
 import {
-	FETCH_GYM,
+	FETCH_GYM_TRAINERS,
 	FETCH_CURRENT_USER_GYMS,
 	FETCH_CURRENT_USER_AVAILABLE_GYMS,
 	FETCH_CURRENT_USER_POSTS,
@@ -108,7 +108,7 @@ export function becomeTrainer() {
 			}, {
 				headers: {'Authorization': 'Bearer ' + localStorage.getItem('token')}
 			}
-		).then(response => {
+		).then(() => {
 			dispatch({
 				type: BECOME_TRAINER
 			});
@@ -127,15 +127,15 @@ export function joinGym(gymId) {
 				headers: {'Authorization': 'Bearer ' + localStorage.getItem('token')}
 			}
 		).then(() => {
-			axios.get(`${ROOT_URL}/gyms/${gymId}`)
+			axios.get(`${ROOT_URL}/gyms/${id}/trainers`)
 				.then(response => {
 					dispatch({
-						type: JOIN_GYM
+						type: FETCH_GYM_TRAINERS,
+						payload: response.data
 					});
 
 					dispatch({
-						type: FETCH_GYM,
-						payload: response.data
+						type: JOIN_GYM
 					});
 				});
 		});
