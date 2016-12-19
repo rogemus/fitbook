@@ -2,6 +2,8 @@ Rails.application.routes.draw do
 
   apipie
 
+	match '/', :to => redirect('/index.html')
+
   match '*nil', to: 'application#options', via: :options
 
   namespace :api, constraints: {id: /\d+/} do
