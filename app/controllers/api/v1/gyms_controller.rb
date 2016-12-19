@@ -14,7 +14,7 @@ module Api::V1
     end
 
     def trainers
-      render json: gym_trainers(params[:gym_id])
+      render json: gym_trainers(params[:gym_id]).map(&:user)
     end
 
     def comments
