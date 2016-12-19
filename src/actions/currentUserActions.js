@@ -2,6 +2,7 @@ import axios from 'axios';
 import {browserHistory} from 'react-router';
 
 import {
+	FETCH_GYM,
 	FETCH_CURRENT_USER_GYMS,
 	FETCH_CURRENT_USER_AVAILABLE_GYMS,
 	FETCH_CURRENT_USER_POSTS,
@@ -51,7 +52,7 @@ export function createGym(gymId) {
 			}, {
 				headers: {'Authorization': 'Bearer ' + localStorage.getItem('token')}
 			}
-		).then(response => {
+		).then(() => {
 			dispatch({
 				type: CREATE_GYM
 			});
@@ -87,7 +88,7 @@ export function createPost(data) {
 			}, {
 				headers: {'Authorization': 'Bearer ' + localStorage.getItem('token')}
 			}
-		).then(response => {
+		).then(() => {
 			dispatch({
 				type: CREATE_POST
 			});
@@ -125,12 +126,18 @@ export function joinGym(gymId) {
 			}, {
 				headers: {'Authorization': 'Bearer ' + localStorage.getItem('token')}
 			}
-		).then(response => {
-			dispatch({
-				type: JOIN_GYM
-			});
+		).then(() => {
+			axios.get(`${ROOT_URL}/gyms/${gymId}`)
+				.then(response => {
+					dispatch({
+						type: JOIN_GYM
+					});
 
-			browserHistory.push('/me');
+					dispatch({
+						type: FETCH_GYM,
+						payload: response.data
+					});
+				});
 		});
 	};
 }
