@@ -1,18 +1,18 @@
-@import "utils/variables";
-@import "utils/mixins";
+// 1 - TOOLS
+@import '1-tools/mixins';
+@import '1-tools/fonts';
+@import '1-tools/normalize';
+@import '1-tools/vars';
+@import '1-tools/grid';
+@import '1-tools/text';
 
-@import "core/typography";
-@import "core/labels";
-@import "core/buttons";
-@import "core/misc";
-@import "core/inputs";
-@import "core/forms";
-@import "core/cards";
+// 2 - BASICS
+@import '2-basics/wrapper';
 
-@import "component/sidebar-and-main-panel";
-@import "component/navbars";
-@import "component/footers";
-@import "component/timeline";
-@import "component/pages";
-@import "component/geosuggest";
-@import "component/find-gym";
+// 3 - Modules
+@import '3-modules/footer';
+@import '3-modules/comments';
+
+// 4 - pages
+@import '4-pages/front-page';
+@import '4-pages/singleBlogPost';
