@@ -1,6 +1,39 @@
 .comments {
   background: $white-dark;
 
+  &-form {
+    width: 700px;
+    margin: 35px auto;
+
+    form {
+      @include clearfix;
+      textarea {
+        width: 100%;
+        border-radius: 6px;
+        background: #f0f0f0;
+        border: 0;
+        resize: none;
+        padding: 15px;
+        height: 150px;
+        font: $font-base $open-sans;
+      }
+    }
+
+    &-button {
+      background: $comments-btn-bg;
+      color: $comments-btn-text;
+      border-radius: 20px;
+      padding: 15px 45px;
+      text-align: center;
+      font: $font-small $montserrat;
+      font-weight: bold;
+      border: 0;
+      text-transform: uppercase;
+      margin: 10px 0;
+      float: right;
+    }
+  }
+
   &-title {
     border-top: 1px solid $comments-line;
     border-bottom: 1px solid $comments-line;
