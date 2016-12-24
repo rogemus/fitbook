@@ -379,6 +379,16 @@ th {
 .user-posts:after {
   clear: both; }
 
+.user-posts-title {
+  width: 1000px;
+  margin: 0 auto; }
+  .user-posts-title h1 {
+    font: 60px "Arvo", serif;
+    line-height: 74px;
+    color: #212121;
+    margin: 0;
+    padding: 35px 50px; }
+
 .user-posts-list {
   margin: 0 auto;
   padding: 0;
@@ -415,12 +425,137 @@ th {
       color: #ffffff; }
     .user-posts-item:nth-child(4n) .user-posts-item-date {
       color: #ffffff; }
-  .user-posts-item:nth-child(7n) {
-    background: #8d76be; }
-    .user-posts-item:nth-child(7n) .user-posts-item-title {
+
+.user-header {
+  background: #fb8414;
+  color: #ffffff;
+  height: 100vh; }
+  .user-header-content {
+    width: 900px;
+    margin: 0 auto;
+    position: relative;
+    top: 50%;
+    transform: translateY(-50%); }
+  .user-header-name {
+    font: 60px "Arvo", serif;
+    line-height: 66px;
+    padding: 35px 0; }
+  .user-header-about {
+    font: 16px "Open Sans", Helvetica, Arial, sans-serif;
+    line-height: 26px;
+    width: 50%; }
+  .user-header-image:before, .user-header-image:after {
+    content: "";
+    display: table; }
+  .user-header-image:after {
+    clear: both; }
+  .user-header-image-content {
+    width: 200px;
+    height: 200px;
+    overflow: hidden;
+    border-radius: 50%;
+    border: 2px solid #ffffff;
+    display: block;
+    float: right; }
+    .user-header-image-content img {
+      width: 100%;
+      height: auto;
+      display: block;
+      margin: 0 auto; }
+  .user-header-rating {
+    font: 60px "Arvo", serif;
+    line-height: 48px;
+    padding: 35px 0;
+    text-align: right; }
+    .user-header-rating-title {
+      font: 18px "Arvo", serif;
+      text-align: right;
+      padding: 20px 0; }
+
+.user-gyms-list {
+  margin: 0 auto;
+  padding: 0;
+  list-style: none;
+  width: 1100px;
+  text-align: center; }
+  .user-gyms-list:before, .user-gyms-list:after {
+    content: "";
+    display: table; }
+  .user-gyms-list:after {
+    clear: both; }
+
+.user-gyms-item {
+  width: 30%;
+  display: inline-block;
+  border-radius: 6px;
+  background: #f8f8f8;
+  overflow: hidden;
+  margin: 25px 25px 25px 0;
+  height: 500px; }
+  .user-gyms-item-header {
+    position: relative; }
+  .user-gyms-item-footer {
+    padding: 25px; }
+  .user-gyms-item-cover {
+    height: 250px;
+    overflow: hidden;
+    width: 100%; }
+    .user-gyms-item-cover img {
+      width: 100%;
+      height: auto;
+      display: block;
+      margin: 0 auto; }
+  .user-gyms-item-profile {
+    position: absolute;
+    height: 75px;
+    width: 75px;
+    overflow: hidden;
+    border-radius: 50%;
+    border: 2px solid #f8f8f8;
+    bottom: -30px;
+    right: 15px; }
+    .user-gyms-item-profile img {
+      width: 100%;
+      display: block;
+      margin: 0 auto; }
+  .user-gyms-item-title {
+    text-align: left;
+    padding: 25px 0; }
+    .user-gyms-item-title a {
+      font: 24px "Arvo", serif;
+      line-height: 32px;
+      color: #212121;
+      text-decoration: none; }
+  .user-gyms-item-about {
+    text-align: left;
+    font: 16px "Open Sans", Helvetica, Arial, sans-serif;
+    line-height: 26px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    max-height: 45px;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    color: #9f9f9f; }
+  .user-gyms-item:nth-child(4n) {
+    background: #ffc80a; }
+    .user-gyms-item:nth-child(4n) .user-gyms-item-about {
       color: #ffffff; }
-    .user-posts-item:nth-child(7n) .user-posts-item-date {
+    .user-gyms-item:nth-child(4n) .user-gyms-item-title a {
       color: #ffffff; }
+  .user-gyms-item:nth-child(3n) {
+    background: #212121; }
+    .user-gyms-item:nth-child(3n) .user-gyms-item-about {
+      color: #ffffff; }
+    .user-gyms-item:nth-child(3n) .user-gyms-item-title a {
+      color: #ffffff; }
+  .user-gyms-item:nth-child(5n) {
+    width: 60%; }
+    .user-gyms-item:nth-child(5n) .user-gyms-item-about {
+      text-align: left;
+      font: 16px "Open Sans", Helvetica, Arial, sans-serif;
+      max-height: 85px;
+      -webkit-line-clamp: 3; }
 
 .comments {
   background: #f8f8f8; }
