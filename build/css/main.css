@@ -227,59 +227,41 @@ th {
   list-style: none;
   margin-left: -35px; }
 
-.col-2-2, .col-3-3, .col-4-4, .col-5-5, .col-6-6, .col-12-12 {
+.col-2-2, .col-3-3, .col-5-5 {
   width: 100%; }
 
-.col-1-2, .col-2-4, .col-3-6, .col-6-12 {
+.col-1-2 {
   width: 50%; }
 
-.col-1-3, .col-2-6, .col-4-12 {
+.col-1-3 {
   width: 33.33333%; }
 
-.col-2-3, .col-4-6, .col-8-12 {
+.col-2-3 {
   width: 66.66667%; }
 
-.col-1-4, .col-3-12 {
-  width: 25%; }
-
-.col-3-4, .col-9-12 {
-  width: 75%; }
-
-.col-push-2-2, .col-push-3-3, .col-push-4-4, .col-push-5-5, .col-push-6-6, .col-push-12-12 {
+.col-push-2-2, .col-push-3-3, .col-push-5-5 {
   margin-left: 100%; }
 
-.col-push-1-2, .col-push-2-4, .col-push-3-6, .col-push-6-12 {
+.col-push-1-2 {
   margin-left: 50%; }
 
-.col-push-1-3, .col-push-2-6, .col-push-4-12 {
+.col-push-1-3 {
   margin-left: 33.33333%; }
 
-.col-push-2-3, .col-push-4-6, .col-push-8-12 {
+.col-push-2-3 {
   margin-left: 66.66667%; }
 
-.col-push-1-4, .col-push-3-12 {
-  margin-left: 25%; }
-
-.col-push-3-4, .col-push-9-12 {
-  margin-left: 75%; }
-
-.col-pull-2-2, .col-pull-3-3, .col-pull-4-4, .col-pull-5-5, .col-pull-6-6, .col-pull-12-12 {
+.col-pull-2-2, .col-pull-3-3, .col-pull-5-5 {
   margin-left: -100%; }
 
-.col-pull-1-2, .col-pull-2-4, .col-pull-3-6, .col-pull-6-12 {
+.col-pull-1-2 {
   margin-left: -50%; }
 
-.col-pull-1-3, .col-pull-2-6, .col-pull-4-12 {
+.col-pull-1-3 {
   margin-left: -33.33333%; }
 
-.col-pull-2-3, .col-pull-4-6, .col-pull-8-12 {
+.col-pull-2-3 {
   margin-left: -66.66667%; }
-
-.col-pull-1-4, .col-pull-3-12 {
-  margin-left: -25%; }
-
-.col-pull-3-4, .col-pull-9-12 {
-  margin-left: -75%; }
 
 .col-1-5 {
   width: 20%; }
@@ -316,78 +298,6 @@ th {
 
 .col-pull-4-5 {
   margin-left: -80%; }
-
-.col-1-6 {
-  width: 16.66667%; }
-
-.col-push-1-6 {
-  margin-left: 16.66667%; }
-
-.col-pull-1-6 {
-  margin-left: -16.66667%; }
-
-.col-5-6 {
-  width: 83.33333%; }
-
-.col-push-5-6 {
-  margin-left: 83.33333%; }
-
-.col-pull-5-6 {
-  margin-left: -83.33333%; }
-
-.col-1-12 {
-  width: 8.33333%; }
-
-.col-push-1-12 {
-  margin-left: 8.33333%; }
-
-.col-pull-1-12 {
-  margin-left: -8.33333%; }
-
-.col-2-12 {
-  width: 16.66667%; }
-
-.col-push-2-12 {
-  margin-left: 16.66667%; }
-
-.col-pull-2-12 {
-  margin-left: -16.66667%; }
-
-.col-5-12 {
-  width: 41.66667%; }
-
-.col-push-5-12 {
-  margin-left: 41.66667%; }
-
-.col-pull-5-12 {
-  margin-left: -41.66667%; }
-
-.col-7-12 {
-  width: 58.33333%; }
-
-.col-push-7-12 {
-  margin-left: 58.33333%; }
-
-.col-pull-7-12 {
-  margin-left: -58.33333%; }
-
-.col-10-12 {
-  width: 83.33333%; }
-
-.col-push-10-12 {
-  margin-left: 83.33333%; }
-
-.col-pull-10-12 {
-  margin-left: -83.33333%; }
-
-.col-11-12 {
-  width: 91.66667%; }
-
-.col-push-11-12 {
-  margin-left: 91.66667%; }
-
-.col-pull-11-12 {
-  margin-left: -91.66667%; }
 
 .col {
   box-sizing: border-box;
@@ -462,16 +372,61 @@ th {
   max-width: 960px;
   margin: 0 auto; }
 
+.user-posts:before, .user-posts:after {
+  content: "";
+  display: table; }
+
+.user-posts:after {
+  clear: both; }
+
+.user-posts-list {
+  margin: 0 auto;
+  padding: 0;
+  list-style: none;
+  width: 1000px; }
+
+.user-posts-item {
+  padding: 35px 50px;
+  border-radius: 5px;
+  margin: 15px;
+  display: inline-block;
+  width: 46%;
+  text-align: center; }
+  .user-posts-item-title {
+    font: 24px "Arvo", serif;
+    text-align: left;
+    line-height: 36px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    max-height: 145px;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    color: #212121; }
+  .user-posts-item-date {
+    font: 16px "Open Sans", Helvetica, Arial, sans-serif;
+    line-height: 26px;
+    color: #9f9f9f;
+    padding: 25px 0 0 0;
+    text-align: left; }
+  .user-posts-item:nth-child(4n) {
+    background: #ffc80a; }
+    .user-posts-item:nth-child(4n) .user-posts-item-title {
+      color: #ffffff; }
+    .user-posts-item:nth-child(4n) .user-posts-item-date {
+      color: #ffffff; }
+  .user-posts-item:nth-child(7n) {
+    background: #8d76be; }
+    .user-posts-item:nth-child(7n) .user-posts-item-title {
+      color: #ffffff; }
+    .user-posts-item:nth-child(7n) .user-posts-item-date {
+      color: #ffffff; }
+
 .comments {
   background: #f8f8f8; }
   .comments-form {
     width: 700px;
     margin: 35px auto; }
-    .comments-form form:before, .comments-form form:after {
-      content: "";
-      display: table; }
-    .comments-form form:after {
-      clear: both; }
     .comments-form form textarea {
       width: 100%;
       border-radius: 6px;
