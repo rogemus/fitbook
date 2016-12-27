@@ -15,7 +15,7 @@ module Api::V1::Me
       post.author = current_user
 
       if post.save
-        render json: post_params, status: :created
+        render json: post, status: :created
       else
         render json: post.errors, status: :unprocessable_entity
       end
