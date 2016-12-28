@@ -39,7 +39,7 @@ module Api::V1::Me
     private
 
     def post_tags
-      tags_names = params[:post][:tags].map(&Tag.method(:sanitize_name)).uniq
+      tags_names = params[:post][:tags].map(&Tag.method(:sanitize_name)).uniq unless params[:post][:tags].nil?
       if tags_names
         existing_tags = Tag.where(name: tags_names).map(&:name)
         Tag.create((tags_names - existing_tags).map {|name| {name: name}})
