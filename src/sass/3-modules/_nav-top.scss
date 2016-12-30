@@ -1,0 +1,83 @@
+.top-nav {
+  position: fixed;
+  background: $white;
+  width: 100%;
+  border-bottom: 1px solid $yellow;
+  top: 0;
+  z-index: 1000;
+
+  &-wrapper {
+    width: 1000px;
+    margin: 0 auto;
+    padding: 15px 0;
+  }
+
+  .logo {
+    padding-top: 5px;
+
+    a {
+      color: $black;
+      font: $font-medium $montserrat;
+      font-weight: bold;
+      text-transform: uppercase;
+      text-decoration: none;
+
+      span {
+        color: $yellow
+      }
+    }
+  }
+
+  .nav {
+    &-list {
+      margin: 0;
+      padding: 7px 0 0 0;
+      list-style: none;
+    }
+
+    &-item {
+      display: inline-block;
+      text-align: center;
+
+      a {
+        font: $font-small $montserrat;
+        font-weight: bold;
+        text-decoration: none;
+        text-transform: uppercase;
+        color: $grey-dark;
+        padding: 15px 35px;
+      }
+    }
+  }
+
+  .current-user {
+    &-name {
+      float: left;
+      vertical-align: middle;
+
+      a {
+        text-transform: capitalize;
+        text-decoration: none;
+        font: $font-small $open-sans;
+        color: $grey-dark;
+        padding: 10px 0 0 25px;
+        display: block;
+      }
+    }
+
+    &-image {
+      float: left;
+      border-radius: 50%;
+      border: 2px solid $grey-light;
+      height: 35px;
+      width: 35px;
+      overflow: hidden;
+
+      img {
+        display: block;
+        width: 100%;
+        height: auto;
+      }
+    }
+  }
+}

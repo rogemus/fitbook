@@ -1,4 +1,6 @@
 .user-gyms {
+	padding: 35px 0;
+	
   &-list {
     margin: 0 auto;
     padding: 0;
@@ -15,7 +17,7 @@
     background: $white-dark;
     overflow: hidden;
     margin: 25px 25px 25px 0;
-    height: 500px;
+    height: 350px;
 
     &-header {
       position: relative;
@@ -26,7 +28,7 @@
     }
 
     &-cover {
-      height: 250px;
+      height: 125px;
       overflow: hidden;
       width: 100%;
 

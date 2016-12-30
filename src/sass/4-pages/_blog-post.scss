@@ -39,10 +39,13 @@
 
     span {
       &.author {
-        font: $font-small $montserrat;
-        font-weight: bold;
-        text-transform: uppercase;
-        color: $grey-dark
+        a {
+          font: $font-small $montserrat;
+          font-weight: bold;
+          text-transform: uppercase;
+          color: $grey-dark;
+          text-decoration: none;
+        }
       }
     }
   }
@@ -88,10 +91,13 @@
     }
 
     &-name {
-      font: $font-small $montserrat;
-      color: $black;
-      font-weight: bold;
       text-align: center;
+      a {
+        text-decoration: none;
+        font: $font-small $montserrat;
+        color: $black;
+        font-weight: bold;
+      }
     }
 
     &-desc {
