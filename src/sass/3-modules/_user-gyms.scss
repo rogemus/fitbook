@@ -1,6 +1,19 @@
 .user-gyms {
-	padding: 35px 0;
-	
+  padding: 35px 0;
+
+  &-title {
+    width: 1000px;
+    margin: 0 auto;
+
+    h1 {
+      font: 60px $arvo;
+      line-height: 74px;
+      color: $black;
+      margin: 0;
+      padding: 35px 50px;
+    }
+  }
+
   &-list {
     margin: 0 auto;
     padding: 0;
