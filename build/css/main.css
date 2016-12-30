@@ -629,7 +629,29 @@ th {
         background: #ccc; }
 
 .mobile-apps {
-  height: 900px; }
+  height: 450px;
+  background: #434350 url("/img/ellipse.png") top right/75% no-repeat;
+  margin-top: 35px; }
+  .mobile-apps-wrapper {
+    width: 900px;
+    margin: 0 auto;
+    padding: 50px 0; }
+  .mobile-apps-showcase {
+    text-align: right; }
+    .mobile-apps-showcase img {
+      display: inline-block; }
+  .mobile-apps-title {
+    padding-bottom: 25px; }
+    .mobile-apps-title h1 {
+      margin: 0;
+      padding: 0;
+      font: 36px "Arvo", serif;
+      font-weight: bold;
+      color: #ffffff; }
+  .mobile-apps-content {
+    font: 18px "Arvo", serif;
+    font-weight: bold;
+    color: #ffffff; }
 
 .newest-posts:before, .newest-posts:after {
   content: "";

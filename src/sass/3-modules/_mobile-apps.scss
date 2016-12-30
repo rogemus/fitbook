@@ -1,3 +1,37 @@
 .mobile-apps {
-  height: 900px;
+  height: 450px;
+  background: #434350 url('/img/ellipse.png') top right/75% no-repeat;
+  margin-top: 35px;
+
+  &-wrapper {
+    width: 900px;
+    margin: 0 auto;
+    padding: 50px 0;
+  }
+
+  &-showcase {
+    text-align: right;
+
+    img {
+      display: inline-block;
+    }
+  }
+
+  &-title {
+    padding-bottom: 25px;
+
+    h1 {
+      margin: 0;
+      padding: 0;
+      font: $font-x-large $arvo;
+      font-weight: bold;
+      color: $white;
+    }
+  }
+
+  &-content {
+    font: $font-slight $arvo;
+    font-weight: bold;
+    color: $white;
+  }
 }
