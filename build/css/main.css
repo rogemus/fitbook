@@ -227,12 +227,18 @@ th {
 
 .footer {
   background: #212121; }
+  .footer:before, .footer:after {
+    content: "";
+    display: table; }
+  .footer:after {
+    clear: both; }
   .footer .logo {
     position: relative;
-    padding: 50px 0 0 0; }
+    padding: 50px 0;
+    float: right; }
     .footer .logo a {
       color: #ffffff;
-      font: 65px "Montserrat", sans-serif;
+      font: 36px "Montserrat", sans-serif;
       font-weight: bold;
       text-transform: uppercase;
       text-decoration: none; }
@@ -241,7 +247,6 @@ th {
   .footer-wrapper {
     width: 960px;
     margin: 0 auto;
-    padding: 35px 0;
     position: relative; }
   .footer ul {
     margin: 0;
@@ -696,7 +701,7 @@ th {
     -webkit-box-orient: vertical;
     color: #212121; }
   .newest-posts-item-date {
-    font: 12px "Open Sans", Helvetica, Arial, sans-serif;
+    font: 10px "Open Sans", Helvetica, Arial, sans-serif;
     line-height: 26px;
     color: #9f9f9f;
     padding: 25px 0 0 0;
@@ -705,7 +710,7 @@ th {
   .newest-posts-item-author {
     float: right; }
     .newest-posts-item-author a {
-      font: 16px "Open Sans", Helvetica, Arial, sans-serif;
+      font: 12px "Open Sans", Helvetica, Arial, sans-serif;
       line-height: 26px;
       color: #9f9f9f;
       padding: 25px 0 0 0;

@@ -46,7 +46,7 @@
     }
 
     &-date {
-      font: $font-small $open-sans;
+      font: $font-x-small $open-sans;
       line-height: 26px;
       color: $grey-light;
       padding: 25px 0 0 0;
@@ -58,7 +58,7 @@
       float: right;
 
       a {
-        font: $font-base $open-sans;
+        font: $font-small $open-sans;
         line-height: 26px;
         color: $grey-light;
         padding: 25px 0 0 0;
