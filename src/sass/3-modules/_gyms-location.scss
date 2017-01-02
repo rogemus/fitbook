@@ -1,0 +1,45 @@
+.gyms-contact {
+  &-wrapper {
+    width: 1200px;
+    margin: 0 auto;
+    height: 600px;
+    @include clearfix;
+  }
+
+  &-location {
+    width:50%;
+    float: left;
+    position: relative;
+    height: 600px;
+
+    &-wrapper {
+      position: absolute;
+      top:50%;
+      transform: translateY(-50%);
+    }
+
+    &-title {
+      font: 64px $montserrat;
+      font-weight: bold;
+      color: $black;
+    }
+
+    &-address {
+      font: $font-large $arvo;
+      color: $black;
+      padding: 45px 0;
+    }
+  }
+
+
+  &-map {
+    width: 50%;
+    float: left;
+    height: 600px;
+
+    iframe  {
+      width: 100% !important;
+      height: 600px;
+    }
+  }
+}
