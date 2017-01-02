@@ -24,13 +24,28 @@ class ActionButton extends React.Component {
 		}
 	}
 
+	renderBtn() {
+		if (this.props.current_user) {
+			return (
+				<div className="btn">
+					<span onClick={this.onButtonClick} className="btn-action">{this.props.title}</span>
+				</div>
+			);
+		}
+	}
+
 	render() {
 		return (
-			<div className="btn">
-				<span onClick={this.onButtonClick} className="btn-action">{this.props.title}</span>
-			</div>
+			<div>{this.renderBtn()}</div>
 		);
 	}
 }
 
-export default connect(null, {joinGym, becomeTrainer})(ActionButton);
+function mapStateToProps(state) {
+	return {
+		current_user: state.current_user.user
+	};
+}
+
+
+export default connect(mapStateToProps, {joinGym, becomeTrainer})(ActionButton);
