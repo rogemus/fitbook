@@ -188,17 +188,11 @@ th {
   list-style: none;
   margin-left: -35px; }
 
-.col-2-2, .col-3-3, .col-5-5 {
+.col-2-2, .col-5-5 {
   width: 100%; }
 
 .col-1-2 {
   width: 50%; }
-
-.col-1-3 {
-  width: 33.33333%; }
-
-.col-2-3 {
-  width: 66.66667%; }
 
 .col-1-5 {
   width: 20%; }
@@ -224,6 +218,9 @@ th {
   display: block;
   max-width: 960px;
   margin: 0 auto; }
+
+body {
+  overflow-x: hidden; }
 
 .footer {
   background: #212121; }
@@ -494,7 +491,6 @@ th {
       margin: 0 auto; }
     .comments-title h1 {
       margin: 0;
-      padding: 0;
       display: inline-block;
       font: 14px "Montserrat", sans-serif;
       font-weight: 600;
@@ -525,7 +521,8 @@ th {
     .comments-item-content {
       font: 14px "Open Sans", Helvetica, Arial, sans-serif;
       line-height: 26px;
-      color: #9fa3a7; }
+      color: #9fa3a7;
+      overflow-wrap: break-word; }
       .comments-item-content:before, .comments-item-content:after {
         content: "";
         display: table; }
@@ -551,6 +548,40 @@ th {
         text-transform: uppercase;
         font-weight: bold;
         font: 14px "Montserrat", sans-serif; }
+
+.rating {
+  background: #f8f8f8; }
+  .rating-title {
+    border-right: 1px solid #e9e9e9;
+    padding: 15px 0; }
+    .rating-title h1 {
+      font: 20px "Arvo", serif;
+      color: #9fa3a7; }
+  .rating-counter {
+    background: #f9593a;
+    color: #ffffff;
+    padding: 5px 15px;
+    border-radius: 10px; }
+  .rating-wrapper {
+    width: 960px;
+    margin: 0 auto;
+    padding: 25px 0; }
+  .rating form {
+    margin: 0;
+    text-align: right;
+    padding: 5px 0; }
+    .rating form label {
+      font: 24px "Arvo", serif;
+      color: #9fa3a7;
+      padding: 0 50px; }
+    .rating form select {
+      display: inline-block;
+      background: #f9593a;
+      border: 0;
+      padding: 15px 35px;
+      font: 24px "Arvo", serif;
+      color: #ffffff;
+      border-radius: 10px; }
 
 .find-gyms {
   height: 100vh;
@@ -750,7 +781,12 @@ th {
         color: #9fa3a7; }
     .gyms-trainers-item-image {
       float: left;
-      width: 50%; }
+      width: 50%;
+      overflow: hidden;
+      height: 250px; }
+      .gyms-trainers-item-image img {
+        width: 100%;
+        height: auto; }
     .gyms-trainers-item-content {
       float: left;
       width: 50%;
@@ -772,41 +808,37 @@ th {
       -webkit-box-orient: vertical;
       padding: 15px 0; }
 
-.gyms-contact-wrapper {
-  width: 1200px;
-  margin: 0 auto;
-  height: 600px; }
-  .gyms-contact-wrapper:before, .gyms-contact-wrapper:after {
-    content: "";
-    display: table; }
-  .gyms-contact-wrapper:after {
-    clear: both; }
-
-.gyms-contact-location {
-  width: 50%;
-  float: left;
-  position: relative;
-  height: 600px; }
-  .gyms-contact-location-wrapper {
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%); }
-  .gyms-contact-location-title {
-    font: 64px "Montserrat", sans-serif;
-    font-weight: bold;
-    color: #212121; }
-  .gyms-contact-location-address {
-    font: 24px "Arvo", serif;
-    color: #212121;
-    padding: 45px 0; }
-
-.gyms-contact-map {
-  width: 50%;
-  float: left;
-  height: 600px; }
-  .gyms-contact-map iframe {
-    width: 100% !important;
+.gyms-contact {
+  margin-bottom: 50px; }
+  .gyms-contact-wrapper {
+    width: 1100px;
+    margin: 0 auto;
     height: 600px; }
+    .gyms-contact-wrapper:before, .gyms-contact-wrapper:after {
+      content: "";
+      display: table; }
+    .gyms-contact-wrapper:after {
+      clear: both; }
+  .gyms-contact-location {
+    width: 50%;
+    float: left;
+    position: relative;
+    height: 600px; }
+    .gyms-contact-location-wrapper {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%); }
+    .gyms-contact-location-title {
+      font: 64px "Montserrat", sans-serif;
+      font-weight: bold;
+      color: #212121; }
+    .gyms-contact-location-address {
+      font: 24px "Arvo", serif;
+      color: #212121;
+      padding: 45px 0; }
+  .gyms-contact-map {
+    width: 50%;
+    float: left; }
 
 .gym-header {
   background: #f9593a; }
@@ -968,6 +1000,105 @@ th {
       display: block;
       width: 100%;
       height: auto; }
+
+.btn {
+  margin: 25px 0;
+  text-align: right; }
+  .btn-action {
+    border: 2px solid #ffffff;
+    padding: 15px 25px;
+    color: #ffffff;
+    cursor: pointer;
+    font: 24px "Montserrat", sans-serif;
+    font-weight: bold;
+    text-transform: uppercase; }
+
+.error-dialog {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 350px;
+  z-index: 1500; }
+  .error-dialog:after {
+    content: '';
+    position: absolute;
+    z-index: -1;
+    width: 1000%;
+    height: 1000%;
+    background: rgba(0, 0, 0, 0.7);
+    top: -500%;
+    left: -500%; }
+  .error-dialog-wrapper {
+    padding: 35px 50px 5px 50px;
+    background: #f8f8f8;
+    border-radius: 7px; }
+  .error-dialog-title {
+    text-align: center; }
+    .error-dialog-title h1 {
+      padding: 15px 0;
+      font: 20px "Arvo", serif;
+      color: #212121; }
+  .error-dialog-errors {
+    text-align: center; }
+  .error-dialog ul {
+    margin: 0;
+    padding: 0; }
+    .error-dialog ul li {
+      text-align: left;
+      font: 10px "Montserrat", sans-serif;
+      font-weight: bold;
+      text-transform: uppercase;
+      color: #9fa3a7;
+      padding: 5px 25px; }
+  .error-dialog-buttons {
+    text-align: center;
+    margin: 15px 0 0 0; }
+  .error-dialog-button {
+    padding: 15px 25px;
+    color: #ffffff;
+    background: #f9593a;
+    border-radius: 7px;
+    cursor: pointer;
+    font: 24px "Montserrat", sans-serif;
+    font-weight: bold;
+    text-transform: uppercase;
+    display: inline-block; }
+
+.full-height {
+  height: 100vh;
+  padding: 50px;
+  position: relative; }
+  .full-height-login {
+    padding: 15px 0;
+    background: #ffffff;
+    border-radius: 7px;
+    width: 300px !important;
+    text-align: center; }
+    .full-height-login-bg {
+      background: url("/img/background/background-10.jpg") no-repeat center/cover; }
+  .full-height-title {
+    width: 600px;
+    margin: 0 auto;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%); }
+    .full-height-title h1 {
+      font: 45px "Arvo", serif;
+      line-height: 74px;
+      color: #212121;
+      margin: 0;
+      padding: 10px; }
+    .full-height-title h2 {
+      font: 30px "Arvo", serif;
+      line-height: 74px;
+      color: #212121;
+      margin: 0;
+      padding: 10px; }
+
+.center {
+  text-align: center; }
 
 .blog-post {
   margin: 0 auto;

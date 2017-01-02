@@ -10,7 +10,7 @@ $toast-grid-column-namespace: "col" !default;
 // $col-groups are the column groups you want
 // For example, $col-groups: (3, 4, 5) will output:
 // .grid__col-n-3, .grid__col-n-4, [...]
-$toast-col-groups: (2, 3, 5) !default;
+$toast-col-groups: (2, 5) !default;
 
 // Gutter width
 $toast-gutter-width: 35px !default;

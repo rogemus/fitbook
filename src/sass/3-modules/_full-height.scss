@@ -1,0 +1,46 @@
+.full-height {
+  height: 100vh;
+  padding: 50px;
+  position: relative;
+
+  &-login {
+    padding: 15px 0;
+    background: $white;
+    border-radius: 7px;
+    width: 300px !important;
+    text-align: center;
+
+    &-bg {
+      background: url('/img/background/background-10.jpg') no-repeat center/cover;
+    }
+  }
+
+  &-title {
+    width: 600px;
+    margin: 0 auto;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+
+    h1 {
+      font: 45px $arvo;
+      line-height: 74px;
+      color: $black;
+      margin: 0;
+      padding: 10px;
+    }
+
+    h2 {
+      font: 30px $arvo;
+      line-height: 74px;
+      color: $black;
+      margin: 0;
+      padding: 10px;
+    }
+  }
+}
+
+.center {
+  text-align: center;
+}

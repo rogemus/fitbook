@@ -66,6 +66,13 @@
     &-image {
       float: left;
       width: 50%;
+      overflow: hidden;
+      height: 250px;
+
+      img {
+        width: 100%;
+        height: auto;
+      }
     }
 
     &-content {

@@ -1,0 +1,14 @@
+.btn {
+  margin: 25px 0;
+  text-align: right;
+
+  &-action {
+    border: 2px solid $white;
+    padding: 15px 25px;
+    color: $white;
+    cursor: pointer;
+    font: $font-large $montserrat;
+    font-weight: bold;
+    text-transform: uppercase;
+  }
+}
