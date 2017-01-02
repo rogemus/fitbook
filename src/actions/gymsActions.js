@@ -7,7 +7,9 @@ import {
 	FETCH_GYM_TRAINERS,
 	FIND_GYMS,
 	CREATE_GYM_COMMENTS,
-	CREATE_GYM_RATING
+	CREATE_GYM_RATING,
+	JOIN_GYM,
+	ERROR
 } from './types';
 
 const ROOT_URL = 'http://fitbook-api.herokuapp.com/api/v1';
@@ -35,6 +37,11 @@ export function findGyms(data) {
 				type: FIND_GYMS,
 				payload: response.data
 			});
+		}).catch((error) => {
+			dispatch({
+				type: ERROR,
+				payload: error.response.data
+			});
 		});
 	};
 }
@@ -47,6 +54,12 @@ export function fetchGym(id) {
 					type: FETCH_GYM,
 					payload: response.data
 				});
+			})
+			.catch((error) => {
+				dispatch({
+					type: ERROR,
+					payload: error.response.data
+				});
 			});
 	};
 }
@@ -57,6 +70,12 @@ export function fetchGymComments(id) {
 				dispatch({
 					type: FETCH_GYM_COMMENTS,
 					payload: response.data
+				});
+			})
+			.catch((error) => {
+				dispatch({
+					type: ERROR,
+					payload: error.response.data
 				});
 			});
 	};
@@ -70,6 +89,12 @@ export function fetchGymTrainers(id) {
 					type: FETCH_GYM_TRAINERS,
 					payload: response.data
 				});
+			})
+			.catch((error) => {
+				dispatch({
+					type: ERROR,
+					payload: error.response.data
+				});
 			});
 	};
 }
@@ -81,6 +106,12 @@ export function fetchNewestGyms() {
 				dispatch({
 					type: FETCH_NEWEST_GYMS,
 					payload: response.data
+				});
+			})
+			.catch((error) => {
+				dispatch({
+					type: ERROR,
+					payload: error.response.data
 				});
 			});
 	};
@@ -106,6 +137,11 @@ export function createGymComment(id, commentBody) {
 						type: CREATE_GYM_COMMENTS
 					});
 				});
+		}).catch((error) => {
+			dispatch({
+				type: ERROR,
+				payload: error.response.data
+			});
 		});
 	};
 }
@@ -130,6 +166,40 @@ export function createGymRating(id, ratingBody) {
 						payload: response.data
 					});
 				});
+		}).catch((error) => {
+			dispatch({
+				type: ERROR,
+				payload: error.response.data
+			});
+		});
+	};
+}
+
+export function joinGym(gymId) {
+	return function (dispatch) {
+		axios.post(`${ROOT_URL}/me/gyms/${gymId}/join`,
+			{
+				level: 'trainer'
+			}, {
+				headers: {'Authorization': 'Bearer ' + localStorage.getItem('token')}
+			}
+		).then(() => {
+			axios.get(`${ROOT_URL}/gyms/${gymId}/trainers`)
+				.then(response => {
+					dispatch({
+						type: FETCH_GYM_TRAINERS,
+						payload: response.data
+					});
+
+					dispatch({
+						type: JOIN_GYM
+					});
+				});
+		}).catch((error) => {
+			dispatch({
+				type: ERROR,
+				payload: error.response.data
+			});
 		});
 	};
 }

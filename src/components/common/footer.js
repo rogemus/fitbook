@@ -3,9 +3,9 @@ import React from 'react';
 export default() => {
 	return (
 		<footer className="footer">
-			<div className="container-fluid">
-				<div className="copyright pull-right">
-					&copy; Fitbook
+			<div className="footer-wrapper">
+				<div className="logo">
+					<a href="">Fit<span>book</span></a>
 				</div>
 			</div>
 		</footer>

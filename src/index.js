@@ -6,18 +6,18 @@ import {createStore, applyMiddleware} from 'redux';
 import {Router, Route, IndexRoute, browserHistory} from 'react-router';
 import {AUTH_USER, FETCH_CURRENT_USER} from './actions/types';
 
-import App from './components/app';
-import SignIn from './components/pages/auth/signIn/signIn';
-import SignOut from './components/pages/auth/signOut/signOut';
-import Home from './components/pages/homePage/home';
+import App from './containers/app';
+import SignIn from './containers/signIn/signIn';
+import SignOut from './containers/signOut/signOut';
+import Home from './containers/homePage/home';
 import requireAuth from './components/pages/auth/requireAuth';
-import CurrentUserPage from './components/pages/currentUserPage/currentUserPage';
-import CreateGymsPage from './components/pages/createGymsPage/createGymsPage';
-import CreatePostPage from './components/pages/createPostPage/createPostPage';
-import PostPage from './components/pages/postPage/postPage';
-import GymPage from './components/pages/gymPage/gymPage';
-import UserPage from './components/pages/userPage/userPage';
-import E404 from './components/pages/errros/e404';
+import CurrentUserPage from './containers/currentUserPage/currentUserPage';
+import CreateGymsPage from './containers/createGymsPage/createGymsPage';
+import CreatePostPage from './containers/createPostPage/createPostPage';
+import PostPage from './containers/postPage/postPage';
+import GymPage from './containers/gymPage/gymPage';
+import UserPage from './containers/userPage/userPage';
+import E404 from './containers/errorsPage/e404';
 
 import reducers from './reducers';
 

@@ -5,7 +5,7 @@ import {
 	AUTH_USER,
 	UNAUTH_USER,
 	FETCH_CURRENT_USER,
-	LOADING
+	REFRESH_TOKEN
 } from './types';
 
 const ROOT_URL = 'http://fitbook-api.herokuapp.com';
@@ -43,11 +43,19 @@ export function signInUser(data) {
 					payload: response.data
 				});
 
-				dispatch({
-					type: LOADING
-				});
-
 				browserHistory.push('/');
+			});
+		});
+	};
+}
+
+export function refreshToken() {
+	return function (dispatch) {
+		axios.put(`${ROOT_URL}/api/auth/refresh`, {
+			headers: {'Authorization': 'Bearer ' + localStorage.getItem('token')}
+		}).then(() => {
+			dispatch({
+				type: REFRESH_TOKEN
 			});
 		});
 	};

@@ -2,14 +2,13 @@ import axios from 'axios';
 import {browserHistory} from 'react-router';
 
 import {
-	FETCH_GYM_TRAINERS,
 	FETCH_CURRENT_USER_GYMS,
 	FETCH_CURRENT_USER_AVAILABLE_GYMS,
 	FETCH_CURRENT_USER_POSTS,
 	CREATE_GYM,
 	CREATE_POST,
 	BECOME_TRAINER,
-	JOIN_GYM
+	ERROR
 } from './types';
 
 const ROOT_URL = 'http://fitbook-api.herokuapp.com/api/v1';
@@ -25,6 +24,11 @@ export function fetchCurrentUserGyms() {
 				type: FETCH_CURRENT_USER_GYMS,
 				payload: response.data
 			});
+		}).catch((error) => {
+			dispatch({
+				type: ERROR,
+				payload: error.response.data
+			});
 		});
 	};
 }
@@ -39,6 +43,11 @@ export function fetchCurrentUserAvailableGyms() {
 			dispatch({
 				type: FETCH_CURRENT_USER_AVAILABLE_GYMS,
 				payload: response.data
+			});
+		}).catch((error) => {
+			dispatch({
+				type: ERROR,
+				payload: error.response.data
 			});
 		});
 	};
@@ -56,6 +65,11 @@ export function createGym(gymId) {
 			dispatch({
 				type: CREATE_GYM
 			});
+		}).catch((error) => {
+			dispatch({
+				type: ERROR,
+				payload: error.response.data
+			});
 		});
 	};
 }
@@ -70,6 +84,11 @@ export function fetchCurrentUserPosts() {
 			dispatch({
 				type: FETCH_CURRENT_USER_POSTS,
 				payload: response.data
+			});
+		}).catch((error) => {
+			dispatch({
+				type: ERROR,
+				payload: error.response.data
 			});
 		});
 	};
@@ -94,6 +113,11 @@ export function createPost(data) {
 			});
 
 			browserHistory.push('/me');
+		}).catch((error) => {
+			dispatch({
+				type: ERROR,
+				payload: error.response.data
+			});
 		});
 	};
 }
@@ -114,30 +138,11 @@ export function becomeTrainer() {
 			});
 
 			browserHistory.push('/me');
-		});
-	};
-}
-
-export function joinGym(gymId) {
-	return function (dispatch) {
-		axios.post(`${ROOT_URL}/me/gyms/${gymId}/join`,
-			{
-				level: 'trainer'
-			}, {
-				headers: {'Authorization': 'Bearer ' + localStorage.getItem('token')}
-			}
-		).then(() => {
-			axios.get(`${ROOT_URL}/gyms/${gymId}/trainers`)
-				.then(response => {
-					dispatch({
-						type: FETCH_GYM_TRAINERS,
-						payload: response.data
-					});
-
-					dispatch({
-						type: JOIN_GYM
-					});
-				});
+		}).catch((error) => {
+			dispatch({
+				type: ERROR,
+				payload: error.response.data
+			});
 		});
 	};
 }

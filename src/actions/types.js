@@ -1,6 +1,7 @@
 /* Auth types */
 export const AUTH_USER = 'auth_user';
 export const UNAUTH_USER = 'unauth_user';
+export const REFRESH_TOKEN = 'refresh_token';
 
 /* GYMS Types */
 /* GET */
@@ -42,3 +43,6 @@ export const FETCH_USER_POSTS = 'fetch_user_posts';
 /* POSTS */
 export const CREATE_USER_COMMENTS = 'create_user_comments';
 export const CREATE_USER_RATING = 'create_user_rating';
+
+/* ERRORS */
+export const ERROR = 'error';

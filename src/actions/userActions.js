@@ -5,7 +5,8 @@ import {
 	FETCH_USER_COMMENTS,
 	FETCH_USER_POSTS,
 	CREATE_USER_COMMENTS,
-	CREATE_USER_RATING
+	CREATE_USER_RATING,
+	ERROR
 } from './types';
 
 const ROOT_URL = 'http://fitbook-api.herokuapp.com/api/v1';
@@ -17,6 +18,12 @@ export function fetchUser(id) {
 				dispatch({
 					type: FETCH_USER,
 					payload: response.data
+				});
+			})
+			.catch((error) => {
+				dispatch({
+					type: ERROR,
+					payload: error.response.data
 				});
 			});
 	};
@@ -30,6 +37,12 @@ export function fetchUserComments(id) {
 					type: FETCH_USER_COMMENTS,
 					payload: response.data
 				});
+			})
+			.catch((error) => {
+				dispatch({
+					type: ERROR,
+					payload: error.response.data
+				});
 			});
 	};
 }
@@ -41,6 +54,12 @@ export function fetchUserPosts(id) {
 				dispatch({
 					type: FETCH_USER_POSTS,
 					payload: response.data
+				});
+			})
+			.catch((error) => {
+				dispatch({
+					type: ERROR,
+					payload: error.response.data
 				});
 			});
 	};
@@ -66,6 +85,11 @@ export function createUserComment(id, commentBody) {
 						type: CREATE_USER_COMMENTS
 					});
 				});
+		}).catch((error) => {
+			dispatch({
+				type: ERROR,
+				payload: error.response.data
+			});
 		});
 	};
 }
@@ -90,6 +114,11 @@ export function createRating(id, ratingBody) {
 						payload: response.data
 					});
 				});
+		}).catch((error) => {
+			dispatch({
+				type: ERROR,
+				payload: error.response.data
+			});
 		});
 	};
 }

@@ -2,7 +2,8 @@ import axios from 'axios';
 
 import {
 	FETCH_NEWEST_POST,
-	FETCH_POST
+	FETCH_POST,
+	ERROR
 } from './types';
 
 const ROOT_URL = 'http://fitbook-api.herokuapp.com/api/v1';
@@ -15,6 +16,12 @@ export function fetchNewestPosts() {
 					type: FETCH_NEWEST_POST,
 					payload: response.data
 				});
+			})
+			.catch((error) => {
+				dispatch({
+					type: ERROR,
+					payload: error.response.data
+				});
 			});
 	};
 }
@@ -26,6 +33,12 @@ export function fetchPosts(id) {
 				dispatch({
 					type: FETCH_POST,
 					payload: response.data
+				});
+			})
+			.catch((error) => {
+				dispatch({
+					type: ERROR,
+					payload: error.response.data
 				});
 			});
 	};
