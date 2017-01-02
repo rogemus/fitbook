@@ -37,22 +37,36 @@ class CommentsForm extends React.Component {
 
 	}
 
+	renderUserImage() {
+		if (this.props.current_user) {
+			return <img src={this.props.user.images.picture} alt={this.props.user.name}/>;
+		}
+	}
+
+	renderUserName() {
+		if (this.props.current_user) {
+			return (
+				<Link to={`/users/${this.props.user.id}`}>
+					{this.props.user.name}
+				</Link>
+			);
+		}
+	}
+
 	renderCommentForm() {
 		return (
 			<div className="comments-form">
 				<div className="row">
 					<div className="col col-1-5">
 						<div className="comments-item-author-image">
-							<img src={this.props.user.images.picture} alt={this.props.user.name}/>
+							{this.renderUserImage}
 						</div>
 					</div>
 					<div className="col col-4-5">
 						<div className="row">
 							<div className="col col-3-5">
 								<div className="comments-item-author-name">
-									<Link to={`/users/${this.props.user.id}`}>
-										{this.props.user.name}
-									</Link>
+									{this.renderUserName()}
 								</div>
 							</div>
 						</div>
@@ -85,4 +99,10 @@ class CommentsForm extends React.Component {
 	}
 }
 
-export default connect(null, {createUserComment, createGymComment})(CommentsForm);
+function mapStateToProps(state) {
+	return {
+		current_user: state.current_user.user
+	};
+}
+
+export default connect(mapStateToProps, {createUserComment, createGymComment})(CommentsForm);

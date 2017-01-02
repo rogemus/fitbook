@@ -50,10 +50,10 @@ class GymPage extends React.Component {
 				<GymComments
 					type={'gym'}
 					id={this.props.params.id}
-					user={this.props.current_user}
 					comments={this.props.gym_comments}
 				/>
 			);
+
 		}
 	}
 

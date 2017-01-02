@@ -34,7 +34,6 @@ class UserPage extends React.Component {
 						<UserComments
 							type={'user'}
 							id={this.props.params.id}
-							user={this.props.current_user}
 							comments={this.props.public_user_comments}
 						/>
 					);

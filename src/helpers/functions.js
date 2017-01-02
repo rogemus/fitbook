@@ -3,7 +3,7 @@ export function renderDate(date) {
 	const month = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
 
 	return (
-		<span>{d.getDay()} {month[d.getMonth()]} {d.getFullYear()}</span>
+		<span>{d.getDay() + 1} {month[d.getMonth()]} {d.getFullYear()}</span>
 	);
 }
 
