@@ -30,8 +30,7 @@ class RatingSection extends React.Component {
 						<div className="row">
 							<div className="col col-1-2">
 								<div className="rating-title">
-									<h1>Rate as just like <span className="rating-counter">{this.props.count}</span>
-										people did</h1>
+									<h1>Rate as just like <span className="rating-counter">{this.props.count}</span> people did</h1>
 								</div>
 							</div>
 							<div className="col col-1-2">

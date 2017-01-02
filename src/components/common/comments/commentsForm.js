@@ -44,15 +44,15 @@ class CommentsForm extends React.Component {
 					<div className="row">
 						<div className="col col-1-5">
 							<div className="comments-item-author-image">
-								<img src={this.props.user.images.picture} alt={this.props.user.name}/>
+								<img src={this.props.current_user.images.picture} alt={this.props.current_user.name}/>
 							</div>
 						</div>
 						<div className="col col-4-5">
 							<div className="row">
 								<div className="col col-3-5">
 									<div className="comments-item-author-name">
-										<Link to={`/users/${this.props.user.id}`}>
-											{this.props.user.name}
+										<Link to={`/users/${this.props.current_user.id}`}>
+											{this.props.current_user.name}
 										</Link>
 									</div>
 								</div>
