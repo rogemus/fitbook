@@ -43,6 +43,9 @@ class Gym < ApplicationRecord
     self.cover = hash['cover']['source'] if hash['cover']
     self.picture = hash['picture']['data']['url'] if hash.dig('picture', 'data')
     self.website = hash['website']
+
+    self.hours = hash['hours'].flatten if hash['hours']
+    self.parking = hash['parking'].flatten if hash['parking']
   end
 
   private

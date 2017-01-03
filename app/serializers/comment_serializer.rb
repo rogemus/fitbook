@@ -4,6 +4,7 @@ class CommentSerializer < ActiveModel::Serializer
   def author
     {
         id: object.user.id,
+        name: object.user.name,
         images: {
             cover: object.user.cover,
             picture: object.user.picture

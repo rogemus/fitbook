@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161218181644) do
+ActiveRecord::Schema.define(version: 20170103164135) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -54,6 +54,8 @@ ActiveRecord::Schema.define(version: 20161218181644) do
     t.string   "cover"
     t.integer  "votes_count", default: 0
     t.float    "rating",      default: 0.0
+    t.string   "hours"
+    t.string   "parking"
     t.index ["facebook_id"], name: "index_gyms_on_facebook_id", using: :btree
     t.index ["location_id"], name: "index_gyms_on_location_id", using: :btree
     t.index ["owner_id"], name: "index_gyms_on_owner_id", using: :btree
