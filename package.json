@@ -41,6 +41,7 @@
   "dependencies": {
     "axios": "^0.15.2",
     "babel-preset-stage-1": "^6.1.18",
+    "express": "^4.14.0",
     "lodash": "^4.16.6",
     "react": "15.3.2",
     "react-dom": "^15.3.2",
