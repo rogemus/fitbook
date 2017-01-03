@@ -26,8 +26,12 @@ module Api::V1::Me::GymsDoc
 
   doc_for :update do
     desc = 'Pull newest data from facebook'
-    api :PUT, '/v1/me/:id/gyms', desc
-    api :PATCH, '/v1/me/:id/gyms', desc
+    api :PUT, '/v1/me/gyms/:id/', desc
+    api :PATCH, '/v1/me/gyms/:id/', desc
+  end
+
+  doc_for :voted_on do
+    api :GET, '/v1/me/gyms/voted_on', 'Get list of voted on gyms'
   end
 
   doc_for :comment do

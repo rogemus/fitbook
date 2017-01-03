@@ -26,6 +26,12 @@ class ApplicationController < ActionController::API
     render json: { errors: e.message }, status: :unauthorized
   end
 
+  def authenticate_request
+    if http_token && user_id_in_token?
+      @current_user = User.find(auth_token[:user][:user_id])
+    end
+  end
+
   private
 
   def http_token

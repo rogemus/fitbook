@@ -36,7 +36,10 @@ Rails.application.routes.draw do
 
       namespace :me do
 
-        resource :gyms, only: [:create]  { get :available }
+        resource :gyms, only: [:create] do
+          get :available
+          get :voted_on
+        end
         resources :gyms, only: [:index, :update] do
           member do
             post :comment

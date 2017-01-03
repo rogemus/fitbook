@@ -70,6 +70,11 @@ module Api::V1::Me
       end
     end
 
+    def voted_on
+      gyms = Vote.where(user: current_user, voteable_type: 'Gym').pluck(:voteable_id)
+      render json: Gym.where(id: gyms), include_user: current_user
+    end
+
     def join
       gym = Gym.find(params.require(:id))
       mailing = params[:mailing] || false

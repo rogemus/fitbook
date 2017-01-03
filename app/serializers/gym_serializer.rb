@@ -21,10 +21,17 @@ class GymSerializer < ActiveModel::Serializer
   end
 
   def rating
-    {count: object.votes_count, rating: object.rating}
+    rat = {count: object.votes_count, rating: object.rating}
+    rat[:your] = user_rating if instance_options[:include_user]
+    rat
   end
 
   private
+
+  def user_rating
+    user = instance_options[:include_user]
+    Vote.find_by(user: user, voteable_id: object.id, voteable_type: 'Gym')&.rating
+  end
 
   def merge(flat)
     a = eval(flat)

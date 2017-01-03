@@ -1,16 +1,20 @@
 module Api::V1
   class GymsController < BaseController
 
+    before_action :authenticate_request, only: [:index, :show]
+
     include GymsDoc
 
     NEW_GYMS_COUNT = 10
 
     def index
-      render json: Gym.order(created_at: :desc).limit(NEW_GYMS_COUNT)
+      render json: Gym.order(created_at: :desc).limit(NEW_GYMS_COUNT),
+             include_user: current_user
     end
 
     def show
-      render json: Gym.find(params[:id])
+      render json: Gym.find(params[:id]),
+             include_user: current_user
     end
 
     def trainers
