@@ -32,8 +32,8 @@ class Gym < ApplicationRecord
 
   def include_facebook_data!
     koala = Koala::Facebook::API.new(self.graph_token)
-    fields = [:about, 'cover.fields(source)', :description, :hours,
-              :name, :location, :parking, :website, 'picture.fields(url)']
+    fields = [:about, 'cover.type(large).fields(source)', :description, :hours,
+              :name, :location, :parking, :website, 'picture.type(large).fields(url)']
     hash = koala.get_object(self.facebook_id, {:fields => fields})
 
     self.location = get_location(hash['location']) if hash['location']

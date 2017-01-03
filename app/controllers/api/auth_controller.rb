@@ -9,6 +9,7 @@ module Api
     def facebook
       token = params.require(:token)
       auth_hash = User::find_in_facebook(token)
+      puts auth_hash
 
       token = generate_long_term(token) if params[:long_term] == 'true'
       user = user_from_token(auth_hash, token)
@@ -38,9 +39,11 @@ module Api
 
       if user
         user.update!({:graph_token => token,
+                      :about => auth_hash['about'],
                       :picture => picture, :cover => cover})
       else
         data = {:name => auth_hash['name'],
+                :about => auth_hash['about'],
                 :facebook_id => auth_hash['id'],
                 :email => auth_hash['email'],
                 :graph_token => token,

@@ -1,5 +1,5 @@
 class UserSerializer < ActiveModel::Serializer
-  attributes :id, :name, :images, :posts,
+  attributes :id, :name, :images, :posts, :about,
              :gyms_attending, :gyms_owned,
              :is_trainer, :trained_gyms, :rating, :comments
 

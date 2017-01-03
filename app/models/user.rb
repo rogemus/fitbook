@@ -12,9 +12,11 @@ class User < ApplicationRecord
 
   has_many :comments, as: :commentable
 
+  FB_FIELDS = %w{id about name email cover.type(large).fields(source) picture.type(large).fields(url)}
+
   class << self
-    def find_in_facebook(token, with = {fields: %w{id name email cover.type(large).fields(source) picture.type(large).fields(url)}})
-      Koala::Facebook::API.new(token).get_object(:me, with)
+    def find_in_facebook(token)
+      Koala::Facebook::API.new(token).get_object(:me, {fields: FB_FIELDS})
     end
   end
 
