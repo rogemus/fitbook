@@ -1,9 +1,8 @@
-const webpack = require('webpack');
-const path = require('path');
+var webpack = require('webpack');
 
 module.exports = {
 	entry: [
-		'./src/index'
+		'./src/index.js'
 	],
 	output: {
 		path: __dirname,
@@ -25,9 +24,6 @@ module.exports = {
 	},
 	resolve: {
 		extensions: ['', '.js', '.jsx']
-	},
-	resolveLoader: {
-		root: path.join(__dirname, 'node_modules')
 	},
 	eslint: {
 		configFile: './.eslintrc'
