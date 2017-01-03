@@ -45,6 +45,10 @@ module Api::V1::Me
     def update
       gym = Gym.find_by!({:id => params.require(:id),
                           :owner => current_user})
+
+      k = koala.get_object(gym.facebook_id, {fields: :access_token})
+      gym.update_attribute(:graph_token, k['access_token'])
+
       merge_facebook_data(gym)
 
       render json: gym
