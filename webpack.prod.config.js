@@ -4,6 +4,15 @@ module.exports = {
 	entry: [
 		'./src/index'
 	],
+
+	resolve: {
+		extensions: ['', '.js', '.jsx']
+	},
+
+	resolveLoader: {
+		root: path.resolve(__dirname, 'node_modules')
+	},
+
 	output: {
 		path: __dirname,
 		publicPath: '/',
@@ -22,10 +31,6 @@ module.exports = {
 			}
 		]
 	},
-	resolve: {
-		extensions: ['', '.js', '.jsx']
-	},
-
 	plugins: [
 		new webpack.DefinePlugin({
 			'process.env': {
