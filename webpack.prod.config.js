@@ -1,4 +1,5 @@
 const webpack = require('webpack');
+const  path = require('path');
 
 module.exports = {
 	entry: [
@@ -25,7 +26,9 @@ module.exports = {
 	resolve: {
 		extensions: ['', '.js', '.jsx']
 	},
-
+	resolveLoader: {
+		root: path.join(__dirname, 'node_modules')
+	},
 	plugins: [
 		new webpack.DefinePlugin({
 			'process.env': {
