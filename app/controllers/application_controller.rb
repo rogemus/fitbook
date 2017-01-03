@@ -1,6 +1,12 @@
 class ApplicationController < ActionController::API
 
+  rescue_from ActionController::ParameterMissing, with: :bad_params
+
   attr_reader :current_user, :koala
+
+  def bad_params(e)
+    render json: {error: e}, status: :unprocessable_entity
+  end
 
   def options
     render json: {}
