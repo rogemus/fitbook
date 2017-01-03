@@ -1,14 +1,6 @@
 import React from 'react';
 import {Link} from 'react-router';
-
-function renderDate(date) {
-	const d = new Date(date);
-	const month = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
-
-	return (
-		<span>{d.getDay()} {month[d.getMonth()]} {d.getFullYear()}</span>
-	);
-}
+import {renderDate} from '../../../helpers/functions';
 
 export default({post}) => {
 	return (
@@ -50,9 +42,7 @@ export default({post}) => {
 					</div>
 					<div className="col col-4-5">
 						<div className="blog-post-author-desc">
-							Lorem ipsum dolor sit amet, consectetur adipisicing elit. Amet consequatur cum
-							cupiditate debitis dolor ea, error fugiat harum hic labore minima porro quis quos,
-							reiciendis soluta tempore vero vitae voluptates.
+							{post.author.about}
 						</div>
 					</div>
 				</div>

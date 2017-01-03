@@ -51,5 +51,5 @@ export function isNumber(number) {
 }
 
 export function renderRating(user) {
-	return isNumber(Number((user.rating.rating / user.rating.count).toFixed(1)));
+	return isNumber(Number((user.rating.rating).toFixed(1)));
 }

@@ -8,12 +8,7 @@ export default({user}) => {
 				<div className="row">
 					<div className="col col-1-2">
 						<div className="user-header-name">{user.name}</div>
-						<div className="user-header-about">Lorem ipsum dolor sit amet, consectetur adipisicing elit. A
-							aliquid, amet
-							aperiam beatae, commodi dolores ducimus est eveniet exercitationem harum iste maiores minima
-							neque
-							non obcaecati pariatur, quam sequi sint.
-						</div>
+						<div className="user-header-about">{user.about}</div>
 					</div>
 					<div className="col col-1-2">
 						<div className="user-header-image">
