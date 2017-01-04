@@ -9,12 +9,14 @@ class Sidebar extends React.Component {
 			return (
 				<div className="current-user">
 					<div className="current-user-image">
-						<Link to="/me">
+						<Link to={`/users/${this.props.current_user.id}`}>
 							<img src={this.props.current_user.images.picture}/>
 						</Link>
 					</div>
 					<div className="current-user-name">
-						<Link to="/me">{this.props.current_user.name}</Link>
+						<Link to={`/users/${this.props.current_user.id}`}>
+							{this.props.current_user.name}
+						</Link>
 					</div>
 				</div>
 			);

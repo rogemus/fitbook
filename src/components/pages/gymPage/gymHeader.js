@@ -2,7 +2,6 @@ import React from 'react';
 import ActionButton from '../../common/actionButton';
 import {renderRating} from '../../../helpers/functions';
 
-
 export default({gym}) => {
 	return (
 		<header className="user-header gym-header">

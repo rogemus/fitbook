@@ -24,19 +24,33 @@ class ActionButton extends React.Component {
 		}
 	}
 
-	renderBtn() {
+	renderBtn(user) {
 		if (this.props.current_user) {
-			return (
-				<div className="btn">
-					<span onClick={this.onButtonClick} className="btn-action">{this.props.title}</span>
-				</div>
-			);
+			switch (this.props.type) {
+				case 'user':
+					if (user.id === this.props.current_user.id) {
+						return (
+							<div className="btn">
+								<span onClick={this.onButtonClick} className="btn-action">{this.props.title}</span>
+							</div>
+						);
+					}
+
+					break;
+				case 'gym':
+					return (
+						<div className="btn">
+							<span onClick={this.onButtonClick} className="btn-action">{this.props.title}</span>
+						</div>
+					);
+					break;
+			}
 		}
 	}
 
 	render() {
 		return (
-			<div>{this.renderBtn()}</div>
+			<div>{this.renderBtn(this.props.user)}</div>
 		);
 	}
 }
@@ -46,6 +60,5 @@ function mapStateToProps(state) {
 		current_user: state.current_user.user
 	};
 }
-
 
 export default connect(mapStateToProps, {joinGym, becomeTrainer})(ActionButton);

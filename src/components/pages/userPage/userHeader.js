@@ -1,4 +1,5 @@
 import React from 'react';
+import ActionButton from '../../common/actionButton';
 import {renderRating} from '../../../helpers/functions';
 
 export default({user}) => {
@@ -24,6 +25,7 @@ export default({user}) => {
 								{renderRating(user)} / 5
                     		</span>
 						</div>
+						<ActionButton type={'user'} title={'Join as trainer'} user={user}/>
 					</div>
 				</div>
 			</div>
