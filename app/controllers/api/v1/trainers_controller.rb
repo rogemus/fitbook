@@ -13,7 +13,7 @@ module Api::V1
         render json: user,
                include_gyms: true
       else
-        render json: not_trainer
+        not_trainer
       end
     end
 
@@ -23,7 +23,7 @@ module Api::V1
         render json: user,
                include_posts: true
       else
-        render json: not_trainer
+        not_trainer
       end
     end
 
@@ -32,7 +32,7 @@ module Api::V1
       if user
         render json: user.comments
       else
-        render json: not_trainer, status: :unprocessable_entity
+        not_trainer
       end
     end
 
@@ -43,7 +43,7 @@ module Api::V1
     end
 
     def not_trainer
-      []
+      render json: not_trainer
       #{errors: 'User does not exists or is not trainer'}
     end
 
