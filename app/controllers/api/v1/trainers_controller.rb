@@ -13,7 +13,7 @@ module Api::V1
         render json: user,
                include_gyms: true
       else
-        render json: not_trainer, status: :unprocessable_entity
+        render json: not_trainer
       end
     end
 
@@ -23,7 +23,7 @@ module Api::V1
         render json: user,
                include_posts: true
       else
-        render json: not_trainer, status: :unprocessable_entity
+        render json: not_trainer
       end
     end
 
