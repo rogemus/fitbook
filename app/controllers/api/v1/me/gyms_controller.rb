@@ -3,7 +3,7 @@ module Api::V1::Me
 
     include ::Api::V1::Me::GymsDoc
 
-    ALLOWED_CATEGORIES = ['Gym/Physical Fitness Center']
+    ALLOWED_CATEGORIES = ['Gym/Physical Fitness Center', 'Recreation & Fitness']
     REQUIRED_PERMISSIONS = %w{ADMINISTER}
 
     def index
@@ -92,6 +92,17 @@ module Api::V1::Me
       end
     end
 
+    def leave
+      gym = Gym.find(params.require(:id))
+      membership = current_user.members.find_by(gym: gym)
+
+      if membership.membership_level == :owner
+        delete_gym(gym)
+      else
+        membership.destroy
+      end
+    end
+
     def change_membership
       level = params.require(:level).to_sym
       mailing = params[:mailing]
@@ -118,6 +129,12 @@ module Api::V1::Me
     end
 
     private
+
+    def delete_gym(gym)
+      Member.where(gym: gym).destroy_all
+      Vote.where(voteable_type: 'Gym', voteable_id: gym.id).destroy_all
+      gym.destroy
+    end
 
     def merge_facebook_data(gym)
       gym.include_facebook_data!
