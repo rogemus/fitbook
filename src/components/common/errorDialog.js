@@ -16,9 +16,14 @@ class ErrorDialog extends React.Component {
 		const errorsArr = [];
 
 		_.forEach(errors, (errorArr) => {
-			errorArr.map((error) => {
-				errorsArr.push(error);
-			});
+
+			if (errorArr.constructor === Array) {
+				errorArr.map((error) => {
+					errorsArr.push(error);
+				});
+			} else {
+				errorsArr.push(errorArr);
+			}
 		});
 
 		return errorsArr;
@@ -40,18 +45,20 @@ class ErrorDialog extends React.Component {
 
 	render() {
 		return (
-			<div className="error-dialog">
-				<div className="error-dialog-wrapper">
-					<div className="error-dialog-title">
-						<h1>Errors</h1>
-					</div>
-					<div className="error-dialog-errors">
-						<ul>
-							{this.renderErrors(this.props.errors)}
-						</ul>
-					</div>
-					<div className="error-dialog-buttons">
-						<span className="error-dialog-button" onClick={this.onButtonClick}>Close</span>
+			<div className="error-dialog-bg">
+				<div className="error-dialog">
+					<div className="error-dialog-wrapper">
+						<div className="error-dialog-title">
+							<h1>Errors</h1>
+						</div>
+						<div className="error-dialog-errors">
+							<ul>
+								{this.renderErrors(this.props.errors)}
+							</ul>
+						</div>
+						<div className="error-dialog-buttons">
+							<span className="error-dialog-button" onClick={this.onButtonClick}>Close</span>
+						</div>
 					</div>
 				</div>
 			</div>

@@ -20,6 +20,17 @@ class GymPage extends React.Component {
 		this.props.fetchGymTrainers(this.props.params.id);
 	}
 
+	componentDidUpdate(prevProps) {
+		const oldId = prevProps.params.id;
+		const newId = this.props.params.id;
+
+		if (newId !== oldId) {
+			this.props.fetchGym(this.props.params.id);
+			this.props.fetchGymComments(this.props.params.id);
+			this.props.fetchGymTrainers(this.props.params.id);
+		}
+	}
+
 	renderGymHeader() {
 		if (this.props.gym) {
 			return <GymHeader gym={this.props.gym}/>;

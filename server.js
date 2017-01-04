@@ -43,6 +43,10 @@ app.get('/me', function (request, response) {
 	response.sendFile(__dirname + '/index.html')
 });
 
+app.get('*', function (request, response) {
+	response.sendFile(__dirname + '/index.html')
+});
+
 app.listen(PORT, function (error) {
 	if (error) {
 		console.error(error);

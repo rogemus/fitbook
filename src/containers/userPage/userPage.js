@@ -20,6 +20,17 @@ class UserPage extends React.Component {
 		this.props.fetchUserPosts(this.props.params.id);
 	}
 
+	componentDidUpdate(prevProps) {
+		const oldId = prevProps.params.id;
+		const newId = this.props.params.id;
+
+		if (newId !== oldId) {
+			this.props.fetchUser(this.props.params.id);
+			this.props.fetchUserComments(this.props.params.id);
+			this.props.fetchUserPosts(this.props.params.id);
+		}
+	}
+
 	renderUserHeader() {
 		if (this.props.public_user) {
 			return <UserHeader user={this.props.public_user}/>;
@@ -44,23 +55,32 @@ class UserPage extends React.Component {
 
 	renderUserGyms() {
 		if (this.props.public_user) {
-			return (
-				<UserGyms gyms={this.props.public_user.trained_gyms}/>
-			);
+			if (this.props.public_user.is_trainer === true) {
+				return (
+					<UserGyms gyms={this.props.public_user.trained_gyms}/>
+				);
+			}
 		}
 	}
 
 	renderUserPosts() {
 		if (this.props.public_user_posts) {
-			return (
-				<UserPosts posts={this.props.public_user_posts.posts}/>
-			);
+			if (this.props.public_user) {
+				if (this.props.public_user.is_trainer === true) {
+					return (
+						<UserPosts posts={this.props.public_user_posts.posts}/>
+					);
+				}
+			}
 		}
 	}
 
 	renderGymRating() {
 		if (this.props.public_user) {
-			return <UserRating type={'user'} id={this.props.params.id} count={this.props.public_user.rating.count}/>;
+			if (this.props.public_user.is_trainer === true) {
+				return <UserRating type={'user'} id={this.props.params.id}
+								   count={this.props.public_user.rating.count}/>;
+			}
 		}
 	}
 

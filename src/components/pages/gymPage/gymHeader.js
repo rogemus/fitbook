@@ -23,7 +23,7 @@ export default({gym}) => {
 								How people rate as:
 							</h2>
 							<span>
-								{renderRating(gym)} / 5
+								{renderRating(gym)}
                     		</span>
 						</div>
 						<ActionButton type={'gym'} title={'Join gym'} id={gym.id}/>

@@ -9,7 +9,8 @@ import {
 	CREATE_GYM_COMMENTS,
 	CREATE_GYM_RATING,
 	JOIN_GYM,
-	ERROR
+	ERROR,
+	LOADING
 } from './types';
 
 const ROOT_URL = 'http://fitbook-api.herokuapp.com/api/v1';
@@ -48,11 +49,19 @@ export function findGyms(data) {
 
 export function fetchGym(id) {
 	return function (dispatch) {
+		dispatch({
+			type: LOADING,
+			payload: true
+		});
 		axios.get(`${ROOT_URL}/gyms/${id}`)
 			.then(response => {
 				dispatch({
 					type: FETCH_GYM,
 					payload: response.data
+				});
+				dispatch({
+					type: LOADING,
+					payload: false
 				});
 			})
 			.catch((error) => {
