@@ -1,9 +1,16 @@
 class GymSerializer < ActiveModel::Serializer
 
   attributes :id, :name, :facebook_id, :rating, :about, :description, :website, :images,
-             :parking, :hours
+             :parking, :hours, :membership
 
   has_one :location
+
+  def membership
+    user = instance_options[:include_user]
+    if user
+      {membership_level: Member.where(user: user, gym: object)&.pluck(:membership_level)&.first}
+    end
+  end
 
   def parking
     {parking: merge(object.parking)} if object.parking

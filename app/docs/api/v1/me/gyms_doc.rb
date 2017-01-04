@@ -12,7 +12,7 @@ module Api::V1::Me::GymsDoc
   end
 
   doc_for :show do
-    api :GET, '/v1/me/gyms', 'Get gyms owned by current user'
+    api :GET, '/v1/me/gyms', 'Get gyms assigned to current user'
   end
 
   doc_for :available do
