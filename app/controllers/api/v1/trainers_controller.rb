@@ -43,7 +43,7 @@ module Api::V1
     end
 
     def not_trainer
-      render json: not_trainer
+      render json: []
       #{errors: 'User does not exists or is not trainer'}
     end
 
