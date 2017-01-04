@@ -43,7 +43,8 @@ module Api::V1
     end
 
     def not_trainer
-      {errors: 'User does not exists or is not trainer'}
+      []
+      #{errors: 'User does not exists or is not trainer'}
     end
 
   end
