@@ -39,17 +39,29 @@ export function fetchNewestPosts() {
 
 export function fetchPosts(id) {
 	return function (dispatch) {
+		dispatch({
+			type: LOADING,
+			payload: true
+		});
 		axios.get(`${ROOT_URL}/posts/${id}`)
 			.then(response => {
 				dispatch({
 					type: FETCH_POST,
 					payload: response.data
 				});
+				dispatch({
+					type: LOADING,
+					payload: false
+				});
 			})
 			.catch((error) => {
 				dispatch({
 					type: ERROR,
 					payload: error.response.data
+				});
+				dispatch({
+					type: LOADING,
+					payload: false
 				});
 			});
 	};
