@@ -82,6 +82,13 @@
       }
     }
 
+    &-location {
+      padding: 15px 0;
+      font: $font-base $arvo;
+      color: darken($grey-light, 10);
+      text-align: left;
+    }
+
     &-about {
       text-align: left;
       font: $font-base $open-sans;
@@ -99,7 +106,11 @@
       background: $yellow;
 
       .user-gyms-item-about {
-        color: $white
+        color: $white;
+      }
+
+      .user-gyms-item-location {
+        color: $white;
       }
 
       .user-gyms-item-title {
@@ -113,9 +124,12 @@
       background: $black;
 
       .user-gyms-item-about {
-        color: $white
+        color: $white;
       }
 
+      .user-gyms-item-location {
+        color: $white;
+      }
       .user-gyms-item-title {
         a {
           color: $white

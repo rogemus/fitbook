@@ -24,7 +24,7 @@
     padding: 25px 0;
   }
 
-  form {
+  &-form {
     margin: 0;
     text-align: right;
     padding: 5px 0;
@@ -44,5 +44,9 @@
       color: $white;
       border-radius: 10px;
     }
+  }
+
+  &-button {
+
   }
 }
