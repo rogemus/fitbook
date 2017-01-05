@@ -6,7 +6,7 @@ import {fetchNewestPosts} from '../../actions/postActions';
 import NewestGyms from '../../components/common/homePage/newestGyms';
 import NewestPost from '../../components/common/homePage/newestPosts';
 import MobileApps from '../../components/common/homePage/mobileApps';
-import FindGyms from '../../components/common/homePage/findGyms';
+import MainMap from './mainMap';
 
 class HomePage extends React.Component {
 
@@ -30,7 +30,7 @@ class HomePage extends React.Component {
 	render() {
 		return (
 			<div className="find-gym">
-				<FindGyms/>
+				<MainMap/>
 				{this.renderNewestPosts()}
 				<MobileApps/>
 				{this.renderNewestGyms()}
