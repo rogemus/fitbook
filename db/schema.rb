@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170105075542) do
+ActiveRecord::Schema.define(version: 20170105083351) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -82,8 +82,8 @@ ActiveRecord::Schema.define(version: 20170105075542) do
     t.integer  "gym_id"
     t.text     "body"
     t.integer  "receivers",  default: 0
-    t.datetime "scheduled",              null: false
     t.datetime "created_at"
+    t.datetime "send"
     t.index ["created_at"], name: "index_mailers_on_created_at", using: :btree
     t.index ["gym_id"], name: "index_mailers_on_gym_id", using: :btree
   end

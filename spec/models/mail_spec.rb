@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe Mail, type: :model do
+RSpec.describe Mailer, type: :model do
 
   let (:user) { build :user, :not_a_trainer }
   let (:trainer) { build :user, :is_trainer }

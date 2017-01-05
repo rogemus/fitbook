@@ -7,7 +7,7 @@ Rails.application.routes.draw do
   namespace :api, constraints: {id: /\d+/} do
 
     post :error, to: 'application#err'
-    
+
     namespace :auth do
       post :facebook
       put :refresh
@@ -53,6 +53,7 @@ Rails.application.routes.draw do
             patch :vote
 
             resources :mailings, only: [:index, :create] do
+              get :info
               get :show
               get :receivers
               post :send, action: :commit
