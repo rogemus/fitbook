@@ -171,6 +171,10 @@ export function createGymComment(id, commentBody) {
 
 export function createGymRating(id, ratingBody) {
 	return function (dispatch) {
+		dispatch({
+			type: LOADING,
+			payload: true
+		});
 		axios.put(`${ROOT_URL}/me/gyms/${id}/vote`,
 			{
 				rating: ratingBody
@@ -188,11 +192,19 @@ export function createGymRating(id, ratingBody) {
 						type: FETCH_GYM,
 						payload: response.data
 					});
+					dispatch({
+						type: LOADING,
+						payload: false
+					});
 				});
 		}).catch((error) => {
 			dispatch({
 				type: ERROR,
 				payload: error.response.data
+			});
+			dispatch({
+				type: LOADING,
+				payload: false
 			});
 		});
 	};
@@ -200,6 +212,10 @@ export function createGymRating(id, ratingBody) {
 
 export function joinGym(gymId) {
 	return function (dispatch) {
+		dispatch({
+			type: LOADING,
+			payload: true
+		});
 		axios.post(`${ROOT_URL}/me/gyms/${gymId}/join`,
 			{
 				level: 'trainer'
@@ -213,15 +229,22 @@ export function joinGym(gymId) {
 						type: FETCH_GYM_TRAINERS,
 						payload: response.data
 					});
-
 					dispatch({
 						type: JOIN_GYM
+					});
+					dispatch({
+						type: LOADING,
+						payload: false
 					});
 				});
 		}).catch((error) => {
 			dispatch({
 				type: ERROR,
 				payload: error.response.data
+			});
+			dispatch({
+				type: LOADING,
+				payload: false
 			});
 		});
 	};

@@ -30,11 +30,13 @@ class RatingSection extends React.Component {
 						<div className="row">
 							<div className="col col-1-2">
 								<div className="rating-title">
-									<h1>Rate as just like <span className="rating-counter">{this.props.count}</span> people did</h1>
+									<h1>Rate as just like <span className="rating-counter">{this.props.count}</span>
+										people did</h1>
 								</div>
 							</div>
 							<div className="col col-1-2">
-								<form className="formRating rating-form" onSubmit={this.handleSelectRating}>
+								<form ref="formRating" name="formRating" id="formRating"
+									  className="formRating rating-form" onSubmit={this.handleSelectRating}>
 									<label htmlFor="ratingSelect">Pick your rating</label>
 									<select name="ratingSelect" id="ratingSelect" onChange={this.handleSelectRating}>
 										<option value="5">5</option>
