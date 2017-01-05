@@ -333,10 +333,13 @@ body {
   .user-header-about {
     font: 14px "Open Sans", Helvetica, Arial, sans-serif;
     line-height: 26px; }
+<<<<<<< HEAD
   .user-header-desc {
     padding-top: 15px;
     font: 12px "Open Sans", Helvetica, Arial, sans-serif;
     line-height: 26px; }
+=======
+>>>>>>> 48f3b9ea713f46182f6ae68c1623325ea84ce8c3
   .user-header-image:before, .user-header-image:after {
     content: "";
     display: table; }

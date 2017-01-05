@@ -6,18 +6,27 @@ import {
 	FETCH_USER_POSTS,
 	CREATE_USER_COMMENTS,
 	CREATE_USER_RATING,
-	ERROR
+	ERROR,
+	LOADING
 } from './types';
 
 const ROOT_URL = 'http://fitbook-api.herokuapp.com/api/v1';
 
 export function fetchUser(id) {
 	return function (dispatch) {
+		dispatch({
+			type: LOADING,
+			payload: true
+		});
 		axios.get(`${ROOT_URL}/users/${id}`)
 			.then(response => {
 				dispatch({
 					type: FETCH_USER,
 					payload: response.data
+				});
+				dispatch({
+					type: LOADING,
+					payload: false
 				});
 			})
 			.catch((error) => {

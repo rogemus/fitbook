@@ -51,5 +51,9 @@ export function isNumber(number) {
 }
 
 export function renderRating(user) {
-	return isNumber(Number((user.rating.rating).toFixed(1)));
+	if (user.rating) {
+		return (
+			<span>{isNumber(Number((user.rating.rating).toFixed(1)))} / 5</span>
+		);
+	}
 }

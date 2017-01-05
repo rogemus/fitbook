@@ -16,9 +16,7 @@ function renderTrainerOddRow(user) {
 					</Link>
 				</div>
 				<div className="gyms-trainers-item-about">
-					Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ab alias consequatur dolore doloribus non
-					nulla odio porro possimus? Eveniet, quasi rerum! Ea necessitatibus nesciunt porro quibusdam vel?
-					Error, minima, sed.
+					{user.about}
 				</div>
 			</div>
 		</li>

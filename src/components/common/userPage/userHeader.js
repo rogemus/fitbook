@@ -22,7 +22,7 @@ export default({user}) => {
 								How people rate me:
 							</h2>
 							<span>
-								{renderRating(user)} / 5
+								{renderRating(user)}
                     		</span>
 						</div>
 						<ActionButton type={'user'} title={'Join as trainer'} user={user}/>
