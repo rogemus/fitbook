@@ -4,10 +4,10 @@ Rails.application.routes.draw do
 
   match '*nil', to: 'application#options', via: :options
 
-  post :error, to: 'application#err'
-
   namespace :api, constraints: {id: /\d+/} do
 
+    post :error, to: 'application#err'
+    
     namespace :auth do
       post :facebook
       put :refresh
