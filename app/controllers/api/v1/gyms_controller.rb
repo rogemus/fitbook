@@ -8,7 +8,7 @@ module Api::V1
     NEW_GYMS_COUNT = 10
 
     def index
-      filter = params[:level] if Member::MEMBERSHIPS.include?(params[:level].to_sym)
+      filter = params[:level] if Member::MEMBERSHIPS.include?(params[:level]&.to_sym)
 
       if current_user && filter
         render json: gyms_by_filter(filter).limit(NEW_GYMS_COUNT),
