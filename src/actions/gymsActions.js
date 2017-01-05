@@ -53,10 +53,13 @@ export function findGyms(data) {
 				type: ERROR,
 				payload: error.response.data
 			});
-			dispatch({
-				type: LOADING,
-				payload: false
-			});
+
+			setTimeout(() => {
+				dispatch({
+					type: LOADING,
+					payload: false
+				}, 900);
+			})
 		});
 	};
 }

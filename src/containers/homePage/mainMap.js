@@ -2,6 +2,7 @@ import React from 'react';
 import {connect} from 'react-redux';
 import {findGyms} from '../../actions/gymsActions';
 import {GoogleMapLoader, GoogleMap, Marker} from 'react-google-maps';
+import _ from 'lodash';
 
 class MainMap extends React.Component {
 
@@ -68,11 +69,20 @@ class MainMap extends React.Component {
 		this.props.findGyms(viewBox);
 		setTimeout(() => {
 			this.handleSearchResults();
-		}, 500);
+		}, 850);
 	}
 
 	handleSearchResults() {
 		if (this.props.search_result) {
+			const userCenter = {
+				position: this.state.userPos,
+				key: 9999999,
+				title: 'You',
+				infoContent: (
+					<div>You</div>
+				)
+			};
+
 			const gyms = this.props.search_result.map((gym) => {
 				return {
 					position: {
@@ -86,6 +96,11 @@ class MainMap extends React.Component {
 					)
 				};
 			});
+
+			if (!!_.find(gyms, userCenter)) {
+				gyms.concat([userCenter])
+			}
+
 			return this.setState({
 				markers: gyms
 			});
@@ -102,6 +117,8 @@ class MainMap extends React.Component {
 							ref="map"
 							defaultZoom={15}
 							onIdle={this.handleOnIdle}
+							onPlacesChanged={this.handleSearchResults}
+							onMapClick={this.handleMapClick}
 							defaultCenter={{lat: this.state.center.lat, lng: this.state.center.lng}}
 							options={{scrollwheel: false}}
 						>
