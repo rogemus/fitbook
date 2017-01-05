@@ -13,6 +13,10 @@ module Api::V1::GymsDoc
 
   doc_for :index do
     api :GET, '/v1/gyms/', 'Get 10 newest gyms'
+    param :level, [:regular, :special, :trainer, :owner],
+          :desc => 'Optional filter for new gyms'
+    param :not_level, [:regular, :special, :trainer, :owner],
+          :desc => 'Optional filter for new gyms'
   end
 
   doc_for :show do

@@ -9,9 +9,10 @@ module Api::V1
 
     def index
       filter = params[:level] if Member::MEMBERSHIPS.include?(params[:level]&.to_sym)
+      not_filter = params[:level] if Member::MEMBERSHIPS.include?(params[:not_]&.to_sym)
 
-      if current_user && filter
-        render json: gyms_by_filter(filter).limit(NEW_GYMS_COUNT),
+      if current_user && (filter || not_filter)
+        render json: gyms_by_filter(filter, not_filter).limit(NEW_GYMS_COUNT),
                include_user: current_user
       else
         render json: Gym.order(created_at: :desc).limit(NEW_GYMS_COUNT),
@@ -50,10 +51,16 @@ module Api::V1
 
     private
 
-    def gyms_by_filter(filter)
-      Gym.where(
-          id: Member.where(user: current_user, membership_level: filter)
-                  .pluck(:gym_id)).order(created_at: :desc)
+    def gyms_by_filter(filter, not_filter)
+      if filter
+        Gym.where(
+            id: Member.where(user: current_user, membership_level: filter)
+                    .pluck(:gym_id)).order(created_at: :desc)
+      else
+        Gym.where(
+            id: Member.where.not(user: current_user, membership_level: not_filter)
+                    .pluck(:gym_id)).order(created_at: :desc)
+      end
     end
 
     def gym_trainers(id)
