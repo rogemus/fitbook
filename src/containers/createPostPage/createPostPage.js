@@ -72,54 +72,56 @@ class CreateGymsPage extends React.Component {
 
 	render() {
 		return (
-			<div>
-				<h2>Create Post</h2>
-				<form ref="form" onSubmit={this.onFormSubmit}>
-					<div className="form-group">
-						<label htmlFor="postTitle">Title</label>
-						<input
-							id="postTitle"
-							placeholder={this.state.editor.titleInit}
-							className="form-control"
-							value={this.state.postTitle}
-							onChange={this.handleTitleChange}/>
+			<div className="create-post">
+				<div className="create-post-wrapper">
+					<div className="create-post-title">
+						<h1>Create Post</h1>
 					</div>
+					<form ref="form" onSubmit={this.onFormSubmit}>
+						<div className="form-group">
+							<label htmlFor="postTitle">Title</label>
+							<input
+								id="postTitle"
+								placeholder={this.state.editor.titleInit}
+								className="form-control"
+								value={this.state.postTitle}
+								onChange={this.handleTitleChange}/>
+						</div>
 
-					<div className="form-group">
-						<label htmlFor="postHeading">Heading</label>
-						<input
-							id="postHeading"
-							placeholder={this.state.editor.headingInit}
-							className="form-control"
-							value={this.state.postHeading}
-							onChange={this.handleHeadingChange}/>
-					</div>
+						<div className="form-group">
+							<label htmlFor="postHeading">Heading</label>
+							<input
+								id="postHeading"
+								placeholder={this.state.editor.headingInit}
+								className="form-control"
+								value={this.state.postHeading}
+								onChange={this.handleHeadingChange}/>
+						</div>
 
-					<hr/>
-					<div className="form-group">
-						<TinyMCE
-							content={this.state.editor.initText}
-							config={{
-								plugins: this.state.editor.plugins,
-								toolbar: this.state.editor.toolbar
-							}}
-							onChange={this.handleBodyChange}
-						/>
-					</div>
+						<div className="form-group">
+							<TinyMCE
+								content={this.state.editor.initText}
+								config={{
+									plugins: this.state.editor.plugins,
+									toolbar: this.state.editor.toolbar
+								}}
+								onChange={this.handleBodyChange}
+							/>
+						</div>
 
-					<div className="form-group">
-						<label htmlFor="postTags">Tags</label>
-						<input
-							id="postTags"
-							placeholder={this.state.editor.tagsInit}
-							className="form-control"
-							value={this.state.postTags}
-							onChange={this.handleTagsChange}/>
-					</div>
+						<div className="form-group">
+							<label htmlFor="postTags">Tags</label>
+							<input
+								id="postTags"
+								placeholder={this.state.editor.tagsInit}
+								className="form-control"
+								value={this.state.postTags}
+								onChange={this.handleTagsChange}/>
+						</div>
 
-					<hr/>
-					<button type="submit" className="btn btn-primary">Create Post</button>
-				</form>
+						<button type="submit" className="btn btn-primary">Create Post</button>
+					</form>
+				</div>
 			</div>
 		);
 	}
