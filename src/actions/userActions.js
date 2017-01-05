@@ -74,12 +74,17 @@ export function fetchUserPosts(id) {
 					type: ERROR,
 					payload: error.response.data
 				});
+
 			});
 	};
 }
 
 export function createUserComment(id, commentBody) {
 	return function (dispatch) {
+		dispatch({
+			type: LOADING,
+			payload: true
+		});
 		axios.post(`${ROOT_URL}/me/trainers/${id}/comment`,
 			{
 				body: commentBody
@@ -97,11 +102,19 @@ export function createUserComment(id, commentBody) {
 					dispatch({
 						type: CREATE_USER_COMMENTS
 					});
+					dispatch({
+						type: LOADING,
+						payload: false
+					});
 				});
 		}).catch((error) => {
 			dispatch({
 				type: ERROR,
 				payload: error.response.data
+			});
+			dispatch({
+				type: LOADING,
+				payload: false
 			});
 		});
 	};
@@ -109,6 +122,10 @@ export function createUserComment(id, commentBody) {
 
 export function createRating(id, ratingBody) {
 	return function (dispatch) {
+		dispatch({
+			type: LOADING,
+			payload: true
+		});
 		axios.put(`${ROOT_URL}/me/trainers/${id}/vote`,
 			{
 				rating: ratingBody
@@ -126,11 +143,19 @@ export function createRating(id, ratingBody) {
 						type: FETCH_USER,
 						payload: response.data
 					});
+					dispatch({
+						type: LOADING,
+						payload: false
+					});
 				});
 		}).catch((error) => {
 			dispatch({
 				type: ERROR,
 				payload: error.response.data
+			});
+			dispatch({
+				type: LOADING,
+				payload: false
 			});
 		});
 	};

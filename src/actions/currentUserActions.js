@@ -44,6 +44,10 @@ export function fetchCurrentUserAvailableGyms() {
 
 export function becomeTrainer() {
 	return function (dispatch) {
+		dispatch({
+			type: LOADING,
+			payload: true
+		});
 		axios.put(`${ROOT_URL}/me`,
 			{
 				options: {
@@ -57,11 +61,19 @@ export function becomeTrainer() {
 				type: BECOME_TRAINER
 			});
 
-			browserHistory.push('/me');
+			dispatch({
+				type: LOADING,
+				payload: false
+			});
+			browserHistory.push('/');
 		}).catch((error) => {
 			dispatch({
 				type: ERROR,
 				payload: error.response.data
+			});
+			dispatch({
+				type: LOADING,
+				payload: false
 			});
 		});
 	};

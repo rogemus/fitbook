@@ -23,30 +23,56 @@ class Sidebar extends React.Component {
 		}
 	}
 
+	renderTrUserMenu() {
+		if (this.props.current_user) {
+			if (this.props.current_user.is_trainer === true) {
+				return [
+					<li key={1} className="nav-item">
+						<Link to="/" activeClassName="active">
+							Home
+						</Link>
+					</li>,
+					<li key={2} className="nav-item">
+						<Link to="/creategym" activeClassName="active">
+							Import Gym
+						</Link>
+					</li>,
+					<li key={3} className="nav-item">
+						<Link to="/createpost" activeClassName="active">
+							Create Post
+						</Link>
+					</li>,
+					<li key={4} className="nav-item">
+						<Link to="/signout">
+							Sign Out
+						</Link>
+					</li>
+				];
+			} else {
+				return [
+					<li key={1} className="nav-item">
+						<Link to="/" activeClassName="active">
+							Home
+						</Link>
+					</li>,
+					<li key={2} className="nav-item">
+						<Link to="/createpost" activeClassName="active">
+							Create Post
+						</Link>
+					</li>,
+					<li key={3} className="nav-item">
+						<Link to="/signout">
+							Sign Out
+						</Link>
+					</li>
+				];
+			}
+		}
+	}
+
 	renderLinks() {
 		if (this.props.authenticated) {
-			return [
-				<li key={1} className="nav-item">
-					<Link to="/" activeClassName="active">
-						Home
-					</Link>
-				</li>,
-				<li key={2} className="nav-item">
-					<Link to="/creategym" activeClassName="active">
-						Import Gym
-					</Link>
-				</li>,
-				<li key={3} className="nav-item">
-					<Link to="/createpost" activeClassName="active">
-						Create Post
-					</Link>
-				</li>,
-				<li key={4} className="nav-item">
-					<Link to="/signout">
-						Sign Out
-					</Link>
-				</li>
-			];
+			return this.renderTrUserMenu();
 		} else {
 			return [
 				<li key={1} className="nav-item">

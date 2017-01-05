@@ -16,7 +16,6 @@ class ErrorDialog extends React.Component {
 		const errorsArr = [];
 
 		_.forEach(errors, (errorArr) => {
-
 			if (errorArr.constructor === Array) {
 				errorArr.map((error) => {
 					errorsArr.push(error);
