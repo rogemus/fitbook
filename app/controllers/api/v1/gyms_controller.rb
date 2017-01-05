@@ -8,8 +8,15 @@ module Api::V1
     NEW_GYMS_COUNT = 10
 
     def index
-      render json: Gym.order(created_at: :desc).limit(NEW_GYMS_COUNT),
-             include_user: current_user
+      filter = params[:level] if Member::MEMBERSHIPS.include?(params[:level].to_sym)
+
+      if current_user && filter
+        render json: gyms_by_filter(filter).limit(NEW_GYMS_COUNT),
+               include_user: current_user
+      else
+        render json: Gym.order(created_at: :desc).limit(NEW_GYMS_COUNT),
+               include_user: current_user
+      end
     end
 
     def show
@@ -42,6 +49,12 @@ module Api::V1
     end
 
     private
+
+    def gyms_by_filter(filter)
+      Gym.where(
+          id: Member.where(user: current_user, membership_level: filter)
+                  .pluck(:gym_id)).order(created_at: :desc)
+    end
 
     def gym_trainers(id)
       Member.where({gym: id, membership_level: :trainer}).order(approved: :desc)

@@ -10,6 +10,8 @@ module Api::V1::TrainersDoc
 
   doc_for :index do
     api :GET, '/v1/users/trainers', 'Get trainers list'
+    param :level, [:regular, :special, :trainer, :owner],
+          :desc => 'Optional filter for new gyms'
   end
 
   doc_for :show do

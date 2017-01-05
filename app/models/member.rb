@@ -6,12 +6,12 @@ class Member < ApplicationRecord
 
   APPROVED_MEMBERSHIP_LEVELS = [:regular]
   BASIC_MEMBERSHIP_LEVELS = APPROVED_MEMBERSHIP_LEVELS + [:special, :trainer]
+  MEMBERSHIPS = BASIC_MEMBERSHIP_LEVELS + [:owner]
 
   validate :basic_membership, :require_being_a_trainer
-
   validates :user, uniqueness: { scope: :gym, message: 'User exists in gym'}
 
-  enum membership_level: BASIC_MEMBERSHIP_LEVELS + [:owner]
+  enum membership_level: MEMBERSHIPS
 
   belongs_to :user
   belongs_to :gym
