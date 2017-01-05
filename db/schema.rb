@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170103172259) do
+ActiveRecord::Schema.define(version: 20170105075542) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -37,6 +37,13 @@ ActiveRecord::Schema.define(version: 20170103172259) do
   create_table "countries", force: :cascade do |t|
     t.string "name"
     t.index ["name"], name: "index_countries_on_name", unique: true, using: :btree
+  end
+
+  create_table "error_logs", force: :cascade do |t|
+    t.string   "platform"
+    t.text     "stack"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "gyms", force: :cascade do |t|
@@ -71,21 +78,20 @@ ActiveRecord::Schema.define(version: 20170103172259) do
     t.index ["gym_id"], name: "index_locations_on_gym_id", using: :btree
   end
 
-  create_table "mails", force: :cascade do |t|
+  create_table "mailers", force: :cascade do |t|
     t.integer  "gym_id"
     t.text     "body"
+    t.integer  "receivers",  default: 0
+    t.datetime "scheduled",              null: false
     t.datetime "created_at"
-    t.string   "header"
-    t.integer  "receivers_count", default: 0, null: false
-    t.datetime "sent"
-    t.index ["created_at"], name: "index_mails_on_created_at", using: :btree
-    t.index ["gym_id"], name: "index_mails_on_gym_id", using: :btree
+    t.index ["created_at"], name: "index_mailers_on_created_at", using: :btree
+    t.index ["gym_id"], name: "index_mailers_on_gym_id", using: :btree
   end
 
-  create_table "mails_users", id: false, force: :cascade do |t|
-    t.integer "mail_id", null: false
-    t.integer "user_id", null: false
-    t.index ["mail_id", "user_id"], name: "index_mails_users_on_mail_id_and_user_id", unique: true, using: :btree
+  create_table "mailers_users", id: false, force: :cascade do |t|
+    t.integer "mailer_id", null: false
+    t.integer "user_id",   null: false
+    t.index ["mailer_id", "user_id"], name: "index_mailers_users_on_mailer_id_and_user_id", unique: true, using: :btree
   end
 
   create_table "members", force: :cascade do |t|
@@ -151,8 +157,9 @@ ActiveRecord::Schema.define(version: 20170103172259) do
 
   add_foreign_key "comments", "users"
   add_foreign_key "gyms", "locations"
-  add_foreign_key "mails_users", "mails"
-  add_foreign_key "mails_users", "users"
+  add_foreign_key "mailers", "gyms"
+  add_foreign_key "mailers_users", "mailers"
+  add_foreign_key "mailers_users", "users"
   add_foreign_key "posts_tags", "posts"
   add_foreign_key "posts_tags", "tags"
   add_foreign_key "votes", "users"

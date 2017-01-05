@@ -1,11 +1,24 @@
 class ApplicationController < ActionController::API
 
+  include GlobalDoc
+
   rescue_from ActionController::ParameterMissing, with: :bad_params
+  rescue_from JWT::ExpiredSignature, with: :expired_token
 
   attr_reader :current_user, :koala
 
+  def err
+    error_params = params.permit(:platform, :stack)
+    error_params.stack.flatten! if error_params.stack
+    render json: ErrorLog.create(error_params), status: :created
+  end
+
   def bad_params(e)
     render json: {error: e}, status: :unprocessable_entity
+  end
+
+  def expired_token(e)
+    render json: {error: 'Token has expired'}, status: :unauthorized
   end
 
   def options

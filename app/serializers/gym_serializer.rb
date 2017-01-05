@@ -7,13 +7,11 @@ class GymSerializer < ActiveModel::Serializer
 
   def membership
     user = instance_options[:include_user]
-    if user
-      {membership_level: Member.where(user: user, gym: object)&.pluck(:membership_level)&.first}
-    end
+    {membership_level: Member.where(user: user, gym: object)&.pluck(:membership_level)&.first} if user
   end
 
   def parking
-    {parking: merge(object.parking)} if object.parking
+    merge(object.parking) if object.parking
   end
 
   def hours
@@ -21,10 +19,7 @@ class GymSerializer < ActiveModel::Serializer
   end
 
   def images
-    {
-        :cover => object.cover,
-        :picture => object.picture
-    }
+    {:cover => object.cover, :picture => object.picture}
   end
 
   def rating
@@ -36,8 +31,7 @@ class GymSerializer < ActiveModel::Serializer
   private
 
   def user_rating
-    user = instance_options[:include_user]
-    Vote.find_by(user: user, voteable_id: object.id, voteable_type: 'Gym')&.rating
+    all_ratings_of_user.detect {|v| v.voteable_id == object.id}&.rating
   end
 
   def merge(flat)
@@ -45,6 +39,11 @@ class GymSerializer < ActiveModel::Serializer
     keys = a.values_at(* a.each_index.select(&:even?))
     values = a.values_at(* a.each_index.select(&:odd?))
     Hash[keys.zip values]
+  end
+
+  def all_ratings_of_user
+    user = instance_options[:include_user]
+    @ratings ||= Vote.where(user: user, voteable_type: 'Gym')
   end
 
 end

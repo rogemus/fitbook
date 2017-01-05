@@ -4,6 +4,8 @@ Rails.application.routes.draw do
 
   match '*nil', to: 'application#options', via: :options
 
+  post :error, to: 'application#err'
+
   namespace :api, constraints: {id: /\d+/} do
 
     namespace :auth do
@@ -43,6 +45,7 @@ Rails.application.routes.draw do
         resources :gyms, only: [:index, :update] do
           member do
             post :comment
+            delete :leave
             post :join
             put :join, action: :change_membership
             patch :join, action: :change_membership

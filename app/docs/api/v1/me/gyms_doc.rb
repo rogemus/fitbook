@@ -45,6 +45,10 @@ module Api::V1::Me::GymsDoc
            :desc => 'Default is regular, special and trainer requires owner approval'
   end
 
+  doc_for :leave do
+    api :DELETE, '/v1/me/gyms/:id/leave', 'Leave gym with :id'
+  end
+
   doc_for :change_membership do
     api :PUT, '/v1/me/gyms/:id/join', 'Change gym joined level'
     api :PATCH, '/v1/me/gyms/:id/join', 'Change gym joined level'
