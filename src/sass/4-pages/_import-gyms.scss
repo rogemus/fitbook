@@ -1,0 +1,45 @@
+.import-gym {
+  @include clearfix;
+
+  &-title {
+    width: 1000px;
+    margin: 0 auto;
+
+    h1 {
+      font: 40px $arvo;
+      line-height: 54px;
+      color: $black;
+      margin: 0;
+      padding: 35px 0;
+    }
+  }
+
+  &-wrapper {
+    width: 960px;
+    margin: 0 auto;
+    padding: 45px 0;
+  }
+
+  form {
+    margin: 0;
+    text-align: right;
+    padding: 5px 0;
+
+    label {
+      font: $font-large $arvo;
+      color: $comments-content;
+      padding: 0 50px;
+    }
+
+    select {
+      display: inline-block;
+      background: $red;
+      border: 0;
+      padding: 15px 35px;
+      font: $font-large $arvo;
+      color: $white;
+      border-radius: 10px;
+    }
+
+  }
+}
