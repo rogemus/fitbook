@@ -27,8 +27,9 @@ class FindGyms extends React.Component {
 
 	renderGymSearchResult() {
 		if (this.props.search_result) {
-			window.scrollTo(0, document.getElementById('result').getBoundingClientRect().top);
-
+			if (document.getElementById('result')) {
+				window.scrollTo(0, document.getElementById('result').getBoundingClientRect().top);
+			}
 			if (this.props.search_result.length > 0) {
 				return <SearchResults gyms={this.props.search_result}/>;
 			} else {
