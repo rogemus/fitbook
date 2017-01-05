@@ -14,11 +14,13 @@ class MainMap extends React.Component {
 			markers: [],
 			map: null,
 			bounds: null,
-			zoom: 15
+			zoom: 15,
+			userPos: null
 		};
 
 		this.getLocation = this.getLocation.bind(this);
 		this.handleOnIdle = this.handleOnIdle.bind(this);
+		this.handleSearchResults = this.handleSearchResults.bind(this);
 	}
 
 	getLocation() {
@@ -26,23 +28,15 @@ class MainMap extends React.Component {
 			if (this.isUnmounted) {
 				return;
 			}
-
-			const marker = {
-				position: {
-					lat: position.coords.latitude,
-					lng: position.coords.longitude
-				},
-				key: Math.random() * 2,
-				title: 'You',
-				infoContent: 'You'
-			};
-
 			this.setState({
 				center: {
 					lat: position.coords.latitude,
 					lng: position.coords.longitude
 				},
-				markers: this.state.markers.concat([marker])
+				userPos: {
+					lat: position.coords.latitude,
+					lng: position.coords.longitude
+				}
 			});
 		}, (reason) => {
 			if (this.isUnmounted) {
@@ -71,12 +65,30 @@ class MainMap extends React.Component {
 			}
 		};
 
-		return this.props.findGyms(viewBox);
+		this.props.findGyms(viewBox);
+		setTimeout(() => {
+			this.handleSearchResults();
+		}, 500);
 	}
 
 	handleSearchResults() {
 		if (this.props.search_result) {
-			console.log(this.props.search_result);
+			const gyms = this.props.search_result.map((gym) => {
+				return {
+					position: {
+						lat: gym.location.latitude,
+						lng: gym.location.longitude
+					},
+					key: gym.id * 2,
+					title: gym.name,
+					infoContent: (
+						<div>{gym.name}</div>
+					)
+				};
+			});
+			return this.setState({
+				markers: gyms
+			});
 		}
 	}
 
@@ -88,10 +100,9 @@ class MainMap extends React.Component {
 					googleMapElement={
 						<GoogleMap
 							ref="map"
-							zoom={15}
+							defaultZoom={15}
 							onIdle={this.handleOnIdle}
-							onDbClick={this.handleDbClick}
-							center={{lat: this.state.center.lat, lng: this.state.center.lng}}
+							defaultCenter={{lat: this.state.center.lat, lng: this.state.center.lng}}
 							options={{scrollwheel: false}}
 						>
 							{this.state.markers.map((marker) => {
@@ -110,7 +121,6 @@ class MainMap extends React.Component {
 
 
 	render() {
-		{this.handleSearchResults();}
 		return (
 			<div className="main-map">
 				{this.getLocation()}
