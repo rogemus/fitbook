@@ -36,7 +36,7 @@ module Api::V1::Me::GymsDoc
 
   doc_for :comment do
     api :POST, '/v1/me/gyms/:id/comment', 'Comment gym with :id'
-    param :body, String, desc: 'Comment body', required: true
+    param :body, String, desc: 'Comment body, length 1..255', required: true
   end
 
   doc_for :join do
