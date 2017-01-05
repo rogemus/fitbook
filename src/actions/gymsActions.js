@@ -1,4 +1,5 @@
 import axios from 'axios';
+import {browserHistory} from 'react-router';
 
 import {
 	FETCH_GYM,
@@ -228,6 +229,10 @@ export function joinGym(gymId) {
 
 export function createGym(gymId) {
 	return function (dispatch) {
+		dispatch({
+			type: LOADING,
+			payload: true
+		});
 		axios.post(`${ROOT_URL}/me/gyms`,
 			{
 				facebook_id: gymId
@@ -238,10 +243,19 @@ export function createGym(gymId) {
 			dispatch({
 				type: CREATE_GYM
 			});
+			dispatch({
+				type: LOADING,
+				payload: false
+			});
+			browserHistory.push('/');
 		}).catch((error) => {
 			dispatch({
 				type: ERROR,
 				payload: error.response.data
+			});
+			dispatch({
+				type: LOADING,
+				payload: false
 			});
 		});
 	};

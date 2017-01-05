@@ -222,6 +222,17 @@ th {
 body {
   overflow-x: hidden; }
 
+.btn {
+  display: block;
+  background: #ffc80a;
+  border: 0;
+  padding: 15px 35px;
+  font: 24px "Arvo", serif;
+  color: #ffffff;
+  border-radius: 10px;
+  margin: 15px 0;
+  float: right; }
+
 .footer {
   background: #212121; }
   .footer:before, .footer:after {

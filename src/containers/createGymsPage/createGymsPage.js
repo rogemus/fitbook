@@ -30,11 +30,11 @@ class CreateGymsPage extends React.Component {
 		if (this.props.current_user_available_gyms) {
 			return (
 				<form ref="form" onSubmit={this.onFormSubmit} className="rating-form">
-					<label htmlFor=""></label>
-					<select name="gymSelect" className="form-control">
+					<label htmlFor="gymSelect">Select Gym</label>
+					<select id="gymSelect" name="gymSelect" className="form-control">
 						{this.renderOptionGym()}
 					</select>
-					<button type="submit" className="btn btn-primary">Import</button>
+					<button type="submit" className="btn button">Import</button>
 				</form>
 			);
 		} else {
@@ -49,7 +49,14 @@ class CreateGymsPage extends React.Component {
 			<div className="full-height">
 				<div className="full-height-title">
 					<div className="full-height-title-wrapper">
-						{this.renderSelectGym()}
+						<div className="import-gym">
+							<div className="import-gym-wrapper">
+								<div className="import-gym-title">
+									<h1>Import gym</h1>
+									{this.renderSelectGym()}
+								</div>
+							</div>
+						</div>
 					</div>
 				</div>
 			</div>
