@@ -1,5 +1,5 @@
 import React from 'react';
-import GoogleMap from '../../common/googleMap';
+import GoogleMap from '../googleMap';
 
 function renderGoogleMap(gym) {
 	const markers = [{

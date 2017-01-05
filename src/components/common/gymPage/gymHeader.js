@@ -1,5 +1,5 @@
 import React from 'react';
-import ActionButton from '../../common/actionButton';
+import ActionButton from '../actionButton';
 import {renderRating} from '../../../helpers/functions';
 
 export default({gym}) => {
@@ -7,12 +7,12 @@ export default({gym}) => {
 		<header className="user-header gym-header">
 			<div className="user-header-content">
 				<div className="row">
-					<div className="col col-1-2">
+					<div className="col col-3-5">
 						<div className="user-header-name">{gym.name}</div>
 						<div className="user-header-about">{gym.about}</div>
-						<div className="user-header-about">{gym.description}</div>
+						<div className="user-header-desc">{gym.description}</div>
 					</div>
-					<div className="col col-1-2">
+					<div className="col col-2-5">
 						<div className="user-header-image">
 							<div className="user-header-image-content">
 								<img src={gym.images.picture} alt=""/>

@@ -10,8 +10,7 @@ import App from './containers/app';
 import SignIn from './containers/signIn/signIn';
 import SignOut from './containers/signOut/signOut';
 import Home from './containers/homePage/home';
-import requireAuth from './components/pages/auth/requireAuth';
-import CurrentUserPage from './containers/currentUserPage/currentUserPage';
+import requireAuth from './components/common/auth/requireAuth';
 import CreateGymsPage from './containers/createGymsPage/createGymsPage';
 import CreatePostPage from './containers/createPostPage/createPostPage';
 import PostPage from './containers/postPage/postPage';
@@ -47,8 +46,6 @@ ReactDOM.render(
 				<Route path="users/:id" component={UserPage}/>
 				<Route path="createpost" component={requireAuth(CreatePostPage)}/>
 				<Route path="creategym" component={requireAuth(CreateGymsPage)}/>
-				<Route path="me" component={requireAuth(CurrentUserPage)}>
-				</Route>
 				<Route path="*" component={E404}/>
 			</Route>
 		</Router>

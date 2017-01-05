@@ -20,6 +20,9 @@ function renderGym(gym) {
 					<Link to={`/gyms/${gym.id}`}>{gym.name}</Link>
 				</div>
 				<div className="user-gyms-item-about">{gym.about}</div>
+				<div className="user-gyms-item-location">
+					{gym.location.street}, {gym.location.city}
+				</div>
 			</div>
 		</li>
 	);

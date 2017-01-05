@@ -1,7 +1,7 @@
 import React from 'react';
 import {connect} from 'react-redux';
 import {fetchPosts} from '../../actions/postActions';
-import PostContent from '../../components/pages/postPage/postContent';
+import PostContent from '../../components/common/postPage/postContent';
 
 class HomePage extends React.Component {
 	componentDidMount() {

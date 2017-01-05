@@ -6,9 +6,9 @@ import {
 	fetchGymTrainers
 } from '../../actions/gymsActions';
 
-import GymHeader from '../../components/pages/gymPage/gymHeader';
-import GymTrainers from '../../components/pages/gymPage/gymTrainers';
-import GymContact from '../../components/pages/gymPage/gymContact';
+import GymHeader from '../../components/common/gymPage/gymHeader';
+import GymTrainers from '../../components/common/gymPage/gymTrainers';
+import GymContact from '../../components/common/gymPage/gymContact';
 import GymComments from '../../components/common/commentSection';
 import GymRating from '../../components/common/ratingSection';
 

@@ -1,8 +1,8 @@
 import React from 'react';
 import {connect} from 'react-redux';
-import UserHeader from '../../components/pages/userPage/userHeader';
-import UserPosts from '../../components/pages/userPage/userPosts';
-import UserGyms from '../../components/pages/userPage/userGyms';
+import UserHeader from '../../components/common/userPage/userHeader';
+import UserPosts from '../../components/common/userPage/userPosts';
+import UserGyms from '../../components/common/userPage/userGyms';
 import UserRating from '../../components/common/ratingSection';
 import UserComments from '../../components/common/commentSection';
 

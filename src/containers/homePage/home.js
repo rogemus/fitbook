@@ -3,10 +3,10 @@ import {connect} from 'react-redux';
 import {fetchNewestGyms} from '../../actions/gymsActions';
 import {fetchNewestPosts} from '../../actions/postActions';
 
-import NewestGyms from '../../components/pages/homePage/newestGyms';
-import NewestPost from '../../components/pages/homePage/newestPosts';
-import MobileApps from '../../components/pages/homePage/mobileApps';
-import FindGyms from '../../components/pages/homePage/findGyms';
+import NewestGyms from '../../components/common/homePage/newestGyms';
+import NewestPost from '../../components/common/homePage/newestPosts';
+import MobileApps from '../../components/common/homePage/mobileApps';
+import FindGyms from '../../components/common/homePage/findGyms';
 
 class HomePage extends React.Component {
 

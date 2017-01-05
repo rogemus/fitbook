@@ -1,5 +1,6 @@
 import React from 'react';
 import {Link} from 'react-router';
+import {renderRating} from '../../../helpers/functions';
 
 function renderGym(gym) {
 	return (
@@ -10,6 +11,11 @@ function renderGym(gym) {
 			<div className="search-results-item-title">
 				<Link to={`/gyms/${gym.id}`}>
 					{gym.name}
+				</Link>
+			</div>
+			<div className="search-results-item-title">
+				<Link to={`/gyms/${gym.id}`}>
+					{renderRating(gym)}
 				</Link>
 			</div>
 			<div className="search-results-item-about">{gym.about}</div>
