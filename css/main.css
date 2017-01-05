@@ -742,6 +742,8 @@ body {
     font: 14px "Open Sans", Helvetica, Arial, sans-serif;
     color: #797c7f;
     text-align: left; }
+  .search-results-item-map {
+    padding: 10px 0; }
 
 .gyms-trainers {
   margin-bottom: 50px; }

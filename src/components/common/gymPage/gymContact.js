@@ -1,17 +1,5 @@
 import React from 'react';
-import GoogleMap from '../googleMap';
-
-function renderGoogleMap(gym) {
-	const markers = [{
-		position: {
-			lat: gym.location.latitude,
-			lng: gym.location.longitude
-		},
-		key: gym.location.street
-	}];
-
-	return <GoogleMap lat={gym.location.latitude} lon={gym.location.longitude} markers={markers}/>;
-}
+import {renderGoogleMap} from '../../../helpers/functions';
 
 function renderLocation(gym) {
 	return (
@@ -36,7 +24,7 @@ function renderContact(gym) {
 						</div>
 					</div>
 					<div className="gyms-contact-map">
-						{renderGoogleMap(gym)}
+						{renderGoogleMap(gym, '600px')}
 					</div>
 				</div>
 			</section>

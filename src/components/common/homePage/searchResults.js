@@ -1,6 +1,16 @@
 import React from 'react';
 import {Link} from 'react-router';
-import {renderRating} from '../../../helpers/functions';
+import {renderRating, renderGoogleMap} from '../../../helpers/functions';
+
+function renderMap(gym) {
+	if (gym.location) {
+		return (
+			<div className="search-results-item-map">
+				{renderGoogleMap(gym, '200px')}
+			</div>
+		);
+	}
+}
 
 function renderGym(gym) {
 	return (
@@ -19,6 +29,7 @@ function renderGym(gym) {
 				</Link>
 			</div>
 			<div className="search-results-item-about">{gym.about}</div>
+			{renderMap(gym)}
 		</li>
 	);
 }

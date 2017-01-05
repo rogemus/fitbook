@@ -1,3 +1,5 @@
+import GoogleMap from '../components/common/googleMap';
+
 export function renderDate(date) {
 	const d = new Date(date);
 	const month = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
@@ -56,4 +58,16 @@ export function renderRating(user) {
 			<span>{isNumber(Number((user.rating.rating).toFixed(1)))} / 5</span>
 		);
 	}
+}
+
+export function renderGoogleMap(gym, size) {
+	const markers = [{
+		position: {
+			lat: gym.location.latitude,
+			lng: gym.location.longitude
+		},
+		key: gym.location.street
+	}];
+
+	return <GoogleMap lat={gym.location.latitude} lon={gym.location.longitude} markers={markers} size={size}/>;
 }

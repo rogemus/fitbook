@@ -2,6 +2,16 @@ import React from 'react';
 import {Link} from 'react-router';
 import {renderCover} from '../../../helpers/functions';
 
+function renderLocation(location) {
+	if (location) {
+		return (
+			<div className="user-gyms-item-location">
+				{location.street}, {location.city}
+			</div>
+		);
+	}
+}
+
 function renderGym(gym) {
 	return (
 		<li key={gym.id} className="user-gyms-item">
@@ -20,9 +30,7 @@ function renderGym(gym) {
 					<Link to={`/gyms/${gym.id}`}>{gym.name}</Link>
 				</div>
 				<div className="user-gyms-item-about">{gym.about}</div>
-				<div className="user-gyms-item-location">
-					{gym.location.street}, {gym.location.city}
-				</div>
+				{renderLocation(gym.location)}
 			</div>
 		</li>
 	);

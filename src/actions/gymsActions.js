@@ -18,6 +18,10 @@ const ROOT_URL = 'http://fitbook-api.herokuapp.com/api/v1';
 
 export function findGyms(data) {
 	return function (dispatch) {
+		dispatch({
+			type: LOADING,
+			payload: true
+		});
 		axios.post(`${ROOT_URL}/gyms/find`,
 			{
 				'location': {
@@ -39,10 +43,18 @@ export function findGyms(data) {
 				type: FIND_GYMS,
 				payload: response.data
 			});
+			dispatch({
+				type: LOADING,
+				payload: false
+			});
 		}).catch((error) => {
 			dispatch({
 				type: ERROR,
 				payload: error.response.data
+			});
+			dispatch({
+				type: LOADING,
+				payload: false
 			});
 		});
 	};

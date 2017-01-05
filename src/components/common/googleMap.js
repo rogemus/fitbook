@@ -4,7 +4,7 @@ import {GoogleMapLoader, GoogleMap, Marker} from 'react-google-maps';
 export default (props) => {
 	return (
 		<GoogleMapLoader
-			containerElement={ <div style={{height: '600px'}}/> }
+			containerElement={ <div style={{height: props.size}}/> }
 			googleMapElement={
 				<GoogleMap
 					defaultZoom={16}
