@@ -1,7 +1,6 @@
 /* Auth types */
 export const AUTH_USER = 'auth_user';
 export const UNAUTH_USER = 'unauth_user';
-export const REFRESH_TOKEN = 'refresh_token';
 
 /* GYMS Types */
 /* GET */
@@ -33,7 +32,6 @@ export const BECOME_TRAINER = 'become_trainer';
 export const FETCH_NEWEST_POST = 'fetch_newest_post';
 export const FETCH_POST = 'fetch_post';
 export const LOADING = 'loading';
-export const NOLOADING = 'noloading';
 
 /* USERS Types */
 /* GET */

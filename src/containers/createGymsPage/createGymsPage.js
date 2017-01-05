@@ -1,6 +1,7 @@
 import React from 'react';
 import {connect} from 'react-redux';
-import {fetchCurrentUserAvailableGyms, createGym} from '../../actions/currentUserActions';
+import {fetchCurrentUserAvailableGyms} from '../../actions/currentUserActions';
+import {createGym} from '../../actions/gymsActions';
 
 class CreateGymsPage extends React.Component {
 
@@ -28,26 +29,29 @@ class CreateGymsPage extends React.Component {
 	renderSelectGym() {
 		if (this.props.current_user_available_gyms) {
 			return (
-				<form ref="form" onSubmit={this.onFormSubmit} className="input-group">
+				<form ref="form" onSubmit={this.onFormSubmit} className="rating-form">
+					<label htmlFor=""></label>
 					<select name="gymSelect" className="form-control">
 						{this.renderOptionGym()}
 					</select>
-					<button type="submit" className="btn btn-primary">Create</button>
+					<button type="submit" className="btn btn-primary">Import</button>
 				</form>
 			);
 		} else {
 			return (
-				<div className="text-center">
-					<h2>You need to have gym page on your Facebook account to import it :)</h2>
-				</div>
+				<h2>You need to have gym page on your Facebook account to import it :)</h2>
 			);
 		}
 	}
 
 	render() {
 		return (
-			<div>
-				{this.renderSelectGym()}
+			<div className="full-height">
+				<div className="full-height-title">
+					<div className="full-height-title-wrapper">
+						{this.renderSelectGym()}
+					</div>
+				</div>
 			</div>
 		);
 	}

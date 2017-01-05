@@ -1,10 +1,12 @@
 import axios from 'axios';
+import {browserHistory} from 'react-router';
 
 import {
 	FETCH_NEWEST_POST,
 	FETCH_POST,
 	ERROR,
-	LOADING
+	LOADING,
+	CREATE_POST
 } from './types';
 
 const ROOT_URL = 'http://fitbook-api.herokuapp.com/api/v1';
@@ -50,5 +52,33 @@ export function fetchPosts(id) {
 					payload: error.response.data
 				});
 			});
+	};
+}
+
+export function createPost(data) {
+	return function (dispatch) {
+		axios.post(`${ROOT_URL}/me/posts`,
+			{
+				post: {
+					title: data.title,
+					heading: data.heading,
+					body: data.body,
+					tags: data.tags
+				}
+			}, {
+				headers: {'Authorization': 'Bearer ' + localStorage.getItem('token')}
+			}
+		).then(() => {
+			dispatch({
+				type: CREATE_POST
+			});
+
+			browserHistory.push('/');
+		}).catch((error) => {
+			dispatch({
+				type: ERROR,
+				payload: error.response.data
+			});
+		});
 	};
 }

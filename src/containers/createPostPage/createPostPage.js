@@ -1,7 +1,7 @@
 import React from 'react';
 import {connect} from 'react-redux';
 import TinyMCE from 'react-tinymce';
-import {createPost} from '../../actions/currentUserActions';
+import {createPost} from '../../actions/postActions';
 
 class CreateGymsPage extends React.Component {
 

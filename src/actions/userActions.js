@@ -31,6 +31,10 @@ export function fetchUser(id) {
 			})
 			.catch((error) => {
 				dispatch({
+					type: LOADING,
+					payload: false
+				});
+				dispatch({
 					type: ERROR,
 					payload: error.response.data
 				});

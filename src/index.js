@@ -5,12 +5,13 @@ import {Provider} from 'react-redux';
 import {createStore, applyMiddleware} from 'redux';
 import {Router, Route, IndexRoute, browserHistory} from 'react-router';
 import {AUTH_USER, FETCH_CURRENT_USER} from './actions/types';
+import {refreshToken} from './actions/authActions';
 
+import requireAuth from './components/common/auth/requireAuth';
 import App from './containers/app';
 import SignIn from './containers/signIn/signIn';
 import SignOut from './containers/signOut/signOut';
 import Home from './containers/homePage/home';
-import requireAuth from './components/common/auth/requireAuth';
 import CreateGymsPage from './containers/createGymsPage/createGymsPage';
 import CreatePostPage from './containers/createPostPage/createPostPage';
 import PostPage from './containers/postPage/postPage';
@@ -28,6 +29,7 @@ const current_user = localStorage.getItem('current_user');
 
 if (token) {
 	store.dispatch({type: AUTH_USER});
+	refreshToken(token);
 	store.dispatch({
 		type: FETCH_CURRENT_USER,
 		payload: JSON.parse(current_user)

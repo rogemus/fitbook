@@ -34,7 +34,7 @@ class RatingSection extends React.Component {
 								</div>
 							</div>
 							<div className="col col-1-2">
-								<form ref="formRating" onSubmit={this.handleSelectRating}>
+								<form className="formRating rating-form" onSubmit={this.handleSelectRating}>
 									<label htmlFor="ratingSelect">Pick your rating</label>
 									<select name="ratingSelect" id="ratingSelect" onChange={this.handleSelectRating}>
 										<option value="5">5</option>

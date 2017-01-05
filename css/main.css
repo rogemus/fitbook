@@ -333,13 +333,10 @@ body {
   .user-header-about {
     font: 14px "Open Sans", Helvetica, Arial, sans-serif;
     line-height: 26px; }
-<<<<<<< HEAD
   .user-header-desc {
     padding-top: 15px;
     font: 12px "Open Sans", Helvetica, Arial, sans-serif;
     line-height: 26px; }
-=======
->>>>>>> 48f3b9ea713f46182f6ae68c1623325ea84ce8c3
   .user-header-image:before, .user-header-image:after {
     content: "";
     display: table; }
@@ -581,15 +578,15 @@ body {
     width: 960px;
     margin: 0 auto;
     padding: 25px 0; }
-  .rating form {
+  .rating-form {
     margin: 0;
     text-align: right;
     padding: 5px 0; }
-    .rating form label {
+    .rating-form label {
       font: 24px "Arvo", serif;
       color: #9fa3a7;
       padding: 0 50px; }
-    .rating form select {
+    .rating-form select {
       display: inline-block;
       background: #f9593a;
       border: 0;

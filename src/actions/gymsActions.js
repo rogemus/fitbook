@@ -10,7 +10,8 @@ import {
 	CREATE_GYM_RATING,
 	JOIN_GYM,
 	ERROR,
-	LOADING
+	LOADING,
+	CREATE_GYM
 } from './types';
 
 const ROOT_URL = 'http://fitbook-api.herokuapp.com/api/v1';
@@ -204,6 +205,27 @@ export function joinGym(gymId) {
 						type: JOIN_GYM
 					});
 				});
+		}).catch((error) => {
+			dispatch({
+				type: ERROR,
+				payload: error.response.data
+			});
+		});
+	};
+}
+
+export function createGym(gymId) {
+	return function (dispatch) {
+		axios.post(`${ROOT_URL}/me/gyms`,
+			{
+				facebook_id: gymId
+			}, {
+				headers: {'Authorization': 'Bearer ' + localStorage.getItem('token')}
+			}
+		).then(() => {
+			dispatch({
+				type: CREATE_GYM
+			});
 		}).catch((error) => {
 			dispatch({
 				type: ERROR,
