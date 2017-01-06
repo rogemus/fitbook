@@ -45,3 +45,8 @@ export const ERROR = 'error';
 
 /* TRAINERS Types */
 export const FETCH_TRAINERS = 'fetch_trainers';
+
+/* MAPS Types */
+export const SET_CENTER = 'set_center';
+export const SET_BOUNDS = 'set_bounds';
+export const SET_MARKERS = 'set_markers';

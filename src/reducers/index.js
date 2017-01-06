@@ -6,6 +6,8 @@ import gymReducer from './gymReducer';
 import postReducer from './postReducer';
 import errorReducer from './errorReducer';
 import loadingReducer from './loadingReducer';
+import trainersReducer from './trainersReducer';
+import mapsReducer from './mapsReducers';
 
 const rootReducer = combineReducers({
 	auth: authReducer,
@@ -14,7 +16,9 @@ const rootReducer = combineReducers({
 	posts: postReducer,
 	public_user: publicUserReducer,
 	errors: errorReducer,
-	loading: loadingReducer
+	loading: loadingReducer,
+	trainers: trainersReducer,
+	maps: mapsReducer
 });
 
 export default rootReducer;

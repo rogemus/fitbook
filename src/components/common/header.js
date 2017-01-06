@@ -2,7 +2,7 @@ import React from 'react';
 import {connect} from 'react-redux';
 import {Link} from 'react-router';
 
-class Sidebar extends React.Component {
+class Header extends React.Component {
 
 	renderUser() {
 		if (this.props.current_user && this.props.authenticated) {
@@ -28,8 +28,8 @@ class Sidebar extends React.Component {
 			if (this.props.current_user.is_trainer === true) {
 				return [
 					<li key={1} className="nav-item">
-						<Link to="/" activeClassName="active">
-							Home
+						<Link to="/trainers" activeClassName="active">
+							Trainers
 						</Link>
 					</li>,
 					<li key={2} className="nav-item">
@@ -51,16 +51,11 @@ class Sidebar extends React.Component {
 			} else {
 				return [
 					<li key={1} className="nav-item">
-						<Link to="/" activeClassName="active">
-							Home
+						<Link to="/trainers" activeClassName="active">
+							Trainers
 						</Link>
 					</li>,
 					<li key={2} className="nav-item">
-						<Link to="/createpost" activeClassName="active">
-							Create Post
-						</Link>
-					</li>,
-					<li key={3} className="nav-item">
 						<Link to="/signout">
 							Sign Out
 						</Link>
@@ -76,8 +71,8 @@ class Sidebar extends React.Component {
 		} else {
 			return [
 				<li key={1} className="nav-item">
-					<Link to="/">
-						Home
+					<Link to="/trainers" activeClassName="active">
+						Trainers
 					</Link>
 				</li>,
 				<li key={2} className="nav-item">
@@ -124,4 +119,4 @@ function mapStateToProps(state) {
 	};
 }
 
-export default connect(mapStateToProps)(Sidebar);
+export default connect(mapStateToProps)(Header);

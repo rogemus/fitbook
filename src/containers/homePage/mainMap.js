@@ -2,6 +2,7 @@ import React from 'react';
 import {connect} from 'react-redux';
 import {findGyms} from '../../actions/gymsActions';
 import {GoogleMapLoader, GoogleMap, Marker, InfoWindow, SearchBox} from 'react-google-maps';
+import {setCenter, setBounds, setMarkers} from '../../actions/mapActions';
 
 const INPUT_STYLE = {
 	border: '1px solid transparent',
@@ -38,21 +39,31 @@ class MainMap extends React.Component {
 		this.handleMarkerClick = this.handleMarkerClick.bind(this);
 		this.handleMarkerClose = this.handleMarkerClose.bind(this);
 		this.handlePlacesChanged = this.handlePlacesChanged.bind(this);
+		this.handleBoundsChanged = this.handleBoundsChanged.bind(this);
 	}
 
 	getLocation() {
 		navigator.geolocation.getCurrentPosition((position) => {
+			const userPos = {
+				lat: position.coords.latitude,
+				lng: position.coords.longitude
+			};
+
 			this.setState({
 				center: {
 					lat: position.coords.latitude,
 					lng: position.coords.longitude
 				},
-				userPos: {
-					lat: position.coords.latitude,
-					lng: position.coords.longitude
-				}
+				userPos: userPos
 			});
+
+			this.props.setCenter(userPos);
 		}, (reason) => {
+			const userPos = {
+				lat: 52.4064,
+				lng: 16.9252
+			};
+
 			this.setState({
 				center: {
 					lat: 52.4064,
@@ -63,11 +74,14 @@ class MainMap extends React.Component {
 					lng: 16.9252
 				}
 			});
+
+			this.props.setCenter(userPos);
 		});
 	}
 
+
 	handleOnIdle() {
-		const bounds = this.refs.map.getBounds();
+		const bounds = this.state.bounds;
 
 		const viewBox = {
 			top_left: {
@@ -81,6 +95,7 @@ class MainMap extends React.Component {
 		};
 
 		this.props.findGyms(viewBox);
+
 		setTimeout(() => {
 			this.handleSearchResults();
 		}, 850);
@@ -93,7 +108,7 @@ class MainMap extends React.Component {
 			const img = 'https://cdn4.iconfinder.com/data/icons/dot/256/man_person_mens_room.png';
 
 			const userCenter = {
-				position: this.state.userPos,
+				position: this.props.center,
 				key: 9999999,
 				title: 'You',
 				showInfo: true,
@@ -133,6 +148,7 @@ class MainMap extends React.Component {
 
 			if (!gyms.includes(userCenter)) {
 				fullMarkerArr = gyms.concat(userCenter);
+				this.props.setMarkers(fullMarkerArr);
 			}
 
 			return this.setState({
@@ -176,7 +192,14 @@ class MainMap extends React.Component {
 			position: place.geometry.location
 		}));
 
-		const mapCenter = markers.length > 0 ? markers[0].position : this.state.center;
+		let mapCenter;
+
+		if (this.state.center) {
+			mapCenter = markers.length > 0 ? markers[0].position : this.state.center;
+		} else {
+			mapCenter = markers.length > 0 ? markers[0].position : this.props.center;
+		}
+
 
 		this.setState({
 			center: {
@@ -192,8 +215,25 @@ class MainMap extends React.Component {
 		this.refs.map.panTo(mapCenter);
 	}
 
+	handleBoundsChanged() {
+		if (this.refs.map.getBounds()) {
+			this.setState({
+				bounds: this.refs.map.getBounds()
+			});
+			this.props.setBounds(this.refs.map.getBounds());
+		}
+
+	}
+
 	renderMap() {
-		if (this.state.center) {
+		if (this.state.center || this.props.center) {
+			let mapCenter;
+			if (this.state.center) {
+				mapCenter = this.state.center;
+			} else {
+				mapCenter = this.props.center;
+			}
+
 			return (
 				<GoogleMapLoader
 					containerElement={<div style={{height: '500px'}}/>}
@@ -202,7 +242,8 @@ class MainMap extends React.Component {
 							ref="map"
 							defaultZoom={15}
 							onIdle={this.handleOnIdle}
-							defaultCenter={{lat: this.state.center.lat, lng: this.state.center.lng}}
+							onBoundsChanged={this.handleBoundsChanged}
+							defaultCenter={{lat: mapCenter.lat, lng: mapCenter.lng}}
 							options={{scrollwheel: false}}
 						>
 							<SearchBox
@@ -249,8 +290,10 @@ class MainMap extends React.Component {
 
 function mapStateToProps(state) {
 	return {
-		search_result: state.gym.search_gyms
+		search_result: state.gym.search_gyms,
+		center: state.maps.center,
+		bounds: state.maps.bounds
 	};
 }
 
-export default connect(mapStateToProps, {findGyms})(MainMap);
+export default connect(mapStateToProps, {findGyms, setCenter, setBounds, setMarkers})(MainMap);

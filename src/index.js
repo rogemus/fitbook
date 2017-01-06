@@ -18,6 +18,7 @@ import PostPage from './containers/postPage/postPage';
 import GymPage from './containers/gymPage/gymPage';
 import UserPage from './containers/userPage/userPage';
 import E404 from './containers/errorsPage/e404';
+import TrainersListPage from './containers/trainersListPage/trainersListPage';
 
 import reducers from './reducers';
 
@@ -48,6 +49,7 @@ ReactDOM.render(
 				<Route path="users/:id" component={UserPage}/>
 				<Route path="createpost" component={requireAuth(CreatePostPage)}/>
 				<Route path="creategym" component={requireAuth(CreateGymsPage)}/>
+				<Route path="trainers" components={TrainersListPage}/>
 				<Route path="*" component={E404}/>
 			</Route>
 		</Router>
