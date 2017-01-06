@@ -44,6 +44,10 @@ class MainMap extends React.Component {
 		this.geolocationError = this.geolocationError.bind(this);
 	}
 
+	componentDidMount() {
+		this.getLocation();
+	}
+
 	processGeolocation(position) {
 		const userPos = {
 			lat: position.coords.latitude,
@@ -84,8 +88,8 @@ class MainMap extends React.Component {
 	getLocation() {
 		const options = {
 			enableHighAccuracy: true,
-			timeout: 7000,
-			maximumAge: 0
+			maximumAge: 0,
+			timeout: Infinity
 		};
 
 		navigator.geolocation.getCurrentPosition(this.processGeolocation, this.geolocationError, options);
@@ -294,7 +298,6 @@ class MainMap extends React.Component {
 	render() {
 		return (
 			<div className="main-map">
-				{this.getLocation()}
 				{this.renderMap()}
 			</div>
 		);

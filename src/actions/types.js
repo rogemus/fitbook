@@ -22,6 +22,7 @@ export const FETCH_CURRENT_USER_AVAILABLE_GYMS = 'fetch_current_user_available_g
 export const CREATE_GYM = 'create_gym';
 export const CREATE_POST = 'create_post';
 export const JOIN_GYM = 'join_gym';
+export const LEAVE_GYM = 'leave_gym';
 /* PUT */
 export const BECOME_TRAINER = 'become_trainer';
 

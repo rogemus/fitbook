@@ -26,7 +26,6 @@
     "indent": [ 2, "tab", {"SwitchCase": 1}],
     "new-cap": 2,
     "quotes": [2, "single"],
-    "max-depth": [2, 3],
     "max-statements": [2, 45],
     "max-len": [2, 150],
     "no-eq-null": 2,

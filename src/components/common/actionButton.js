@@ -2,13 +2,15 @@ import React from 'react';
 import {connect} from 'react-redux';
 
 import {becomeTrainer} from '../../actions/currentUserActions';
-import {joinGym} from '../../actions/gymsActions';
+import {joinGym, leaveGym} from '../../actions/gymsActions';
+import _ from 'lodash';
 
 class ActionButton extends React.Component {
 	constructor(props) {
 		super(props);
 
 		this.onButtonClick = this.onButtonClick.bind(this);
+		this.onButtonClickLeave = this.onButtonClickLeave.bind(this);
 	}
 
 	onButtonClick(e) {
@@ -24,26 +26,53 @@ class ActionButton extends React.Component {
 		}
 	}
 
+	onButtonClickLeave(e) {
+		e.preventDefault();
+		this.props.leaveGym(this.props.id);
+	}
+
+	isTrainerInGym() {
+		const isTrainer = _.find(this.props.gym_trainers, (user) => {
+			return user.id === this.props.current_user.id;
+		});
+
+		return !isTrainer;
+	}
+
 	renderBtn(user) {
 		if (this.props.current_user) {
 			switch (this.props.type) {
 				case 'user':
 					if (user.id === this.props.current_user.id) {
-						return (
-							<div className="btn">
-								<span onClick={this.onButtonClick} className="btn-action">{this.props.title}</span>
-							</div>
-						);
+						if (this.props.current_user.is_trainer !== true) {
+							return (
+								<div className="btn">
+									<span onClick={this.onButtonClick} className="btn-action">{this.props.title}</span>
+								</div>
+							);
+						}
 					}
 
 					break;
 				case 'gym':
 					if (this.props.current_user.is_trainer === true) {
-						return (
-							<div className="btn">
-								<span onClick={this.onButtonClick} className="btn-action">{this.props.title}</span>
-							</div>
-						);
+						if (this.props.gym_trainers) {
+							if (this.isTrainerInGym()) {
+								return (
+									<div className="btn">
+										<span onClick={this.onButtonClick}
+											  className="btn-action">{this.props.title}</span>
+									</div>
+								);
+							} else {
+								return (
+									<div className="btn">
+										<span onClick={this.onButtonClickLeave}
+											  className="btn-action">Leave gym</span>
+									</div>
+								);
+							}
+						}
 					}
 					break;
 			}
@@ -59,8 +88,9 @@ class ActionButton extends React.Component {
 
 function mapStateToProps(state) {
 	return {
-		current_user: state.current_user.user
+		current_user: state.current_user.user,
+		gym_trainers: state.gym.gym_trainers
 	};
 }
 
-export default connect(mapStateToProps, {joinGym, becomeTrainer})(ActionButton);
+export default connect(mapStateToProps, {joinGym, leaveGym, becomeTrainer})(ActionButton);

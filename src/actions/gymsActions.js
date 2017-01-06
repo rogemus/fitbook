@@ -12,7 +12,8 @@ import {
 	JOIN_GYM,
 	ERROR,
 	LOADING,
-	CREATE_GYM
+	CREATE_GYM,
+	LEAVE_GYM
 } from './types';
 
 const ROOT_URL = 'http://fitbook-api.herokuapp.com/api/v1';
@@ -234,6 +235,42 @@ export function joinGym(gymId) {
 					});
 					dispatch({
 						type: JOIN_GYM
+					});
+					dispatch({
+						type: LOADING,
+						payload: false
+					});
+				});
+		}).catch((error) => {
+			dispatch({
+				type: ERROR,
+				payload: error.response.data
+			});
+			dispatch({
+				type: LOADING,
+				payload: false
+			});
+		});
+	};
+}
+
+export function leaveGym(gymId) {
+	return function (dispatch) {
+		dispatch({
+			type: LOADING,
+			payload: true
+		});
+		axios.delete(`${ROOT_URL}/me/gyms/${gymId}/leave`, {
+			headers: {'Authorization': 'Bearer ' + localStorage.getItem('token')}}
+		).then(() => {
+			axios.get(`${ROOT_URL}/gyms/${gymId}/trainers`)
+				.then(response => {
+					dispatch({
+						type: FETCH_GYM_TRAINERS,
+						payload: response.data
+					});
+					dispatch({
+						type: LEAVE_GYM
 					});
 					dispatch({
 						type: LOADING,
