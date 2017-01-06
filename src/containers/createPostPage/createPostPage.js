@@ -79,7 +79,7 @@ class CreateGymsPage extends React.Component {
 					</div>
 					<form ref="form" onSubmit={this.onFormSubmit}>
 						<div className="form-group">
-							<label htmlFor="postTitle">Title</label>
+							<label htmlFor="postTitle">Title (max 55 characters)</label>
 							<input
 								id="postTitle"
 								placeholder={this.state.editor.titleInit}
@@ -89,7 +89,7 @@ class CreateGymsPage extends React.Component {
 						</div>
 
 						<div className="form-group">
-							<label htmlFor="postHeading">Heading</label>
+							<label htmlFor="postHeading">Heading (max 255 characters)</label>
 							<input
 								id="postHeading"
 								placeholder={this.state.editor.headingInit}
