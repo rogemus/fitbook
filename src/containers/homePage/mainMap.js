@@ -38,7 +38,6 @@ class MainMap extends React.Component {
 		this.handleSearchResults = this.handleSearchResults.bind(this);
 		this.handleMarkerClick = this.handleMarkerClick.bind(this);
 		this.handleMarkerClose = this.handleMarkerClose.bind(this);
-		this.handleBoundsChanged = this.handleBoundsChanged.bind(this);
 		this.handlePlacesChanged = this.handlePlacesChanged.bind(this);
 	}
 
@@ -92,11 +91,14 @@ class MainMap extends React.Component {
 		if (this.props.search_result) {
 			let fullMarkerArr;
 
+			const img = 'https://cdn4.iconfinder.com/data/icons/dot/256/man_person_mens_room.png';
+
 			const userCenter = {
 				position: this.state.userPos,
 				key: 9999999,
 				title: 'You',
 				showInfo: true,
+				icon: img,
 				infoContent: (
 					<div>You</div>
 				)
@@ -172,21 +174,23 @@ class MainMap extends React.Component {
 		const places = this.refs.searchBox.getPlaces();
 
 		const markers = places.map(place => ({
-			position: place.geometry.location,
+			position: place.geometry.location
 		}));
 
 		const mapCenter = markers.length > 0 ? markers[0].position : this.state.center;
 
 		this.setState({
-			center: mapCenter,
-			markers
+			center: {
+				lat: mapCenter.lat(),
+				lng: mapCenter.lng()
+			},
+			userPos: {
+				lat: mapCenter.lat(),
+				lng: mapCenter.lng()
+			}
 		});
-	}
 
-	handleBoundsChanged() {
-		this.setState({
-			bounds: this.refs.map.getBounds()
-		});
+		this.refs.map.panTo(mapCenter);
 	}
 
 	renderMap() {
@@ -199,14 +203,13 @@ class MainMap extends React.Component {
 							ref="map"
 							defaultZoom={15}
 							onIdle={this.handleOnIdle}
-							onBoundsChanged={this.handleBoundsChanged}
 							defaultCenter={{lat: this.state.center.lat, lng: this.state.center.lng}}
 							options={{scrollwheel: false}}
 						>
 							<SearchBox
 								ref="searchBox"
 								bounds={this.state.bounds}
-								controlPosition={google.maps.ControlPosition.BOTTOM_CENTER}
+								controlPosition={google.maps.ControlPosition.TOP_CENTER}
 								onPlacesChanged={this.handlePlacesChanged}
 								placeholder="Customized your placeholder"
 								style={INPUT_STYLE}
