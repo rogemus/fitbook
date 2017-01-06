@@ -29,7 +29,6 @@ function renderGym(gym) {
 				</Link>
 			</div>
 			<div className="search-results-item-about">{gym.about}</div>
-			{renderMap(gym)}
 		</li>
 	);
 }

@@ -42,3 +42,6 @@ export const CREATE_USER_RATING = 'create_user_rating';
 
 /* ERRORS */
 export const ERROR = 'error';
+
+/* TRAINERS Types */
+export const FETCH_TRAINERS = 'fetch_trainers';

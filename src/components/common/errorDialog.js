@@ -3,6 +3,8 @@ import {connect} from 'react-redux';
 import _ from 'lodash';
 
 import {clearError} from '../../actions/errorAction';
+import {signOutUser} from '../../actions/authActions';
+let err;
 
 class ErrorDialog extends React.Component {
 
@@ -24,12 +26,17 @@ class ErrorDialog extends React.Component {
 				errorsArr.push(errorArr);
 			}
 		});
-
+		err = errorsArr;
 		return errorsArr;
 	}
 
 	onButtonClick() {
-		this.props.clearError();
+		if (err[0] === 'Signature has expired') {
+			this.props.signOutUser();
+			this.props.clearError();
+		} else {
+			this.props.clearError();
+		}
 	}
 
 	renderErrors(errors) {
@@ -65,4 +72,4 @@ class ErrorDialog extends React.Component {
 	}
 }
 
-export default connect(null, {clearError})(ErrorDialog);
+export default connect(null, {clearError, signOutUser})(ErrorDialog);

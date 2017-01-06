@@ -2,7 +2,6 @@ import React from 'react';
 import {connect} from 'react-redux';
 import {findGyms} from '../../actions/gymsActions';
 import {GoogleMapLoader, GoogleMap, Marker, InfoWindow, SearchBox} from 'react-google-maps';
-import _ from 'lodash';
 
 const INPUT_STYLE = {
 	border: '1px solid transparent',
@@ -132,8 +131,8 @@ class MainMap extends React.Component {
 				};
 			});
 
-			if (typeof _.find(gyms, userCenter) === 'undefined') {
-				fullMarkerArr = _.concat(gyms, userCenter);
+			if (!gyms.includes(userCenter)) {
+				fullMarkerArr = gyms.concat(userCenter);
 			}
 
 			return this.setState({
