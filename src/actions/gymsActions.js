@@ -59,7 +59,7 @@ export function findGyms(data) {
 					type: LOADING,
 					payload: false
 				}, 900);
-			})
+			});
 		});
 	};
 }

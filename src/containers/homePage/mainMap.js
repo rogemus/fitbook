@@ -1,7 +1,7 @@
 import React from 'react';
 import {connect} from 'react-redux';
 import {findGyms} from '../../actions/gymsActions';
-import {GoogleMapLoader, GoogleMap, Marker} from 'react-google-maps';
+import {GoogleMapLoader, GoogleMap, Marker, InfoWindow} from 'react-google-maps';
 import _ from 'lodash';
 
 class MainMap extends React.Component {
@@ -22,6 +22,8 @@ class MainMap extends React.Component {
 		this.getLocation = this.getLocation.bind(this);
 		this.handleOnIdle = this.handleOnIdle.bind(this);
 		this.handleSearchResults = this.handleSearchResults.bind(this);
+		this.handleMarkerClick = this.handleMarkerClick.bind(this);
+		this.handleMarkerClose = this.handleMarkerClose.bind(this);
 	}
 
 	getLocation() {
@@ -74,10 +76,13 @@ class MainMap extends React.Component {
 
 	handleSearchResults() {
 		if (this.props.search_result) {
+			let fullMarkerArr;
+
 			const userCenter = {
 				position: this.state.userPos,
 				key: 9999999,
 				title: 'You',
+				showInfo: true,
 				infoContent: (
 					<div>You</div>
 				)
@@ -91,42 +96,92 @@ class MainMap extends React.Component {
 					},
 					key: gym.id * 2,
 					title: gym.name,
+					showInfo: false,
 					infoContent: (
-						<div>{gym.name}</div>
+						<div className="row">
+							<div className="col col-2-5">
+								<div className="tooltip-img">
+									<img src={gym.images.picture}/>
+								</div>
+							</div>
+							<div className="col col-3-5">
+								<div>
+									<a href={`/gyms/${gym.id}`}>{gym.name}</a>
+								</div>
+								<div className="tooltip-about">{gym.about}</div>
+								<div>{gym.location.street}, {gym.location.city}</div>
+							</div>
+						</div>
 					)
 				};
 			});
 
-			if (!!_.find(gyms, userCenter)) {
-				gyms.concat([userCenter])
+			if (typeof _.find(gyms, userCenter) === 'undefined') {
+				fullMarkerArr = _.concat(gyms, userCenter);
 			}
 
 			return this.setState({
-				markers: gyms
+				markers: fullMarkerArr
 			});
 		}
 	}
+
+	handleMarkerClose(targetMarker) {
+		this.setState({
+			markers: this.state.markers.map(marker => {
+				if (marker === targetMarker) {
+					return {
+						...marker,
+						showInfo: false
+					};
+				}
+				return marker;
+			})
+		});
+	}
+
+	handleMarkerClick(targetMarker) {
+		this.setState({
+			markers: this.state.markers.map(marker => {
+				if (marker === targetMarker) {
+					return {
+						...marker,
+						showInfo: true
+					};
+				}
+				return marker;
+			})
+		});
+	}
+
 
 	renderMap() {
 		if (this.state.center) {
 			return (
 				<GoogleMapLoader
-					containerElement={ <div style={{height: '500px'}}/> }
+					containerElement={<div style={{height: '500px'}}/>}
 					googleMapElement={
 						<GoogleMap
 							ref="map"
 							defaultZoom={15}
 							onIdle={this.handleOnIdle}
 							onPlacesChanged={this.handleSearchResults}
-							onMapClick={this.handleMapClick}
 							defaultCenter={{lat: this.state.center.lat, lng: this.state.center.lng}}
 							options={{scrollwheel: false}}
 						>
-							{this.state.markers.map((marker) => {
+							{this.state.markers.map((marker, index) => {
 								return (
 									<Marker
-										{...marker}
-									/>
+										key={index}
+										position={marker.position}
+										onClick={() => this.handleMarkerClick(marker)}
+									>
+										{marker.showInfo && (
+											<InfoWindow onCloseClick={() => this.handleMarkerClose(marker)}>
+												<div>{marker.infoContent}</div>
+											</InfoWindow>
+										)}
+									</Marker>
 								);
 							})}
 						</GoogleMap>
