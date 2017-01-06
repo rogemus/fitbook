@@ -42,6 +42,12 @@ app.get('/creategym', function (request, response) {
 app.get('/me', function (request, response) {
 	response.sendFile(__dirname + '/index.html')
 });
+app.get('/trainers', function (request, response) {
+	response.sendFile(__dirname + '/index.html')
+});
+app.get('/updatepost/:id', function (request, response) {
+	response.sendFile(__dirname + '/index.html')
+});
 
 app.get('*', function (request, response) {
 	response.sendFile(__dirname + '/index.html')
