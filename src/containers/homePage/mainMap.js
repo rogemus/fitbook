@@ -1,8 +1,23 @@
 import React from 'react';
 import {connect} from 'react-redux';
 import {findGyms} from '../../actions/gymsActions';
-import {GoogleMapLoader, GoogleMap, Marker, InfoWindow} from 'react-google-maps';
+import {GoogleMapLoader, GoogleMap, Marker, InfoWindow, SearchBox} from 'react-google-maps';
 import _ from 'lodash';
+
+const INPUT_STYLE = {
+	border: '1px solid transparent',
+	borderRadius: '1px',
+	boxShadow: '0 2px 6px rgba(0, 0, 0, 0.3)',
+	boxSizing: 'border-box',
+	MozBoxSizing: 'border-box',
+	fontSize: '14px',
+	height: '32px',
+	marginTop: '27px',
+	outline: 'none',
+	padding: '0 12px',
+	textOverflow: 'ellipses',
+	width: '400px'
+};
 
 class MainMap extends React.Component {
 
@@ -11,7 +26,6 @@ class MainMap extends React.Component {
 
 		this.state = {
 			center: null,
-			content: 'You',
 			markers: [],
 			map: null,
 			bounds: null,
@@ -24,13 +38,12 @@ class MainMap extends React.Component {
 		this.handleSearchResults = this.handleSearchResults.bind(this);
 		this.handleMarkerClick = this.handleMarkerClick.bind(this);
 		this.handleMarkerClose = this.handleMarkerClose.bind(this);
+		this.handleBoundsChanged = this.handleBoundsChanged.bind(this);
+		this.handlePlacesChanged = this.handlePlacesChanged.bind(this);
 	}
 
 	getLocation() {
 		navigator.geolocation.getCurrentPosition((position) => {
-			if (this.isUnmounted) {
-				return;
-			}
 			this.setState({
 				center: {
 					lat: position.coords.latitude,
@@ -42,11 +55,12 @@ class MainMap extends React.Component {
 				}
 			});
 		}, (reason) => {
-			if (this.isUnmounted) {
-				return;
-			}
 			this.setState({
 				center: {
+					lat: 52.4064,
+					lng: 16.9252
+				},
+				userPos: {
 					lat: 52.4064,
 					lng: 16.9252
 				}
@@ -154,6 +168,26 @@ class MainMap extends React.Component {
 		});
 	}
 
+	handlePlacesChanged() {
+		const places = this.refs.searchBox.getPlaces();
+
+		const markers = places.map(place => ({
+			position: place.geometry.location,
+		}));
+
+		const mapCenter = markers.length > 0 ? markers[0].position : this.state.center;
+
+		this.setState({
+			center: mapCenter,
+			markers
+		});
+	}
+
+	handleBoundsChanged() {
+		this.setState({
+			bounds: this.refs.map.getBounds()
+		});
+	}
 
 	renderMap() {
 		if (this.state.center) {
@@ -165,10 +199,19 @@ class MainMap extends React.Component {
 							ref="map"
 							defaultZoom={15}
 							onIdle={this.handleOnIdle}
-							onPlacesChanged={this.handleSearchResults}
+							onBoundsChanged={this.handleBoundsChanged}
 							defaultCenter={{lat: this.state.center.lat, lng: this.state.center.lng}}
 							options={{scrollwheel: false}}
 						>
+							<SearchBox
+								ref="searchBox"
+								bounds={this.state.bounds}
+								controlPosition={google.maps.ControlPosition.BOTTOM_CENTER}
+								onPlacesChanged={this.handlePlacesChanged}
+								placeholder="Customized your placeholder"
+								style={INPUT_STYLE}
+							/>
+
 							{this.state.markers.map((marker, index) => {
 								return (
 									<Marker
