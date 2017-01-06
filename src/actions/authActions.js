@@ -5,7 +5,8 @@ import {
 	AUTH_USER,
 	UNAUTH_USER,
 	FETCH_CURRENT_USER,
-	LOADING
+	LOADING,
+	ERROR
 } from './types';
 
 const ROOT_URL = 'http://fitbook-api.herokuapp.com';
@@ -27,33 +28,49 @@ export function signInUser(data) {
 			{
 				token: facebookToken,
 				long_term: true
-			}
-		).then(response => {
+			})
+			.then(response => {
+				localStorage.setItem('token', response.data.token);
 
-			localStorage.setItem('token', response.data.token);
+				axios.get(`${ROOT_URL}/api/v1/me`, {
+					headers: {'Authorization': 'Bearer ' + response.data.token}
+				})
+					.then(response => {
+						const user = JSON.stringify(response.data);
+						localStorage.setItem('current_user', user);
 
-			axios.get(`${ROOT_URL}/api/v1/me`, {
-				headers: {'Authorization': 'Bearer ' + response.data.token}
-			}).then(response => {
-				const user = JSON.stringify(response.data);
-				localStorage.setItem('current_user', user);
+						dispatch({
+							type: AUTH_USER
+						});
 
-				dispatch({
-					type: AUTH_USER
-				});
+						dispatch({
+							type: FETCH_CURRENT_USER,
+							payload: response.data
+						});
 
-				dispatch({
-					type: FETCH_CURRENT_USER,
-					payload: response.data
-				});
+						dispatch({
+							type: LOADING,
+							payload: false
+						});
 
-				dispatch({
-					type: LOADING,
-					payload: false
-				});
-
-				browserHistory.push('/');
-			}).catch((error) => {
+						browserHistory.push('/');
+					})
+					.catch((error) => {
+						if (error.response) {
+							dispatch({
+								type: ERROR,
+								payload: error.response.data
+							});
+						} else {
+							console.log(error);
+						}
+						dispatch({
+							type: LOADING,
+							payload: false
+						});
+					});
+			})
+			.catch((error) => {
 				if (error.response) {
 					dispatch({
 						type: ERROR,
@@ -67,7 +84,6 @@ export function signInUser(data) {
 					payload: false
 				});
 			});
-		});
 	};
 }
 
