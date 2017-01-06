@@ -38,11 +38,13 @@ class ActionButton extends React.Component {
 
 					break;
 				case 'gym':
-					return (
-						<div className="btn">
-							<span onClick={this.onButtonClick} className="btn-action">{this.props.title}</span>
-						</div>
-					);
+					if (this.props.current_user.is_trainer === true) {
+						return (
+							<div className="btn">
+								<span onClick={this.onButtonClick} className="btn-action">{this.props.title}</span>
+							</div>
+						);
+					}
 					break;
 			}
 		}

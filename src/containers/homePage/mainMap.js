@@ -40,43 +40,55 @@ class MainMap extends React.Component {
 		this.handleMarkerClose = this.handleMarkerClose.bind(this);
 		this.handlePlacesChanged = this.handlePlacesChanged.bind(this);
 		this.handleBoundsChanged = this.handleBoundsChanged.bind(this);
+		this.processGeolocation = this.processGeolocation.bind(this);
+		this.geolocationError = this.geolocationError.bind(this);
+	}
+
+	processGeolocation(position) {
+		const userPos = {
+			lat: position.coords.latitude,
+			lng: position.coords.longitude
+		};
+
+		this.setState({
+			center: {
+				lat: position.coords.latitude,
+				lng: position.coords.longitude
+			},
+			userPos: userPos
+		});
+
+		this.props.setCenter(userPos);
+	}
+
+	geolocationError(reason) {
+		const userPos = {
+			lat: 52.4064,
+			lng: 16.9252
+		};
+
+		this.setState({
+			center: {
+				lat: 52.4064,
+				lng: 16.9252
+			},
+			userPos: {
+				lat: 52.4064,
+				lng: 16.9252
+			}
+		});
+
+		this.props.setCenter(userPos);
 	}
 
 	getLocation() {
-		navigator.geolocation.getCurrentPosition((position) => {
-			const userPos = {
-				lat: position.coords.latitude,
-				lng: position.coords.longitude
-			};
+		const options = {
+			enableHighAccuracy: true,
+			timeout: 7000,
+			maximumAge: 0
+		};
 
-			this.setState({
-				center: {
-					lat: position.coords.latitude,
-					lng: position.coords.longitude
-				},
-				userPos: userPos
-			});
-
-			this.props.setCenter(userPos);
-		}, (reason) => {
-			const userPos = {
-				lat: 52.4064,
-				lng: 16.9252
-			};
-
-			this.setState({
-				center: {
-					lat: 52.4064,
-					lng: 16.9252
-				},
-				userPos: {
-					lat: 52.4064,
-					lng: 16.9252
-				}
-			});
-
-			this.props.setCenter(userPos);
-		});
+		navigator.geolocation.getCurrentPosition(this.processGeolocation, this.geolocationError, options);
 	}
 
 
@@ -213,7 +225,6 @@ class MainMap extends React.Component {
 		});
 
 		this.props.setCenter(mapCenter);
-
 		this.refs.map.panTo(mapCenter);
 	}
 
@@ -253,7 +264,7 @@ class MainMap extends React.Component {
 								bounds={this.state.bounds}
 								controlPosition={google.maps.ControlPosition.TOP_CENTER}
 								onPlacesChanged={this.handlePlacesChanged}
-								placeholder="Customized your placeholder"
+								placeholder="Search"
 								style={INPUT_STYLE}
 							/>
 

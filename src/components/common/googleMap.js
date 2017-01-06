@@ -7,7 +7,6 @@ export default (props) => {
 			containerElement={ <div style={{height: props.size}}/> }
 			googleMapElement={
 				<GoogleMap
-					ref={(map) => console.log(map)}
 					defaultZoom={16}
 					defaultCenter={{lat: props.lat, lng: props.lon}}
 					options={{scrollwheel: false}}
