@@ -30,10 +30,14 @@ export function fetchCurrentUserAvailableGyms() {
 				payload: false
 			});
 		}).catch((error) => {
-			dispatch({
-				type: ERROR,
-				payload: error.response.data
-			});
+			if (error.response) {
+				dispatch({
+					type: ERROR,
+					payload: error.response.data
+				});
+			} else {
+				console.log(error);
+			}
 			dispatch({
 				type: LOADING,
 				payload: false

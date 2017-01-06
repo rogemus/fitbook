@@ -30,13 +30,17 @@ export function fetchUser(id) {
 				});
 			})
 			.catch((error) => {
+				if (error.response) {
+					dispatch({
+						type: ERROR,
+						payload: error.response.data
+					});
+				} else {
+					console.log(error);
+				}
 				dispatch({
 					type: LOADING,
 					payload: false
-				});
-				dispatch({
-					type: ERROR,
-					payload: error.response.data
 				});
 			});
 	};
@@ -52,9 +56,17 @@ export function fetchUserComments(id) {
 				});
 			})
 			.catch((error) => {
+				if (error.response) {
+					dispatch({
+						type: ERROR,
+						payload: error.response.data
+					});
+				} else {
+					console.log(error);
+				}
 				dispatch({
-					type: ERROR,
-					payload: error.response.data
+					type: LOADING,
+					payload: false
 				});
 			});
 	};
@@ -70,11 +82,18 @@ export function fetchUserPosts(id) {
 				});
 			})
 			.catch((error) => {
+				if (error.response) {
+					dispatch({
+						type: ERROR,
+						payload: error.response.data
+					});
+				} else {
+					console.log(error);
+				}
 				dispatch({
-					type: ERROR,
-					payload: error.response.data
+					type: LOADING,
+					payload: false
 				});
-
 			});
 	};
 }
@@ -108,10 +127,14 @@ export function createUserComment(id, commentBody) {
 					});
 				});
 		}).catch((error) => {
-			dispatch({
-				type: ERROR,
-				payload: error.response.data
-			});
+			if (error.response) {
+				dispatch({
+					type: ERROR,
+					payload: error.response.data
+				});
+			} else {
+				console.log(error);
+			}
 			dispatch({
 				type: LOADING,
 				payload: false
@@ -149,10 +172,14 @@ export function createRating(id, ratingBody) {
 					});
 				});
 		}).catch((error) => {
-			dispatch({
-				type: ERROR,
-				payload: error.response.data
-			});
+			if (error.response) {
+				dispatch({
+					type: ERROR,
+					payload: error.response.data
+				});
+			} else {
+				console.log(error);
+			}
 			dispatch({
 				type: LOADING,
 				payload: false

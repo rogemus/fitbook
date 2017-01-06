@@ -31,9 +31,17 @@ export function fetchNewestPosts() {
 				});
 			})
 			.catch((error) => {
+				if (error.response) {
+					dispatch({
+						type: ERROR,
+						payload: error.response.data
+					});
+				} else {
+					console.log(error);
+				}
 				dispatch({
-					type: ERROR,
-					payload: error.response.data
+					type: LOADING,
+					payload: false
 				});
 			});
 	};
@@ -57,10 +65,14 @@ export function fetchPosts(id) {
 				});
 			})
 			.catch((error) => {
-				dispatch({
-					type: ERROR,
-					payload: error.response.data
-				});
+				if (error.response) {
+					dispatch({
+						type: ERROR,
+						payload: error.response.data
+					});
+				} else {
+					console.log(error);
+				}
 				dispatch({
 					type: LOADING,
 					payload: false
@@ -97,10 +109,14 @@ export function createPost(data) {
 
 			browserHistory.push('/');
 		}).catch((error) => {
-			dispatch({
-				type: ERROR,
-				payload: error.response.data
-			});
+			if (error.response) {
+				dispatch({
+					type: ERROR,
+					payload: error.response.data
+				});
+			} else {
+				console.log(error);
+			}
 			dispatch({
 				type: LOADING,
 				payload: false
@@ -124,27 +140,32 @@ export function updatePost(data, id) {
 				}
 			}, {
 				headers: {'Authorization': 'Bearer ' + localStorage.getItem('token')}
-			}
-		).then(() => {
-			dispatch({
-				type: CREATE_POST
-			});
-			dispatch({
-				type: LOADING,
-				payload: false
-			});
+			})
+			.then(() => {
+				dispatch({
+					type: CREATE_POST
+				});
+				dispatch({
+					type: LOADING,
+					payload: false
+				});
 
-			browserHistory.push(`/posts/${id}`);
-		}).catch((error) => {
-			dispatch({
-				type: ERROR,
-				payload: error.response.data
+				browserHistory.push(`/posts/${id}`);
+			})
+			.catch((error) => {
+				if (error.response) {
+					dispatch({
+						type: ERROR,
+						payload: error.response.data
+					});
+				} else {
+					console.log(error);
+				}
+				dispatch({
+					type: LOADING,
+					payload: false
+				});
 			});
-			dispatch({
-				type: LOADING,
-				payload: false
-			});
-		});
 	};
 }
 
@@ -155,25 +176,31 @@ export function deletePost(id) {
 			payload: true
 		});
 		axios.delete(`${ROOT_URL}/me/posts/${id}`, {
-			headers: {'Authorization': 'Bearer ' + localStorage.getItem('token')}}
-		).then(() => {
-			dispatch({
-				type: DELETE_POST
+			headers: {'Authorization': 'Bearer ' + localStorage.getItem('token')}
+		})
+			.then(() => {
+				dispatch({
+					type: DELETE_POST
+				});
+				dispatch({
+					type: LOADING,
+					payload: false
+				});
+				browserHistory.push('/');
+			})
+			.catch((error) => {
+				if (error.response) {
+					dispatch({
+						type: ERROR,
+						payload: error.response.data
+					});
+				} else {
+					console.log(error);
+				}
+				dispatch({
+					type: LOADING,
+					payload: false
+				});
 			});
-			dispatch({
-				type: LOADING,
-				payload: false
-			});
-			browserHistory.push('/');
-		}).catch((error) => {
-			dispatch({
-				type: ERROR,
-				payload: error.response.data
-			});
-			dispatch({
-				type: LOADING,
-				payload: false
-			});
-		});
 	};
 }

@@ -39,29 +39,30 @@ export function findGyms(data) {
 			}
 			, {
 				headers: {'Content-Type': 'application/json'}
-			}
-		).then(response => {
-			dispatch({
-				type: FIND_GYMS,
-				payload: response.data
-			});
-			dispatch({
-				type: LOADING,
-				payload: false
-			});
-		}).catch((error) => {
-			dispatch({
-				type: ERROR,
-				payload: error.response.data
-			});
-
-			setTimeout(() => {
+			})
+			.then(response => {
+				dispatch({
+					type: FIND_GYMS,
+					payload: response.data
+				});
 				dispatch({
 					type: LOADING,
 					payload: false
-				}, 900);
+				});
+			})
+			.catch((error) => {
+				dispatch({
+					type: ERROR,
+					payload: error.response.data
+				});
+
+				setTimeout(() => {
+					dispatch({
+						type: LOADING,
+						payload: false
+					}, 900);
+				});
 			});
-		});
 	};
 }
 
@@ -83,9 +84,17 @@ export function fetchGym(id) {
 				});
 			})
 			.catch((error) => {
+				if (error.response) {
+					dispatch({
+						type: ERROR,
+						payload: error.response.data
+					});
+				} else {
+					console.log(error);
+				}
 				dispatch({
-					type: ERROR,
-					payload: error.response.data
+					type: LOADING,
+					payload: false
 				});
 			});
 	};
@@ -100,9 +109,17 @@ export function fetchGymComments(id) {
 				});
 			})
 			.catch((error) => {
+				if (error.response) {
+					dispatch({
+						type: ERROR,
+						payload: error.response.data
+					});
+				} else {
+					console.log(error);
+				}
 				dispatch({
-					type: ERROR,
-					payload: error.response.data
+					type: LOADING,
+					payload: false
 				});
 			});
 	};
@@ -118,9 +135,17 @@ export function fetchGymTrainers(id) {
 				});
 			})
 			.catch((error) => {
+				if (error.response) {
+					dispatch({
+						type: ERROR,
+						payload: error.response.data
+					});
+				} else {
+					console.log(error);
+				}
 				dispatch({
-					type: ERROR,
-					payload: error.response.data
+					type: LOADING,
+					payload: false
 				});
 			});
 	};
@@ -136,9 +161,17 @@ export function fetchNewestGyms() {
 				});
 			})
 			.catch((error) => {
+				if (error.response) {
+					dispatch({
+						type: ERROR,
+						payload: error.response.data
+					});
+				} else {
+					console.log(error);
+				}
 				dispatch({
-					type: ERROR,
-					payload: error.response.data
+					type: LOADING,
+					payload: false
 				});
 			});
 	};
@@ -151,25 +184,34 @@ export function createGymComment(id, commentBody) {
 				body: commentBody
 			}, {
 				headers: {'Authorization': 'Bearer ' + localStorage.getItem('token')}
-			}
-		).then(() => {
-			axios.get(`${ROOT_URL}/gyms/${id}/comments`)
-				.then(response => {
-					dispatch({
-						type: FETCH_GYM_COMMENTS,
-						payload: response.data
-					});
+			})
+			.then(() => {
+				axios.get(`${ROOT_URL}/gyms/${id}/comments`)
+					.then(response => {
+						dispatch({
+							type: FETCH_GYM_COMMENTS,
+							payload: response.data
+						});
 
-					dispatch({
-						type: CREATE_GYM_COMMENTS
+						dispatch({
+							type: CREATE_GYM_COMMENTS
+						});
 					});
+			})
+			.catch((error) => {
+				if (error.response) {
+					dispatch({
+						type: ERROR,
+						payload: error.response.data
+					});
+				} else {
+					console.log(error);
+				}
+				dispatch({
+					type: LOADING,
+					payload: false
 				});
-		}).catch((error) => {
-			dispatch({
-				type: ERROR,
-				payload: error.response.data
 			});
-		});
 	};
 }
 
@@ -184,33 +226,38 @@ export function createGymRating(id, ratingBody) {
 				rating: ratingBody
 			}, {
 				headers: {'Authorization': 'Bearer ' + localStorage.getItem('token')}
-			}
-		).then(() => {
-			axios.get(`${ROOT_URL}/gyms/${id}`)
-				.then(response => {
-					dispatch({
-						type: CREATE_GYM_RATING
-					});
+			})
+			.then(() => {
+				axios.get(`${ROOT_URL}/gyms/${id}`)
+					.then(response => {
+						dispatch({
+							type: CREATE_GYM_RATING
+						});
 
-					dispatch({
-						type: FETCH_GYM,
-						payload: response.data
+						dispatch({
+							type: FETCH_GYM,
+							payload: response.data
+						});
+						dispatch({
+							type: LOADING,
+							payload: false
+						});
 					});
+			})
+			.catch((error) => {
+				if (error.response) {
 					dispatch({
-						type: LOADING,
-						payload: false
+						type: ERROR,
+						payload: error.response.data
 					});
+				} else {
+					console.log(error);
+				}
+				dispatch({
+					type: LOADING,
+					payload: false
 				});
-		}).catch((error) => {
-			dispatch({
-				type: ERROR,
-				payload: error.response.data
 			});
-			dispatch({
-				type: LOADING,
-				payload: false
-			});
-		});
 	};
 }
 
@@ -225,32 +272,37 @@ export function joinGym(gymId) {
 				level: 'trainer'
 			}, {
 				headers: {'Authorization': 'Bearer ' + localStorage.getItem('token')}
-			}
-		).then(() => {
-			axios.get(`${ROOT_URL}/gyms/${gymId}/trainers`)
-				.then(response => {
-					dispatch({
-						type: FETCH_GYM_TRAINERS,
-						payload: response.data
+			})
+			.then(() => {
+				axios.get(`${ROOT_URL}/gyms/${gymId}/trainers`)
+					.then(response => {
+						dispatch({
+							type: FETCH_GYM_TRAINERS,
+							payload: response.data
+						});
+						dispatch({
+							type: JOIN_GYM
+						});
+						dispatch({
+							type: LOADING,
+							payload: false
+						});
 					});
+			})
+			.catch((error) => {
+				if (error.response) {
 					dispatch({
-						type: JOIN_GYM
+						type: ERROR,
+						payload: error.response.data
 					});
-					dispatch({
-						type: LOADING,
-						payload: false
-					});
+				} else {
+					console.log(error);
+				}
+				dispatch({
+					type: LOADING,
+					payload: false
 				});
-		}).catch((error) => {
-			dispatch({
-				type: ERROR,
-				payload: error.response.data
 			});
-			dispatch({
-				type: LOADING,
-				payload: false
-			});
-		});
 	};
 }
 
@@ -261,32 +313,38 @@ export function leaveGym(gymId) {
 			payload: true
 		});
 		axios.delete(`${ROOT_URL}/me/gyms/${gymId}/leave`, {
-			headers: {'Authorization': 'Bearer ' + localStorage.getItem('token')}}
-		).then(() => {
-			axios.get(`${ROOT_URL}/gyms/${gymId}/trainers`)
-				.then(response => {
-					dispatch({
-						type: FETCH_GYM_TRAINERS,
-						payload: response.data
+			headers: {'Authorization': 'Bearer ' + localStorage.getItem('token')}
+		})
+			.then(() => {
+				axios.get(`${ROOT_URL}/gyms/${gymId}/trainers`)
+					.then(response => {
+						dispatch({
+							type: FETCH_GYM_TRAINERS,
+							payload: response.data
+						});
+						dispatch({
+							type: LEAVE_GYM
+						});
+						dispatch({
+							type: LOADING,
+							payload: false
+						});
 					});
+			})
+			.catch((error) => {
+				if (error.response) {
 					dispatch({
-						type: LEAVE_GYM
+						type: ERROR,
+						payload: error.response.data
 					});
-					dispatch({
-						type: LOADING,
-						payload: false
-					});
+				} else {
+					console.log(error);
+				}
+				dispatch({
+					type: LOADING,
+					payload: false
 				});
-		}).catch((error) => {
-			dispatch({
-				type: ERROR,
-				payload: error.response.data
 			});
-			dispatch({
-				type: LOADING,
-				payload: false
-			});
-		});
 	};
 }
 
@@ -301,25 +359,30 @@ export function createGym(gymId) {
 				facebook_id: gymId
 			}, {
 				headers: {'Authorization': 'Bearer ' + localStorage.getItem('token')}
-			}
-		).then(() => {
-			dispatch({
-				type: CREATE_GYM
+			})
+			.then(() => {
+				dispatch({
+					type: CREATE_GYM
+				});
+				dispatch({
+					type: LOADING,
+					payload: false
+				});
+				browserHistory.push('/');
+			})
+			.catch((error) => {
+				if (error.response) {
+					dispatch({
+						type: ERROR,
+						payload: error.response.data
+					});
+				} else {
+					console.log(error);
+				}
+				dispatch({
+					type: LOADING,
+					payload: false
+				});
 			});
-			dispatch({
-				type: LOADING,
-				payload: false
-			});
-			browserHistory.push('/');
-		}).catch((error) => {
-			dispatch({
-				type: ERROR,
-				payload: error.response.data
-			});
-			dispatch({
-				type: LOADING,
-				payload: false
-			});
-		});
 	};
 }

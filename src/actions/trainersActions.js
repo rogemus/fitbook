@@ -26,13 +26,17 @@ export function fetchTrainers() {
 				});
 			})
 			.catch((error) => {
+				if (error.response) {
+					dispatch({
+						type: ERROR,
+						payload: error.response.data
+					});
+				} else {
+					console.log(error);
+				}
 				dispatch({
 					type: LOADING,
 					payload: false
-				});
-				dispatch({
-					type: ERROR,
-					payload: error.response.data
 				});
 			});
 	};
