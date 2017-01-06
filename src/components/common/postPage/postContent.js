@@ -12,22 +12,26 @@ class PostContent extends React.Component {
 	}
 
 	renderEditButton(post, user) {
-		if (user.id === post.author.id) {
-			return (
-				<Link to={`/updatepost/${post.id}`} className="btn">
-					Update post
-				</Link>
-			);
+		if (this.props.authenticated) {
+			if (user.id === post.author.id) {
+				return (
+					<Link to={`/updatepost/${post.id}`} className="btn">
+						Update post
+					</Link>
+				);
+			}
 		}
 	}
 
 	renderDeleteButton(post, user) {
-		if (user.id === post.author.id) {
-			return (
-				<span className="btn btn-red" onClick={this.handleButtonClick}>
+		if (this.props.authenticated) {
+			if (user.id === post.author.id) {
+				return (
+					<span className="btn btn-red" onClick={this.handleButtonClick}>
 					Delete post
 				</span>
-			);
+				);
+			}
 		}
 	}
 
@@ -91,4 +95,11 @@ class PostContent extends React.Component {
 	}
 }
 
-export default connect(null, {deletePost})(PostContent);
+function mapStateToProps(state) {
+	return {
+		authenticated: state.auth.authenticated
+	};
+}
+
+
+export default connect(mapStateToProps, {deletePost})(PostContent);
