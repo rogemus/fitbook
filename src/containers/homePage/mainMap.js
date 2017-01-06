@@ -212,6 +212,8 @@ class MainMap extends React.Component {
 			}
 		});
 
+		this.props.setCenter(mapCenter);
+
 		this.refs.map.panTo(mapCenter);
 	}
 
