@@ -144,18 +144,20 @@ class MainMap extends React.Component {
 					title: gym.name,
 					showInfo: false,
 					infoContent: (
-						<div className="row">
-							<div className="col col-2-5">
-								<div className="tooltip-img">
-									<img src={gym.images.picture}/>
+						<div className="tooltip">
+							<div className="row">
+								<div className="col col-2-5">
+									<div className="tooltip-img">
+										<img src={gym.images.picture}/>
+									</div>
 								</div>
-							</div>
-							<div className="col col-3-5">
-								<div>
-									<a href={`/gyms/${gym.id}`}>{gym.name}</a>
+								<div className="col col-3-5">
+									<div className="tooltip-title">
+										<a href={`/gyms/${gym.id}`}>{gym.name}</a>
+									</div>
+									<div className="tooltip-about">{gym.about}</div>
+									<div>{gym.location.street}, {gym.location.city}</div>
 								</div>
-								<div className="tooltip-about">{gym.about}</div>
-								<div>{gym.location.street}, {gym.location.city}</div>
 							</div>
 						</div>
 					)
@@ -257,7 +259,7 @@ class MainMap extends React.Component {
 					googleMapElement={
 						<GoogleMap
 							ref="map"
-							defaultZoom={15}
+							defaultZoom={13}
 							onIdle={this.handleOnIdle}
 							onBoundsChanged={this.handleBoundsChanged}
 							defaultCenter={{lat: mapCenter.lat, lng: mapCenter.lng}}
