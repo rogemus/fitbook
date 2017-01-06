@@ -1,7 +1,7 @@
 import React from 'react';
 import {connect} from 'react-redux';
 import TinyMCE from 'react-tinymce';
-import {createPost} from '../../actions/postActions';
+import {updatePost, fetchPosts} from '../../actions/postActions';
 
 class CreateGymsPage extends React.Component {
 
@@ -10,7 +10,6 @@ class CreateGymsPage extends React.Component {
 
 		this.state = {
 			editor: {
-				initText: '',
 				titleInit: '',
 				headingInit: '',
 				tagsInit: '',
@@ -32,7 +31,19 @@ class CreateGymsPage extends React.Component {
 	}
 
 	componentDidMount() {
-		this.props.fetchPosts(this.props.params.id);
+		this.props.fetchPosts(this.props.params.id).then(() => {
+			this.setState({
+				postTitle: this.props.post.content.title,
+				postHeading: this.props.post.content.heading,
+				postBody: this.props.post.content.body
+			});
+
+			if (this.props.post.content.tags) {
+				this.setState({
+					postTags: this.props.post.content.tags
+				});
+			}
+		});
 	}
 
 	handleBodyChange(e) {
@@ -71,73 +82,74 @@ class CreateGymsPage extends React.Component {
 			tags: this.state.postTags
 		};
 
-		this.props.createPost(post);
+		this.props.updatePost(post, this.props.params.id);
 	}
 
 	renderEditForm() {
 		if (this.props.post) {
-			if (this.props.current_user) {
-				if (this.props.post.author.id === this.props.current_user.id) {
-					this.setState({
-						editor: {
-							initText: this.props.post.content.body,
-							titleInit: this.props.post.content.title,
-							headingInit: this.props.post.content.heading,
-							tagsInit: this.props.post.content.tags,
-						}
-					});
+			if (this.state.postBody) {
+				if (this.props.current_user) {
+					if (this.props.post.author.id === this.props.current_user.id) {
+						return (
+							<div className="create-post-wrapper">
+								<div className="create-post-title">
+									<h1>Create Post</h1>
+								</div>
+								<form ref="form" onSubmit={this.onFormSubmit}>
+									<div className="form-group">
+										<label htmlFor="postTitle">Title</label>
+										<input
+											id="postTitle"
+											placeholder={this.state.editor.titleInit}
+											className="form-control"
+											value={this.state.postTitle}
+											onChange={this.handleTitleChange}/>
+									</div>
 
-					return (
-						<div className="create-post-wrapper">
-							<div className="create-post-title">
-								<h1>Create Post</h1>
+									<div className="form-group">
+										<label htmlFor="postHeading">Heading</label>
+										<input
+											id="postHeading"
+											placeholder={this.state.editor.headingInit}
+											className="form-control"
+											value={this.state.postHeading}
+											onChange={this.handleHeadingChange}/>
+									</div>
+
+									<div className="form-group">
+										<TinyMCE
+											content={this.state.postBody}
+											config={{
+												plugins: this.state.editor.plugins,
+												toolbar: this.state.editor.toolbar
+											}}
+											onChange={this.handleBodyChange}
+										/>
+									</div>
+
+									<div className="form-group">
+										<label htmlFor="postTags">Tags</label>
+										<input
+											id="postTags"
+											placeholder={this.state.editor.tagsInit}
+											className="form-control"
+											value={this.state.postTags}
+											onChange={this.handleTagsChange}/>
+									</div>
+
+									<button type="submit" className="btn btn-primary">Update Post</button>
+								</form>
 							</div>
-							<form ref="form" onSubmit={this.onFormSubmit}>
-								<div className="form-group">
-									<label htmlFor="postTitle">Title</label>
-									<input
-										id="postTitle"
-										placeholder={this.state.editor.titleInit}
-										className="form-control"
-										value={this.state.postTitle}
-										onChange={this.handleTitleChange}/>
-								</div>
-
-								<div className="form-group">
-									<label htmlFor="postHeading">Heading</label>
-									<input
-										id="postHeading"
-										placeholder={this.state.editor.headingInit}
-										className="form-control"
-										value={this.state.postHeading}
-										onChange={this.handleHeadingChange}/>
-								</div>
-
-								<div className="form-group">
-									<TinyMCE
-										content={this.state.editor.initText}
-										config={{
-											plugins: this.state.editor.plugins,
-											toolbar: this.state.editor.toolbar
-										}}
-										onChange={this.handleBodyChange}
-									/>
-								</div>
-
-								<div className="form-group">
-									<label htmlFor="postTags">Tags</label>
-									<input
-										id="postTags"
-										placeholder={this.state.editor.tagsInit}
-										className="form-control"
-										value={this.state.postTags}
-										onChange={this.handleTagsChange}/>
-								</div>
-
-								<button type="submit" className="btn btn-primary">Create Post</button>
-							</form>
+						);
+					} else {
+						return (
+							<div className="create-post-wrapper">
+							<div className="create-post-title">
+								<h1>You can not edit this post. <br/> You are not a author.</h1>
+							</div>
 						</div>
-					)
+						);
+					}
 				}
 			}
 		}
@@ -159,4 +171,4 @@ function mapStateToProps(state) {
 	};
 }
 
-export default connect(mapStateToProps, {createPost})(CreateGymsPage);
+export default connect(mapStateToProps, {updatePost, fetchPosts})(CreateGymsPage);

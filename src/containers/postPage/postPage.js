@@ -3,7 +3,7 @@ import {connect} from 'react-redux';
 import {fetchPosts} from '../../actions/postActions';
 import PostContent from '../../components/common/postPage/postContent';
 
-class HomePage extends React.Component {
+class PostPage extends React.Component {
 	componentDidMount() {
 		this.props.fetchPosts(this.props.params.id);
 	}
@@ -11,7 +11,7 @@ class HomePage extends React.Component {
 	renderPost() {
 		if (this.props.post) {
 			return (
-				<PostContent post={this.props.post}/>
+				<PostContent post={this.props.post} current_user={this.props.current_user} id={this.props.params.id}/>
 			);
 		}
 	}
@@ -27,8 +27,9 @@ class HomePage extends React.Component {
 
 function mapStateToProps(state) {
 	return {
-		post: state.posts.public_post
+		post: state.posts.public_post,
+		current_user: state.current_user.user
 	};
 }
 
-export default connect(mapStateToProps, {fetchPosts})(HomePage);
+export default connect(mapStateToProps, {fetchPosts})(PostPage);

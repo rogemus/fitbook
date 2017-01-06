@@ -14,6 +14,7 @@ import SignOut from './containers/signOut/signOut';
 import Home from './containers/homePage/home';
 import CreateGymsPage from './containers/createGymsPage/createGymsPage';
 import CreatePostPage from './containers/createPostPage/createPostPage';
+import UpdatePostPage from './containers/updatePostPage/updatePostPage';
 import PostPage from './containers/postPage/postPage';
 import GymPage from './containers/gymPage/gymPage';
 import UserPage from './containers/userPage/userPage';
@@ -48,7 +49,7 @@ ReactDOM.render(
 				<Route path="posts/:id" component={PostPage}/>
 				<Route path="users/:id" component={UserPage}/>
 				<Route path="createpost" component={requireAuth(CreatePostPage)}/>
-				<Route path="updatepost/:id" component={requireAuth(CreatePostPage)}/>
+				<Route path="updatepost/:id" component={requireAuth(UpdatePostPage)}/>
 				<Route path="creategym" component={requireAuth(CreateGymsPage)}/>
 				<Route path="trainers" components={TrainersListPage}/>
 				<Route path="*" component={E404}/>

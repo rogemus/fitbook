@@ -23,6 +23,8 @@ export const CREATE_GYM = 'create_gym';
 export const CREATE_POST = 'create_post';
 export const JOIN_GYM = 'join_gym';
 export const LEAVE_GYM = 'leave_gym';
+export const UPDATE_POST = 'update_post';
+export const DELETE_POST = 'delete_post';
 /* PUT */
 export const BECOME_TRAINER = 'become_trainer';
 
