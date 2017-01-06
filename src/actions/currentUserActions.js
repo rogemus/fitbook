@@ -19,30 +19,31 @@ export function fetchCurrentUserAvailableGyms() {
 		axios.get(`${ROOT_URL}/me/gyms/available`,
 			{
 				headers: {'Authorization': 'Bearer ' + localStorage.getItem('token')}
-			}
-		).then(response => {
-			dispatch({
-				type: FETCH_CURRENT_USER_AVAILABLE_GYMS,
-				payload: response.data
-			});
-			dispatch({
-				type: LOADING,
-				payload: false
-			});
-		}).catch((error) => {
-			if (error.response) {
+			})
+			.then(response => {
 				dispatch({
-					type: ERROR,
-					payload: error.response.data
+					type: FETCH_CURRENT_USER_AVAILABLE_GYMS,
+					payload: response.data
 				});
-			} else {
-				console.log(error);
-			}
-			dispatch({
-				type: LOADING,
-				payload: false
+				dispatch({
+					type: LOADING,
+					payload: false
+				});
+			})
+			.catch((error) => {
+				if (error.response) {
+					dispatch({
+						type: ERROR,
+						payload: error.response.data
+					});
+				} else {
+					console.log(error);
+				}
+				dispatch({
+					type: LOADING,
+					payload: false
+				});
 			});
-		});
 	};
 }
 
@@ -59,26 +60,27 @@ export function becomeTrainer() {
 				}
 			}, {
 				headers: {'Authorization': 'Bearer ' + localStorage.getItem('token')}
-			}
-		).then(() => {
-			dispatch({
-				type: BECOME_TRAINER
-			});
+			})
+			.then(() => {
+				dispatch({
+					type: BECOME_TRAINER
+				});
 
-			dispatch({
-				type: LOADING,
-				payload: false
+				dispatch({
+					type: LOADING,
+					payload: false
+				});
+				browserHistory.push('/');
+			})
+			.catch((error) => {
+				dispatch({
+					type: ERROR,
+					payload: error.response.data
+				});
+				dispatch({
+					type: LOADING,
+					payload: false
+				});
 			});
-			browserHistory.push('/');
-		}).catch((error) => {
-			dispatch({
-				type: ERROR,
-				payload: error.response.data
-			});
-			dispatch({
-				type: LOADING,
-				payload: false
-			});
-		});
 	};
 }

@@ -287,6 +287,20 @@ export function joinGym(gymId) {
 							type: LOADING,
 							payload: false
 						});
+					})
+					.catch((error) => {
+						if (error.response) {
+							dispatch({
+								type: ERROR,
+								payload: error.response.data
+							});
+						} else {
+							console.log(error);
+						}
+						dispatch({
+							type: LOADING,
+							payload: false
+						});
 					});
 			})
 			.catch((error) => {
@@ -325,6 +339,20 @@ export function leaveGym(gymId) {
 						dispatch({
 							type: LEAVE_GYM
 						});
+						dispatch({
+							type: LOADING,
+							payload: false
+						});
+					})
+					.catch((error) => {
+						if (error.response) {
+							dispatch({
+								type: ERROR,
+								payload: error.response.data
+							});
+						} else {
+							console.log(error);
+						}
 						dispatch({
 							type: LOADING,
 							payload: false

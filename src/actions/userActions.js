@@ -109,37 +109,52 @@ export function createUserComment(id, commentBody) {
 				body: commentBody
 			}, {
 				headers: {'Authorization': 'Bearer ' + localStorage.getItem('token')}
-			}
-		).then(() => {
-			axios.get(`${ROOT_URL}/users/trainers/${id}/comments`)
-				.then(response => {
-					dispatch({
-						type: FETCH_USER_COMMENTS,
-						payload: response.data
-					});
+			})
+			.then(() => {
+				axios.get(`${ROOT_URL}/users/trainers/${id}/comments`)
+					.then(response => {
+						dispatch({
+							type: FETCH_USER_COMMENTS,
+							payload: response.data
+						});
 
-					dispatch({
-						type: CREATE_USER_COMMENTS
+						dispatch({
+							type: CREATE_USER_COMMENTS
+						});
+						dispatch({
+							type: LOADING,
+							payload: false
+						});
+					})
+					.catch((error) => {
+						if (error.response) {
+							dispatch({
+								type: ERROR,
+								payload: error.response.data
+							});
+						} else {
+							console.log(error);
+						}
+						dispatch({
+							type: LOADING,
+							payload: false
+						});
 					});
+			})
+			.catch((error) => {
+				if (error.response) {
 					dispatch({
-						type: LOADING,
-						payload: false
+						type: ERROR,
+						payload: error.response.data
 					});
-				});
-		}).catch((error) => {
-			if (error.response) {
+				} else {
+					console.log(error);
+				}
 				dispatch({
-					type: ERROR,
-					payload: error.response.data
+					type: LOADING,
+					payload: false
 				});
-			} else {
-				console.log(error);
-			}
-			dispatch({
-				type: LOADING,
-				payload: false
 			});
-		});
 	};
 }
 
@@ -154,36 +169,51 @@ export function createRating(id, ratingBody) {
 				rating: ratingBody
 			}, {
 				headers: {'Authorization': 'Bearer ' + localStorage.getItem('token')}
-			}
-		).then(() => {
-			axios.get(`${ROOT_URL}/users/${id}`)
-				.then(response => {
-					dispatch({
-						type: CREATE_USER_RATING
-					});
+			})
+			.then(() => {
+				axios.get(`${ROOT_URL}/users/${id}`)
+					.then(response => {
+						dispatch({
+							type: CREATE_USER_RATING
+						});
 
-					dispatch({
-						type: FETCH_USER,
-						payload: response.data
+						dispatch({
+							type: FETCH_USER,
+							payload: response.data
+						});
+						dispatch({
+							type: LOADING,
+							payload: false
+						});
+					})
+					.catch((error) => {
+						if (error.response) {
+							dispatch({
+								type: ERROR,
+								payload: error.response.data
+							});
+						} else {
+							console.log(error);
+						}
+						dispatch({
+							type: LOADING,
+							payload: false
+						});
 					});
+			})
+			.catch((error) => {
+				if (error.response) {
 					dispatch({
-						type: LOADING,
-						payload: false
+						type: ERROR,
+						payload: error.response.data
 					});
-				});
-		}).catch((error) => {
-			if (error.response) {
+				} else {
+					console.log(error);
+				}
 				dispatch({
-					type: ERROR,
-					payload: error.response.data
+					type: LOADING,
+					payload: false
 				});
-			} else {
-				console.log(error);
-			}
-			dispatch({
-				type: LOADING,
-				payload: false
 			});
-		});
 	};
 }
