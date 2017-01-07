@@ -9,7 +9,6 @@ class ApplicationController < ActionController::API
 
   def err
     error_params = params.permit(:platform, :stack)
-    error_params.stack.flatten! if error_params.stack
     render json: ErrorLog.create(error_params), status: :created
   end
 
