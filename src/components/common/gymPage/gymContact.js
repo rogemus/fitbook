@@ -18,7 +18,7 @@ function renderContact(gym) {
 					<div className="gyms-contact-location">
 						<div className="gyms-contact-location-wrapper">
 							<div className="gyms-contact-location-title">
-								Come visit as
+								Come visit us
 							</div>
 							{renderLocation(gym)}
 						</div>
