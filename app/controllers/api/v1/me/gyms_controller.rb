@@ -3,7 +3,7 @@ module Api::V1::Me
 
     include ::Api::V1::Me::GymsDoc
 
-    ALLOWED_CATEGORIES = ['Gym/Physical Fitness Center', 'Recreation & Fitness']
+    ALLOWED_CATEGORIES = ['Gym/Physical Fitness Center', 'Recreation & Fitness', 'Recreation & Fitness']
     REQUIRED_PERMISSIONS = %w{ADMINISTER}
 
     def index
