@@ -27,6 +27,7 @@ export const UPDATE_POST = 'update_post';
 export const DELETE_POST = 'delete_post';
 /* PUT */
 export const BECOME_TRAINER = 'become_trainer';
+export const STOP_BEING_TRAINER = 'stop_being_trainer';
 
 /* POSTS Types*/
 /* GET */

@@ -1,7 +1,7 @@
 import React from 'react';
 import {connect} from 'react-redux';
 
-import {becomeTrainer} from '../../actions/currentUserActions';
+import {becomeTrainer, stopBeingTrainer} from '../../actions/currentUserActions';
 import {joinGym, leaveGym} from '../../actions/gymsActions';
 import _ from 'lodash';
 
@@ -11,6 +11,7 @@ class ActionButton extends React.Component {
 
 		this.onButtonClick = this.onButtonClick.bind(this);
 		this.onButtonClickLeave = this.onButtonClickLeave.bind(this);
+		this.onButtonStopClick = this.onButtonStopClick.bind(this);
 	}
 
 	onButtonClick(e) {
@@ -31,6 +32,12 @@ class ActionButton extends React.Component {
 		this.props.leaveGym(this.props.id);
 	}
 
+	onButtonStopClick(e) {
+		e.preventDefault();
+
+		this.props.stopBeingTrainer();
+	}
+
 	isTrainerInGym() {
 		const isTrainer = _.find(this.props.gym_trainers, (user) => {
 			return user.id === this.props.current_user.id;
@@ -48,6 +55,12 @@ class ActionButton extends React.Component {
 							return (
 								<div className="btn2">
 									<span onClick={this.onButtonClick} className="btn-action">{this.props.title}</span>
+								</div>
+							);
+						} else {
+							return (
+								<div className="btn2">
+									<span onClick={this.onButtonStopClick} className="btn-action">Stop being trainer</span>
 								</div>
 							);
 						}
@@ -93,4 +106,4 @@ function mapStateToProps(state) {
 	};
 }
 
-export default connect(mapStateToProps, {joinGym, leaveGym, becomeTrainer})(ActionButton);
+export default connect(mapStateToProps, {joinGym, leaveGym, becomeTrainer, stopBeingTrainer})(ActionButton);
