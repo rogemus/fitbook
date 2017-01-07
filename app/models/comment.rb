@@ -3,7 +3,7 @@ class Comment < ApplicationRecord
   belongs_to :user
   belongs_to :commentable, polymorphic: true
 
-  validates :body, length: { in: 1..255 }
+  validates :body, length: { in: 1..500 }
 
   with_options if: :comments_on_user? do |comment|
     comment.validate :user_is_trainer
