@@ -21,7 +21,9 @@ class TrainersListPage extends React.Component {
 		return (
 			<li className="search-results-item">
 				<div className="search-results-item-image">
-					<img src={user.images.picture} alt={user.name}/>
+					<Link to={`/users/${user.id}`}>
+						<img src={user.images.picture} alt={user.name}/>
+					</Link>
 				</div>
 				<div className="search-results-item-title">
 					<Link to={`/users/${user.id}`}>

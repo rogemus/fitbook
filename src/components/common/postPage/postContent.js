@@ -28,8 +28,8 @@ class PostContent extends React.Component {
 			if (user.id === post.author.id) {
 				return (
 					<span className="btn btn-red" onClick={this.handleButtonClick}>
-					Delete post
-				</span>
+						Delete post
+					</span>
 				);
 			}
 		}
@@ -75,7 +75,9 @@ class PostContent extends React.Component {
 					<div className="row">
 						<div className="col col-1-5">
 							<div className="blog-post-author-image">
-								<img src={this.props.post.author.images.picture} alt=""/>
+								<Link to={`/users/${this.props.post.author.id}`}>
+									<img src={this.props.post.author.images.picture} alt=""/>
+								</Link>
 							</div>
 							<div className="blog-post-author-name">
 								<Link to={`/users/${this.props.post.author.id}`}>

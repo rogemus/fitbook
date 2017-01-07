@@ -35,6 +35,9 @@ class CommentsForm extends React.Component {
 				break;
 		}
 
+		this.setState({
+			commentBody: ''
+		});
 	}
 
 	renderCommentForm() {

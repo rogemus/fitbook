@@ -4,7 +4,7 @@ import Comment from './comment';
 export default({comments}) => {
 	return (
 		<ul className="comments-list">
-			{comments.map(comment => {
+			{comments.reverse().map(comment => {
 				return <Comment comment={comment}/>;
 			})}
 		</ul>
