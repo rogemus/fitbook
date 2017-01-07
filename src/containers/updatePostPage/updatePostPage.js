@@ -93,7 +93,7 @@ class CreateGymsPage extends React.Component {
 						return (
 							<div className="create-post-wrapper">
 								<div className="create-post-title">
-									<h1>Create Post</h1>
+									<h1>Update Post</h1>
 								</div>
 								<form ref="form" onSubmit={this.onFormSubmit}>
 									<div className="form-group">
