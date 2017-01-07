@@ -56,6 +56,11 @@ class Header extends React.Component {
 						</Link>
 					</li>,
 					<li key={2} className="nav-item">
+						<Link to="/creategym" activeClassName="active">
+							Import Gym
+						</Link>
+					</li>,
+					<li key={3} className="nav-item">
 						<Link to="/signout">
 							Sign Out
 						</Link>
