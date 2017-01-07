@@ -7,11 +7,6 @@ class ApplicationController < ActionController::API
 
   attr_reader :current_user, :koala
 
-  def err
-    error_params = params.permit(:platform, :stack)
-    render json: ErrorLog.create(error_params), status: :created
-  end
-
   def bad_params(e)
     render json: {error: e}, status: :unprocessable_entity
   end
