@@ -53,8 +53,8 @@ class CreateGymsPage extends React.Component {
 							<div className="import-gym-wrapper">
 								<div className="import-gym-title">
 									<h1>Import gym</h1>
-									{this.renderSelectGym()}
 								</div>
+								{this.renderSelectGym()}
 							</div>
 						</div>
 					</div>
