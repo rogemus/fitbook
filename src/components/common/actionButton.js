@@ -47,30 +47,12 @@ class ActionButton extends React.Component {
 	}
 
 	renderBtn(user) {
-		if (this.props.current_user) {
-			switch (this.props.type) {
-				case 'user':
-					if (user.id === this.props.current_user.id) {
-						if (this.props.current_user.is_trainer !== true) {
-							return (
-								<div className="btn2">
-									<span onClick={this.onButtonClick} className="btn-action">{this.props.title}</span>
-								</div>
-							);
-						} else {
-							return (
-								<div className="btn2">
-									<span onClick={this.onButtonStopClick} className="btn-action">Stop being trainer</span>
-								</div>
-							);
-						}
-					}
-
-					break;
-				case 'gym':
-					if (this.props.current_user.is_trainer === true) {
-						if (this.props.gym_trainers) {
-							if (this.isTrainerInGym()) {
+		if (this.props.authenticated) {
+			if (this.props.current_user) {
+				switch (this.props.type) {
+					case 'user':
+						if (user.id === this.props.current_user.id) {
+							if (this.props.current_user.is_trainer !== true) {
 								return (
 									<div className="btn2">
 										<span onClick={this.onButtonClick}
@@ -80,14 +62,36 @@ class ActionButton extends React.Component {
 							} else {
 								return (
 									<div className="btn2">
-										<span onClick={this.onButtonClickLeave}
-											  className="btn-action">Leave gym</span>
+										<span onClick={this.onButtonStopClick}
+											  className="btn-action">Stop being trainer</span>
 									</div>
 								);
 							}
 						}
-					}
-					break;
+
+						break;
+					case 'gym':
+						if (this.props.current_user.is_trainer === true) {
+							if (this.props.gym_trainers) {
+								if (this.isTrainerInGym()) {
+									return (
+										<div className="btn2">
+										<span onClick={this.onButtonClick}
+											  className="btn-action">{this.props.title}</span>
+										</div>
+									);
+								} else {
+									return (
+										<div className="btn2">
+										<span onClick={this.onButtonClickLeave}
+											  className="btn-action">Leave gym</span>
+										</div>
+									);
+								}
+							}
+						}
+						break;
+				}
 			}
 		}
 	}
@@ -102,7 +106,8 @@ class ActionButton extends React.Component {
 function mapStateToProps(state) {
 	return {
 		current_user: state.current_user.user,
-		gym_trainers: state.gym.gym_trainers
+		gym_trainers: state.gym.gym_trainers,
+		authenticated: state.auth.authenticated
 	};
 }
 
