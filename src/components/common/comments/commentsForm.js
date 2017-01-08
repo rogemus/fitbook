@@ -42,26 +42,28 @@ class CommentsForm extends React.Component {
 
 	renderCommentForm() {
 		if (this.props.current_user) {
-			return (
-				<div className="comments-form">
-					<div className="row">
-						<div className="col col-1-5">
-							<div className="comments-item-author-image">
-								<img src={this.props.current_user.images.picture} alt={this.props.current_user.name}/>
-							</div>
-						</div>
-						<div className="col col-4-5">
-							<div className="row">
-								<div className="col col-3-5">
-									<div className="comments-item-author-name">
-										<Link to={`/users/${this.props.current_user.id}`}>
-											{this.props.current_user.name}
-										</Link>
-									</div>
+			if (this.props.authenticated) {
+				return (
+					<div className="comments-form">
+						<div className="row">
+							<div className="col col-1-5">
+								<div className="comments-item-author-image">
+									<img src={this.props.current_user.images.picture}
+										 alt={this.props.current_user.name}/>
 								</div>
 							</div>
-							<div className="comments-item-content">
-								<form ref="form" onSubmit={this.onCommentFormSubmit} className="comment">
+							<div className="col col-4-5">
+								<div className="row">
+									<div className="col col-3-5">
+										<div className="comments-item-author-name">
+											<Link to={`/users/${this.props.current_user.id}`}>
+												{this.props.current_user.name}
+											</Link>
+										</div>
+									</div>
+								</div>
+								<div className="comments-item-content">
+									<form ref="form" onSubmit={this.onCommentFormSubmit} className="comment">
 								<textarea
 									id="commentBody"
 									placeholder="Type here!"
@@ -71,13 +73,14 @@ class CommentsForm extends React.Component {
 									cols="30"
 									rows="10">
 								</textarea>
-									<button type="submit" className="btn comments-form-button">Send</button>
-								</form>
+										<button type="submit" className="btn comments-form-button">Send</button>
+									</form>
+								</div>
 							</div>
 						</div>
 					</div>
-				</div>
-			);
+				);
+			}
 		}
 	}
 
@@ -92,7 +95,8 @@ class CommentsForm extends React.Component {
 
 function mapStateToProps(state) {
 	return {
-		current_user: state.current_user.user
+		current_user: state.current_user.user,
+		authenticated: state.auth.authenticated
 	};
 }
 
