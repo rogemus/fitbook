@@ -96,10 +96,12 @@ module Api::V1::Me
       gym = Gym.find(params.require(:id))
       membership = current_user.members.find_by(gym: gym)
 
-      if membership.membership_level == :owner
-        delete_gym(gym)
-      else
-        membership.destroy
+      if membership
+        if membership.membership_level == :owner
+          delete_gym(gym)
+        else
+          membership.destroy
+        end
       end
     end
 
