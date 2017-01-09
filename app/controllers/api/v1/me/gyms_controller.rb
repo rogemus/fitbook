@@ -7,7 +7,7 @@ module Api::V1::Me
     REQUIRED_PERMISSIONS = %w{ADMINISTER}
 
     def index
-      render json: current_user.members
+      render json: current_user.members, include_user: current_user
     end
 
     def show
