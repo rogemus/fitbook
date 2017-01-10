@@ -64,7 +64,7 @@ module Api::V1
     end
 
     def gym_trainers(id)
-      Member.where({gym: id, membership_level: :trainer}).order(approved: :desc)
+      Member.where({gym: id, membership_level: :trainer, user: User.where(is_trainer: :true)}).order(approved: :desc)
     end
 
     def test_city_params

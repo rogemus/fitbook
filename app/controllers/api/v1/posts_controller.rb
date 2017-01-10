@@ -6,7 +6,7 @@ module Api::V1
     NEW_POSTS_COUNT = 10
 
     def index
-      render json: Post.order(created_at: :desc).limit(NEW_POSTS_COUNT)
+      render json: Post.where(author: User.where(is_trainer: :true)).order(created_at: :desc).limit(NEW_POSTS_COUNT)
     end
 
     def show
