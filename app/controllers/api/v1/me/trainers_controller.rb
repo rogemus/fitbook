@@ -2,6 +2,8 @@ module Api::V1::Me
   class TrainersController < BaseController
 
     include ::Api::V1::Me::TrainersDoc
+    VoteResult = Struct.new(:voteable, :vote)
+
 
     def comment
       body = params.require(:body)
@@ -20,10 +22,8 @@ module Api::V1::Me
       vote = current_user.vote_on(User.find(params[:trainer_id]), params.require(:rating))
 
       if vote.valid?
-        voteResult = Object.new
-        voteResult.voteable = vote.voteable
-        voteResult.vote = vote.vote
-        render json: voteResult
+        vote_result = VoteResult.new(vote.voteable, vote.vote)
+        render json: vote_result
       else
         render json: vote.errors, status: :bad_request
       end

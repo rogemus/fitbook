@@ -2,6 +2,7 @@ module Api::V1::Me
   class GymsController < BaseController
 
     include ::Api::V1::Me::GymsDoc
+    VoteResult = Struct.new(:voteable, :vote)
 
     ALLOWED_CATEGORIES = ['Gym/Physical Fitness Center', 'Recreation & Fitness', 'Recreation & Fitness']
     REQUIRED_PERMISSIONS = %w{ADMINISTER}
@@ -68,10 +69,8 @@ module Api::V1::Me
       vote = current_user.vote_on(Gym.find(params[:id]), params.require(:rating))
 
       if vote.valid?
-        voteResult = Object.new
-        voteResult.voteable = vote.voteable
-        voteResult.vote = vote.vote
-        render json: voteResult
+        vote_result = VoteResult.new(vote.voteable, vote.vote)
+        render json: vote_result
       else
         render json: vote.errors, status: :bad_request
       end
