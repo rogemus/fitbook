@@ -13,7 +13,9 @@ function renderPost(post) {
 			<div className="newest-posts-item-date">{renderDate(post.created_at)}</div>
 			<div className="newest-posts-item-author">
 				<Link to={`/users/${post.author.id}`}>
-					{post.author.name}
+					<div className="newest-posts-item-author-img">
+						<img src={post.author.images.picture} alt={post.author.name}/>
+					</div>
 				</Link>
 			</div>
 		</li>

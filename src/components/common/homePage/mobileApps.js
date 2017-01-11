@@ -14,7 +14,7 @@ export default () => {
 								</a>
 							</div>
 							<div className="apps">
-								<a href="">
+								<a href="https://play.google.com/store/apps/details?id=pl.edu.amu.wmi.fitbook">
 									<img src="/img/and.png" alt=""/>
 								</a>
 							</div>
