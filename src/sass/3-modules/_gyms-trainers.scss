@@ -14,7 +14,6 @@
     }
   }
 
-
   &-list {
     margin: 0 auto;
     padding: 0;
@@ -40,16 +39,19 @@
         }
       }
 
-      .gyms-trainers-item-about {
+      .gyms-trainers-item-about,
+      .gyms-trainers-item-rating {
         color: $white;
       }
+
     }
 
     &:nth-child(3n) {
       background: #d2dde4;
       text-align: right;
 
-      .gyms-trainers-item-about {
+      .gyms-trainers-item-about,
+      .gyms-trainers-item-rating {
         color: #9fa3a7;
       }
     }
@@ -58,7 +60,8 @@
       background: $black;
       text-align: right;
 
-      .gyms-trainers-item-about {
+      .gyms-trainers-item-about,
+      .gyms-trainers-item-rating {
         color: #9fa3a7;
       }
     }
@@ -82,6 +85,8 @@
     }
 
     &-name {
+      text-align: right !important;
+
       a {
         font: $font-medium $arvo;
         color: $black;
@@ -101,6 +106,15 @@
       -webkit-line-clamp: 5;
       -webkit-box-orient: vertical;
       padding: 15px 0;
+    }
+
+    &-rating {
+      font: 50px $open-sans;
+      color: #9fa3a7;
+      overflow: hidden;
+      padding: 35px 0 0 0;
+      margin-top: 20px;
+      text-align: right !important;
     }
   }
 }

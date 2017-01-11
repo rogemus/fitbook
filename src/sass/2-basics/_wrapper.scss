@@ -6,6 +6,10 @@
 
 body {
   overflow-x: hidden;
+
+  @media (max-width: 900px) {
+    overflow: hidden;
+  }
 }
 
 .btn {
@@ -18,4 +22,17 @@ body {
   border-radius: 10px;
   margin: 15px 0;
   float: right;
+  text-decoration: none;
+
+  &.btn-red {
+    background: $red !important;
+  }
+}
+
+.apps {
+  margin: 25px 0;
+
+  img {
+    max-width: 210px;
+  }
 }

@@ -30,19 +30,19 @@
     text-align: center;
 
     &-title {
-			a {
-				text-decoration: none;
-				font: $font-large $arvo;
-				text-align: left;
-				line-height: 36px;
-				overflow: hidden;
-				text-overflow: ellipsis;
-				display: -webkit-box;
-				max-height: 145px;
-				-webkit-line-clamp: 3;
-				-webkit-box-orient: vertical;
-				color: $black;
-			}
+      a {
+        text-decoration: none;
+        font: $font-large $arvo;
+        text-align: left;
+        line-height: 36px;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        display: -webkit-box;
+        max-height: 145px;
+        -webkit-line-clamp: 3;
+        -webkit-box-orient: vertical;
+        color: $black;
+      }
     }
 
     &-date {
@@ -57,9 +57,9 @@
       background: $yellow;
 
       .user-posts-item-title {
-				a {
-					color: $white;
-				}
+        a {
+          color: $white;
+        }
       }
 
       .user-posts-item-date {

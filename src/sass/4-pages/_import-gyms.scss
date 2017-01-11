@@ -2,7 +2,7 @@
   @include clearfix;
 
   &-title {
-    width: 1000px;
+    width: 900px;
     margin: 0 auto;
 
     h1 {
@@ -15,15 +15,21 @@
   }
 
   &-wrapper {
-    width: 960px;
+    width: 800px;
     margin: 0 auto;
     padding: 45px 0;
   }
 
   form {
     margin: 0;
-    text-align: right;
+    text-align: left;
     padding: 5px 0;
+
+    .btn {
+      margin: 0 15px !important;
+      float: none !important;
+      display: inline-block;
+    }
 
     label {
       font: $font-large $arvo;
@@ -40,6 +46,5 @@
       color: $white;
       border-radius: 10px;
     }
-
   }
 }

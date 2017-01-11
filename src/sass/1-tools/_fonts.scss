@@ -1,6 +1,8 @@
-@import url(https://fonts.googleapis.com/css?family=Roboto&subset=latin,latin-ext);
+@import url('https://fonts.googleapis.com/css?family=Roboto&subset=latin,latin-ext');
 @import url('https://fonts.googleapis.com/css?family=Montserrat:700');
 @import url('https://fonts.googleapis.com/css?family=Arvo');
+@import url('https://fonts.googleapis.com/css?family=Andada&subset=latin-ext');
+@import url('https://fonts.googleapis.com/css?family=Bree+Serif&subset=latin-ext');
 
 //font-family
 $georgia: Georgia, Cambria, "Times New Roman", Times, serif;
@@ -18,7 +20,11 @@ $verdana: Verdana, Geneva, sans-serif;
 $pt-sans : 'PT Sans', sans-serif;
 $montserrat: 'Montserrat', sans-serif;
 $roboto: 'Roboto', sans-serif;
-$arvo: 'Arvo', serif;
+$andada: 'Andada', serif;
+$bree-serif: 'Bree Serif', serif;
+$arvo: $bree-serif;
+
+//$arvo: 'Arvo', serif;
 //font-size
 $font-x2-small: 8px;
 $font-x-small: 10px;

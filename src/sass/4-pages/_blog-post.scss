@@ -64,8 +64,26 @@
     width: 650px;
     margin: 0 auto;
     font: $font-base $open-sans;
-    line-height: 32px;
+
     color: $grey-light;
+
+    a {
+      font: $font-base $open-sans;
+      line-height: 32px;
+      color: $grey-dark;
+    }
+  }
+
+  &-edit {
+    width: 750px;
+    border-top: 1px solid $grey-light;
+    margin: 0 auto;
+    @include clearfix;
+
+    .btn {
+      margin-left: 15px;
+      margin-right: 15px;
+    }
   }
 
   &-author {
@@ -73,6 +91,7 @@
     border-top: 1px solid $grey-light;
     margin: 35px auto 0 auto;
     padding: 35px 0;
+    @include clearfix;
 
     &-image {
       display: block;
