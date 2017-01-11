@@ -7,7 +7,9 @@ import {
 	LOADING,
 	FETCH_CURRENT_USER,
 	STOP_BEING_TRAINER,
-	FETCH_USER
+	FETCH_USER,
+	FETCH_USER_POSTS,
+	FETCH_USER_COMMENTS
 } from './types';
 
 const ROOT_URL = 'http://fitbook-api.herokuapp.com/api/v1';
@@ -86,10 +88,52 @@ export function becomeTrainer(id) {
 									type: FETCH_USER,
 									payload: response.data
 								});
-								dispatch({
-									type: LOADING,
-									payload: false
-								});
+								axios.get(`${ROOT_URL}/users/trainers/${id}/posts`)
+									.then(response => {
+										dispatch({
+											type: FETCH_USER_POSTS,
+											payload: response.data
+										});
+										axios.get(`${ROOT_URL}/users/trainers/${id}/comments`)
+											.then(response => {
+												dispatch({
+													type: FETCH_USER_COMMENTS,
+													payload: response.data
+												});
+												dispatch({
+													type: LOADING,
+													payload: false
+												});
+											})
+											.catch((error) => {
+												if (error.response) {
+													dispatch({
+														type: ERROR,
+														payload: error.response.data
+													});
+												} else {
+													console.log(error);
+												}
+												dispatch({
+													type: LOADING,
+													payload: false
+												});
+											});
+									})
+									.catch((error) => {
+										if (error.response) {
+											dispatch({
+												type: ERROR,
+												payload: error.response.data
+											});
+										} else {
+											console.log(error);
+										}
+										dispatch({
+											type: LOADING,
+											payload: false
+										});
+									});
 							})
 							.catch((error) => {
 								if (error.response) {

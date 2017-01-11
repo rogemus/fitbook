@@ -67,9 +67,11 @@ class UserPage extends React.Component {
 		if (this.props.public_user_posts) {
 			if (this.props.public_user) {
 				if (this.props.public_user.is_trainer === true) {
-					return (
-						<UserPosts posts={this.props.public_user_posts.posts}/>
-					);
+					if (this.props.public_user_posts.posts) {
+						return (
+							<UserPosts posts={this.props.public_user_posts.posts}/>
+						);
+					}
 				}
 			}
 		}
