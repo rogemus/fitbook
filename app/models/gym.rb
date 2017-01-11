@@ -31,10 +31,8 @@ class Gym < ApplicationRecord
   end
 
   def include_facebook_data!
-    koala = Koala::Facebook::API.new(self.graph_token)
-    fields = [:about, 'cover.type(large).fields(source)', :description, :hours,
-              :name, :location, :parking, :website, 'picture.type(large).fields(url)']
-    hash = koala.get_object(self.facebook_id, {:fields => fields})
+    #hash = koala.get_object(self.facebook_id, {:fields => fields})
+    hash = find_by_fb_id(self.facebook_id)
 
     self.location = get_location(hash['location']) if hash['location']
     self.about = hash['about']
@@ -49,6 +47,16 @@ class Gym < ApplicationRecord
   end
 
   private
+
+  def find_by_fb_id(id)
+    koala = Koala::Facebook::API.new(self.owner.graph_token)
+    fields = [:about, 'cover.type(large).fields(source)', :description, :hours, :access_token,
+              :name, :location, :parking, :website, 'picture.type(large).fields(url)']
+
+    koala.get_connection(:me, :accounts, {:fields => fields}).detect do |g|
+      g['id'].to_i == id
+    end
+  end
 
   def get_location(hash)
     country = Country.find_or_create_by!({:name => hash['country']})
