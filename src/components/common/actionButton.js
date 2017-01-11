@@ -19,7 +19,7 @@ class ActionButton extends React.Component {
 
 		switch (this.props.type) {
 			case 'user':
-				this.props.becomeTrainer();
+				this.props.becomeTrainer(this.props.id);
 				break;
 			case 'gym':
 				this.props.joinGym(this.props.id);
@@ -35,7 +35,7 @@ class ActionButton extends React.Component {
 	onButtonStopClick(e) {
 		e.preventDefault();
 
-		this.props.stopBeingTrainer();
+		this.props.stopBeingTrainer(this.props.id);
 	}
 
 	isTrainerInGym() {

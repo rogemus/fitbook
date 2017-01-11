@@ -2,7 +2,7 @@ import React from 'react';
 import ActionButton from '../actionButton';
 import {renderRating} from '../../../helpers/functions';
 
-export default({user}) => {
+export default({user, id}) => {
 	return (
 		<header className="user-header">
 			<div className="user-header-content">
@@ -25,7 +25,7 @@ export default({user}) => {
 								{renderRating(user)}
                     		</span>
 						</div>
-						<ActionButton type={'user'} title={'Join as trainer'} user={user}/>
+						<ActionButton type={'user'} title={'Join as trainer'} user={user} id={user.id}/>
 					</div>
 				</div>
 			</div>

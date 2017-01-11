@@ -6,7 +6,8 @@ import {
 	ERROR,
 	LOADING,
 	FETCH_CURRENT_USER,
-	STOP_BEING_TRAINER
+	STOP_BEING_TRAINER,
+	FETCH_USER
 } from './types';
 
 const ROOT_URL = 'http://fitbook-api.herokuapp.com/api/v1';
@@ -48,7 +49,7 @@ export function fetchCurrentUserAvailableGyms() {
 	};
 }
 
-export function becomeTrainer() {
+export function becomeTrainer(id) {
 	return function (dispatch) {
 		dispatch({
 			type: LOADING,
@@ -79,10 +80,31 @@ export function becomeTrainer() {
 							type: BECOME_TRAINER
 						});
 
-						dispatch({
-							type: LOADING,
-							payload: false
-						});
+						axios.get(`${ROOT_URL}/users/${id}`)
+							.then(response => {
+								dispatch({
+									type: FETCH_USER,
+									payload: response.data
+								});
+								dispatch({
+									type: LOADING,
+									payload: false
+								});
+							})
+							.catch((error) => {
+								if (error.response) {
+									dispatch({
+										type: ERROR,
+										payload: error.response.data
+									});
+								} else {
+									console.log(error);
+								}
+								dispatch({
+									type: LOADING,
+									payload: false
+								});
+							});
 					})
 					.catch((error) => {
 						if (error.response) {
@@ -116,7 +138,7 @@ export function becomeTrainer() {
 	};
 }
 
-export function stopBeingTrainer() {
+export function stopBeingTrainer(id) {
 	return function (dispatch) {
 		dispatch({
 			type: LOADING,
@@ -143,14 +165,37 @@ export function stopBeingTrainer() {
 							payload: response.data
 						});
 
-						dispatch({
-							type: STOP_BEING_TRAINER
-						});
+						axios.get(`${ROOT_URL}/users/${id}`)
+							.then(response => {
+								dispatch({
+									type: FETCH_USER,
+									payload: response.data
+								});
 
-						dispatch({
-							type: LOADING,
-							payload: false
-						});
+								dispatch({
+									type: STOP_BEING_TRAINER
+								});
+
+								dispatch({
+									type: LOADING,
+									payload: false
+								});
+							})
+							.catch((error) => {
+								if (error.response) {
+									dispatch({
+										type: ERROR,
+										payload: error.response.data
+									});
+								} else {
+									console.log(error);
+								}
+								dispatch({
+									type: LOADING,
+									payload: false
+								});
+							});
+
 					})
 					.catch((error) => {
 						if (error.response) {
