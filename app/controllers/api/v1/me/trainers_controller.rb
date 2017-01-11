@@ -22,8 +22,7 @@ module Api::V1::Me
       vote = current_user.vote_on(User.find(params[:trainer_id]), params.require(:rating))
 
       if vote.valid?
-        vote_result = VoteResult.new(vote.voteable, vote.vote)
-        render json: vote_result
+        render json: vote.voteable
       else
         render json: vote.errors, status: :bad_request
       end
