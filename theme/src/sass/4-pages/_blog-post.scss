@@ -1,0 +1,130 @@
+.blog-post {
+  margin: 0 auto;
+  padding-top: 100px;
+
+  &-date {
+    width: 650px;
+    text-align: center;
+    padding: 20px 0;
+    color: $grey-light;
+    margin: 0 auto;
+
+    span {
+      font: $font-minor $open-sans;
+      line-height: 21px;
+    }
+  }
+
+  &-title {
+    width: 650px;
+    padding: 20px 0;
+    text-align: center;
+    margin: 0 auto;
+
+    h1 {
+      margin: 0;
+      padding: 0;
+      font: $font-x2-large $arvo;
+      color: $black;
+      line-height: 65px;
+    }
+  }
+
+  &-by-author {
+    width: 650px;
+    text-align: center;
+    margin: 0 auto;
+    font: $font-small $arvo;
+    padding: 20px 0;
+
+    span {
+      &.author {
+        a {
+          font: $font-small $montserrat;
+          font-weight: bold;
+          text-transform: uppercase;
+          color: $grey-dark;
+          text-decoration: none;
+        }
+      }
+    }
+  }
+
+  &-heading {
+    width: 500px;
+    margin: 0 auto;
+    color: $grey-light;
+    font: $font-slight $open-sans;
+    line-height: 32px;
+    padding-bottom: 30px;
+    text-align: justify;
+  }
+
+  &-content {
+    width: 650px;
+    margin: 0 auto;
+    font: $font-base $open-sans;
+
+    color: $grey-light;
+
+    a {
+      font: $font-base $open-sans;
+      line-height: 32px;
+      color: $grey-dark;
+    }
+  }
+
+  &-edit {
+    width: 750px;
+    border-top: 1px solid $grey-light;
+    margin: 0 auto;
+    @include clearfix;
+
+    .btn {
+      margin-left: 15px;
+      margin-right: 15px;
+    }
+  }
+
+  &-author {
+    width: 750px;
+    border-top: 1px solid $grey-light;
+    margin: 35px auto 0 auto;
+    padding: 35px 0;
+    @include clearfix;
+
+    &-image {
+      display: block;
+      margin: 20px auto;
+      width: 70px;
+      height: 70px;
+      overflow: hidden;
+      border-radius: 50%;
+
+      img {
+        display: block;
+        margin: 0 auto;
+        width: 100%;
+        height: auto;
+      }
+    }
+
+    &-name {
+      text-align: center;
+      a {
+        text-decoration: none;
+        font: $font-small $montserrat;
+        color: $black;
+        font-weight: bold;
+      }
+    }
+
+    &-desc {
+      font: $font-base $arvo;
+      color: $black;
+      font-style: italic;
+      line-height: 21px;
+      padding: 20px 0;
+    }
+  }
+}

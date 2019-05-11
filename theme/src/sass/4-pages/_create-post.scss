@@ -1,0 +1,39 @@
+.create-post {
+  @include clearfix;
+
+  &-title {
+    width: 1000px;
+    margin: 0 auto;
+
+    h1 {
+      font: 40px $arvo;
+      line-height: 54px;
+      color: $black;
+      margin: 0;
+      padding: 35px 0;
+    }
+  }
+
+  &-wrapper {
+    width: 960px;
+    margin: 0 auto;
+    padding: 45px 0;
+  }
+
+  label {
+    display: block;
+    padding: 10px;
+    font: $font-base $arvo;
+    color: $black;
+  }
+
+  input {
+    display: block;
+    font: $font-base $open-sans;
+    padding: 10px;
+    border-radius: 5px;
+    width: 100%;
+    border: 1px solid lighten($grey-light, 15%);
+    margin-bottom: 15px;
+  }
+}

@@ -1,0 +1,120 @@
+.gyms-trainers {
+  margin-bottom: 50px;
+
+  &-title {
+    width: 1000px;
+    margin: 0 auto;
+
+    h1 {
+      font: 60px $arvo;
+      line-height: 74px;
+      color: $black;
+      margin: 0;
+      padding: 35px 50px;
+    }
+  }
+
+  &-list {
+    margin: 0 auto;
+    padding: 0;
+    list-style: none;
+    background: $white;
+    width: 1000px;
+    @include clearfix;
+  }
+
+  &-item {
+    @include clearfix;
+    height: 250px;
+    width: 50%;
+    float: left;
+    background: #f5f5f5;
+
+    &:nth-child(2n) {
+      background: $yellow;
+
+      .gyms-trainers-item-name {
+        a {
+          color: $white;
+        }
+      }
+
+      .gyms-trainers-item-about,
+      .gyms-trainers-item-rating {
+        color: $white;
+      }
+
+    }
+
+    &:nth-child(3n) {
+      background: #d2dde4;
+      text-align: right;
+
+      .gyms-trainers-item-about,
+      .gyms-trainers-item-rating {
+        color: #9fa3a7;
+      }
+    }
+
+    &:nth-child(4n) {
+      background: $black;
+      text-align: right;
+
+      .gyms-trainers-item-about,
+      .gyms-trainers-item-rating {
+        color: #9fa3a7;
+      }
+    }
+
+    &-image {
+      float: left;
+      width: 50%;
+      overflow: hidden;
+      height: 250px;
+
+      img {
+        width: 100%;
+        height: auto;
+      }
+    }
+
+    &-content {
+      float: left;
+      width: 50%;
+      padding: 25px;
+    }
+
+    &-name {
+      text-align: right !important;
+
+      a {
+        font: $font-medium $arvo;
+        color: $black;
+        text-decoration: none;
+        margin: 0 0 15px 0;
+      }
+    }
+
+    &-about {
+      font: $font-minor $open-sans;
+      color: #9fa3a7;
+      line-height: 25px;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      display: -webkit-box;
+      max-height: 140px;
+      -webkit-line-clamp: 5;
+      -webkit-box-orient: vertical;
+      padding: 15px 0;
+    }
+
+    &-rating {
+      font: 50px $open-sans;
+      color: #9fa3a7;
+      overflow: hidden;
+      padding: 35px 0 0 0;
+      margin-top: 20px;
+      text-align: right !important;
+    }
+  }
+}

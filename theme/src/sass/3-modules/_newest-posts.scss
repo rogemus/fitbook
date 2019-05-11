@@ -1,0 +1,126 @@
+.newest-posts {
+  @include clearfix;
+
+  &-title {
+    width: 1000px;
+    margin: 0 auto;
+
+    h1 {
+      font: 60px $arvo;
+      line-height: 74px;
+      color: $black;
+      margin: 0;
+      padding: 35px 50px;
+    }
+  }
+
+  &-list {
+    margin: 0 auto;
+    padding: 0;
+    list-style: none;
+    width: 1000px;
+  }
+
+  &-item {
+    padding: 35px 50px;
+    border-radius: 5px;
+    margin: 15px;
+    display: inline-block;
+    width: 30%;
+    text-align: center;
+
+    &-title {
+      a {
+        text-decoration: none;
+        font: 18px $arvo;
+        text-align: left;
+        line-height: 36px;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        display: -webkit-box;
+        max-height: 180px;
+        -webkit-line-clamp: 5;
+        -webkit-box-orient: vertical;
+        color: $black;
+      }
+    }
+
+    &-date {
+      font: $font-x-small $open-sans;
+      line-height: 26px;
+      color: $grey-light;
+      padding: 25px 0 0 0;
+      text-align: left;
+      float: left;
+    }
+
+    &-author {
+      float: right;
+
+      a {
+        font: $font-small $open-sans;
+        line-height: 26px;
+        color: $grey-light;
+        padding: 25px 0 0 0;
+        text-align: right;
+        text-decoration: none;
+      }
+
+      &-img {
+        height: 35px;
+        width: 35px;
+        overflow: hidden;
+        border-radius: 50%;
+        border: 1px solid $black;
+        margin-top: 15px;
+
+        img {
+          width: 100%;
+          height: auto;
+          display: block;
+          margin: auto;
+        }
+      }
+    }
+    /*
+        &:nth-child(3) {
+          background: $yellow;
+
+          .newest-posts-item-title {
+            a {
+              color: $white;
+            }
+          }
+
+          .newest-posts-item-date {
+            color: $white;
+          }
+
+          .newest-posts-item-author {
+            a {
+              color: $white;
+            }
+          }
+        }
+
+        &:nth-child(4) {
+          background: $red;
+
+          .newest-posts-item-title {
+            a {
+              color: $white;
+            }
+          }
+
+          .newest-posts-item-date {
+            color: $white;
+          }
+
+          .newest-posts-item-author {
+            a {
+              color: $white;
+            }
+          }
+        }*/
+  }
+}

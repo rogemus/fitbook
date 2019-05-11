@@ -1,0 +1,82 @@
+.mobile-apps {
+  height: 450px;
+  background: #434350 url('/img/ellipse.png') top right/75% no-repeat;
+  margin-top: 35px;
+
+  @media (max-width: 900px) {
+    position: fixed;
+    height: 110%;
+    width: 100%;
+    top: -50px;
+    left: 0;
+    z-index: 2000;
+
+    .row {
+      margin: 0;
+      padding: 0;
+
+      .col {
+        display: block;
+        width: 100%;
+      }
+    }
+  }
+
+  &-wrapper {
+    width: 900px;
+    margin: 0 auto;
+    padding: 50px 0;
+
+    @media (max-width: 900px) {
+      width: auto;
+    }
+  }
+
+  &-showcase {
+    text-align: right;
+    @media (max-width: 900px) {
+      display: block;
+      width: 100%;
+      @include clearfix;
+    }
+    img {
+      display: inline-block;
+
+      @media (max-width: 900px) {
+        display: block;
+        width: 100%;
+        @include clearfix;
+        margin: 15px auto;
+      }
+    }
+  }
+
+  &-title {
+    padding-bottom: 25px;
+
+    h1 {
+      margin: 0;
+      padding: 0;
+      font: $font-x-large $arvo;
+      font-weight: bold;
+      color: $white;
+    }
+  }
+
+  &-content {
+    font: $font-slight $arvo;
+    font-weight: bold;
+    color: $white;
+
+    @media (max-width: 900px) {
+      text-align: center;
+    }
+
+    img {
+      @media (max-width: 900px) {
+        display: inline-block;
+        overflow: hidden;
+      }
+    }
+  }
+}

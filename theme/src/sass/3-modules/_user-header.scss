@@ -1,0 +1,66 @@
+.user-header {
+  background: $blue;
+  color: $white;
+  height: 100vh;
+
+  &-content {
+    width: 900px;
+    margin: 0 auto;
+    position: relative;
+    top: 50%;
+    transform: translateY(-50%);
+  }
+
+  &-name {
+    font: 60px $arvo;
+    line-height: 66px;
+    padding: 35px 0;
+  }
+
+  &-about {
+    font: $font-base $open-sans;
+    line-height: 26px;
+  }
+
+  &-desc {
+    padding-top: 15px;
+    font: $font-small $open-sans;
+    line-height: 26px;
+  }
+
+  &-image {
+    @include clearfix;
+
+    &-content {
+      width: 200px;
+      height: 200px;
+      overflow: hidden;
+      border-radius: 50%;
+      border: 2px solid $white;
+      display: block;
+      float: right;
+
+      img {
+        width: 100%;
+        height: auto;
+        display: block;
+        margin: 0 auto;
+      }
+
+    }
+
+  }
+
+  &-rating {
+    font: 60px $arvo;
+    line-height: 48px;
+    padding: 35px 0;
+    text-align: right;
+
+    &-title {
+      font: $font-slight $arvo;
+      text-align: right;
+      padding: 20px 0;
+    }
+  }
+}

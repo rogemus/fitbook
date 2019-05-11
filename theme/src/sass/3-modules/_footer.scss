@@ -1,0 +1,49 @@
+.footer {
+  background: $black;
+  @include clearfix;
+
+  .logo {
+    position: relative;
+    padding: 50px 0;
+    float: right;
+
+    a {
+      color: $white;
+      font: $font-x-large $montserrat;
+      font-weight: bold;
+      text-transform: uppercase;
+      text-decoration: none;
+
+      span {
+        color: $yellow
+      }
+    }
+  }
+
+  &-wrapper {
+    width: 960px;
+    margin: 0 auto;
+    position: relative;
+  }
+
+  ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+
+    li {
+      font: $font-small $montserrat;
+      font-weight: bold;
+      color: $white;
+      text-transform: uppercase;
+      padding: 15px 0;
+
+      a {
+        font: $font-base $open-sans;
+        color: #c8c8c8;
+        text-decoration: none;
+        text-transform: capitalize;
+      }
+    }
+  }
+}

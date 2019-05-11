@@ -1,0 +1,52 @@
+.rating {
+  background: $white-dark;
+
+  &-title {
+    border-right: 1px solid $comments-line;
+    padding: 15px 0;
+
+    h1 {
+      font: $font-medium $arvo;
+      color: $comments-content;
+    }
+  }
+
+  &-counter {
+    background: $red;
+    color: $white;
+    padding: 5px 15px;
+    border-radius: 10px;
+  }
+
+  &-wrapper {
+    width: 960px;
+    margin: 0 auto;
+    padding: 25px 0;
+  }
+
+  &-form {
+    margin: 0;
+    text-align: right;
+    padding: 5px 0;
+
+    label {
+      font: $font-large $arvo;
+      color: $comments-content;
+      padding: 0 20px;
+    }
+
+    select {
+      display: inline-block;
+      background: $red;
+      border: 0;
+      padding: 15px;
+      font: $font-large $arvo;
+      color: $white;
+      border-radius: 10px;
+    }
+  }
+
+  &-button {
+
+  }
+}

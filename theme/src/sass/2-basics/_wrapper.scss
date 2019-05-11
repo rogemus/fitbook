@@ -1,0 +1,38 @@
+.wrapper {
+  display: block;
+  max-width: 960px;
+  margin: 0 auto;
+}
+
+body {
+  overflow-x: hidden;
+
+  @media (max-width: 900px) {
+    overflow: hidden;
+  }
+}
+
+.btn {
+  display: block;
+  background: $yellow;
+  border: 0;
+  padding: 15px 35px;
+  font: $font-large $arvo;
+  color: $white;
+  border-radius: 10px;
+  margin: 15px 0;
+  float: right;
+  text-decoration: none;
+
+  &.btn-red {
+    background: $red !important;
+  }
+}
+
+.apps {
+  margin: 25px 0;
+
+  img {
+    max-width: 210px;
+  }
+}
