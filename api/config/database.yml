@@ -1,0 +1,30 @@
+default: &default
+  host: localhost
+  adapter: postgresql
+  encoding: unicode
+
+development:
+  <<: *default
+  database: development
+  username: fitbook-user
+  password: password
+
+
+# Warning: The database defined as "test" will be erased and
+# re-generated from your development database when you run "rake".
+# Do not set this db to the same as development or production.
+test:
+  <<: *default
+  database: test
+  username: fitbook-user
+  password: password
+
+
+production:
+  <<: *default
+  pool: 5
+  database: pg63672_fitbook
+  username: pg63672_fitbook
+  password: 5Oac21HgR6
+  host: 63672.p.tld.pl
+  port: 5432
